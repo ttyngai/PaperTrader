@@ -36,8 +36,6 @@ function create(req, res) {
 
 function show(req, res) {
   Portfolio.findById(req.params.id, function (err, portfolio) {
-    console.log('This', req.params.id);
-    console.log('This', portfolio);
     res.render(`portfolios/show`, { title: 'Portfolio:', portfolio });
   });
 }

@@ -39,6 +39,5 @@ async function checkStock(ticker) {
   )
     .then((res) => res.json())
     .then((quote) => (exist = quote.quoteResponse.result[0].bid));
-  console.log('exist', exist);
   return exist;
 }
