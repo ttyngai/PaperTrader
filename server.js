@@ -10,6 +10,7 @@ const isLoggedIn = require('./config/auth');
 
 var indexRouter = require('./routes/index');
 var portfoliosRouter = require('./routes/portfolios');
+var stocksRouter = require('./routes/stocks');
 
 // This will load our env variables
 require('dotenv').config();
@@ -52,6 +53,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/portfolios', portfoliosRouter);
+app.use('/stocks', stocksRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
