@@ -17,6 +17,7 @@
         <th>Ask</th>
         <th>Open</th>
         <th>Trade</th>
+        <th>Delete</th>
       </tr>
     </thead>
     <tbody>
@@ -28,6 +29,11 @@
         <td><%= s.ask %></td>
         <td><%= s.open %></td>
         <td><a href="/stocks/<%= s._id %>">Buy/Sell</a></td>
+        <td>
+          <form action="/stocks/<%= s._id %>?_method=DELETE" method="POST">
+            <button type="submit">X</button>
+          </form>
+        </td>
       </tr>
       <% }); %>
     </tbody>
