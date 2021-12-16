@@ -1,6 +1,6 @@
 const Stock = require('../models/stock');
 const Portfolio = require('../models/portfolio');
-
+const StockPrice = require('../stockPrice');
 module.exports = {
   index,
   show,
@@ -8,11 +8,18 @@ module.exports = {
 };
 
 async function index(req, res) {
-  console.log('index');
+  // pass in array of tickers
+  let tickers = [];
 
-  const stocks = await Stock.find({ user: req.user });
+  Stock.find({ user: req.user }, async function (err, stocksFound) {
+    stocksFound.forEach(function (s) {
+      tickers.push(s.ticker);
+    });
+    stocksToRender = stocksFound;
+    const stocks = await StockPrice.getStock(tickers, stocksFound);
 
-  res.render('stocks/index', { title: 'stocks', stocks });
+    res.render('stocks/index', { title: 'stocks', stocks });
+  });
 }
 
 function show(req, res) {
@@ -24,7 +31,8 @@ function show(req, res) {
   });
 }
 function create(req, res) {
-  console.log('create Stock', req.body);
+  // Check stock
+
   const stock = new Stock(req.body);
   stock.user = req.user._id;
   stock.save(function (err) {

@@ -1,7 +1,7 @@
 <%- include('../partials/header') %>
 
 <div>
-  <h1>Stocks!</h1>
+  <h1>Watchlist</h1>
   <form id="new-form" action="/stocks" method="POST">
     <label>Ticker Symbol:</label>
     <input type="text" name="ticker" />
@@ -15,6 +15,7 @@
         <th>% Change</th>
         <th>Bid</th>
         <th>Ask</th>
+        <th>Open</th>
         <th>Trade</th>
       </tr>
     </thead>
@@ -22,9 +23,10 @@
       <% stocks.forEach(function(s) { %>
       <tr>
         <td><%= s.ticker %></td>
-        <td>Some %</td>
-        <td>Some $</td>
-        <td>Some $</td>
+        <td><%= s.change.toFixed(2) %>%</td>
+        <td><%= s.bid %></td>
+        <td><%= s.ask %></td>
+        <td><%= s.open %></td>
         <td><a href="/stocks/<%= s._id %>">Buy/Sell</a></td>
       </tr>
       <% }); %>

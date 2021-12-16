@@ -20,3 +20,9 @@ function create(req, res) {
     });
   });
 }
+
+// async function getStock(){
+//     const response = await fetch(`https://query1.finance.yahoo.com/v7/finance/quote?lang=en-US&region=US&corsDomain=finance.yahoo.com&symbols=TSLA`);
+//     var data = await response.json();
+//     console.log(data)
+//     }
