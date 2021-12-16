@@ -1,6 +1,25 @@
 <%- include('../partials/header') %>
 <div>
-  <h1>Hello</h1>
+  <h1>Account</h1>
+  <table id="list">
+    <thead>
+      <tr>
+        <th>Portfolio Name</th>
+        <th>Capital</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% portfolios.forEach(function(p){%>
+      <tr>
+        <td><%=p.name%></td>
+        <td><%=p.capital%></td>
+        <td><a href="/portfolios/<%= p._id %>">DETAILS</a></td>
+      </tr>
+      <% }); %>
+    </tbody>
+  </table>
+
   <a href="/portfolios/new">New Portolio</a>
 </div>
 

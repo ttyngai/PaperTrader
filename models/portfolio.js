@@ -18,10 +18,10 @@ const transactionSchema = new Schema(
 const portfolioSchema = new Schema({
   name: { type: String, required: true },
   capital: { type: Number, required: true },
-  transactions: [transactionSchema],
   user: { type: Schema.Types.ObjectId, ref: 'User' },
   userName: String,
   userAvatar: String,
+  transactions: [transactionSchema],
 });
 
 module.exports = mongoose.model('portfolios', portfolioSchema);
