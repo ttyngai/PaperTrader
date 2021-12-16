@@ -4,11 +4,12 @@ const Schema = mongoose.Schema;
 const transactionSchema = new Schema(
   {
     ticker: { type: String, required: true },
+
+    shares: { type: Number, required: true },
+
     purchasedPrice: {
       type: Number,
-      required: true,
     },
-    sharesPurchased: { type: Number, required: true },
   },
   {
     timestamps: true,

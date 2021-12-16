@@ -1,4 +1,51 @@
 <%- include('../partials/header') %>
+<div>
+  <h1><%=title%> <%= portfolio.name %></h1>
+  <h1>Captial $<%= portfolio.capital %></h1>
+  <h3>Holdings</h3>
+  <table id="list">
+    <thead>
+      <tr>
+        <th>Ticker</th>
+        <th>Shares</th>
+        <th>Price</th>
+        <th>% Change</th>
+        <th>P/L Day</th>
+        <th>P/L %</th>
+        <th>P/L Open</th>
+        <th>Purchased Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% portfolio.transactions.forEach(function(t) { %>
+      <tr>
+        <td><%= t.ticker %></td>
+        <td><%= t.shares %></td>
+        <td><%= t.purchasedPrice %></td>
+      </tr>
+      <% }); %>
+    </tbody>
+  </table>
 
-<h1><%=title%><%= portfolio %></h1>
+  <h3>Transactions</h3>
+  <table id="list">
+    <thead>
+      <tr>
+        <th>Ticker</th>
+        <th>Shares</th>
+        <th>Purchased Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% portfolio.transactions.forEach(function(t) { %>
+      <tr>
+        <td><%= t.ticker %></td>
+        <td><%= t.shares %></td>
+        <td><%= t.purchasedPrice %></td>
+      </tr>
+      <% }); %>
+    </tbody>
+  </table>
+</div>
+
 <%- include('../partials/footer') %>

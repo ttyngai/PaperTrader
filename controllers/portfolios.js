@@ -1,5 +1,5 @@
 const Portfolio = require('../models/portfolio');
-
+// const Transaction = require('../models/transaction')
 module.exports = {
   index,
   new: newPortfolio,
@@ -38,6 +38,6 @@ function show(req, res) {
   Portfolio.findById(req.params.id, function (err, portfolio) {
     console.log('This', req.params.id);
     console.log('This', portfolio);
-    res.render(`portfolios/show`, { title: 'Details', portfolio });
+    res.render(`portfolios/show`, { title: 'Portfolio:', portfolio });
   });
 }

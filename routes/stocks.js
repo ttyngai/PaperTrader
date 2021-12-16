@@ -6,6 +6,10 @@ const isLoggedIn = require('../config/auth');
 // POST "/portfolios" - Create Route
 router.post('/', stocksCtrl.create);
 
+router.post('/stocks/:id/portfolios', function () {
+  console.log('YO!');
+});
+
 //GET "/portfolios", index route
 router.get('/', stocksCtrl.index);
 

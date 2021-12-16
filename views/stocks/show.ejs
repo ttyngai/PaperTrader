@@ -2,8 +2,22 @@
 <%- include('../partials/header') %>
 <div>
   <h1>Stock Info</h1>
-  <h1><%= stock.ticker%>></h1>
-  <h1><%=portfolios%>></h1>
+  <h1><%= stock.ticker%></h1>
+  <form
+    id="transaction"
+    action="/stocks/<%= stock._id%>/transactions"
+    method="POST"
+  >
+    <label>Shares:</label>
+    <input type="number" name="shares" />
+    <select name="portfolioId">
+      <% portfolios.forEach(function(p){ %>
+      <option value="<%= p._id%>"><%=p.name%></option>
+      <%}) %>
+    </select>
+
+    <button type="submit">Confirm</button>
+  </form>
 </div>
 
 <%- include('../partials/footer') %>
