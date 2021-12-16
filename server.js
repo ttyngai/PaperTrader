@@ -3,15 +3,22 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var session = require('express-session');
+var passport = require('passport');
+var methodOverride = require('method-override');
+const isLoggedIn = require('./config/auth');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var portfoliosRouter = require('./routes/portfolios');
 
 // This will load our env variables
 require('dotenv').config();
 
 // This will connect us to the database
 require('./config/database');
+
+// require the passport module
+require('./config/passport');
 
 var app = express();
 
@@ -23,10 +30,28 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use(methodOverride('_method'));
+//express session middleware needs to be after cookieParser
+app.use(
+  session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(function (req, res, next) {
+  // add req.user to res.locals
+  res.locals.user = req.user;
+  next();
+});
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/portfolios', portfoliosRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
