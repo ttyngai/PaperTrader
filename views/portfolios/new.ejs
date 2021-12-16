@@ -1,4 +1,13 @@
 <%- include('../partials/header') %>
+<div>
+  <h1>New portfolio</h1>
+  <form id="new-form" action="/portfolios" method="POST">
+    <label>Portfolio Name:</label>
+    <input type="text" name="name" />
+    <label>Starting Capital:</label>
+    <input type="number" name="capital" />
+    <input type="submit" value="Create Portfolio" />
+  </form>
+</div>
 
-<h1>New port</h1>
 <%- include('../partials/footer') %>

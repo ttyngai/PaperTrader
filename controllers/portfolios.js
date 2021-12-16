@@ -16,6 +16,7 @@ function newPortfolio(req, res) {
   res.render('portfolios/new', { title: 'New Portfolio' });
 }
 function create(req, res) {
+  // console.log(req.body);
   const portfolio = new Portfolio(req.body);
   portfolio.save(function (err) {
     // one way to handle errors
@@ -24,8 +25,14 @@ function create(req, res) {
       return res.redirect('/portfolios/new');
     }
     console.log(portfolio);
-    res.redirect(`/portfolio/${portfolio._id}`);
+    res.redirect(`/portfolios/${portfolio._id}`);
   });
 }
 
-function show(req, res) {}
+function show(req, res) {
+  Portfolio.findById(req.params.id, function (err, portfolio) {
+    console.log('This', req.params.id);
+    console.log('This', portfolio);
+    res.render(`portfolios/show`, { title: 'Details', portfolio });
+  });
+}
