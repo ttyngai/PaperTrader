@@ -23,7 +23,7 @@
         <td><a href="/stocks/<%= s._id %>"><%= s.symbol %></a></td>
 
         <td><%= s.regularMarketChangePercent.toFixed(2) %>%</td>
-        <td>$<%= s.regularMarketPrice %></td>
+        <td>$<%= s.regularMarketPrice.toFixed(2) %></td>
 
         <td>
           <form action="/stocks/<%= s._id %>?_method=DELETE" method="POST">
