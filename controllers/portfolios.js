@@ -41,6 +41,10 @@ function create(req, res) {
 
 function show(req, res) {
   Portfolio.findById(req.params.id, async function (err, portfolio) {
+    //Protect route unless from logged in user
+    if (!portfolio.user.equals(req.user._id)) {
+      return res.redirect('/portfolios');
+    }
     let holdings = calculateHoldings.calculateHoldings(portfolio);
 
     let tickers = [];
@@ -66,23 +70,34 @@ function show(req, res) {
 }
 
 function edit(req, res) {
-  console.log('Edit page!');
   Portfolio.findById({ _id: req.params.id }, function (err, portfolio) {
+    //Protect route unless from logged in user
+    if (!portfolio.user.equals(req.user._id)) {
+      return res.redirect('/portfolios');
+    }
     res.render('portfolios/edit', { title: 'Edit portfolio', portfolio });
   });
 }
 
 function update(req, res) {
-  console.log('update page!');
   Portfolio.findById({ _id: req.params.id }, function (err, portfolio) {
+    //Protect route unless from logged in user
+    if (!portfolio.user.equals(req.user._id)) {
+      return res.redirect('/portfolios');
+    }
     portfolio.name = req.body.name;
     portfolio.save();
     res.redirect(`/portfolios/${req.params.id}`);
   });
 }
 function deletePortfolio(req, res) {
-  console.log('delete!');
-  Portfolio.findByIdAndDelete({ _id: req.params.id }, function (err) {
+  //Protect route unless from logged in user
+
+  Portfolio.findById({ _id: req.params.id }, function (err, portfolio) {
+    if (!portfolio.user.equals(req.user._id)) {
+      return res.redirect('/portfolios');
+    }
+    portfolio.remove();
     res.redirect('/portfolios');
   });
 }
