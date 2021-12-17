@@ -1,7 +1,27 @@
 <!-- Show stock that you added, and show available portfolio, and how much to buy/sell. Jump to that portfolio when done -->
 <%- include('../partials/header') %>
 <div>
-  <h1><%= stock.ticker%></h1>
+  <h1><%= quote[0].longName%> (Ticker: <%= stock.ticker%>)</h1>
+
+  <table id="list">
+    <thead>
+      <tr>
+        <th>Bid</th>
+        <th>Ask</th>
+        <th>% Change</th>
+        <th>Market Cap(M)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>$<%= quote[0].bid %></td>
+        <td>$<%= quote[0].ask %></td>
+        <td><%= quote[0].regularMarketChangePercent.toFixed(2) %>%</td>
+        <td>$<%= (quote[0].marketCap/1000000).toFixed(0) %></td>
+      </tr>
+    </tbody>
+  </table>
+
   <form
     id="transaction"
     action="/stocks/<%= stock._id%>/transactions"
@@ -10,7 +30,7 @@
     <label>Shares:</label>
     <input type="number" name="shares" />
     <select name="portfolioId">
-      <option value="" disabled selected>Select Portfolio</option>
+      <!-- <option value="" disabled selected>Select Portfolio</option> -->
       <% portfolios.forEach(function(p){ %>
       <option value="<%= p._id%>"><%=p.name%></option>
       <%}) %>

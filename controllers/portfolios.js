@@ -1,4 +1,5 @@
 const Portfolio = require('../models/portfolio');
+const calculateHoldings = require('../calculateHoldings');
 // const Transaction = require('../models/transaction')
 module.exports = {
   index,
@@ -36,6 +37,8 @@ function create(req, res) {
 
 function show(req, res) {
   Portfolio.findById(req.params.id, function (err, portfolio) {
-    res.render(`portfolios/show`, { title: 'Portfolio:', portfolio });
+    let holdings = calculateHoldings.calculateHoldings(portfolio);
+    // console.log('holdings outside', holdings);
+    res.render(`portfolios/show`, { title: 'Portfolio:', portfolio, holdings });
   });
 }

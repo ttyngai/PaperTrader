@@ -2,6 +2,7 @@ const fetch = require('node-fetch');
 
 module.exports = {
   getStock,
+  getOneStock,
   checkStock,
 };
 
@@ -15,20 +16,22 @@ async function getStock(array, stocksFound) {
     )
       .then((res) => res.json())
       .then((quote) => {
-        quote.quoteResponse.result.forEach(function (s, idx) {
-          let stockInfo = {
-            ticker: s.symbol,
-            bid: s.bid,
-            ask: s.ask,
-            open: s.regularMarketOpen,
-            change: s.regularMarketChangePercent,
-            _id: stocksFound[idx]._id,
-          };
-          stocks.push(stockInfo);
+        stockInfo = quote.quoteResponse.result.forEach(function (s, idx) {
+          s._id = stocksFound[idx]._id;
+
+          //   let stockInfo = {
+          //     ticker: s.symbol,
+          //     bid: s.bid,
+          //     ask: s.ask,
+          //     open: s.regularMarketOpen,
+          //     change: s.regularMarketChangePercent,
+          //     _id: stocksFound[idx]._id,
+          //   };
+          stocks.push(s);
         });
       });
   }
-
+  console.log('long asnwer', stockInfo);
   return stocks;
 }
 
@@ -40,4 +43,24 @@ async function checkStock(ticker) {
     .then((res) => res.json())
     .then((quote) => (exist = quote.quoteResponse.result[0].bid));
   return exist;
+}
+// async function getOneStock(ticker) {
+//   let stockInfo = {};
+//   await fetch(
+//     `https://query1.finance.yahoo.com/v7/finance/quote?lang=en-US&region=US&corsDomain=finance.yahoo.com&symbols=${ticker}`
+//   )
+//     .then((res) => res.json())
+//     .then((quote) => (stockInfo = quote.quoteResponse.result[0]));
+
+//   return stockInfo;
+// }
+async function getOneStock(ticker) {
+  let stock = [];
+  await fetch(
+    `https://query1.finance.yahoo.com/v7/finance/quote?lang=en-US&region=US&corsDomain=finance.yahoo.com&symbols=${ticker}`
+  )
+    .then((res) => res.json())
+    .then((quote) => (exist = quote.quoteResponse.result[0]));
+  stock.push(exist);
+  return stock;
 }

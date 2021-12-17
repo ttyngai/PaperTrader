@@ -17,11 +17,11 @@
       </tr>
     </thead>
     <tbody>
-      <% portfolio.transactions.forEach(function(t) { %>
+      <% holdings.forEach(function(h) { %>
       <tr>
-        <td><%= t.ticker %></td>
-        <td><%= t.shares %></td>
-        <td><%= t.purchasedPrice %></td>
+        <td><%= h.ticker %></td>
+        <td><%= h.shares %></td>
+        <!-- <td><%= h.purchasedPrice %></td> -->
       </tr>
       <% }); %>
     </tbody>

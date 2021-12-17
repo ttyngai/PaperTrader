@@ -23,11 +23,11 @@
     <tbody>
       <% stocks.forEach(function(s) { %>
       <tr>
-        <td><%= s.ticker %></td>
-        <td><%= s.change.toFixed(2) %>%</td>
+        <td><%= s.symbol %></td>
+        <td><%= s.regularMarketChangePercent.toFixed(2) %>%</td>
         <td><%= s.bid %></td>
         <td><%= s.ask %></td>
-        <td><%= s.open %></td>
+        <td><%= s.regularMarketOpen %></td>
         <td><a href="/stocks/<%= s._id %>">Buy/Sell</a></td>
         <td>
           <form action="/stocks/<%= s._id %>?_method=DELETE" method="POST">

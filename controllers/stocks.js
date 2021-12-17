@@ -30,8 +30,17 @@ async function deleteOne(req, res) {
 
 function show(req, res) {
   Stock.findById(req.params.id, function (err, stock) {
-    Portfolio.find({ user: req.user._id }, function (err, portfolios) {
-      res.render('stocks/show', { title: 'Stock Details', stock, portfolios });
+    Portfolio.find({ user: req.user._id }, async function (err, portfolios) {
+      const quote = await StockPrice.getOneStock(stock.ticker);
+
+      console.log('quote', quote);
+
+      res.render('stocks/show', {
+        title: 'Stock Details',
+        stock,
+        portfolios,
+        quote,
+      });
     });
   });
 }
