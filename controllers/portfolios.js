@@ -38,29 +38,43 @@ function create(req, res) {
 }
 
 function show(req, res) {
-  Portfolio.findById(req.params.id, async function (err, portfolio) {
+  Portfolio.findById(req.params.id, function (err, portfolio) {
     //Protect route unless from logged in user
     if (!portfolio.user.equals(req.user._id)) {
       return res.redirect('/portfolios');
     }
 
-    let holdings = calculateHoldings.calculateHoldings(portfolio);
-    let tickers = [];
-    holdings.forEach(function (s) {
-      tickers.push(s.ticker, holdings);
-    });
-    let prices = [];
-    if (holdings[0]) {
-      prices = await StockPrice.getStockNoId(tickers);
-      prices[0].forEach(function (p, idx) {
-        p.shares = holdings[idx].shares;
-        p.price = holdings[idx].price;
+    Stock.find({ user: req.user._id }, async function (err, stocks) {
+      let holdings = calculateHoldings.calculateHoldings(portfolio);
+      let tickers = [];
+      holdings.forEach(function (s) {
+        tickers.push(s.ticker, holdings);
       });
-    }
-    res.render(`portfolios/show`, {
-      title: 'Portfolio:',
-      portfolio,
-      prices,
+      let prices = [];
+      if (holdings[0]) {
+        prices = await StockPrice.getStockNoId(tickers);
+
+        prices[0].forEach(function (p, idx) {
+          p.shares = holdings[idx].shares;
+          p.price = holdings[idx].price;
+
+          // console.log('check stock p', p);
+
+          stocks.forEach(function (s) {
+            if (s.ticker === p.symbol) {
+              p._id = s._id;
+            }
+          });
+        });
+      }
+      console.log('what stocks is', stocks);
+      console.log('what prices[0] is', prices[0]);
+
+      res.render(`portfolios/show`, {
+        title: 'Portfolio:',
+        portfolio,
+        prices,
+      });
     });
   });
 }

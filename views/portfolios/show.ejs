@@ -19,7 +19,8 @@
     <tbody>
       <% prices[0].forEach(function(p) { %>
       <tr>
-        <td><%= p.symbol %></td>
+        <td><a href="/stocks/<%= p._id %>"><%= p.symbol %></a></td>
+
         <td><%= p.shares %></td>
         <td>$<%= p.regularMarketPrice %></td>
         <td><%= p.regularMarketChangePercent.toFixed(2) %>%</td>

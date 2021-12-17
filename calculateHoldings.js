@@ -22,7 +22,12 @@ function calculateHoldings(portfolio) {
       }
     }
     if (!existSum) {
-      let objSum = { ticker: t.ticker, shares: t.shares, price: t.price };
+      let objSum = {
+        ticker: t.ticker,
+        shares: t.shares,
+        price: t.price,
+      };
+
       gatheredSum.push(objSum);
     } else {
       gatheredSum[idxOfTickerSum]['shares'] += t.shares;
@@ -35,5 +40,6 @@ function calculateHoldings(portfolio) {
   gatheredSum.forEach(function (t) {
     t.price = t.price / t.shares;
   });
+
   return gatheredSum;
 }
