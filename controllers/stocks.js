@@ -35,6 +35,7 @@ async function index(req, res) {
 
 function hide(req, res) {
   Stock.findById(req.params.id, function (err, stock) {
+    console.log('Set hide to ', stock);
     stock.hide = true;
     stock.save();
     res.redirect('/stocks');
@@ -78,6 +79,19 @@ async function create(req, res) {
       }
       res.redirect(`/stocks`);
     });
+  }
+
+  if (duplicate) {
+    Stock.findOne(
+      {
+        $and: [{ ticker: req.body.ticker }, { user: req.user._id }],
+      },
+      function (err, stock) {
+        stock.hide = false;
+        stock.save();
+        res.redirect(`/stocks`);
+      }
+    );
   }
 
   // If it exists, change to unhide
