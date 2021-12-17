@@ -1,12 +1,18 @@
 const Portfolio = require('../models/portfolio');
 const Stock = require('../models/stock');
-// const Transaction = require('../models/transaction')
+
 module.exports = {
   create,
 };
 
 function create(req, res) {
+  console.log('trans');
   Portfolio.findById(req.body.portfolioId, function (err, portfolio) {
+    //Protect route unless from logged in user
+    if (!portfolio.user.equals(req.user._id)) {
+      return res.redirect('/stocks');
+    }
+    console.log('trans');
     Stock.findById(req.params.id, function (err, stock) {
       req.body.ticker = stock.ticker;
       portfolio.transactions.push(req.body);
@@ -17,9 +23,3 @@ function create(req, res) {
     });
   });
 }
-
-// async function getStock(){
-//     const response = await fetch(`https://query1.finance.yahoo.com/v7/finance/quote?lang=en-US&region=US&corsDomain=finance.yahoo.com&symbols=TSLA`);
-//     var data = await response.json();
-//     console.log(data)
-//     }

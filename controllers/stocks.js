@@ -23,6 +23,10 @@ async function index(req, res) {
 
 async function deleteOne(req, res) {
   await Stock.findOne({ _id: req.params.id }).then(function (stock) {
+    //Protect route unless from logged in user
+    if (!stock.user.equals(req.user._id)) {
+      return res.redirect('/stocks');
+    }
     stock.remove();
     res.redirect('/stocks');
   });
@@ -30,6 +34,10 @@ async function deleteOne(req, res) {
 
 function show(req, res) {
   Stock.findById(req.params.id, function (err, stock) {
+    //Protect route unless from logged in user
+    if (!stock.user.equals(req.user._id)) {
+      return res.redirect('/stocks');
+    }
     Portfolio.find({ user: req.user._id }, async function (err, portfolios) {
       const quote = await StockPrice.getOneStock(stock.ticker);
 
@@ -50,16 +58,10 @@ async function create(req, res) {
   const check = await StockPrice.checkStock(req.body.ticker);
   // Check stock duplicate
 
-  const duplicate = await Stock.findOne(
-    {
-      $and: [{ ticker: req.body.ticker }, { user: req.user._id }],
-    }
-    // function (err) {
-    //   console.log(err);
-    // }
-  );
+  const duplicate = await Stock.findOne({
+    $and: [{ ticker: req.body.ticker }, { user: req.user._id }],
+  });
 
-  console.log('req.body', req.body);
   if (check && !duplicate) {
     const stock = new Stock(req.body);
     stock.user = req.user._id;

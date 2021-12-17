@@ -38,16 +38,6 @@ async function checkStock(ticker) {
     );
   return exist;
 }
-// async function getOneStock(ticker) {
-//   let stockInfo = {};
-//   await fetch(
-//     `https://query1.finance.yahoo.com/v7/finance/quote?lang=en-US&region=US&corsDomain=finance.yahoo.com&symbols=${ticker}`
-//   )
-//     .then((res) => res.json())
-//     .then((quote) => (stockInfo = quote.quoteResponse.result[0]));
-
-//   return stockInfo;
-// }
 async function getOneStock(ticker) {
   let stock = [];
   await fetch(

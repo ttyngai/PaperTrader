@@ -14,19 +14,17 @@
         <th>Ticker</th>
         <th>% Change</th>
         <th>StockPrice</th>
-
-        <th>Trade</th>
         <th>Delete</th>
       </tr>
     </thead>
     <tbody>
       <% stocks.forEach(function(s) { %>
       <tr>
-        <td><%= s.symbol %></td>
+        <td><a href="/stocks/<%= s._id %>"><%= s.symbol %></a></td>
+
         <td><%= s.regularMarketChangePercent.toFixed(2) %>%</td>
         <td>$<%= s.regularMarketPrice %></td>
 
-        <td><a href="/stocks/<%= s._id %>">Buy/Sell</a></td>
         <td>
           <form action="/stocks/<%= s._id %>?_method=DELETE" method="POST">
             <button type="submit">X</button>

@@ -46,12 +46,10 @@ function show(req, res) {
       return res.redirect('/portfolios');
     }
     let holdings = calculateHoldings.calculateHoldings(portfolio);
-
     let tickers = [];
     holdings.forEach(function (s) {
       tickers.push(s.ticker, holdings);
     });
-    console.log('check holdings', holdings);
     let prices = [];
     if (holdings[0]) {
       prices = await StockPrice.getStockNoId(tickers);
@@ -63,7 +61,6 @@ function show(req, res) {
     res.render(`portfolios/show`, {
       title: 'Portfolio:',
       portfolio,
-      // holdings,
       prices,
     });
   });
@@ -91,9 +88,8 @@ function update(req, res) {
   });
 }
 function deletePortfolio(req, res) {
-  //Protect route unless from logged in user
-
   Portfolio.findById({ _id: req.params.id }, function (err, portfolio) {
+    //Protect route unless from logged in user
     if (!portfolio.user.equals(req.user._id)) {
       return res.redirect('/portfolios');
     }
