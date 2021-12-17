@@ -50,13 +50,17 @@ async function create(req, res) {
   const check = await StockPrice.checkStock(req.body.ticker);
   // Check stock duplicate
 
-  const duplicate = await Stock.findOne({
-    $and: [{ ticker: req.body.ticker }, { user: req.user._id }],
-  });
+  const duplicate = await Stock.findOne(
+    {
+      $and: [{ ticker: req.body.ticker }, { user: req.user._id }],
+    }
+    // function (err) {
+    //   console.log(err);
+    // }
+  );
 
   console.log('req.body', req.body);
   if (check && !duplicate) {
-    console.log('req.body2', req.body);
     const stock = new Stock(req.body);
     stock.user = req.user._id;
     stock.save(function (err) {

@@ -32,7 +32,9 @@ async function checkStock(ticker) {
     `https://query1.finance.yahoo.com/v7/finance/quote?lang=en-US&region=US&corsDomain=finance.yahoo.com&symbols=${ticker}`
   )
     .then((res) => res.json())
-    .then((quote) => (exist = quote.quoteResponse.result[0].marketCap));
+    .then(
+      (quote) => (exist = quote.quoteResponse.result[0].regularMarketPrice)
+    );
   return exist;
 }
 // async function getOneStock(ticker) {

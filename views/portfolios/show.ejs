@@ -9,7 +9,6 @@
         <th>Shares</th>
         <th>Price</th>
         <th>% Change</th>
-        <th>P/L Day</th>
         <th>P/L %</th>
         <th>P/L Open</th>
         <th>Purchased Price</th>
@@ -20,7 +19,12 @@
       <tr>
         <td><%= h.ticker %></td>
         <td><%= h.shares %></td>
-        <!-- <td><%= h.purchasedPrice %></td> -->
+        <td><%= h.shares %></td>
+        <td><%= h.shares %></td>
+        <td><%= h.shares %></td>
+        <td><%= h.shares %></td>
+        <td><%= h.shares %></td>
+        <td>$<%= h.price %></td>
       </tr>
       <% }); %>
     </tbody>

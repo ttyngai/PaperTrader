@@ -9,14 +9,12 @@
         <th>Price</th>
 
         <th>% Change</th>
-        <th>Market Cap(M)</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td>$<%= quote[0].regularMarketPrice %></td>
         <td><%= quote[0].regularMarketChangePercent.toFixed(2) %>%</td>
-        <td>$<%= (quote[0].marketCap/1000000).toFixed(0) %></td>
       </tr>
     </tbody>
   </table>
