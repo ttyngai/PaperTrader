@@ -17,7 +17,7 @@ router.get('/:id', portfoliosCtrl.show);
 //Get edit portfolio page
 router.get('/:id/edit', portfoliosCtrl.edit);
 //Update portfolio name
-router.post('/:id/edit', portfoliosCtrl.update);
+router.post('/:id', portfoliosCtrl.update);
 
 //Delete portfolio
 router.delete('/:id', portfoliosCtrl.delete);

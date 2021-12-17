@@ -74,7 +74,15 @@ function edit(req, res) {
 
 function update(req, res) {
   console.log('update page!');
+  Portfolio.findById({ _id: req.params.id }, function (err, portfolio) {
+    portfolio.name = req.body.name;
+    portfolio.save();
+    res.redirect(`/portfolios/${req.params.id}`);
+  });
 }
 function deletePortfolio(req, res) {
   console.log('delete!');
+  Portfolio.findByIdAndDelete({ _id: req.params.id }, function (err) {
+    res.redirect('/portfolios');
+  });
 }

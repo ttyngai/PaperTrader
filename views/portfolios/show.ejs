@@ -1,7 +1,7 @@
 <%- include('../partials/header') %>
 <div>
-  <h1>Portfolio: <%= portfolio.name %></h1>
-
+  <h1><%= portfolio.name %></h1>
+  <td><a href="/portfolios/<%= portfolio._id %>/edit">Edit</a></td>
   <h3>Holdings</h3>
   <% if (prices[0]){%>
   <table id="list">

@@ -1,6 +1,5 @@
 <%- include('../partials/header') %>
 <div>
-  <h1>Account</h1>
   <table id="list">
     <thead>
       <tr>
@@ -11,7 +10,6 @@
       <% portfolios.forEach(function(p){%>
       <tr>
         <td><a href="/portfolios/<%= p._id %>"><%=p.name%></a></td>
-        <td><a href="/portfolios/<%= p._id %>/edit">Edit</a></td>
       </tr>
       <% }); %>
     </tbody>
