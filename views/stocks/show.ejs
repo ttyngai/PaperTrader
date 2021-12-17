@@ -6,14 +6,12 @@
   <table id="list">
     <thead>
       <tr>
-        <th>StockPrice</th>
-
         <th>% Change</th>
+        <th>StockPrice</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td>$<%= quote[0].regularMarketPrice %></td>
         <td><%= quote[0].regularMarketChangePercent.toFixed(2) %>%</td>
       </tr>
     </tbody>
@@ -33,12 +31,12 @@
       readonly="readonly"
     />
     <select name="portfolioId">
-      <!-- <option value="" disabled selected>Select Portfolio</option> -->
       <% portfolios.forEach(function(p){ %>
       <option value="<%= p._id%>"><%=p.name%></option>
       <%}) %>
     </select>
-    <button type="submit">Confirm</button>
+    <button type="submit" name="button" value="buy">Buy</button>
+    <button type="submit" name="button" value="sell">Sell</button>
   </form>
 </div>
 
