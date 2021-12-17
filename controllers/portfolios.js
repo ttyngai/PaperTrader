@@ -33,7 +33,7 @@ function create(req, res) {
       console.log(err);
       return res.redirect('/portfolios/new');
     }
-    res.redirect(`/portfolios/${portfolio._id}`);
+    res.redirect(`/portfolios`);
   });
 }
 
@@ -43,7 +43,6 @@ function show(req, res) {
     if (!portfolio.user.equals(req.user._id)) {
       return res.redirect('/portfolios');
     }
-
     Stock.find({ user: req.user._id }, async function (err, stocks) {
       let holdings = calculateHoldings.calculateHoldings(portfolio);
       let tickers = [];
@@ -53,13 +52,10 @@ function show(req, res) {
       let prices = [];
       if (holdings[0]) {
         prices = await StockPrice.getStockNoId(tickers);
-
         prices[0].forEach(function (p, idx) {
           p.shares = holdings[idx].shares;
           p.price = holdings[idx].price;
-
-          // console.log('check stock p', p);
-
+          // Match and attach _id to prices[0] to be passed onto render in show
           stocks.forEach(function (s) {
             if (s.ticker === p.symbol) {
               p._id = s._id;
@@ -67,9 +63,6 @@ function show(req, res) {
           });
         });
       }
-      console.log('what stocks is', stocks);
-      console.log('what prices[0] is', prices[0]);
-
       res.render(`portfolios/show`, {
         title: 'Portfolio:',
         portfolio,

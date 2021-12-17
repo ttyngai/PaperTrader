@@ -22,20 +22,8 @@ async function index(req, res) {
   });
 }
 
-// async function deleteOne(req, res) {
-//   await Stock.findOne({ _id: req.params.id }).then(function (stock) {
-//     //Protect route unless from logged in user
-//     if (!stock.user.equals(req.user._id)) {
-//       return res.redirect('/stocks');
-//     }
-//     stock.remove();
-//     res.redirect('/stocks');
-//   });
-// }
-
 function hide(req, res) {
   Stock.findById(req.params.id, function (err, stock) {
-    console.log('Set hide to ', stock);
     stock.hide = true;
     stock.save();
     res.redirect('/stocks');
@@ -93,6 +81,4 @@ async function create(req, res) {
       }
     );
   }
-
-  // If it exists, change to unhide
 }
