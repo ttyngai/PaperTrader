@@ -3,6 +3,7 @@ module.exports = {
 };
 
 function calculateHoldings(portfolio) {
+  console.log(portfolio.transactions);
   let gathered = [];
   //   let gathered = [{ticker:'AAPL', shares:400},{ticker:'FB', shares:200}];
   portfolio.transactions.forEach(function (t) {
@@ -21,11 +22,10 @@ function calculateHoldings(portfolio) {
     } else {
       gathered[idxOfTicker]['shares'] += t.shares;
       if (gathered[idxOfTicker]['shares'] === 0) {
-        console.log('remove this', gathered[idxOfTicker], idxOfTicker);
         gathered.splice(idxOfTicker, 1);
       }
     }
   });
-  console.log(gathered);
+
   return gathered;
 }

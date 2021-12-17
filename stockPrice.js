@@ -18,30 +18,21 @@ async function getStock(array, stocksFound) {
       .then((quote) => {
         stockInfo = quote.quoteResponse.result.forEach(function (s, idx) {
           s._id = stocksFound[idx]._id;
-
-          //   let stockInfo = {
-          //     ticker: s.symbol,
-          //     bid: s.bid,
-          //     ask: s.ask,
-          //     open: s.regularMarketOpen,
-          //     change: s.regularMarketChangePercent,
-          //     _id: stocksFound[idx]._id,
-          //   };
           stocks.push(s);
         });
       });
   }
-  console.log('long asnwer', stockInfo);
   return stocks;
 }
 
 async function checkStock(ticker) {
   let exist;
+
   await fetch(
     `https://query1.finance.yahoo.com/v7/finance/quote?lang=en-US&region=US&corsDomain=finance.yahoo.com&symbols=${ticker}`
   )
     .then((res) => res.json())
-    .then((quote) => (exist = quote.quoteResponse.result[0].bid));
+    .then((quote) => (exist = quote.quoteResponse.result[0].marketCap));
   return exist;
 }
 // async function getOneStock(ticker) {

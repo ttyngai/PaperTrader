@@ -7,9 +7,7 @@ const transactionSchema = new Schema(
 
     shares: { type: Number, required: true },
     // portfolio: { type: String, required: true },
-    purchasedPrice: {
-      type: Number,
-    },
+    price: { type: Number, required: true },
   },
   {
     timestamps: true,
@@ -18,7 +16,6 @@ const transactionSchema = new Schema(
 
 const portfolioSchema = new Schema({
   name: { type: String, required: true },
-  capital: { type: Number, required: true },
   user: { type: Schema.Types.ObjectId, ref: 'User' },
   userName: String,
   userAvatar: String,

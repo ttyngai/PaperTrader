@@ -6,16 +6,15 @@
   <table id="list">
     <thead>
       <tr>
-        <th>Bid</th>
-        <th>Ask</th>
+        <th>Price</th>
+
         <th>% Change</th>
         <th>Market Cap(M)</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td>$<%= quote[0].bid %></td>
-        <td>$<%= quote[0].ask %></td>
+        <td>$<%= quote[0].regularMarketPrice %></td>
         <td><%= quote[0].regularMarketChangePercent.toFixed(2) %>%</td>
         <td>$<%= (quote[0].marketCap/1000000).toFixed(0) %></td>
       </tr>
@@ -29,6 +28,11 @@
   >
     <label>Shares:</label>
     <input type="number" name="shares" />
+    <input
+      type="number"
+      name="price"
+      value="<%=quote[0].regularMarketPrice%>"
+    />
     <select name="portfolioId">
       <!-- <option value="" disabled selected>Select Portfolio</option> -->
       <% portfolios.forEach(function(p){ %>

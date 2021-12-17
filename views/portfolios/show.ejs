@@ -1,7 +1,6 @@
 <%- include('../partials/header') %>
 <div>
-  <h1><%=title%> <%= portfolio.name %></h1>
-  <h1>Captial $<%= portfolio.capital %></h1>
+  <h1>Portfolio: <%= portfolio.name %></h1>
   <h3>Holdings</h3>
   <table id="list">
     <thead>
@@ -34,6 +33,7 @@
         <th>Ticker</th>
         <th>Shares</th>
         <th>Purchased Price</th>
+        <th>Transaction $</th>
       </tr>
     </thead>
     <tbody>
@@ -41,7 +41,8 @@
       <tr>
         <td><%= t.ticker %></td>
         <td><%= t.shares %></td>
-        <td><%= t.purchasedPrice %></td>
+        <td>$<%= t.price %></td>
+        <td>$<%= (t.shares*t.price).toFixed(2) %></td>
       </tr>
       <% }); %>
     </tbody>

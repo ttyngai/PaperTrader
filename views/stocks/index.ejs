@@ -13,9 +13,8 @@
       <tr>
         <th>Ticker</th>
         <th>% Change</th>
-        <th>Bid</th>
-        <th>Ask</th>
-        <th>Open</th>
+        <th>Price</th>
+
         <th>Trade</th>
         <th>Delete</th>
       </tr>
@@ -25,9 +24,8 @@
       <tr>
         <td><%= s.symbol %></td>
         <td><%= s.regularMarketChangePercent.toFixed(2) %>%</td>
-        <td><%= s.bid %></td>
-        <td><%= s.ask %></td>
-        <td><%= s.regularMarketOpen %></td>
+        <td>$<%= s.regularMarketPrice %></td>
+
         <td><a href="/stocks/<%= s._id %>">Buy/Sell</a></td>
         <td>
           <form action="/stocks/<%= s._id %>?_method=DELETE" method="POST">

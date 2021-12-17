@@ -54,7 +54,9 @@ async function create(req, res) {
     $and: [{ ticker: req.body.ticker }, { user: req.user._id }],
   });
 
+  console.log('req.body', req.body);
   if (check && !duplicate) {
+    console.log('req.body2', req.body);
     const stock = new Stock(req.body);
     stock.user = req.user._id;
     stock.save(function (err) {
