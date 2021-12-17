@@ -10,15 +10,16 @@
   <body>
     <!-- <nav><a href="/">HOME or WHATEVER YOU WANT</a></nav> -->
     <nav>
-        <div id="navTitle">PaperTrader</div>
-        <a href="/stocks" >Watchlist</a>
-        <% if (user) { %>
-          <a href="/portfolios"	<%- title === 'Add Performer' ? 'class="active"' : '' %>>
-              Portfolio</a>
-          <a href="/logout">Logout</a>
-        <% } else { %>
-          <a href="/auth/google" class="login">Login&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"></a>
-        <% } %>
-      </nav>
+      <a id="navTitle" href="/">PaperTrader</a>
+      <% if (user) { %>
+      <a href="/stocks">Watchlist</a>
+      <a href="/portfolios"> Portfolio</a>
+      <a href="/logout">Logout</a>
+      <% } else { %>
+      <a href="/auth/google" class="login"
+        >Login&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"
+      /></a>
+      <% } %>
+    </nav>
   </body>
 </html>

@@ -3,7 +3,7 @@ var router = express.Router();
 const passport = require('passport');
 
 router.get('/', function (req, res, next) {
-  res.redirect('/portfolios');
+  res.render('index');
 });
 
 // Google OAuth login
@@ -24,7 +24,7 @@ router.get(
 // OAuth logout route
 router.get('/logout', function (req, res) {
   req.logout();
-  res.redirect('/portfolios');
+  res.redirect('/');
 });
 
 module.exports = router;
