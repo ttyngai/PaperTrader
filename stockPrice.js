@@ -3,6 +3,7 @@ const fetch = require('node-fetch');
 module.exports = {
   getStock,
   getOneStock,
+  getStockNoId,
   checkStock,
 };
 
@@ -54,6 +55,16 @@ async function getOneStock(ticker) {
   )
     .then((res) => res.json())
     .then((quote) => (exist = quote.quoteResponse.result[0]));
+  stock.push(exist);
+  return stock;
+}
+async function getStockNoId(ticker) {
+  let stock = [];
+  await fetch(
+    `https://query1.finance.yahoo.com/v7/finance/quote?lang=en-US&region=US&corsDomain=finance.yahoo.com&symbols=${ticker}`
+  )
+    .then((res) => res.json())
+    .then((quote) => (exist = quote.quoteResponse.result));
   stock.push(exist);
   return stock;
 }

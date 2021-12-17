@@ -1,5 +1,6 @@
 const Portfolio = require('../models/portfolio');
 const calculateHoldings = require('../calculateHoldings');
+const StockPrice = require('../stockPrice');
 // const Transaction = require('../models/transaction')
 module.exports = {
   index,
@@ -36,9 +37,27 @@ function create(req, res) {
 }
 
 function show(req, res) {
-  Portfolio.findById(req.params.id, function (err, portfolio) {
+  Portfolio.findById(req.params.id, async function (err, portfolio) {
     let holdings = calculateHoldings.calculateHoldings(portfolio);
-    // console.log('holdings outside', holdings);
-    res.render(`portfolios/show`, { title: 'Portfolio:', portfolio, holdings });
+
+    let tickers = [];
+    holdings.forEach(function (s) {
+      tickers.push(s.ticker, holdings);
+    });
+    console.log('check holdings', holdings);
+    let prices = [];
+    if (holdings[0]) {
+      prices = await StockPrice.getStockNoId(tickers);
+      prices[0].forEach(function (p, idx) {
+        p.shares = holdings[idx].shares;
+        p.price = holdings[idx].price;
+      });
+    }
+    res.render(`portfolios/show`, {
+      title: 'Portfolio:',
+      portfolio,
+      // holdings,
+      prices,
+    });
   });
 }

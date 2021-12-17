@@ -2,6 +2,7 @@
 <div>
   <h1>Portfolio: <%= portfolio.name %></h1>
   <h3>Holdings</h3>
+  <% if (prices[0]){%>
   <table id="list">
     <thead>
       <tr>
@@ -10,27 +11,36 @@
         <th>Price</th>
         <th>% Change</th>
         <th>P/L %</th>
-        <th>P/L Open</th>
+        <th>Profit/Loss</th>
         <th>Purchased Price</th>
       </tr>
     </thead>
     <tbody>
-      <% holdings.forEach(function(h) { %>
+      <% prices[0].forEach(function(p) { %>
       <tr>
-        <td><%= h.ticker %></td>
-        <td><%= h.shares %></td>
-        <td><%= h.shares %></td>
-        <td><%= h.shares %></td>
-        <td><%= h.shares %></td>
-        <td><%= h.shares %></td>
-        <td><%= h.shares %></td>
-        <td>$<%= h.price %></td>
+        <td><%= p.symbol %></td>
+        <td><%= p.shares %></td>
+        <td>$<%= p.regularMarketPrice %></td>
+        <td><%= p.regularMarketChangePercent.toFixed(2) %>%</td>
+        <td>
+          <%=
+          ((Math.abs(p.shares)/p.shares)*((p.regularMarketPrice-p.price)/p.price)*100).toFixed(2)%>%
+        </td>
+        <td>$<%= ((p.regularMarketPrice - p.price)*p.shares).toFixed(2) %></td>
+        <td>$<%= p.price %></td>
       </tr>
       <% }); %>
     </tbody>
+    <%} else{%>
+
+    <h3>No Holdings</h3>
+
+    <%}%>
   </table>
 
   <h3>Transactions</h3>
+  <% if (prices[0]){%>
+
   <table id="list">
     <thead>
       <tr>
@@ -51,6 +61,12 @@
       <% }); %>
     </tbody>
   </table>
+
+  <%} else{%>
+
+  <h3>No Transactions</h3>
+
+  <%}%>
 </div>
 
 <%- include('../partials/footer') %>
