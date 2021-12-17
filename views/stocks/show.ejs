@@ -17,6 +17,8 @@
     </tbody>
   </table>
 
+  <% if (portfolios.length !==0) {%>
+
   <form
     id="transaction"
     action="/stocks/<%= stock._id%>/transactions"
@@ -38,6 +40,10 @@
     <button type="submit" name="button" value="buy">Buy</button>
     <button type="submit" name="button" value="sell">Sell</button>
   </form>
+  <%} else {%>
+
+  <a href="/portfolios/new">Start Trading</a>
+  <%} %>
 </div>
 
 <%- include('../partials/footer') %>

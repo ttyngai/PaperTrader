@@ -38,6 +38,7 @@ function show(req, res) {
     }
     Portfolio.find({ user: req.user._id }, async function (err, portfolios) {
       const quote = await StockPrice.getOneStock(stock.ticker);
+      console.log('whats port', portfolios);
       res.render('stocks/show', {
         title: 'Stock Details',
         stock,
@@ -52,7 +53,6 @@ async function create(req, res) {
   // Check stock exist
   const check = await StockPrice.checkStock(req.body.ticker);
   // Check stock duplicate
-
   const duplicate = await Stock.findOne({
     $and: [{ ticker: req.body.ticker }, { user: req.user._id }],
   });
