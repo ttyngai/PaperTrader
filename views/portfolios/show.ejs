@@ -27,7 +27,7 @@
           ((Math.abs(p.shares)/p.shares)*((p.regularMarketPrice-p.price)/p.price)*100).toFixed(2)%>%
         </td>
         <td>$<%= ((p.regularMarketPrice - p.price)*p.shares).toFixed(2) %></td>
-        <td>$<%= p.price %></td>
+        <td>$<%= p.price.toFixed(2) %></td>
       </tr>
       <% }); %>
     </tbody>
