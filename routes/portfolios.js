@@ -14,4 +14,12 @@ router.get('/', portfoliosCtrl.index);
 //GET "/portfolios/:id", show route
 router.get('/:id', portfoliosCtrl.show);
 
+//Get edit portfolio page
+router.get('/:id/edit', portfoliosCtrl.edit);
+//Update portfolio name
+router.post('/:id/edit', portfoliosCtrl.update);
+
+//Delete portfolio
+router.delete('/:id', portfoliosCtrl.delete);
+
 module.exports = router;

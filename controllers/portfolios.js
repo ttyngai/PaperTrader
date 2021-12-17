@@ -7,6 +7,9 @@ module.exports = {
   new: newPortfolio,
   show,
   create,
+  delete: deletePortfolio,
+  edit,
+  update,
 };
 
 async function index(req, res) {
@@ -60,4 +63,18 @@ function show(req, res) {
       prices,
     });
   });
+}
+
+function edit(req, res) {
+  console.log('Edit page!');
+  Portfolio.findById({ _id: req.params.id }, function (err, portfolio) {
+    res.render('portfolios/edit', { title: 'Edit portfolio', portfolio });
+  });
+}
+
+function update(req, res) {
+  console.log('update page!');
+}
+function deletePortfolio(req, res) {
+  console.log('delete!');
 }

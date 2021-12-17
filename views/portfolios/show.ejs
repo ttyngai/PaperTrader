@@ -1,6 +1,7 @@
 <%- include('../partials/header') %>
 <div>
   <h1>Portfolio: <%= portfolio.name %></h1>
+
   <h3>Holdings</h3>
   <% if (prices[0]){%>
   <table id="list">
@@ -8,11 +9,11 @@
       <tr>
         <th>Ticker</th>
         <th>Shares</th>
-        <th>Price</th>
+        <th>StockPrice</th>
         <th>% Change</th>
         <th>P/L %</th>
         <th>Profit/Loss</th>
-        <th>Purchased Price</th>
+        <th>TradePrice</th>
       </tr>
     </thead>
     <tbody>
@@ -46,8 +47,8 @@
       <tr>
         <th>Ticker</th>
         <th>Shares</th>
-        <th>Purchased Price</th>
-        <th>Transaction $</th>
+        <th>PurchasePrice</th>
+        <th>TradePrice</th>
       </tr>
     </thead>
     <tbody>

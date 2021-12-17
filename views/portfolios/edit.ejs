@@ -1,0 +1,23 @@
+<%- include('../partials/header') %>
+<div>
+  <h1>Back</h1>
+  <h1><%= portfolio.name%></h1>
+  <form
+    id="new-form"
+    action="/portfolios/<%= portfolio._id %>?_method=UPDATE"
+    method="POST"
+  >
+    <label>Edit Name:</label>
+    <input type="text" name="name" />
+    <input type="submit" value="Edit Name" />
+  </form>
+  <form
+    id="new-form"
+    action="/portfolios/<%= portfolio._id %>?_method=DELETE"
+    method="POST"
+  >
+    <input type="submit" value="Delete Portfolio" />
+  </form>
+</div>
+
+<%- include('../partials/footer') %>

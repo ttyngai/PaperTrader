@@ -7,7 +7,7 @@ const isLoggedIn = require('../config/auth');
 router.post('/', stocksCtrl.create);
 
 //GET "/portfolios", index route
-router.get('/', stocksCtrl.index);
+router.get('/', isLoggedIn, stocksCtrl.index);
 
 //GET "/portfolios/:id", show route
 router.get('/:id', stocksCtrl.show);

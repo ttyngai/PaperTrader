@@ -10,8 +10,8 @@
     <tbody>
       <% portfolios.forEach(function(p){%>
       <tr>
-        <td><%=p.name%></td>
-        <td><a href="/portfolios/<%= p._id %>">DETAILS</a></td>
+        <td><a href="/portfolios/<%= p._id %>"><%=p.name%></a></td>
+        <td><a href="/portfolios/<%= p._id %>/edit">Edit</a></td>
       </tr>
       <% }); %>
     </tbody>
