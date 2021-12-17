@@ -19,6 +19,7 @@ async function getStock(array, stocksFound) {
       .then((quote) => {
         stockInfo = quote.quoteResponse.result.forEach(function (s, idx) {
           s._id = stocksFound[idx]._id;
+          s.hide = stocksFound[idx].hide;
           stocks.push(s);
         });
       });

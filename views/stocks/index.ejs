@@ -18,7 +18,8 @@
       </tr>
     </thead>
     <tbody>
-      <% stocks.forEach(function(s) { %>
+      <% stocks.forEach(function(s) {if (!s.hide) { %>
+
       <tr>
         <td><a href="/stocks/<%= s._id %>"><%= s.symbol %></a></td>
 
@@ -26,12 +27,13 @@
         <td>$<%= s.regularMarketPrice.toFixed(2) %></td>
 
         <td>
-          <form action="/stocks/<%= s._id %>?_method=DELETE" method="POST">
+          <form action="/stocks/<%= s._id %>?_method=UPDATE" method="POST">
             <button type="submit">X</button>
           </form>
         </td>
       </tr>
-      <% }); %>
+
+      <% }}); %>
     </tbody>
   </table>
 </div>

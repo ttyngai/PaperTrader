@@ -6,6 +6,7 @@ const stocksSchema = new Schema({
   user: { type: Schema.Types.ObjectId, ref: 'User' },
   userName: String,
   userAvatar: String,
+  hide: { type: Boolean, default: false },
 });
 
 module.exports = mongoose.model('stocks', stocksSchema);

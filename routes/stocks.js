@@ -13,6 +13,6 @@ router.get('/', stocksCtrl.index);
 router.get('/:id', stocksCtrl.show);
 
 // Deleting a review to "/reviews/:id"
-router.delete('/:id', stocksCtrl.delete);
+router.post('/:id', stocksCtrl.hide);
 
 module.exports = router;
