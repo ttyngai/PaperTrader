@@ -13,10 +13,16 @@ async function index(req, res) {
   // pass in array of tickers
   let tickers = [];
   Stock.find({ user: req.user }, async function (err, stocksFound) {
+    // Sort alphabetically
+    let sortedStocks = [];
+    stocksFound.sort(function (a, b) {
+      if (a.ticker > b.ticker) return 1;
+      if (a.ticker < b.ticker) return -1;
+    });
+    // push to single ticker
     stocksFound.forEach(function (s) {
       tickers.push(s.ticker);
     });
-    stocksToRender = stocksFound;
     const stocks = await StockPrice.getStock(tickers, stocksFound);
     res.render('stocks/index', { title: 'Stocks', stocks });
   });
