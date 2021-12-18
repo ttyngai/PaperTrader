@@ -45,6 +45,7 @@ function show(req, res) {
     }
     Stock.find({ user: req.user._id }, async function (err, stocks) {
       let holdings = calculateHoldings.calculateHoldings(portfolio);
+
       let tickers = [];
       holdings.forEach(function (s) {
         tickers.push(s.ticker, holdings);
@@ -54,7 +55,9 @@ function show(req, res) {
         prices = await StockPrice.getStockNoId(tickers);
         prices[0].forEach(function (p, idx) {
           p.shares = holdings[idx].shares;
-          p.price = holdings[idx].price;
+          p.avgPrice = holdings[idx].avgCost;
+
+          // console.log('p', p.price);
           // Match and attach _id to prices[0] to be passed onto render in show
           stocks.forEach(function (s) {
             if (s.ticker === p.symbol) {

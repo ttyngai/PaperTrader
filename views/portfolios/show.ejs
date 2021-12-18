@@ -26,10 +26,12 @@
         <td><%= p.regularMarketChangePercent.toFixed(2) %>%</td>
         <td>
           <%=
-          ((Math.abs(p.shares)/p.shares)*((p.regularMarketPrice-p.price)/p.price)*100).toFixed(2)%>%
+          ((Math.abs(p.shares)/p.shares)*((p.regularMarketPrice-p.avgPrice)/p.avgPrice)*100).toFixed(2)%>%
         </td>
-        <td>$<%= ((p.regularMarketPrice - p.price)*p.shares).toFixed(2) %></td>
-        <td>$<%= p.price.toFixed(2) %></td>
+        <td>
+          $<%= ((p.regularMarketPrice - p.avgPrice)*p.shares).toFixed(2) %>
+        </td>
+        <td>$<%= p.avgPrice.toFixed(2) %></td>
       </tr>
       <% }); %>
     </tbody>
@@ -49,7 +51,7 @@
         <th>Ticker</th>
         <th>Shares</th>
         <th>PurchasePrice</th>
-        <th>TradePrice</th>
+        <th>Cost</th>
       </tr>
     </thead>
     <tbody>

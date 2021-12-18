@@ -6,8 +6,7 @@ function calculateHoldings(portfolio) {
   let gatheredSum = [];
   // New t.price is purchased price
   portfolio.transactions.forEach(function (t) {
-    let purchase = t.shares * t.price;
-    t.price = purchase;
+    t.cost = t.shares * t.price;
   });
 
   //loop through full array and each object to find ticker
@@ -27,14 +26,14 @@ function calculateHoldings(portfolio) {
       let objSum = {
         ticker: t.ticker,
         shares: t.shares,
-        price: t.price,
+        costSum: t.cost,
       };
       gatheredSum.push(objSum);
     }
     // exists, combines shares and prices
     else {
       gatheredSum[idxOfTickerSum]['shares'] += t.shares;
-      gatheredSum[idxOfTickerSum]['price'] += t.price;
+      gatheredSum[idxOfTickerSum]['costSum'] += t.cost;
       //if shares becomes 0, deletes stock from holdings (Why keep stocks with zero shares?)
       if (gatheredSum[idxOfTickerSum]['shares'] === 0) {
         gatheredSum.splice(idxOfTickerSum, 1);
@@ -43,7 +42,8 @@ function calculateHoldings(portfolio) {
   });
   // calculates average share price
   gatheredSum.forEach(function (t) {
-    t.price = t.price / t.shares;
+    t.avgCost = t.costSum / t.shares;
   });
+  console.log('gathered sum', gatheredSum);
   return gatheredSum;
 }

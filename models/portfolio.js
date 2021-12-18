@@ -6,7 +6,6 @@ const transactionSchema = new Schema(
     ticker: { type: String, required: true },
 
     shares: { type: Number, required: true },
-    // portfolio: { type: String, required: true },
     price: { type: Number, required: true },
   },
   {
