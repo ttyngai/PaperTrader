@@ -34,10 +34,11 @@ nav {
   padding: 20px;
 }
 
-#navTitle {
+.navTitle {
   position: absolute;
   left: 0;
   padding: 10px;
+  color: var(--greyFont);
 }
 .navButtons {
   padding: 10px;
@@ -49,7 +50,10 @@ a {
 #watchListContent {
   width: 100vw;
 }
-
+.navButtons:hover {
+  color: var(--stockYellow);
+  text-decoration: none;
+}
 tr {
   text-align: right;
 }
@@ -69,6 +73,7 @@ table {
 }
 #eachStock {
   border-bottom: 1px solid var(--greyFont);
+  width: 95vw;
 }
 .stockListRight {
   padding: 5px 10px;
@@ -85,9 +90,14 @@ table {
   padding: 50px 0 10px 0;
   text-align: center;
 }
+#listPortfolio {
+  padding: 500px 0 10px 0;
+  text-align: center;
+}
 #search {
   width: 200px;
   border-radius: 20px;
+  font-size: 0.9em;
   background-color: var(--lightGrey);
   color: black;
   outline: 0;
@@ -97,7 +107,6 @@ table {
 #searchButton {
   background-color: var(--stockYellow);
   border-radius: 200px;
-
   padding: 0.2em 0.5em;
   font-size: 0.9em;
   color: black;
@@ -110,14 +119,14 @@ table {
   text-align: center;
   vertical-align: middle;
   border-radius: 20px;
-  padding: 0.4em 0.6em;
+  padding: 0.2em 0.6em;
   border: none;
 }
 #removeHeader {
   color: black;
 }
 .removeButtonSlot {
-  padding: 0 10px 0 0;
+  padding: 0 25px 0 0;
 }
 
 #noStock {

@@ -1,47 +1,66 @@
 <%- include('../partials/header') %>
 
+<form id="searchForm" action="/stocks" method="POST">
+  <input
+    id="search"
+    type="text"
+    name="ticker"
+    placeholder="Search (example: AAPL)"
+  />
+  <input type="submit" id="searchButton" value="Add" />
+</form>
+
 <div>
-  <form id="searchForm" action="/stocks" method="POST">
-    <input id="search" type="text" name="ticker" placeholder="Search (example: AAPL)"/>
-    <input type="submit" id="searchButton" value="Add" />
-  </form>
+  <table id="watchListContent">
+    <thead>
+      <tr id="stockListBottom">
+        <th class="tickerLeft">Stock</th>
+        <th>%Chng</th>
+        <th>StockPrice</th>
+        <th>MktOpen</th>
+        <th id="removeHeader">Remove</th>
+      </tr>
+    </thead>
 
-  <div>
-    <table id="watchListContent">
-      <thead>
-        <tr id="stockListBottom">
-          <th class="tickerLeft">Ticker</th>
-          <th>%Chng</th>
-          <th>StockPrice</th>
-          <th>MktOpen</th>
-          <th id="removeHeader">Remove</th>
-        </tr>
-      </thead>
+    <%if (stocks.length!==0){ %>
+    <tbody id="wholeForm">
+      <% stocks.forEach(function(s) {if (!s.hide) { %>
+      <tr id="eachStock">
+        <!--  -->
 
-      <%if (stocks.length!==0){ %>
-      <tbody id="wholeForm">
-        <% stocks.forEach(function(s) {if (!s.hide) { %>
-        <tr id="eachStock">
-          <td class="tickerLeft">
-            <a class=" ticker" href="/stocks/<%= s._id %>"><%= s.symbol %></a>
-          </td class="stockListRight">
+        <td class="tickerLeft">
+          <a class="ticker navButtons" href="/stocks/<%= s._id %>"
+            ><%= s.symbol %></a
+          >
+        </td>
+        <!--  -->
+        <td
+          class="
+            stockListRight
+            <%=(s.regularMarketChangePercent>0)?'stockGreen':
+            ''%>
+            <%=(s.regularMarketChangePercent<0)?'stockRed':
+            ''%>
+          "
+        >
+          <%= s.regularMarketChangePercent.toFixed(2) %>%
+        </td>
 
-          <td class="stockListRight <%=(s.regularMarketChangePercent>0)?'stockGreen': ''%> <%=(s.regularMarketChangePercent<0)?'stockRed': ''%>"><%= s.regularMarketChangePercent.toFixed(2) %>%</td>
-          <td class="stockListRight">$<%= s.regularMarketPrice.toFixed(2) %></td>
-          <td class="stockListRight">$<%= s.regularMarketOpen.toFixed(2) %></td>
+        <td class="stockListRight">$<%= s.regularMarketPrice.toFixed(2) %></td>
+        <td class="stockListRight">$<%= s.regularMarketOpen.toFixed(2) %></td>
 
-          <td class="removeButtonSlot">
-            <form action="/stocks/<%= s._id %>?_method=UPDATE" method="POST">
-              <button id="removeStock" type="submit">X</button>
-            </form>
-          </td>
-        </tr>
-        <% }}); %>
-      </tbody>
-      <%} else{ %>
-        <p id="noStock">No Stock Added</p>
-<%}%>
-    </table>
-  </div>
+        <td class="removeButtonSlot">
+          <form action="/stocks/<%= s._id %>?_method=UPDATE" method="POST">
+            <button id="removeStock" type="submit">X</button>
+          </form>
+        </td>
+      </tr>
+      <% }}); %>
+    </tbody>
+    <%} else{ %>
+    <p id="noStock">No Stock Added</p>
+    <%}%>
+  </table>
 </div>
+
 <%- include('../partials/footer') %>

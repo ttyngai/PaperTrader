@@ -1,21 +1,18 @@
 <%- include('../partials/header') %>
-<div>
-  <table id="list">
-    <thead>
-      <tr>
-        <th>Portfolio Name</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% portfolios.forEach(function(p){%>
-      <tr>
-        <td><a href="/portfolios/<%= p._id %>"><%=p.name%></a></td>
-      </tr>
-      <% }); %>
-    </tbody>
-  </table>
 
-  <a href="/portfolios/new">New Portolio</a>
-</div>
+<form id="searchForm" action="/portfolios" method="POST">
+  <input id="search" type="text" name="name" placeholder="New Portfolio" />
+  <input type="submit" id="searchButton" value="Create" />
+</form>
+
+<table id="listPortfolio">
+  <tbody>
+    <% portfolios.forEach(function(p){%>
+    <tr>
+      <td><a href="/portfolios/<%= p._id %>"><%=p.name%></a></td>
+    </tr>
+    <% }); %>
+  </tbody>
+</table>
 
 <%- include('../partials/footer') %>
