@@ -67,7 +67,7 @@ function show(req, res) {
         });
       }
       res.render(`portfolios/show`, {
-        title: 'Portfolio:',
+        title: 'Portfolios',
         portfolio,
         prices,
       });

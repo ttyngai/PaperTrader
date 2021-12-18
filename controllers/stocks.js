@@ -46,7 +46,7 @@ function show(req, res) {
       const quote = await StockPrice.getOneStock(stock.ticker);
       console.log('whats port', portfolios);
       res.render('stocks/show', {
-        title: 'Stock Details',
+        title: 'Stocks',
         stock,
         portfolios,
         quote,

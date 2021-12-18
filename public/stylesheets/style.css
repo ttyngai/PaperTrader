@@ -45,16 +45,20 @@ nav {
   padding: 10px;
   color: var(--whiteFont);
 }
+.navButtons:hover {
+  color: var(--stockYellow);
+  text-decoration: none;
+}
+.activeNav {
+  color: var(--stockYellow);
+}
 a {
   text-decoration: none;
 }
 #watchListContent {
   width: 100vw;
 }
-.navButtons:hover {
-  color: var(--stockYellow);
-  text-decoration: none;
-}
+
 tr {
   text-align: right;
 }
