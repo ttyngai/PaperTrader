@@ -8,7 +8,6 @@ function calculateHoldings(portfolio) {
   portfolio.transactions.forEach(function (t) {
     t.cost = t.shares * t.price;
   });
-
   //loop through full array and each object to find ticker
   portfolio.transactions.forEach(function (t) {
     let idxOfTickerSum;
@@ -44,6 +43,5 @@ function calculateHoldings(portfolio) {
   gatheredSum.forEach(function (t) {
     t.avgCost = t.costSum / t.shares;
   });
-  console.log('gathered sum', gatheredSum);
   return gatheredSum;
 }

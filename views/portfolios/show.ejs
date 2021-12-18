@@ -44,13 +44,14 @@
     <%}%>
   </table>
 
-  <h3>Transactions</h3>
+  <h3>Transactions (NEED TO ADD NOTE BUTTON)</h3>
   <% if (portfolio.transactions){%>
 
   <table id="list">
     <thead>
       <tr>
         <th>Ticker</th>
+        <th>Date</th>
         <th>Shares</th>
         <th>PurchasePrice</th>
         <th>Cost</th>
@@ -60,6 +61,7 @@
       <% portfolio.transactions.forEach(function(t) { %>
       <tr>
         <td><%= t.ticker %></td>
+        <td><%= t.createdAt.toLocaleDateString() %></td>
         <td><%= t.shares %></td>
         <td>$<%= t.price %></td>
         <td>$<%= (t.shares*t.price).toFixed(2) %></td>

@@ -5,7 +5,6 @@ module.exports = {
   index,
   show,
   create,
-  //   delete: deleteOne,
   hide,
 };
 
@@ -52,7 +51,6 @@ function show(req, res) {
     }
     Portfolio.find({ user: req.user._id }, async function (err, portfolios) {
       const quote = await StockPrice.getOneStock(stock.ticker);
-      console.log('whats port', portfolios);
       res.render('stocks/show', {
         title: 'Stocks',
         stock,
@@ -70,7 +68,7 @@ async function create(req, res) {
   // Check stock duplicate
   const duplicate = await Stock.findOne({
     $and: [{ ticker: req.body.ticker }, { user: req.user._id }],
-  });
+  }).catch((err) => console.log('Duplicate Error', err));
 
   if (check && !duplicate) {
     const stock = new Stock(req.body);

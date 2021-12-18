@@ -1,8 +1,7 @@
 const Portfolio = require('../models/portfolio');
 const Stock = require('../models/stock');
-const calculateHoldings = require('../calculateHoldings');
 const StockPrice = require('../stockPrice');
-// const Transaction = require('../models/transaction')
+
 module.exports = {
   index,
   show,
@@ -14,21 +13,15 @@ module.exports = {
 
 async function index(req, res) {
   const portfolios = await Portfolio.find({ user: req.user });
-  let userName = req.user.name;
   res.render('portfolios/index', { title: 'Portfolios', portfolios, req });
 }
-
-// function newPortfolio(req, res) {
-//   res.render('portfolios/new', { title: 'New Portfolio' });
-// }
-
+// Create new portfolio
 function create(req, res) {
   const portfolio = new Portfolio(req.body);
   portfolio.user = req.user._id;
   portfolio.userName = req.user.name;
   portfolio.userAvatar = req.user.avatar;
   portfolio.save(function (err) {
-    // one way to handle errors
     if (err) {
       console.log(err);
       return res.redirect('/portfolios/new');
@@ -36,7 +29,7 @@ function create(req, res) {
     res.redirect(`/portfolios`);
   });
 }
-
+//Displays selected portfolio with all transactions and current holdings calculated
 function show(req, res) {
   Portfolio.findById(req.params.id, function (err, portfolio) {
     //Protect route unless from logged in user
@@ -44,8 +37,7 @@ function show(req, res) {
       return res.redirect('/portfolios');
     }
     Stock.find({ user: req.user._id }, async function (err, stocks) {
-      let holdings = calculateHoldings.calculateHoldings(portfolio);
-
+      let holdings = calculateHoldings(portfolio);
       let tickers = [];
       holdings.forEach(function (s) {
         tickers.push(s.ticker, holdings);
@@ -56,8 +48,6 @@ function show(req, res) {
         prices[0].forEach(function (p, idx) {
           p.shares = holdings[idx].shares;
           p.avgPrice = holdings[idx].avgCost;
-
-          // console.log('p', p.price);
           // Match and attach _id to prices[0] to be passed onto render in show
           stocks.forEach(function (s) {
             if (s.ticker === p.symbol) {
@@ -76,6 +66,7 @@ function show(req, res) {
   });
 }
 
+// Renders edit page with specified portfolio id
 function edit(req, res) {
   Portfolio.findById({ _id: req.params.id }, function (err, portfolio) {
     //Protect route unless from logged in user
@@ -86,6 +77,7 @@ function edit(req, res) {
   });
 }
 
+// Updates portfolio name and redirects back to this portfolio
 function update(req, res) {
   Portfolio.findById({ _id: req.params.id }, function (err, portfolio) {
     //Protect route unless from logged in user
@@ -97,6 +89,7 @@ function update(req, res) {
     res.redirect(`/portfolios/${req.params.id}`);
   });
 }
+// Deletes selected portfolio and redirect to portfolio page
 function deletePortfolio(req, res) {
   Portfolio.findById({ _id: req.params.id }, function (err, portfolio) {
     //Protect route unless from logged in user
@@ -106,4 +99,49 @@ function deletePortfolio(req, res) {
     portfolio.remove();
     res.redirect('/portfolios');
   });
+}
+
+// Calculate holdings based on portfolio's transaction. Summarizes the net shares(removes 0 share holdings), returns avg price of each holdings remaining
+function calculateHoldings(portfolio) {
+  let gatheredSum = [];
+  // New t.price is purchased price
+  portfolio.transactions.forEach(function (t) {
+    t.cost = t.shares * t.price;
+  });
+  //loop through full array and each object to find ticker
+  portfolio.transactions.forEach(function (t) {
+    let idxOfTickerSum;
+    let exist = false;
+    //finds whether stock already exist and remembering it's index
+    for (i = 0; i < gatheredSum.length; i++) {
+      if (t.ticker == gatheredSum[i].ticker) {
+        // Found, sets exist and rememebers it's index
+        exist = true;
+        idxOfTickerSum = i;
+      }
+    }
+    // If doens't exist, makes a new one
+    if (!exist) {
+      let objSum = {
+        ticker: t.ticker,
+        shares: t.shares,
+        costSum: t.cost,
+      };
+      gatheredSum.push(objSum);
+    }
+    // exists, combines shares and prices
+    else {
+      gatheredSum[idxOfTickerSum]['shares'] += t.shares;
+      gatheredSum[idxOfTickerSum]['costSum'] += t.cost;
+      //if shares becomes 0, deletes stock from holdings (Why keep stocks with zero shares?)
+      if (gatheredSum[idxOfTickerSum]['shares'] === 0) {
+        gatheredSum.splice(idxOfTickerSum, 1);
+      }
+    }
+  });
+  // calculates average share price
+  gatheredSum.forEach(function (t) {
+    t.avgCost = t.costSum / t.shares;
+  });
+  return gatheredSum;
 }
