@@ -75,6 +75,16 @@ nav {
   font-weight: bold;
   padding: 0 10px;
 }
+
+.navUser {
+  position: absolute;
+  left: 140px;
+  font-size: 12px;
+}
+
+.navPadding {
+  padding-bottom: 50px;
+}
 a {
   text-decoration: none;
 }
@@ -87,12 +97,20 @@ tr {
 }
 .tickerLeft {
   text-align: left;
-  min-width: 100px;
-  padding: 5px 10px;
+  border-right: 1px solid var(--greyFont);
+  font-size: 18px;
+  font-weight: bold;
+  /* min-width: 100px; */
+  /* padding: 5px 5px 5px 5px; */
 }
 .ticker {
-  padding: 0 0 0 10px;
+  padding: 0 0 0 5px;
   color: var(--whiteFont);
+  font-weight: bold;
+}
+.tickerTitle {
+  padding: 0 0 0 5px;
+  border-right: none;
   font-weight: bold;
 }
 
@@ -104,7 +122,7 @@ tr {
 table {
   border-collapse: collapse;
 }
-#stockListBottom {
+#stockListTitle {
   border-bottom: 1px solid var(--greyFont);
 }
 #eachStock {
@@ -122,16 +140,16 @@ table {
   color: var(--stockGreen);
 }
 #searchForm {
-  padding: 60px 0 10px 0;
-  text-align: center;
+  padding: 0px 10px 10px 0;
+  text-align: right;
 }
 #portfolioForm {
   padding: 20px 0 10px 0;
   text-align: center;
 }
 #search {
-  width: 200px;
-  border-radius: 20px;
+  width: 150px;
+  border-radius: 5px;
   font-size: 0.9em;
   background-color: var(--lightGrey);
   color: black;
@@ -190,12 +208,12 @@ table {
   color: black;
 }
 .removeButtonSlot {
-  padding: 0 25px 0 0;
+  padding: 0 10px;
 }
 
 #noStock {
   position: absolute;
-  top: 30%;
+  top: 40%;
   right: 50%;
   font-size: 20px;
   transform: translateX(75px);
@@ -213,7 +231,7 @@ table {
   border: 2px solid var(--stockYellow);
   width: 70vw;
   max-width: 400px;
-  border-radius: 200px;
+  border-radius: 10px;
   padding: 0.2em 0.5em;
   font-size: 0.9em;
 }
@@ -225,80 +243,12 @@ table {
 
 #portfolioTitle {
   color: var(--lightGrey);
-  padding: 100px 0 0 0;
+  padding: 50px 0 0 0;
   text-align: center;
-  font-size: 60px;
+  font-size: 35px;
 }
 #listPortfolio {
   font-size: 30px;
-  padding: 5px;
+  padding: 10px;
   text-align: center;
 }
-/* 
-body {
-  margin: 0;
-  height: 100vh;
-  display: grid;
-  background-color: var(--background);
-  grid-template-rows: 50px 1fr;
-  grid-template-areas:
-    'nav'
-    'main';
-}
-
-body > nav {
-  grid-area: nav;
-  background-color: var(--nav);
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 0 20px 0 30px;
-}
-
-nav > img {
-  width: 34px;
-  object-fit: contain;
-  margin-right: auto;
-}
-
-body > main {
-  grid-area: main;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #e8eceb;
-  padding: 20px;
-  overflow-y: scroll;
-}
-
-nav > a {
-  margin: 10px;
-  text-decoration: none;
-  padding: 0px;
-  border-radius: 5px;
-}
-
-nav > a:hover:not(.active) {
-  color: white;
-  background-color: var(--nav);
-}
-
-nav > a.active {
-  color: white;
-  cursor: default;
-}
-
-.login {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 34px;
-}
-
-.login img {
-  height: 30px;
-}
-
-#navTitle {
-  color: var(--navFont);
-} */

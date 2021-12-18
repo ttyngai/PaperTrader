@@ -14,8 +14,8 @@ module.exports = {
 
 async function index(req, res) {
   const portfolios = await Portfolio.find({ user: req.user });
-
-  res.render('portfolios/index', { title: 'Portfolios', portfolios });
+  let userName = req.user.name;
+  res.render('portfolios/index', { title: 'Portfolios', portfolios, req });
 }
 
 // function newPortfolio(req, res) {
@@ -70,6 +70,7 @@ function show(req, res) {
         title: 'Portfolios',
         portfolio,
         prices,
+        req,
       });
     });
   });
@@ -81,7 +82,7 @@ function edit(req, res) {
     if (!portfolio.user.equals(req.user._id)) {
       return res.redirect('/portfolios');
     }
-    res.render('portfolios/edit', { title: 'Edit portfolio', portfolio });
+    res.render('portfolios/edit', { title: 'Edit portfolio', portfolio, req });
   });
 }
 

@@ -5,33 +5,30 @@
     id="search"
     type="text"
     name="ticker"
-    placeholder="Search (example: AAPL)"
+    placeholder="Search (ie: AAPL)"
   />
   <input type="submit" class="formButton" value="Add" />
 </form>
 
 <div>
   <table id="watchListContent">
+    <%if (listNotEmpty==true){ %>
     <thead>
-      <tr id="stockListBottom">
-        <th class="tickerLeft">Stock</th>
+      <tr id="stockListTitle">
+        <th class="tickerLeft tickerTitle">Stock</th>
         <th>%Chng</th>
-        <th>StockPrice</th>
+        <th>Mark</th>
+        <th>$Chng</th>
         <th>MktOpen</th>
-        <th id="removeHeader">Remove</th>
       </tr>
     </thead>
-
-    <%if (listNotEmpty==true){ %>
     <tbody id="wholeForm">
       <% stocks.forEach(function(s) {if (!s.hide) { %>
       <tr id="eachStock">
-        <!--  -->
-
         <td class="tickerLeft">
           <a class="ticker" href="/stocks/<%= s._id %>"><%= s.symbol %></a>
         </td>
-        <!--  -->
+
         <td
           class="
             stockListRight
@@ -45,6 +42,17 @@
         </td>
 
         <td class="stockListRight">$<%= s.regularMarketPrice.toFixed(2) %></td>
+        <td
+          class="
+            stockListRight
+            <%=((s.regularMarketPrice-s.regularMarketOpen).toFixed(2)>0)?'stockGreen':
+            ''%>
+            <%=((s.regularMarketPrice-s.regularMarketOpen).toFixed(2)<0)?'stockRed':
+            ''%>
+          "
+        >
+          $<%= (s.regularMarketPrice-s.regularMarketOpen).toFixed(2) %>
+        </td>
         <td class="stockListRight">$<%= s.regularMarketOpen.toFixed(2) %></td>
 
         <td class="removeButtonSlot">

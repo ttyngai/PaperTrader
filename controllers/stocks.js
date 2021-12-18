@@ -32,7 +32,7 @@ async function index(req, res) {
     });
 
     const stocks = await StockPrice.getStock(tickers, stocksFound);
-    res.render('stocks/index', { title: 'Stocks', stocks, listNotEmpty });
+    res.render('stocks/index', { title: 'Stocks', stocks, listNotEmpty, req });
   });
 }
 
@@ -58,6 +58,7 @@ function show(req, res) {
         stock,
         portfolios,
         quote,
+        req,
       });
     });
   });

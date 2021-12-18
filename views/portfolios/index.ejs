@@ -2,12 +2,19 @@
 
 <table id="portfolioTable">
   <tbody>
+    <%if (portfolios.length!==0) {%>
     <div id="portfolioTitle">Portfolio</div>
-    <% portfolios.forEach(function(p){%>
+    <%}else{ %>
+    <div id="portfolioTitle">
+      <%= req.user.name.split(' ')[0] %>,<br />
+      Make a portfolio.
+    </div>
+
+    <% }%> <% portfolios.forEach(function(p){%>
     <tr>
       <td>
         <form id="listPortfolio" action="/portfolios/<%= p._id %>">
-          <input type="submit" id="portfolioMod" value="<%=p.name%> - ($200)" />
+          <input type="submit" id="portfolioMod" value="<%=p.name%>" />
         </form>
       </td>
     </tr>
@@ -20,4 +27,5 @@
   <input id="search" type="text" name="name" placeholder="New Portfolio" />
   <input type="submit" class="formButton" value="Create" />
 </form>
+
 <%- include('../partials/footer') %>
