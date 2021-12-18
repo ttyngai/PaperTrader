@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 const portfoliosCtrl = require('../controllers/portfolios');
-const isLoggedIn = require('../config/auth');
 
 // POST "/portfolios" - new form route
 // router.get('/new', portfoliosCtrl.new);

@@ -22,7 +22,8 @@ async function getStock(array, stocksFound) {
           s.hide = stocksFound[idx].hide;
           stocks.push(s);
         });
-      });
+      })
+      .catch((err) => console.log(err));
   }
   return stocks;
 }
@@ -34,9 +35,8 @@ async function checkStock(ticker) {
     `https://query1.finance.yahoo.com/v7/finance/quote?lang=en-US&region=US&corsDomain=finance.yahoo.com&symbols=${ticker}`
   )
     .then((res) => res.json())
-    .then(
-      (quote) => (exist = quote.quoteResponse.result[0].regularMarketPrice)
-    );
+    .then((quote) => (exist = quote.quoteResponse.result[0].regularMarketPrice))
+    .catch((err) => console.log(err));
   return exist;
 }
 async function getOneStock(ticker) {
@@ -45,7 +45,8 @@ async function getOneStock(ticker) {
     `https://query1.finance.yahoo.com/v7/finance/quote?lang=en-US&region=US&corsDomain=finance.yahoo.com&symbols=${ticker}`
   )
     .then((res) => res.json())
-    .then((quote) => (exist = quote.quoteResponse.result[0]));
+    .then((quote) => (exist = quote.quoteResponse.result[0]))
+    .catch((err) => console.log(err));
   stock.push(exist);
   return stock;
 }

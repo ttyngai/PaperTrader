@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 const stocksCtrl = require('../controllers/stocks');
-const isLoggedIn = require('../config/auth');
 
 // POST "/stocks" - Create Route
 router.post('/', stocksCtrl.create);
