@@ -1,16 +1,92 @@
 :root {
   --nav: #131314;
   --background: #000000;
-  --font: #727272;
-  --navFont: white;
+  --greyFont: #727272;
+  --whiteFont: white;
+
+  --stockGreen: rgb(2, 134, 2);
+  --stockRed: rgb(170, 0, 57);
 }
 
 * {
   box-sizing: border-box;
   font-family: Helvetica;
-  color: var(--font);
+  color: var(--greyFont);
 }
 
+body {
+  background-color: var(--background);
+  margin: auto;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  background-color: var(--nav);
+  width: 100vw;
+  height: 30px;
+  text-align: right;
+}
+
+#navTitle {
+  position: absolute;
+  left: 0;
+  padding: 10px;
+}
+.navButtons {
+  padding: 10px;
+  color: var(--whiteFont);
+}
+a {
+  text-decoration: none;
+}
+#watchListContent {
+  width: 100vw;
+}
+
+tr {
+  text-align: right;
+}
+.tickerLeft {
+  text-align: left;
+  min-width: 100px;
+  padding: 5px 10px;
+}
+.ticker {
+  color: var(--whiteFont);
+}
+table {
+  border-collapse: collapse;
+}
+#stockListBottom {
+  border-bottom: 1px solid var(--greyFont);
+}
+#eachStock {
+  border-bottom: 1px solid var(--greyFont);
+}
+.stockListRight {
+  padding: 5px 10px;
+  color: var(--whiteFont);
+}
+.stockRed {
+  color: var(--stockRed);
+}
+.stockGreen {
+  color: var(--stockGreen);
+}
+#searchForm {
+  padding: 10px;
+  text-align: center;
+}
+#search {
+  width: 200px;
+  border-radius: 20px;
+  /* background-color: var(--greyFont); */
+  outline: 0;
+  padding: 3px 10px;
+}
+/* 
 body {
   margin: 0;
   height: 100vh;
@@ -77,4 +153,4 @@ nav > a.active {
 
 #navTitle {
   color: var(--navFont);
-}
+} */

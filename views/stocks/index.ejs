@@ -1,40 +1,42 @@
 <%- include('../partials/header') %>
 
 <div>
-  <h1>Watchlist</h1>
-  <form id="new-form" action="/stocks" method="POST">
-    <label>Ticker Symbol:</label>
-    <input type="text" name="ticker" />
+  <form id="searchForm" action="/stocks" method="POST">
+    <input id="search" type="text" name="ticker" placeholder="Search"/>
     <input type="submit" value="Add" />
   </form>
 
-  <table id="list">
-    <thead>
-      <tr>
-        <th>Ticker</th>
-        <th>% Change</th>
-        <th>StockPrice</th>
-        <th>Delete</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% stocks.forEach(function(s) {if (!s.hide) { %>
+  <div>
+    <table id="watchListContent">
+      <thead>
+        <tr id="stockListBottom">
+          <th class="tickerLeft">Ticker</th>
+          <th>%Chng</th>
+          <th>StockPrice</th>
+          <th>MktOpen</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% stocks.forEach(function(s) {if (!s.hide) { %>
+        <tr id="eachStock">
+          <td class="tickerLeft">
+            <a class=" ticker" href="/stocks/<%= s._id %>"><%= s.symbol %></a>
+          </td class="stockListRight">
 
-      <tr>
-        <td><a href="/stocks/<%= s._id %>"><%= s.symbol %></a></td>
+          <td class="stockListRight <%=(s.regularMarketChangePercent>0)?'stockGreen': ''%> <%=(s.regularMarketChangePercent<0)?'stockRed': ''%>"><%= s.regularMarketChangePercent.toFixed(2) %>%</td>
+          <td class="stockListRight">$<%= s.regularMarketPrice.toFixed(2) %></td>
+          <td class="stockListRight">$<%= s.regularMarketOpen.toFixed(2) %></td>
 
-        <td><%= s.regularMarketChangePercent.toFixed(2) %>%</td>
-        <td>$<%= s.regularMarketPrice.toFixed(2) %></td>
-
-        <td>
-          <form action="/stocks/<%= s._id %>?_method=UPDATE" method="POST">
-            <button type="submit">X</button>
-          </form>
-        </td>
-      </tr>
-
-      <% }}); %>
-    </tbody>
-  </table>
+          <td>
+            <form action="/stocks/<%= s._id %>?_method=UPDATE" method="POST">
+              <button type="submit">X</button>
+            </form>
+          </td>
+        </tr>
+        <% }}); %>
+      </tbody>
+    </table>
+  </div>
 </div>
 <%- include('../partials/footer') %>
