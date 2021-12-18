@@ -17,7 +17,9 @@
           <th id="removeHeader">Remove</th>
         </tr>
       </thead>
-      <tbody>
+
+      <%if (stocks.length!==0){ %>
+      <tbody id="wholeForm">
         <% stocks.forEach(function(s) {if (!s.hide) { %>
         <tr id="eachStock">
           <td class="tickerLeft">
@@ -36,6 +38,9 @@
         </tr>
         <% }}); %>
       </tbody>
+      <%} else{ %>
+        <p id="noStock">No Stock Added</p>
+<%}%>
     </table>
   </div>
 </div>

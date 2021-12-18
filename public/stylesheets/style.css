@@ -7,6 +7,7 @@
   --stockYellow: rgb(221, 188, 0);
   --stockGreen: rgb(2, 134, 2);
   --stockRed: rgb(170, 0, 57);
+  --darkRed: rgb(65, 2, 2);
 }
 
 * {
@@ -28,6 +29,9 @@ nav {
   width: 100vw;
   height: 30px;
   text-align: right;
+  position: fixed;
+  float: top;
+  padding: 20px;
 }
 
 #navTitle {
@@ -69,6 +73,7 @@ table {
 .stockListRight {
   padding: 5px 10px;
   color: var(--whiteFont);
+  padding: 10px 0;
 }
 .stockRed {
   color: var(--stockRed);
@@ -77,7 +82,7 @@ table {
   color: var(--stockGreen);
 }
 #searchForm {
-  padding: 20px 0 10px 0;
+  padding: 50px 0 10px 0;
   text-align: center;
 }
 #search {
@@ -99,7 +104,7 @@ table {
   border: none;
 }
 #removeStock {
-  background-color: var(--stockRed);
+  background-color: var(--darkRed);
   color: white;
   font-size: 0.7em;
   text-align: center;
@@ -113,6 +118,14 @@ table {
 }
 .removeButtonSlot {
   padding: 0 10px 0 0;
+}
+
+#noStock {
+  position: fixed;
+  margin: 0;
+  right: 35%;
+  top: 50%;
+  font-size: 20px;
 }
 /* 
 body {
