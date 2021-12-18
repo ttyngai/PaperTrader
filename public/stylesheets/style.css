@@ -6,6 +6,7 @@
   --lightGrey: lightgrey;
   --stockYellow: rgb(221, 188, 0);
   --mustardYellow: rgb(204, 204, 77);
+  --transparentYellow: rgba(221, 188, 0, 0.37);
   --stockGreen: rgb(2, 134, 2);
   --stockRed: rgb(170, 0, 57);
   --darkRed: rgb(65, 2, 2);
@@ -111,7 +112,6 @@ table {
   width: 95vw;
 }
 .stockListRight {
-  padding: 5px 10px;
   color: var(--whiteFont);
   padding: 10px 0;
 }
@@ -194,11 +194,11 @@ table {
 }
 
 #noStock {
-  position: fixed;
-  margin: 0;
-  right: 35%;
-  top: 50%;
+  position: absolute;
+  top: 30%;
+  right: 50%;
   font-size: 20px;
+  transform: translateX(75px);
 }
 
 #portfolioTable {
@@ -218,8 +218,9 @@ table {
   font-size: 0.9em;
 }
 #portfolioMod:hover {
-  transform: scale(1.025);
-  transition: all 0.2s ease-in-out;
+  background-color: var(--transparentYellow);
+  transform: scale(1.05);
+  transition: all 0.1s ease-in-out;
 }
 
 #portfolioTitle {

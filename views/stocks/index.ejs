@@ -22,7 +22,7 @@
       </tr>
     </thead>
 
-    <%if (stocks.length!==0){ %>
+    <%if (listNotEmpty==true){ %>
     <tbody id="wholeForm">
       <% stocks.forEach(function(s) {if (!s.hide) { %>
       <tr id="eachStock">
@@ -56,7 +56,11 @@
       <% }}); %>
     </tbody>
     <%} else{ %>
-    <p id="noStock">No Stock Added</p>
+    <tbody>
+      <tr id="noStock">
+        <td>No Stock Added</td>
+      </tr>
+    </tbody>
     <%}%>
   </table>
 </div>

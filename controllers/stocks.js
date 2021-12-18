@@ -23,8 +23,16 @@ async function index(req, res) {
     stocksFound.forEach(function (s) {
       tickers.push(s.ticker);
     });
+    // Check if all are hidden(empty), allow watchlist to show "No symbols added"
+    let listNotEmpty = false;
+    stocksFound.forEach(function (s) {
+      if (!s.hide) {
+        listNotEmpty = true;
+      }
+    });
+
     const stocks = await StockPrice.getStock(tickers, stocksFound);
-    res.render('stocks/index', { title: 'Stocks', stocks });
+    res.render('stocks/index', { title: 'Stocks', stocks, listNotEmpty });
   });
 }
 
