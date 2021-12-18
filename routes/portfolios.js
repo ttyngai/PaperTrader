@@ -4,7 +4,7 @@ const portfoliosCtrl = require('../controllers/portfolios');
 const isLoggedIn = require('../config/auth');
 
 // POST "/portfolios" - new form route
-router.get('/new', portfoliosCtrl.new);
+// router.get('/new', portfoliosCtrl.new);
 // POST "/portfolios" - Create Route
 router.post('/', portfoliosCtrl.create);
 

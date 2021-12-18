@@ -5,6 +5,7 @@
   --whiteFont: white;
   --lightGrey: lightgrey;
   --stockYellow: rgb(221, 188, 0);
+  --mustardYellow: rgb(168, 168, 78);
   --stockGreen: rgb(2, 134, 2);
   --stockRed: rgb(170, 0, 57);
   --darkRed: rgb(65, 2, 2);
@@ -36,7 +37,7 @@ nav {
 
 .navTitle {
   position: absolute;
-  left: 0;
+  left: 2vw;
   padding: 10px;
   color: var(--greyFont);
 }
@@ -87,11 +88,11 @@ table {
   color: var(--stockGreen);
 }
 #searchForm {
-  padding: 50px 0 10px 0;
+  padding: 60px 0 10px 0;
   text-align: center;
 }
-#listPortfolio {
-  padding: 500px 0 10px 0;
+#portfolioForm {
+  padding: 20px 0 10px 0;
   text-align: center;
 }
 #search {
@@ -104,14 +105,21 @@ table {
   padding: 3px 15px;
   border: none;
 }
-#searchButton {
+.formButton {
   background-color: var(--stockYellow);
+  border: 1px solid var(--stockYellow);
   border-radius: 200px;
   padding: 0.2em 0.5em;
   font-size: 0.9em;
   color: black;
   border: none;
 }
+.formButton:hover {
+  background-color: var(--stockGreen);
+  color: white;
+  transition: all 0.25s ease-in-out;
+}
+
 #removeStock {
   background-color: var(--darkRed);
   color: white;
@@ -122,6 +130,12 @@ table {
   padding: 0.2em 0.6em;
   border: none;
 }
+#removeStock:hover {
+  background-color: var(--stockRed);
+  transform: scale(1.3);
+  transition: all 0.15s ease-in-out;
+}
+
 #removeHeader {
   color: black;
 }
@@ -135,6 +149,38 @@ table {
   right: 35%;
   top: 50%;
   font-size: 20px;
+}
+
+#portfolioTable {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+}
+#portfolioMod {
+  background: black;
+  color: white;
+  border: 2px solid var(--stockGreen);
+  width: 70vw;
+  max-width: 400px;
+  border-radius: 200px;
+  padding: 0.2em 0.5em;
+  font-size: 0.9em;
+}
+#portfolioMod:hover {
+  background-color: var(--stockGreen);
+  transition: all 0.3s ease-in-out;
+}
+
+#portfolioTitle {
+  padding: 100px 0 0 0;
+  text-align: center;
+  font-size: 60px;
+}
+#listPortfolio {
+  font-size: 30px;
+  padding: 5px;
+  text-align: center;
 }
 /* 
 body {

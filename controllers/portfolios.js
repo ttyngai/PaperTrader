@@ -5,7 +5,6 @@ const StockPrice = require('../stockPrice');
 // const Transaction = require('../models/transaction')
 module.exports = {
   index,
-  new: newPortfolio,
   show,
   create,
   delete: deletePortfolio,
@@ -16,12 +15,13 @@ module.exports = {
 async function index(req, res) {
   const portfolios = await Portfolio.find({ user: req.user });
 
-  res.render('portfolios/index', { title: 'All Portfolios', portfolios });
+  res.render('portfolios/index', { title: 'Portfolios', portfolios });
 }
 
-function newPortfolio(req, res) {
-  res.render('portfolios/new', { title: 'New Portfolio' });
-}
+// function newPortfolio(req, res) {
+//   res.render('portfolios/new', { title: 'New Portfolio' });
+// }
+
 function create(req, res) {
   const portfolio = new Portfolio(req.body);
   portfolio.user = req.user._id;

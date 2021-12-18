@@ -18,7 +18,7 @@ async function index(req, res) {
     });
     stocksToRender = stocksFound;
     const stocks = await StockPrice.getStock(tickers, stocksFound);
-    res.render('stocks/index', { title: 'stocks', stocks });
+    res.render('stocks/index', { title: 'Stocks', stocks });
   });
 }
 
