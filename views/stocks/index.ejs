@@ -2,8 +2,8 @@
 
 <div>
   <form id="searchForm" action="/stocks" method="POST">
-    <input id="search" type="text" name="ticker" placeholder="Search"/>
-    <input type="submit" value="Add" />
+    <input id="search" type="text" name="ticker" placeholder="Search (example: AAPL)"/>
+    <input type="submit" id="searchButton" value="Add" />
   </form>
 
   <div>
@@ -14,7 +14,7 @@
           <th>%Chng</th>
           <th>StockPrice</th>
           <th>MktOpen</th>
-          <th></th>
+          <th id="removeHeader">Remove</th>
         </tr>
       </thead>
       <tbody>
@@ -28,9 +28,9 @@
           <td class="stockListRight">$<%= s.regularMarketPrice.toFixed(2) %></td>
           <td class="stockListRight">$<%= s.regularMarketOpen.toFixed(2) %></td>
 
-          <td>
+          <td class="removeButtonSlot">
             <form action="/stocks/<%= s._id %>?_method=UPDATE" method="POST">
-              <button type="submit">X</button>
+              <button id="removeStock" type="submit">X</button>
             </form>
           </td>
         </tr>

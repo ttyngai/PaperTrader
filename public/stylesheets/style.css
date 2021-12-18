@@ -3,7 +3,8 @@
   --background: #000000;
   --greyFont: #727272;
   --whiteFont: white;
-
+  --lightGrey: lightgrey;
+  --stockYellow: rgb(221, 188, 0);
   --stockGreen: rgb(2, 134, 2);
   --stockRed: rgb(170, 0, 57);
 }
@@ -76,15 +77,42 @@ table {
   color: var(--stockGreen);
 }
 #searchForm {
-  padding: 10px;
+  padding: 20px 0 10px 0;
   text-align: center;
 }
 #search {
   width: 200px;
   border-radius: 20px;
-  /* background-color: var(--greyFont); */
+  background-color: var(--lightGrey);
+  color: black;
   outline: 0;
-  padding: 3px 10px;
+  padding: 3px 15px;
+  border: none;
+}
+#searchButton {
+  background-color: var(--stockYellow);
+  border-radius: 200px;
+
+  padding: 0.2em 0.5em;
+  font-size: 0.9em;
+  color: black;
+  border: none;
+}
+#removeStock {
+  background-color: var(--stockRed);
+  color: white;
+  font-size: 0.7em;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 20px;
+  padding: 0.4em 0.6em;
+  border: none;
+}
+#removeHeader {
+  color: black;
+}
+.removeButtonSlot {
+  padding: 0 10px 0 0;
 }
 /* 
 body {
