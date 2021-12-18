@@ -23,7 +23,7 @@
       <a  href="/portfolios" <%- title === 'Portfolios' ? 'class="navButtons activeNav"':'class="navButtons"'%>> Portfolio</a>
       <a class="navButtons" href="/logout">Logout</a>
       <% } else { %>
-      <a class="navButtons" href="/auth/google" class="login">Login</a>
+      <a class="navButtons " id="loginButton" href="/auth/google" class="login">Login</a>
       <% } %>
     </nav>
   </body>
