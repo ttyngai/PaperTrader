@@ -3,6 +3,7 @@
   <div class="portfolioSections">
     <h1><%= portfolio.name %></h1>
     <td><a href="/portfolios/<%= portfolio._id %>/edit">Edit</a></td>
+    <br />
     <h3 class="portfolioSections">Holdings</h3>
   </div>
 
@@ -17,7 +18,7 @@
         <th>%Chng</th>
         <th>%Profit</th>
         <th>$Profit</th>
-        <th>AvgPrice</th>
+        <th>AvgCost</th>
       </tr>
     </thead>
 
@@ -45,11 +46,18 @@
       <% }); %>
     </tbody>
     <%} else{%>
-
     <h3>No Holdings</h3>
-
     <%}%>
+    <tr>
+      <td>Unrealized P/L:</td>
+      <td>$<%= unrealizedPL.toFixed(2)%></td>
+    </tr>
+    <tr>
+      <td>Realized P/L:</td>
+      <td>$<%= (totalHoldings-realizedPL).toFixed(2)%></td>
+    </tr>
   </table>
+  <br />
 
   <div class="portfolioSections">
     <h3>Transactions</h3>
@@ -61,7 +69,7 @@
       <tr class="portfolioList portfolioListTitle">
         <th class="tickerLeft tickerTitle">Stock</th>
         <th>Shares</th>
-        <th>PurchasePrice</th>
+        <th>TransactPrice</th>
         <th>Cost</th>
         <th>Date</th>
       </tr>
@@ -69,14 +77,14 @@
 
     <tbody>
       <% portfolio.transactions.forEach(function(t) { %>
-      <tr class="portfolioList">
+      <tr class="portfolioList transactionBorderBottom">
         <td class="tickerLeft tickerTitle tickerTransactionUnbold">
           <%= t.ticker %>
         </td>
         <td><%= t.shares %></td>
         <td>$<%= t.price %></td>
         <td>$<%= (t.shares*t.price).toFixed(2) %></td>
-        <td><%= t.createdAt.toLocaleString() %></td>
+        <td><%= t.createdAt.toLocaleDateString() %></td>
       </tr>
       <% }); %>
     </tbody>

@@ -43,6 +43,9 @@ function show(req, res) {
         tickers.push(s.ticker, holdings);
       });
       let prices = [];
+      let unrealizedPL = 0;
+      let realizedPL = 0;
+      let totalHoldings = 0;
       if (holdings[0]) {
         prices = await StockPrice.getStockNoId(tickers);
         prices[0].forEach(function (p, idx) {
@@ -55,12 +58,29 @@ function show(req, res) {
             }
           });
         });
+        // Calculating P/L holdings and all transactions for this particular portfolio
+        prices[0].forEach(function (p) {
+          unrealizedPL += p.shares * (p.regularMarketPrice - p.avgPrice);
+        });
+        prices[0].forEach(function (p) {
+          totalHoldings += p.shares * p.avgPrice;
+        });
       }
+      //Realized Gains
+      portfolio.transactions.forEach(function (t) {
+        realizedPL += t.price * t.shares;
+      });
+      console.log('unrealizedPL', unrealizedPL);
+      console.log('realizedPL', realizedPL);
+      console.log('totalHoldings', totalHoldings);
       res.render(`portfolios/show`, {
         title: 'Portfolios',
         portfolio,
         prices,
         req,
+        unrealizedPL,
+        realizedPL,
+        totalHoldings,
       });
     });
   });

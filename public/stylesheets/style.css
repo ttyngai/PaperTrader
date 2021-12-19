@@ -266,12 +266,18 @@ table {
 }
 .holdingsList {
   width: 95vw;
-  border-bottom: 0.1rem solid var(--greyFont);
+
   max-width: 800px;
 }
 .portfolioList {
   text-align: right;
+  border-bottom: 0.1rem solid var(--greyFont);
 }
+
+.transactionBorderBottom {
+  border: none;
+}
+
 .portfolioListTitle {
   border-bottom: 0.1rem solid var(--greyFont);
 }
