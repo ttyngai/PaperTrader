@@ -295,11 +295,13 @@ table {
   padding: 0.5rem 0 0 0;
 }
 .portfolioEdit {
+  position: absolute;
   background-color: black;
   border: none;
   color: var(--stockYellow);
+  transform: scale(0.75);
   border-radius: 0.25rem;
-  /* padding: 0 1rem; */
+  margin: 0.1rem 0 0 -3.5rem;
   font-size: 1.5rem;
 }
 
@@ -322,12 +324,13 @@ table {
   background-color: black;
 }
 .portfolioDelete {
+  border: 1px solid var(--stockRed);
   background-color: black;
-  border: none;
   color: var(--stockRed);
   border-radius: 0.25rem;
-  /* padding: 0 1rem; */
+  transform: scale(0.75);
   font-size: 1.5rem;
+  margin: 0.1rem 0 0 0;
 }
 
 .portfolioDelete:hover {

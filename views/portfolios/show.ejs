@@ -20,7 +20,7 @@
         class="portfolioEditContainer"
         action="/portfolios/<%= portfolio._id %>/delete"
       >
-        <input type="submit" class="portfolioDelete" value="Del" />
+        <input type="submit" class="portfolioDelete" value="Delete" />
       </form>
     </div>
     <table id="PLSection">
@@ -62,9 +62,9 @@
       </tr>
     </table>
     <br />
-    <h3 class="portfolioSections">Holdings</h3>
   </div>
   <% if (prices[0]){%>
+  <h3 class="portfolioSections">Holdings</h3>
   <table class="holdingsList">
     <thead>
       <tr class="portfolioList portfolioListTitle">
@@ -134,11 +134,9 @@
   </table>
   <br />
 
-  <div class="portfolioSections">
-    <h3>Transactions</h3>
-  </div>
+  <div class="portfolioSections"></div>
   <% if (portfolio.transactions.length!==0){%>
-
+  <h3>Transactions</h3>
   <table class="holdingsList">
     <thead>
       <tr class="portfolioList portfolioListTitle">
