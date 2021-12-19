@@ -106,8 +106,7 @@ tr {
 }
 .tickerLeft {
   text-align: center;
-  border-right: 0.1rem solid var(--greyFont);
-  /* font-size: 1.8rem; */
+  /* border-right: 0.1rem solid var(--greyFont); */
   font-weight: bold;
 }
 .ticker {
@@ -133,6 +132,12 @@ table {
   border-bottom: 0.1rem solid var(--greyFont);
   color: var(--greyFont);
 }
+#stockName {
+  font-size: 0.5rem;
+  text-align: left;
+  color: var(--stockYellow);
+}
+
 #eachStock {
   border-bottom: 0.1rem solid var(--greyFont);
 }
@@ -396,5 +401,8 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
   .navUser {
     font-size: 1rem;
     padding: 0 0.5rem;
+  }
+  #stockName {
+    font-size: 0.8rem;
   }
 }

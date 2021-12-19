@@ -16,6 +16,7 @@
     <thead>
       <tr id="stockListTitle">
         <th class="tickerLeft tickerTitle">Stock</th>
+        <th></th>
         <th>%Chng</th>
         <th>Price</th>
         <th>$Chng</th>
@@ -30,7 +31,9 @@
             <input type="submit" class="tickerButton" value="<%= s.symbol %>" />
           </form>
         </td>
-
+        <td class="stockListRight" id="stockName">
+          <%= s.longName.substring(0,27)%>
+        </td>
         <td
           class="
             stockListRight
