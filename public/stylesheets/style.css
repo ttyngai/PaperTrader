@@ -257,7 +257,7 @@ table {
 }
 #listPortfolio {
   font-size: 3rem;
-  padding: 0.5rem;
+  padding: 0.25rem;
   text-align: center;
 }
 #portfolioContent {
@@ -282,6 +282,12 @@ table {
   .navButton,
   .activeNav {
     padding: 0 1rem;
+  }
+  .activeNav:hover {
+    padding: 0 1rem;
+  }
+  #listPortfolio {
+    padding: 0.5rem;
   }
 }
 @media (min-width: 1024px) {
