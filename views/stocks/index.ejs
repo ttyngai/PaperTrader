@@ -1,5 +1,4 @@
 <%- include('../partials/header') %>
-
 <form id="searchForm" action="/stocks" method="POST">
   <input id="search" type="text" name="ticker" placeholder="(e.g. AAPL)" />
   <input type="submit" class="formButton" value="Add" />
@@ -12,7 +11,7 @@
       <tr id="stockListTitle">
         <th class="tickerLeft tickerTitle">Stock</th>
         <th>%Chng</th>
-        <th>Mark</th>
+        <th>Price</th>
         <th>$Chng</th>
         <th>MktOpen</th>
       </tr>
@@ -21,7 +20,9 @@
       <% stocks.forEach(function(s) {if (!s.hide) { %>
       <tr id="eachStock">
         <td class="tickerLeft">
-          <a class="ticker" href="/stocks/<%= s._id %>"><%= s.symbol %></a>
+          <form class="tickerForm" action="/stocks/<%= s._id %>">
+            <input type="submit" class="tickerButton" value="<%= s.symbol %>" />
+          </form>
         </td>
 
         <td

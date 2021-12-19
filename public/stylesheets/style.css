@@ -13,9 +13,9 @@
 }
 
 * {
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
   font-family: Helvetica;
-  color: var(--greyFont);
+  color: white;
 }
 
 body {
@@ -77,9 +77,8 @@ nav {
 }
 
 .navUser {
-  position: absolute;
-  left: 140px;
   font-size: 12px;
+  color: var(--greyFont);
 }
 
 .navPadding {
@@ -96,12 +95,10 @@ tr {
   text-align: right;
 }
 .tickerLeft {
-  text-align: left;
+  text-align: center;
   border-right: 1px solid var(--greyFont);
   font-size: 18px;
   font-weight: bold;
-  /* min-width: 100px; */
-  /* padding: 5px 5px 5px 5px; */
 }
 .ticker {
   padding: 0 0 0 5px;
@@ -124,6 +121,7 @@ table {
 }
 #stockListTitle {
   border-bottom: 1px solid var(--greyFont);
+  color: var(--greyFont);
 }
 #eachStock {
   border-bottom: 1px solid var(--greyFont);
@@ -131,13 +129,27 @@ table {
 }
 .stockListRight {
   color: var(--whiteFont);
-  padding: 10px 0;
+  /* padding: 5px 0; */
 }
 .stockRed {
   color: var(--stockRed);
 }
 .stockGreen {
   color: var(--stockGreen);
+}
+.tickerForm {
+  font-size: 23px;
+}
+.tickerButton {
+  background-color: black;
+  border: none;
+  width: 100%;
+  height: 100%;
+}
+.tickerButton:hover {
+  background-color: var(--stockYellow);
+  color: black;
+  transition: all 0.2s ease-in-out;
 }
 #searchForm {
   padding: 0px 10px 10px 0;
@@ -157,20 +169,6 @@ table {
   padding: 3px 15px;
   border: none;
 }
-/* .formButton {
-  background-color: var(--stockYellow);
-  border: 1px solid var(--stockYellow);
-  border-radius: 200px;
-  padding: 0.2em 0.5em;
-  font-size: 0.9em;
-  color: black;
-  border: none;
-}
-.formButton:hover {
-  background-color: var(--stockGreen);
-  color: white;
-  transition: all 0.25s ease-in-out;
-} */
 
 .formButton {
   background-color: black;
