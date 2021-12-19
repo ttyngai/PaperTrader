@@ -11,16 +11,16 @@
           type="text"
           autocomplete="off"
           name="name"
-          class="portfolioEditting"
-          placeholder="Portfolio: <%= portfolio.name %>"
+          id="portfolioEditting"
+          placeholder="<%= portfolio.name %>"
         />
-        <input type="submit" class="portfolioEdit" value="Save" />
+        <input type="submit" class="portfolioEdit" value="Edit" />
       </form>
       <form
         class="portfolioEditContainer"
         action="/portfolios/<%= portfolio._id %>/edit"
       >
-        <input type="submit" class="portfolioDelete" value="Delete" />
+        <input type="submit" class="portfolioDelete" value="Del" />
       </form>
     </div>
     <table id="PLSection">

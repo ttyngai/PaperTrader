@@ -303,16 +303,16 @@ table {
   color: black;
   transition: all 0.25s ease-in-out;
 }
-.portfolioEditting {
+#portfolioEditting {
   background-color: black;
   border: 0.1rem solid var(--stockYellow);
   color: var(--stockYellow);
   border-radius: 0.25rem;
   padding: 0 1rem;
   font-size: 1.5rem;
-  /* max-width: 10rem; */
+  max-width: 15rem;
 }
-.portfolioEditting:focus {
+#portfolioEditting:focus {
   border: 0.1rem solid var(--stockYellow);
   background-color: black;
 }
@@ -351,10 +351,6 @@ table {
   padding: 4rem 0;
 }
 
-input[type='text'].portfolioEditting::-webkit-input-placeholder {
-  color: var(--stockYellow);
-}
-
 .tickerTransactionUnbold {
   font-weight: normal;
 }
@@ -380,7 +376,9 @@ input[type='text'].portfolioEditting::-webkit-input-placeholder {
   flex-direction: row;
   align-items: center;
 }
-
+input[type='text']#portfolioEditting::-webkit-input-placeholder {
+  color: var(--stockYellow);
+}
 @media (min-width: 640px) {
   body {
     font-size: 1.1rem;

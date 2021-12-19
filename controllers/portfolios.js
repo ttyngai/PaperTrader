@@ -36,6 +36,7 @@ function show(req, res) {
     if (!portfolio.user.equals(req.user._id)) {
       return res.redirect('/portfolios');
     }
+
     Stock.find({ user: req.user._id }, async function (err, stocks) {
       let holdings = calculateHoldings(portfolio);
       let tickers = [];
@@ -101,8 +102,11 @@ function update(req, res) {
     if (!portfolio.user.equals(req.user._id)) {
       return res.redirect('/portfolios');
     }
-    portfolio.name = req.body.name;
-    portfolio.save();
+    if (req.body.name) {
+      portfolio.name = req.body.name;
+      portfolio.save();
+    } else {
+    }
     res.redirect(`/portfolios/${req.params.id}`);
   });
 }
