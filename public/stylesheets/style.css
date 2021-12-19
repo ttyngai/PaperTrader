@@ -136,7 +136,6 @@ table {
 }
 #eachStock {
   border-bottom: 0.1rem solid var(--greyFont);
-  width: 95vw;
 }
 .stockListRight {
   color: var(--whiteFont);
@@ -162,7 +161,7 @@ table {
   transition: all 0.2s ease-in-out;
 }
 #searchForm {
-  padding: 0 1rem 0.5rem 0;
+  padding: 1rem;
   text-align: right;
 }
 #portfolioForm {

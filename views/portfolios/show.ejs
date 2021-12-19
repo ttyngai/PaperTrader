@@ -20,6 +20,7 @@
         <th>AvgPrice</th>
       </tr>
     </thead>
+
     <tbody>
       <% prices[0].forEach(function(p) { %>
       <tr class="portfolioList">
@@ -52,8 +53,8 @@
 
   <div class="portfolioSections">
     <h3>Transactions</h3>
-    <% if (portfolio.transactions){%>
   </div>
+  <% if (portfolio.transactions.length!==0){%>
 
   <table class="holdingsList">
     <thead>
@@ -79,13 +80,13 @@
       </tr>
       <% }); %>
     </tbody>
+
+    <%} else{%>
+
+    <h3>No Transactions</h3>
+
+    <%}%>
   </table>
-
-  <%} else{%>
-
-  <h3>No Transactions</h3>
-
-  <%}%>
 </div>
 
 <%- include('../partials/footer') %>
