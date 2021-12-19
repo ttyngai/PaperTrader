@@ -14,7 +14,7 @@
 
 html {
   font-size: 62.5%;
-  font-size: 1rem;
+  font-size: 0.8rem;
 }
 * {
   /* box-sizing: border-box; */
@@ -68,7 +68,7 @@ nav {
 }
 .navButtons:hover {
   color: white;
-  border-bottom: 0.3rem solid var(--stockYellow);
+  border-bottom: 0.2rem solid var(--stockYellow);
   padding: 0 0.5rem;
   text-decoration: none;
   transition: all 0.2s ease-in-out;
@@ -94,7 +94,7 @@ a {
 #watchListContent {
   width: 100vw;
   left: 50vw;
-  max-width: 800px;
+  max-width: 1024px;
 }
 #stockContent {
   display: flex;
@@ -133,7 +133,7 @@ table {
   color: var(--greyFont);
 }
 #stockName {
-  font-size: 0.5rem;
+  font-size: 0.65rem;
   text-align: left;
   color: var(--stockYellow);
 }
@@ -270,7 +270,7 @@ table {
 }
 .holdingsList {
   width: 95vw;
-  max-width: 800px;
+  max-width: 1024px;
 }
 .portfolioList {
   text-align: right;
@@ -289,7 +289,7 @@ table {
   display: flex;
   flex-direction: column;
   width: 95vw;
-  max-width: 800px;
+  max-width: 1024px;
 }
 .portfolioEditContainer {
   padding: 0.5rem 0 0 0;
@@ -387,9 +387,9 @@ table {
 input[type='text']#portfolioEditting::-webkit-input-placeholder {
   color: var(--stockYellow);
 }
-@media (min-width: 640px) {
+@media (min-width: 478px) {
   body {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
   }
   .navButton,
   .activeNav {
@@ -406,6 +406,6 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
     padding: 0 0.5rem;
   }
   #stockName {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
   }
 }

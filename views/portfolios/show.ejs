@@ -12,7 +12,7 @@
           autocomplete="off"
           name="name"
           id="portfolioEditting"
-          placeholder="<%= portfolio.name %>"
+          value="<%= portfolio.name %>"
         />
         <input type="submit" class="portfolioEdit" value="Edit" />
       </form>
@@ -71,9 +71,10 @@
         <th class="tickerLeft tickerTitle">Stock</th>
         <th>Share</th>
         <th>Price</th>
-        <th>%Profit</th>
-        <th>$Profit</th>
-        <th>AvgCost</th>
+        <th>%Gain</th>
+        <th>Profit</th>
+        <th>Avg.Cost</th>
+        <th>Position Size</th>
       </tr>
     </thead>
 
@@ -96,7 +97,7 @@
         >
           <%= p.shares %>
         </td>
-        <td>$<%=p.regularMarketPrice %></td>
+        <td><%=p.regularMarketPrice %></td>
         <td
           class="
             <%=(p.regularMarketChangePercent>0)?'stockGreen':
@@ -124,7 +125,12 @@
           $<%= Intl.NumberFormat('en-US').format(((p.regularMarketPrice -
           p.avgPrice)*p.shares).toFixed(2)) %>
         </td>
-        <td>$<%= p.avgPrice.toFixed(2) %></td>
+        <td><%= p.avgPrice.toFixed(2) %></td>
+        <td>
+          $<%=
+          Intl.NumberFormat('en-US').format((p.regularMarketPrice*p.shares).toFixed(2))
+          %>
+        </td>
       </tr>
       <% }); %>
     </tbody>
@@ -134,16 +140,17 @@
   </table>
   <br />
 
-  <div class="portfolioSections"></div>
   <% if (portfolio.transactions.length!==0){%>
-  <h3>Transactions</h3>
+  <div class="portfolioSections">
+    <h3>Transactions</h3>
+  </div>
   <table class="holdingsList">
     <thead>
       <tr class="portfolioList portfolioListTitle">
         <th class="tickerLeft tickerTitle">Stock</th>
         <th>Action</th>
         <th>Shares</th>
-        <th>TransactPrice</th>
+        <th>Transact Price</th>
         <th>Date</th>
       </tr>
     </thead>
@@ -161,7 +168,7 @@
         <%} %>
         <td><%= Math.abs(t.shares) %></td>
 
-        <td>$<%= t.price %></td>
+        <td><%= t.price %></td>
         <td><%= t.createdAt.toLocaleDateString() %></td>
       </tr>
       <% }); %>
