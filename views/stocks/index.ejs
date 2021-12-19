@@ -37,7 +37,7 @@
           <%= s.regularMarketChangePercent.toFixed(2) %>%
         </td>
 
-        <td class="stockListRight">$<%= s.regularMarketPrice.toFixed(2) %></td>
+        <td class="stockListRight"><%= s.regularMarketPrice.toFixed(2) %></td>
         <td
           class="
             stockListRight
@@ -47,9 +47,9 @@
             ''%>
           "
         >
-          $<%= (s.regularMarketPrice-s.regularMarketOpen).toFixed(2) %>
+          <%= (s.regularMarketPrice-s.regularMarketOpen).toFixed(2) %>
         </td>
-        <td class="stockListRight">$<%= s.regularMarketOpen.toFixed(2) %></td>
+        <td class="stockListRight"><%= s.regularMarketOpen.toFixed(2) %></td>
 
         <td class="removeButtonSlot">
           <form action="/stocks/<%= s._id %>?_method=UPDATE" method="POST">

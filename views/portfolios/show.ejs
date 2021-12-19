@@ -6,11 +6,14 @@
     <br />
     <table id="PLSection">
       <tr>
-        <td>Position Size:</td>
-        <td>$<%= Math.abs(totalHoldings+unrealizedPL).toFixed(2)%></td>
+        <td class="positionTitle">Position Size:</td>
+        <td>
+          $<%=
+          Intl.NumberFormat('en-US').format(Math.abs(totalHoldings+unrealizedPL).toFixed(2))%>
+        </td>
       </tr>
       <tr>
-        <td>Holdings P/L:</td>
+        <td class="positionTitle">Holdings P/L:</td>
         <td
           class="
             PLPrices
@@ -20,11 +23,11 @@
             ''%>
           "
         >
-          $<%= unrealizedPL.toFixed(2)%>
+          $<%= Intl.NumberFormat('en-US').format(unrealizedPL.toFixed(2))%>
         </td>
       </tr>
       <tr>
-        <td>Realized P/L:</td>
+        <td class="positionTitle">Realized P/L:</td>
         <td
           class="
             PLPrices
@@ -34,7 +37,8 @@
             ''%>
           "
         >
-          $<%= (totalHoldings-realizedPL).toFixed(2)%>
+          $<%=
+          Intl.NumberFormat('en-US').format((totalHoldings-realizedPL).toFixed(2))%>
         </td>
       </tr>
     </table>
@@ -48,7 +52,6 @@
         <th class="tickerLeft tickerTitle">Stock</th>
         <th>Share</th>
         <th>Price</th>
-        <th>%Day</th>
         <th>%Profit</th>
         <th>$Profit</th>
         <th>AvgCost</th>
@@ -83,19 +86,10 @@
             ''%>
           "
         >
-          <%= p.regularMarketChangePercent.toFixed(2) %>%
+          <%= (((p.regularMarketPrice-p.avgPrice)/p.avgPrice)*100).toFixed(2)
+          %>%
         </td>
-        <td
-          class="
-            <%=(p.regularMarketPrice-p.avgPrice>0)?'stockGreen':
-            ''%>
-            <%=(p.regularMarketPrice-p.avgPrice<0)?'stockRed':
-            ''%>
-          "
-        >
-          <%=
-          ((Math.abs(p.shares)/p.shares)*((p.regularMarketPrice-p.avgPrice)/p.avgPrice)*100).toFixed(2)%>%
-        </td>
+
         <td
           class="
             <%=(p.regularMarketPrice
@@ -108,7 +102,8 @@
             ''%>
           "
         >
-          $<%= ((p.regularMarketPrice - p.avgPrice)*p.shares).toFixed(2) %>
+          $<%= Intl.NumberFormat('en-US').format(((p.regularMarketPrice -
+          p.avgPrice)*p.shares).toFixed(2)) %>
         </td>
         <td>$<%= p.avgPrice.toFixed(2) %></td>
       </tr>
