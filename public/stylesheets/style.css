@@ -52,7 +52,7 @@ nav {
   background-color: var(--nav);
   border: 0.2rem solid var(--stockYellow);
   color: var(--stockYellow);
-  border-radius: 20rem;
+  border-radius: 1rem;
   padding: 0.2em 0.5em;
   font-size: 0.9em;
   font-weight: bold;
@@ -182,7 +182,7 @@ table {
   background-color: black;
   border: 0.2rem solid var(--stockYellow);
   color: var(--stockYellow);
-  border-radius: 2rem;
+  border-radius: 1rem;
   padding: 0.2em 0.5em;
   font-size: 0.9em;
   font-weight: bold;
@@ -286,23 +286,73 @@ table {
   width: 95vw;
   max-width: 800px;
 }
-.portfolioEdit {
-  background-color: black;
-  border: 0.1rem solid var(--stockYellow);
-  color: var(--stockYellow);
-  border-radius: 0.5rem;
-  padding: 0 1rem;
-  font-size: 1.5rem;
-  /* font-weight: bold; */
-}
 .portfolioEditContainer {
   padding: 0.5rem 0 0 0;
+}
+.portfolioEdit {
+  background-color: black;
+  border: none;
+  color: var(--stockYellow);
+  border-radius: 0.25rem;
+  /* padding: 0 1rem; */
+  font-size: 1.5rem;
 }
 
 .portfolioEdit:hover {
   background-color: var(--stockYellow);
   color: black;
   transition: all 0.25s ease-in-out;
+}
+.portfolioEditting {
+  background-color: black;
+  border: 0.1rem solid var(--stockYellow);
+  color: var(--stockYellow);
+  border-radius: 0.25rem;
+  padding: 0 1rem;
+  font-size: 1.5rem;
+  /* max-width: 10rem; */
+}
+.portfolioEditting:focus {
+  border: 0.1rem solid var(--stockYellow);
+  background-color: black;
+}
+.portfolioDelete {
+  background-color: black;
+  border: none;
+  color: var(--stockRed);
+  border-radius: 0.25rem;
+  /* padding: 0 1rem; */
+  font-size: 1.5rem;
+}
+
+.portfolioDelete:hover {
+  background-color: var(--stockRed);
+  color: white;
+  transition: all 0.25s ease-in-out;
+}
+.portfolioDeleteFinal {
+  background-color: var(--stockRed);
+  border: 1px solid var(--stockRed);
+  color: white;
+  border-radius: 0.25rem;
+  margin: 10px 0 0 0;
+  padding: 0 2rem;
+  font-size: 1.5rem;
+}
+
+.portfolioDeleteFinal:hover {
+  background-color: var(--stockRed);
+  color: white;
+  transition: all 0.25s ease-in-out;
+}
+
+.portfolioDeleteContainer {
+  text-align: center;
+  padding: 4rem 0;
+}
+
+input[type='text'].portfolioEditting::-webkit-input-placeholder {
+  color: var(--stockYellow);
 }
 
 .tickerTransactionUnbold {
@@ -323,6 +373,12 @@ table {
 }
 .positionTitle {
   padding: 0 0.5rem 0 0;
+}
+
+#portfolioControl {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 @media (min-width: 640px) {

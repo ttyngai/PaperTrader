@@ -1,6 +1,12 @@
 <%- include('../partials/header') %>
 <form id="searchForm" action="/stocks" method="POST">
-  <input id="search" type="text" name="ticker" placeholder="(e.g. AAPL)" />
+  <input
+    id="search"
+    type="text"
+    autocomplete="off"
+    name="ticker"
+    placeholder="(e.g. AAPL)"
+  />
   <input type="submit" class="formButton" value="Add" />
 </form>
 

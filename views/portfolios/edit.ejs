@@ -1,22 +1,19 @@
 <%- include('../partials/header') %>
-<div>
-  <h1>Back</h1>
-  <form
-    id="new-form"
-    action="/portfolios/<%= portfolio._id %>?_method=UPDATE"
-    method="POST"
-  >
-    <label>Edit Name:</label>
-    <input type="text" value="<%=portfolio.name%>" name="name" />
-    <input type="submit" value="Edit Name" />
-  </form>
-  <form
-    id="new-form"
-    action="/portfolios/<%= portfolio._id %>?_method=DELETE"
-    method="POST"
-  >
-    <input type="submit" value="Delete Portfolio" />
-  </form>
-</div>
 
+<div class="portfolioContent">
+  <div class="portfolioDeleteContainer">
+    <h5>This action cannot be reversed.</h5>
+    <form
+      class=""
+      action="/portfolios/<%= portfolio._id %>?_method=DELETE"
+      method="POST"
+    >
+      <input
+        type="submit"
+        class="portfolioDeleteFinal"
+        value="Delete: <%= portfolio.name %>"
+      />
+    </form>
+  </div>
+</div>
 <%- include('../partials/footer') %>

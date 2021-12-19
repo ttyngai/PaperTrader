@@ -1,17 +1,28 @@
 <%- include('../partials/header') %>
 <div class="portfolioContent">
   <div class="portfolioSections">
-    <form
-      class="portfolioEditContainer"
-      action="/portfolios/<%= portfolio._id %>/edit"
-    >
-      <input
-        type="submit"
-        class="portfolioEdit"
-        value="Portfolio: <%= portfolio.name %>"
-      />
-    </form>
-
+    <div id="portfolioControl">
+      <form
+        class="portfolioEditContainer"
+        action="/portfolios/<%= portfolio._id %>?_method=UPDATE"
+        method="POST"
+      >
+        <input
+          type="text"
+          autocomplete="off"
+          name="name"
+          class="portfolioEditting"
+          placeholder="Portfolio: <%= portfolio.name %>"
+        />
+        <input type="submit" class="portfolioEdit" value="Save" />
+      </form>
+      <form
+        class="portfolioEditContainer"
+        action="/portfolios/<%= portfolio._id %>/edit"
+      >
+        <input type="submit" class="portfolioDelete" value="Delete" />
+      </form>
+    </div>
     <table id="PLSection">
       <tr>
         <td class="positionTitle">Position Size:</td>
