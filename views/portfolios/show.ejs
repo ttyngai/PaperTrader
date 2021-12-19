@@ -7,7 +7,7 @@
   </div>
 
   <% if (prices[0]){%>
-  <!--  -->
+
   <table class="holdingsList">
     <thead>
       <tr class="portfolioList portfolioListTitle">
@@ -49,38 +49,37 @@
 
     <%}%>
   </table>
-  <!--  -->
+
   <div class="portfolioSections">
-    <h3>Transactions (NEED TO ADD NOTE BUTTON)</h3>
+    <h3>Transactions</h3>
     <% if (portfolio.transactions){%>
   </div>
-
-  <!--  -->
 
   <table class="holdingsList">
     <thead>
       <tr class="portfolioList portfolioListTitle">
-        <th>Date</th>
         <th class="tickerLeft tickerTitle">Stock</th>
         <th>Shares</th>
         <th>PurchasePrice</th>
         <th>Cost</th>
+        <th>Date</th>
       </tr>
     </thead>
 
     <tbody>
       <% portfolio.transactions.forEach(function(t) { %>
       <tr class="portfolioList">
-        <td><%= t.createdAt.toLocaleDateString() %></td>
-        <td class="tickerLeft tickerTitle"><%= t.ticker %></td>
+        <td class="tickerLeft tickerTitle tickerTransactionUnbold">
+          <%= t.ticker %>
+        </td>
         <td><%= t.shares %></td>
         <td>$<%= t.price %></td>
         <td>$<%= (t.shares*t.price).toFixed(2) %></td>
+        <td><%= t.createdAt.toLocaleString() %></td>
       </tr>
       <% }); %>
     </tbody>
   </table>
-  <!--  -->
 
   <%} else{%>
 

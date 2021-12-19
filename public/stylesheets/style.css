@@ -284,6 +284,10 @@ table {
   max-width: 800px;
 }
 
+.tickerTransactionUnbold {
+  font-weight: normal;
+}
+
 @media (min-width: 640px) {
   body {
     font-size: 1.1rem;
