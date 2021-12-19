@@ -75,7 +75,6 @@ nav {
 }
 .activeNav {
   color: var(--stockYellow);
-
   font-weight: bold;
   padding: 0 0.5rem;
 }
@@ -291,6 +290,19 @@ table {
 
 .tickerTransactionUnbold {
   font-weight: normal;
+}
+
+#PLSection {
+  display: flex;
+  align-content: left;
+  padding: 0.5rem;
+}
+.PLPrices {
+  padding: 0 0 0 2rem;
+}
+.buySell {
+  /* padding: 0 2rem; */
+  text-align: right;
 }
 
 @media (min-width: 640px) {

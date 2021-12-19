@@ -70,9 +70,6 @@ function show(req, res) {
       portfolio.transactions.forEach(function (t) {
         realizedPL += t.price * t.shares;
       });
-      console.log('unrealizedPL', unrealizedPL);
-      console.log('realizedPL', realizedPL);
-      console.log('totalHoldings', totalHoldings);
       res.render(`portfolios/show`, {
         title: 'Portfolios',
         portfolio,

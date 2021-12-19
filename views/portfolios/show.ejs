@@ -4,11 +4,20 @@
     <h1><%= portfolio.name %></h1>
     <td><a href="/portfolios/<%= portfolio._id %>/edit">Edit</a></td>
     <br />
+    <table id="PLSection">
+      <tr>
+        <td>Holdings P/L:</td>
+        <td class="PLPrices">$<%= unrealizedPL.toFixed(2)%></td>
+      </tr>
+      <tr>
+        <td>Realized P/L:</td>
+        <td class="PLPrices">$<%= (totalHoldings-realizedPL).toFixed(2)%></td>
+      </tr>
+    </table>
+    <br />
     <h3 class="portfolioSections">Holdings</h3>
   </div>
-
   <% if (prices[0]){%>
-
   <table class="holdingsList">
     <thead>
       <tr class="portfolioList portfolioListTitle">
@@ -48,14 +57,6 @@
     <%} else{%>
     <h3>No Holdings</h3>
     <%}%>
-    <tr>
-      <td>Unrealized P/L:</td>
-      <td>$<%= unrealizedPL.toFixed(2)%></td>
-    </tr>
-    <tr>
-      <td>Realized P/L:</td>
-      <td>$<%= (totalHoldings-realizedPL).toFixed(2)%></td>
-    </tr>
   </table>
   <br />
 
@@ -68,9 +69,9 @@
     <thead>
       <tr class="portfolioList portfolioListTitle">
         <th class="tickerLeft tickerTitle">Stock</th>
+        <th>Action</th>
         <th>Shares</th>
         <th>TransactPrice</th>
-        <th>Cost</th>
         <th>Date</th>
       </tr>
     </thead>
@@ -81,9 +82,14 @@
         <td class="tickerLeft tickerTitle tickerTransactionUnbold">
           <%= t.ticker %>
         </td>
-        <td><%= t.shares %></td>
+        <% if(t.shares>0) { %>
+        <td class="buySell stockGreen">Buy</td>
+        <%} else {%>
+        <td class="buySell stockRed">Sell</td>
+        <%} %>
+        <td><%= Math.abs(t.shares) %></td>
+
         <td>$<%= t.price %></td>
-        <td>$<%= (t.shares*t.price).toFixed(2) %></td>
         <td><%= t.createdAt.toLocaleDateString() %></td>
       </tr>
       <% }); %>
