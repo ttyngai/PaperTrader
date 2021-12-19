@@ -1,15 +1,17 @@
 <%- include('../partials/header') %>
-
-<div id="portfolioContent">
-  <h1><%= portfolio.name %></h1>
-  <td><a href="/portfolios/<%= portfolio._id %>/edit">Edit</a></td>
-  <h3>Holdings</h3>
+<div class="portfolioContent">
+  <div class="portfolioSections">
+    <h1><%= portfolio.name %></h1>
+    <td><a href="/portfolios/<%= portfolio._id %>/edit">Edit</a></td>
+    <h3 class="portfolioSections">Holdings</h3>
+  </div>
 
   <% if (prices[0]){%>
-  <table id="holdingsList ">
+  <!--  -->
+  <table class="holdingsList">
     <thead>
       <tr class="portfolioList portfolioListTitle">
-        <th>Stock</th>
+        <th class="tickerLeft tickerTitle">Stock</th>
         <th>Share</th>
         <th>Price</th>
         <th>%Chng</th>
@@ -21,8 +23,10 @@
     <tbody>
       <% prices[0].forEach(function(p) { %>
       <tr class="portfolioList">
-        <td>
-          <a href="/stocks/<%= p._id %>"><%= p.symbol %></a>
+        <td class="tickerLeft">
+          <form class="tickerForm" action="/stocks/<%= p._id %>">
+            <input type="submit" class="tickerButton" value="<%= p.symbol %>" />
+          </form>
         </td>
 
         <td><%= p.shares %></td>
@@ -45,25 +49,30 @@
 
     <%}%>
   </table>
+  <!--  -->
+  <div class="portfolioSections">
+    <h3>Transactions (NEED TO ADD NOTE BUTTON)</h3>
+    <% if (portfolio.transactions){%>
+  </div>
 
-  <h3>Transactions (NEED TO ADD NOTE BUTTON and total profit)</h3>
-  <% if (portfolio.transactions){%>
+  <!--  -->
 
-  <table id="list">
+  <table class="holdingsList">
     <thead>
-      <tr>
-        <th>Ticker</th>
+      <tr class="portfolioList portfolioListTitle">
         <th>Date</th>
+        <th class="tickerLeft tickerTitle">Stock</th>
         <th>Shares</th>
         <th>PurchasePrice</th>
         <th>Cost</th>
       </tr>
     </thead>
+
     <tbody>
       <% portfolio.transactions.forEach(function(t) { %>
-      <tr>
-        <td><%= t.ticker %></td>
+      <tr class="portfolioList">
         <td><%= t.createdAt.toLocaleDateString() %></td>
+        <td class="tickerLeft tickerTitle"><%= t.ticker %></td>
         <td><%= t.shares %></td>
         <td>$<%= t.price %></td>
         <td>$<%= (t.shares*t.price).toFixed(2) %></td>
@@ -71,6 +80,7 @@
       <% }); %>
     </tbody>
   </table>
+  <!--  -->
 
   <%} else{%>
 
