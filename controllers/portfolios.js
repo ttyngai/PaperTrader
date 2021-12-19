@@ -7,7 +7,7 @@ module.exports = {
   show,
   create,
   delete: deletePortfolio,
-  edit,
+  confirmDelete,
   update,
 };
 
@@ -85,13 +85,13 @@ function show(req, res) {
 }
 
 // Renders edit page with specified portfolio id
-function edit(req, res) {
+function confirmDelete(req, res) {
   Portfolio.findById({ _id: req.params.id }, function (err, portfolio) {
     //Protect route unless from logged in user
     if (!portfolio.user.equals(req.user._id)) {
       return res.redirect('/portfolios');
     }
-    res.render('portfolios/edit', { title: 'Edit portfolio', portfolio, req });
+    res.render('portfolios/delete', { title: 'delete', portfolio, req });
   });
 }
 
