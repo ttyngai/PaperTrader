@@ -1,9 +1,17 @@
 <%- include('../partials/header') %>
 <div class="portfolioContent">
   <div class="portfolioSections">
-    <h1><%= portfolio.name %></h1>
-    <td><a href="/portfolios/<%= portfolio._id %>/edit">Edit</a></td>
-    <br />
+    <form
+      class="portfolioEditContainer"
+      action="/portfolios/<%= portfolio._id %>/edit"
+    >
+      <input
+        type="submit"
+        class="portfolioEdit"
+        value="Portfolio: <%= portfolio.name %>"
+      />
+    </form>
+
     <table id="PLSection">
       <tr>
         <td class="positionTitle">Position Size:</td>

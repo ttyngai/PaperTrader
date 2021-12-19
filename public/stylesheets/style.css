@@ -286,6 +286,24 @@ table {
   width: 95vw;
   max-width: 800px;
 }
+.portfolioEdit {
+  background-color: black;
+  border: 0.1rem solid var(--stockYellow);
+  color: var(--stockYellow);
+  border-radius: 0.5rem;
+  padding: 0 1rem;
+  font-size: 1.5rem;
+  /* font-weight: bold; */
+}
+.portfolioEditContainer {
+  padding: 0.5rem 0 0 0;
+}
+
+.portfolioEdit:hover {
+  background-color: var(--stockYellow);
+  color: black;
+  transition: all 0.25s ease-in-out;
+}
 
 .tickerTransactionUnbold {
   font-weight: normal;
