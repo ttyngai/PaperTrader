@@ -6,12 +6,36 @@
     <br />
     <table id="PLSection">
       <tr>
+        <td>Position Size:</td>
+        <td>$<%= Math.abs(totalHoldings+unrealizedPL).toFixed(2)%></td>
+      </tr>
+      <tr>
         <td>Holdings P/L:</td>
-        <td class="PLPrices">$<%= unrealizedPL.toFixed(2)%></td>
+        <td
+          class="
+            PLPrices
+            <%=(unrealizedPL>0)?'stockGreen':
+            ''%>
+            <%=(unrealizedPL<0)?'stockRed':
+            ''%>
+          "
+        >
+          $<%= unrealizedPL.toFixed(2)%>
+        </td>
       </tr>
       <tr>
         <td>Realized P/L:</td>
-        <td class="PLPrices">$<%= (totalHoldings-realizedPL).toFixed(2)%></td>
+        <td
+          class="
+            PLPrices
+            <%=(totalHoldings-realizedPL>0)?'stockGreen':
+            ''%>
+            <%=(totalHoldings-realizedPL<0)?'stockRed':
+            ''%>
+          "
+        >
+          $<%= (totalHoldings-realizedPL).toFixed(2)%>
+        </td>
       </tr>
     </table>
     <br />
@@ -24,7 +48,7 @@
         <th class="tickerLeft tickerTitle">Stock</th>
         <th>Share</th>
         <th>Price</th>
-        <th>%Chng</th>
+        <th>%Day</th>
         <th>%Profit</th>
         <th>$Profit</th>
         <th>AvgCost</th>
@@ -40,14 +64,50 @@
           </form>
         </td>
 
-        <td><%= p.shares %></td>
+        <td
+          class="
+            <%=(p.shares>0)?'stockGreen':
+            ''%>
+            <%=(p.shares<0)?'stockRed':
+            ''%>
+          "
+        >
+          <%= p.shares %>
+        </td>
         <td>$<%=p.regularMarketPrice %></td>
-        <td><%= p.regularMarketChangePercent.toFixed(2) %>%</td>
-        <td>
+        <td
+          class="
+            <%=(p.regularMarketChangePercent>0)?'stockGreen':
+            ''%>
+            <%=(p.regularMarketChangePercent<0)?'stockRed':
+            ''%>
+          "
+        >
+          <%= p.regularMarketChangePercent.toFixed(2) %>%
+        </td>
+        <td
+          class="
+            <%=(p.regularMarketPrice-p.avgPrice>0)?'stockGreen':
+            ''%>
+            <%=(p.regularMarketPrice-p.avgPrice<0)?'stockRed':
+            ''%>
+          "
+        >
           <%=
           ((Math.abs(p.shares)/p.shares)*((p.regularMarketPrice-p.avgPrice)/p.avgPrice)*100).toFixed(2)%>%
         </td>
-        <td>
+        <td
+          class="
+            <%=(p.regularMarketPrice
+            -
+            p.avgPrice>0)?'stockGreen':
+            ''%>
+            <%=(p.regularMarketPrice
+            -
+            p.avgPrice<0)?'stockRed':
+            ''%>
+          "
+        >
           $<%= ((p.regularMarketPrice - p.avgPrice)*p.shares).toFixed(2) %>
         </td>
         <td>$<%= p.avgPrice.toFixed(2) %></td>
