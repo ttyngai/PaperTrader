@@ -391,6 +391,7 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
 #chart_div {
   width: 100vw;
   height: 100vw;
+  transform: scale(1.4);
 }
 
 @media (min-width: 478px) {

@@ -103,6 +103,30 @@ async function getChartData(ticker, candleTime, howManyCandles) {
           array.push(bar);
         }
       }
+      let arrayDataLength = array.length;
+      for (i = 0; i < 5; i++) {
+        let bar = [];
+        let time = new Date(
+          (timestamp[arrayDataLength - 1] + 60 * (i + 1)) * 1000
+        );
+        let hour = time.getHours();
+        let minute = time.getMinutes();
+        let newTime = `${hour}:${minute}`;
+        let lastDots;
+        if (close[arrayDataLength - 1] > open[arrayDataLength - 1]) {
+          lastDots = 0.001;
+        } else {
+          lastDots = -0.001;
+        }
+        console.log('hello!!!');
+        bar.push(newTime);
+        bar.push(open[howManyCandles - 1]);
+        bar.push(open[howManyCandles - 1]);
+        bar.push(open[howManyCandles - 1] + lastDots);
+        bar.push(open[howManyCandles - 1]);
+        bar.push(open[howManyCandles - 1]);
+        array.push(bar);
+      }
     })
     .catch((err) => console.log(err));
   console.log(array);
