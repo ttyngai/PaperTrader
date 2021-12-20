@@ -42,6 +42,12 @@ function show(req, res) {
 
     Stock.find({ user: req.user._id }, async function (err, stocks) {
       let holdings = calculateHoldings(portfolio);
+      // Sort alphabetically
+      holdings.sort(function (a, b) {
+        if (a.ticker > b.ticker) return 1;
+        if (a.ticker < b.ticker) return -1;
+      });
+      console.log('myHoldings', holdings);
       let tickers = [];
       holdings.forEach(function (s) {
         tickers.push(s.ticker, holdings);
