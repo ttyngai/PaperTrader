@@ -338,19 +338,45 @@ table {
   color: white;
   transition: all 0.25s ease-in-out;
 }
-.portfolioDeleteFinal {
+#portfolioDeleteFinal {
+  background-color: black;
+  border: 1px solid red;
+  color: red;
+  border-radius: 0.25rem;
+  margin: 10px 0 0 0;
+  padding: 0 2rem;
+  font-size: 1.5rem;
+  opacity: 60%;
+}
+
+#portfolioDeleteFinal:hover {
   background-color: var(--stockRed);
-  border: 1px solid var(--stockRed);
   color: white;
+  transition: all 0.25s ease-in-out;
+}
+.blink_me:hover {
+  animation: blinker 0.5s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 100%;
+  }
+}
+
+#portfolioDeleteBack {
+  background-color: black;
+  border: 1px solid var(--stockYellow);
+  color: var(--stockYellow);
   border-radius: 0.25rem;
   margin: 10px 0 0 0;
   padding: 0 2rem;
   font-size: 1.5rem;
 }
 
-.portfolioDeleteFinal:hover {
-  background-color: var(--stockRed);
-  color: white;
+#portfolioDeleteBack:hover {
+  background-color: var(--stockYellow);
+  color: black;
   transition: all 0.25s ease-in-out;
 }
 

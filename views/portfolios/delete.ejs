@@ -10,9 +10,13 @@
     >
       <input
         type="submit"
-        class="portfolioDeleteFinal"
+        id="portfolioDeleteFinal"
+        class="blink_me"
         value="Delete <%= portfolio.name %>"
       />
+    </form>
+    <form class="" action="/portfolios/<%= portfolio._id %>">
+      <input type="submit" id="portfolioDeleteBack" value="Back" />
     </form>
   </div>
 </div>
