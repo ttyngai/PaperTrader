@@ -53,21 +53,21 @@
     var data = google.visualization.arrayToDataTable(<%- JSON.stringify(chartParsed)%>, true);
     var options = {
       legend: 'none',
-
+      chartArea:{'width': '85%', 'height': '85%'},
 
 
       seriesType: 'candlesticks',
       series: {1: {type: 'line',lineDashStyle: [4, 4]}},
 
-      colors: ['#242424', "#ddbc00", ],
+      colors: ['#242424', "#ddbc00" ],
 
 
       vAxis: { gridlineColor: '#393939',minorGridlines:{color:'transparent'}, textStyle: {
-        color: '#FFF', fontSize:8
+        color: '#FFF', fontSize:10
       }, gridlines:{count:10}},
 
 
-      hAxis: { gridlineColor: 'transparent', textStyle: { color: '#FFF',fontSize:8  }, showTextEvery: 10,  },
+      hAxis: { gridlineColor: 'transparent', textStyle: { color: '#FFF',fontSize:10  }, showTextEvery: 10,  },
       backgroundColor: 'transparent',
       candlestick: {
         risingColor: { stroke: '#028602', strokeWidth:1,fill: '#028602' },
@@ -82,3 +82,8 @@
   }
 </script>
 <%- include('../partials/footer') %>
+<script>
+  window.setTimeout(function () {
+    window.location.reload();
+  }, 30000);
+</script>

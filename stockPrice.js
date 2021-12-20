@@ -111,6 +111,12 @@ async function getChartData(ticker, candleTime, howManyCandles) {
         );
         let hour = time.getHours();
         let minute = time.getMinutes();
+        if (minute < 10) {
+          minute = `0${minute}`;
+        }
+        if (hour < 10) {
+          hour = `0${hour}`;
+        }
         let newTime = `${hour}:${minute}`;
         let lastDots;
         if (close[arrayDataLength - 1] > open[arrayDataLength - 1]) {
@@ -118,7 +124,6 @@ async function getChartData(ticker, candleTime, howManyCandles) {
         } else {
           lastDots = -0.001;
         }
-        console.log('hello!!!');
         bar.push(newTime);
         bar.push(open[howManyCandles - 1]);
         bar.push(open[howManyCandles - 1]);

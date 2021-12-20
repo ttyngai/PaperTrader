@@ -11,12 +11,14 @@
       crossorigin="anonymous"
     />
     <link defer rel="stylesheet" href="/stylesheets/style.css" />
-    <title>Document</title>
+
+    <title>PaperTrader</title>
+
   </head>
   <body>
 <section class="navPadding">
     <nav>
-      <a class="navTitle navButtons" href="/"  >PaperTrader™</a>
+      <a class="navTitle navButtons" href="/"  >PaperTrader</a>
       <% if (user) { %>
         <p  class="nav navUser">(<%= req.user.name.split(' ')[0]%>)</p>
       <a  href="/stocks" <%-   title === 'Stocks' ? 'class="navButtons activeNav"':'class="navButtons"'  %>  >Trade</a>
