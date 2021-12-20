@@ -119,7 +119,7 @@ async function getChartData(ticker, candleTime, howManyCandles) {
         }
         let newTime = `${hour}:${minute}`;
         let lastDots;
-        if (close[arrayDataLength - 1] > open[arrayDataLength - 1]) {
+        if (close[howManyCandles - 1] > open[howManyCandles - 1]) {
           lastDots = 0.001;
         } else {
           lastDots = -0.001;
