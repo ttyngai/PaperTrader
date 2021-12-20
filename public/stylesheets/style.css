@@ -396,12 +396,13 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
   background-color: black;
   border: none;
   font-size: 1.5rem;
-  padding: 0 1rem;
+  padding: 0 1.5rem;
   border-radius: 0.25rem;
+  margin: 0 0 0 0.38rem;
 }
 #buyButton {
   color: greenyellow;
-  border: 1px solid greenyellow;
+  border: 2px solid greenyellow;
 }
 #buyButton:hover {
   background-color: greenyellow;
@@ -410,12 +411,26 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
 }
 #sellButton {
   color: red;
-  border: 1px solid red;
+  border: 2px solid red;
 }
 #sellButton:hover {
   background-color: red;
   color: white;
   transition: all 0.1s ease-in-out;
+}
+
+.buySellNumBox {
+  background-color: black;
+  border: 0.1rem solid var(--stockYellow);
+  color: var(--stockYellow);
+  border-radius: 0.25rem;
+  padding: 0 1rem;
+  font-size: 1.5rem;
+  max-width: 13rem;
+}
+.buySellNumBox:focus {
+  border: 0.1rem solid var(--stockYellow);
+  background-color: black;
 }
 
 @media (min-width: 478px) {

@@ -1,32 +1,38 @@
 <%- include('../partials/header') %>
 <div>
+  <div>
   <h1><%= quote[0].longName%> (Ticker: <%= stock.ticker%>)</h1>
 
   <% if (portfolios.length !==0) {%>
-  <form
-    id="transaction"
-    action="/stocks/<%= stock._id%>/transactions"
-    method="POST"
-  >
-    <label>Shares:</label>
-    <input type="number" min="0" class="search" name="shares" />
-    <input
-      type="number"
-      name="price"
-      class="search"
-      value="<%=quote[0].regularMarketPrice%>"
-      readonly="readonly"
-    />
 
-    <select name="portfolioId" class="search">
-      <% portfolios.forEach(function(p){ %>
-      <option value="<%= p._id%>"  <%- (p._id.toString()===preselectPortfolio.toString())? 'selected':''   %>  ><%=p.name%></option>
-      <%}) %>
-    </select>
 
-    <button type="submit" class="buySellButtons" id="buyButton" name="button" value="buy">Buy</button>
-    <button type="submit" class="buySellButtons" id="sellButton" name="button" value="sell">Sell</button>
-  </form>
+
+      <form
+        id="transaction"
+        action="/stocks/<%= stock._id%>/transactions"
+        method="POST"
+      >
+        <input type="text" min="0" class="buySellNumBox" name="shares" placeholder="Shares" autofocus />
+        
+        <input
+          type="number"
+          name="price"
+          class="buySellNumBox"
+          value="<%=quote[0].regularMarketPrice.toFixed(2)%>"
+          readonly="readonly"
+        />
+        <br>
+
+  
+        <button type="submit" class="buySellButtons" id="buyButton" name="button" value="buy">Buy</button>
+        <button type="submit" class="buySellButtons" id="sellButton" name="button" value="sell">Sell</button>
+        <select name="portfolioId" class="buySellNumBox">
+          <% portfolios.forEach(function(p){ %>
+          <option value="<%= p._id%>"  <%- (p._id.toString()===preselectPortfolio.toString())? 'selected':''   %>  ><%=p.name%></option>
+          <%}) %>
+        </select>
+      </form>
+    </div>
   <%} else {%>
 
   <a href="/portfolios/new">Start Trading</a>
@@ -73,8 +79,8 @@
   }
 </script>
 <%- include('../partials/footer') %>
-<script>
+<!-- <script>
   window.setTimeout(function () {
     window.location.reload();
   }, 30000);
-</script>
+</script> -->
