@@ -28,11 +28,13 @@
       value="<%=quote[0].regularMarketPrice%>"
       readonly="readonly"
     />
+
     <select name="portfolioId">
       <% portfolios.forEach(function(p){ %>
       <option value="<%= p._id%>"><%=p.name%></option>
       <%}) %>
     </select>
+
     <button type="submit" name="button" value="buy">Buy</button>
     <button type="submit" name="button" value="sell">Sell</button>
   </form>

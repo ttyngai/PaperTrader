@@ -49,7 +49,7 @@ async function show(req, res) {
     if (!stock.user.equals(req.user._id)) {
       return res.redirect('/stocks');
     }
-    let preselectPortfolio;
+    let preselectPortfolio = 0;
     if (req.params.portfolioId) {
       preselectPortfolio = req.params.portfolioId;
     }
@@ -57,6 +57,7 @@ async function show(req, res) {
       const quote = await StockPrice.getOneStock(stock.ticker);
       //Get charting data
       const chartParsed = await StockPrice.getChartData(stock.ticker, 1, 51);
+      console.log('portfolios', portfolios);
       console.log('PRESELECT', preselectPortfolio);
       res.render('stocks/show', {
         title: 'Stocks',

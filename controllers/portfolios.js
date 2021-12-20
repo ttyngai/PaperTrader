@@ -46,7 +46,6 @@ function show(req, res) {
         if (a.ticker > b.ticker) return 1;
         if (a.ticker < b.ticker) return -1;
       });
-      console.log('myHoldings', holdings);
       let tickers = [];
       holdings.forEach(function (s) {
         tickers.push(s.ticker, holdings);
