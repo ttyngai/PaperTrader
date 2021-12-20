@@ -1,6 +1,7 @@
 const Stock = require('../models/stock');
 const Portfolio = require('../models/portfolio');
 const StockPrice = require('../stockPrice');
+const Chart = require('chart.js');
 module.exports = {
   index,
   show,
@@ -44,6 +45,10 @@ function hide(req, res) {
 }
 
 function show(req, res) {
+  // Charts
+
+  // charts end
+
   Stock.findById(req.params.id, function (err, stock) {
     //Protect route unless from logged in user
     if (!stock.user.equals(req.user._id)) {

@@ -387,6 +387,7 @@ table {
 input[type='text']#portfolioEditting::-webkit-input-placeholder {
   color: var(--stockYellow);
 }
+
 @media (min-width: 478px) {
   body {
     font-size: 1.2rem;
