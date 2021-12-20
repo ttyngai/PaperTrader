@@ -172,7 +172,7 @@ table {
   padding: 2rem 0 1rem 0;
   text-align: center;
 }
-#search {
+.search {
   width: 15rem;
   border-radius: 0.5rem;
   font-size: 0.9em;
@@ -391,6 +391,31 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
 #chart_div {
   width: 100vw;
   height: 100vw;
+}
+.buySellButtons {
+  background-color: black;
+  border: none;
+  font-size: 1.5rem;
+  padding: 0 1rem;
+  border-radius: 0.25rem;
+}
+#buyButton {
+  color: greenyellow;
+  border: 1px solid greenyellow;
+}
+#buyButton:hover {
+  background-color: greenyellow;
+  color: black;
+  transition: all 0.1s ease-in-out;
+}
+#sellButton {
+  color: red;
+  border: 1px solid red;
+}
+#sellButton:hover {
+  background-color: red;
+  color: white;
+  transition: all 0.1s ease-in-out;
 }
 
 @media (min-width: 478px) {
