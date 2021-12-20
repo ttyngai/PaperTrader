@@ -12,6 +12,9 @@ module.exports = {
 };
 
 async function index(req, res) {
+  // test of charts
+
+  // test of charts above
   const portfolios = await Portfolio.find({ user: req.user });
   res.render('portfolios/index', { title: 'Portfolios', portfolios, req });
 }

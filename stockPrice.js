@@ -5,6 +5,7 @@ module.exports = {
   getOneStock,
   getStockNoId,
   checkStock,
+  getChartData,
 };
 
 async function getStock(array, stocksFound) {
@@ -65,4 +66,37 @@ async function getStockNoId(ticker) {
     .catch((err) => console.log(err));
   stock.push(exist);
   return stock;
+}
+async function getChartData(ticker, candleTime, howManyCandles) {
+  let array = [];
+  let object;
+  await fetch(
+    `https://query1.finance.yahoo.com/v7/finance/chart/${ticker}?range=${howManyCandles}m&interval=${candleTime}m&indicators=quote&includeTimestamps=true`
+  )
+    .then((res) => res.json())
+    .then(function (data) {
+      object = data.chart.result[0];
+      let timestamp = object.timestamp;
+      let open = object.indicators.quote[0].open;
+      let high = object.indicators.quote[0].high;
+      let low = object.indicators.quote[0].low;
+      let close = object.indicators.quote[0].close;
+      for (i = 0; i < 30; i++) {
+        if (timestamp[i] && low[i] && open[i] && close[i] && high[i]) {
+          let bar = [];
+          let time = new Date(timestamp[i] * 1000);
+          let hour = time.getHours();
+          let minute = time.getMinutes();
+          let newTime = `${hour}:${minute}`;
+          bar.push(newTime);
+          bar.push(low[i]);
+          bar.push(open[i]);
+          bar.push(close[i]);
+          bar.push(high[i]);
+          array.push(bar);
+        }
+      }
+    })
+    .catch((err) => console.log(err));
+  return array;
 }

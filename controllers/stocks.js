@@ -1,7 +1,7 @@
 const Stock = require('../models/stock');
 const Portfolio = require('../models/portfolio');
 const StockPrice = require('../stockPrice');
-const Chart = require('chart.js');
+
 module.exports = {
   index,
   show,
@@ -44,11 +44,7 @@ function hide(req, res) {
   });
 }
 
-function show(req, res) {
-  // Charts
-
-  // charts end
-
+async function show(req, res) {
   Stock.findById(req.params.id, function (err, stock) {
     //Protect route unless from logged in user
     if (!stock.user.equals(req.user._id)) {
@@ -56,12 +52,15 @@ function show(req, res) {
     }
     Portfolio.find({ user: req.user._id }, async function (err, portfolios) {
       const quote = await StockPrice.getOneStock(stock.ticker);
+      //Get charting data
+      const chartParsed = await StockPrice.getChartData(stock.ticker, 1, 30);
       res.render('stocks/show', {
         title: 'Stocks',
         stock,
         portfolios,
         quote,
         req,
+        chartParsed,
       });
     });
   });

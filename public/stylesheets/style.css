@@ -388,6 +388,11 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
   color: var(--stockYellow);
 }
 
+#chart_div {
+  width: 100vw;
+  height: 100vw;
+}
+
 @media (min-width: 478px) {
   body {
     font-size: 1.2rem;
