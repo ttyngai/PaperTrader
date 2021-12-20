@@ -6,7 +6,6 @@ module.exports = {
 };
 
 function create(req, res) {
-  console.log('body of req', req.body);
   Portfolio.findById(req.body.portfolioId, function (err, portfolio) {
     //Protect route unless from logged in user
     if (!portfolio.user.equals(req.user._id)) {

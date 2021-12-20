@@ -57,8 +57,6 @@ async function show(req, res) {
       const quote = await StockPrice.getOneStock(stock.ticker);
       //Get charting data
       const chartParsed = await StockPrice.getChartData(stock.ticker, 1, 51);
-      console.log('portfolios', portfolios);
-      console.log('PRESELECT', preselectPortfolio);
       res.render('stocks/show', {
         title: 'Stocks',
         stock,

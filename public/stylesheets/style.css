@@ -396,9 +396,9 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
   background-color: black;
   border: none;
   font-size: 1.5rem;
-  padding: 0 1.5rem;
+  padding: 0 1rem;
   border-radius: 0.25rem;
-  margin: 0 0 0 0.38rem;
+  margin: 0 0rem 0 0;
 }
 #buyButton {
   color: greenyellow;
@@ -426,7 +426,7 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
   border-radius: 0.25rem;
   padding: 0 1rem;
   font-size: 1.5rem;
-  max-width: 13rem;
+  max-width: 10rem;
 }
 .buySellNumBox:focus {
   border: 0.1rem solid var(--stockYellow);
