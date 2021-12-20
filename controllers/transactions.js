@@ -11,6 +11,10 @@ function create(req, res) {
     if (!portfolio.user.equals(req.user._id)) {
       return res.redirect('/stocks');
     }
+    // Check for negative shares
+    if (req.body.shares <= 0) {
+      return res.redirect(`/stocks/${req.params.id}/${req.body.portfolioId}`);
+    }
     Stock.findById(req.params.id, function (err, stock) {
       req.body.ticker = stock.ticker;
       if (req.body.button === 'sell') {
