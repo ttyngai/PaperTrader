@@ -53,7 +53,7 @@ async function show(req, res) {
     Portfolio.find({ user: req.user._id }, async function (err, portfolios) {
       const quote = await StockPrice.getOneStock(stock.ticker);
       //Get charting data
-      const chartParsed = await StockPrice.getChartData(stock.ticker, 1, 30);
+      const chartParsed = await StockPrice.getChartData(stock.ticker, 1, 51);
       res.render('stocks/show', {
         title: 'Stocks',
         stock,

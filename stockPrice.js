@@ -81,22 +81,30 @@ async function getChartData(ticker, candleTime, howManyCandles) {
       let high = object.indicators.quote[0].high;
       let low = object.indicators.quote[0].low;
       let close = object.indicators.quote[0].close;
-      for (i = 0; i < 30; i++) {
+      for (i = 0; i < howManyCandles; i++) {
         if (timestamp[i] && low[i] && open[i] && close[i] && high[i]) {
           let bar = [];
           let time = new Date(timestamp[i] * 1000);
           let hour = time.getHours();
           let minute = time.getMinutes();
+          if (minute < 10) {
+            minute = `0${minute}`;
+          }
+          if (hour < 10) {
+            hour = `0${hour}`;
+          }
           let newTime = `${hour}:${minute}`;
           bar.push(newTime);
           bar.push(low[i]);
           bar.push(open[i]);
           bar.push(close[i]);
           bar.push(high[i]);
+          bar.push(open[howManyCandles - 1]);
           array.push(bar);
         }
       }
     })
     .catch((err) => console.log(err));
+  console.log(array);
   return array;
 }

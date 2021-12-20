@@ -53,14 +53,21 @@
     var data = google.visualization.arrayToDataTable(<%- JSON.stringify(chartParsed)%>, true);
     var options = {
       legend: 'none',
-      colors: ['white'],
-      vAxis: { gridlineColor: '#010101', textStyle: { color: '#FFF' }, },
-      hAxis: { gridlineColor: '', textStyle: { color: '#FFF' }, showTextEvery: 5 },
+
+
+
+      seriesType: 'candlesticks',
+      series: {1: {type: 'line',lineDashStyle: [4, 4]}},
+
+      colors: ['#242424', "#ddbc00" ],
+      vAxis: { gridlineColor: '#393939',minorGridlines:{color:'transparent'}, textStyle: { color: '#FFF', fontSize:8 }, gridlines:{count:10}},
+      hAxis: { gridlineColor: 'transparent', textStyle: { color: '#FFF',fontSize:8  }, showTextEvery: 10,  },
       backgroundColor: 'transparent',
       candlestick: {
-        risingColor: { stroke: '#028602', fill: '#028602' },
-        fallingColor: { stroke: '#aa0039', fill: '#aa0039' },
+        risingColor: { stroke: '#028602', strokeWidth:1,fill: '#028602' },
+        fallingColor: { stroke: '#aa0039', strokeWidth:1,fill: '#aa0039' },
       },
+
     };
     var chart = new google.visualization.CandlestickChart(
       document.getElementById('chart_div')
