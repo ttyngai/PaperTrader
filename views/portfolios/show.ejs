@@ -82,7 +82,10 @@
       <% prices[0].forEach(function(p) { %>
       <tr class="portfolioList">
         <td class="tickerLeft">
-          <form class="tickerForm" action="/stocks/<%= p._id %>">
+          <form
+            class="tickerForm"
+            action="/stocks/<%= p._id %>/<%= portfolio._id%>"
+          >
             <input type="submit" class="tickerButton" value="<%= p.symbol %>" />
           </form>
         </td>

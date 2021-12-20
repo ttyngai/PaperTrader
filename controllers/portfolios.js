@@ -39,7 +39,6 @@ function show(req, res) {
     if (!portfolio.user.equals(req.user._id)) {
       return res.redirect('/portfolios');
     }
-
     Stock.find({ user: req.user._id }, async function (err, stocks) {
       let holdings = calculateHoldings(portfolio);
       // Sort alphabetically

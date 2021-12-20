@@ -8,6 +8,8 @@ router.post('/', stocksCtrl.create);
 //GET "/stocks", index route
 router.get('/', stocksCtrl.index);
 
+//GET "/stocks/:id", preselected portfolio ID
+router.get('/:id/:portfolioId', stocksCtrl.show);
 //GET "/stocks/:id", show route
 router.get('/:id', stocksCtrl.show);
 

@@ -14,7 +14,6 @@ async function index(req, res) {
   let tickers = [];
   Stock.find({ user: req.user }, async function (err, stocksFound) {
     // Sort alphabetically
-    let sortedStocks = [];
     stocksFound.sort(function (a, b) {
       if (a.ticker > b.ticker) return 1;
       if (a.ticker < b.ticker) return -1;
@@ -50,10 +49,15 @@ async function show(req, res) {
     if (!stock.user.equals(req.user._id)) {
       return res.redirect('/stocks');
     }
+    let preselectPortfolio;
+    if (req.params.portfolioId) {
+      preselectPortfolio = req.params.portfolioId;
+    }
     Portfolio.find({ user: req.user._id }, async function (err, portfolios) {
       const quote = await StockPrice.getOneStock(stock.ticker);
       //Get charting data
       const chartParsed = await StockPrice.getChartData(stock.ticker, 1, 51);
+      console.log('PRESELECT', preselectPortfolio);
       res.render('stocks/show', {
         title: 'Stocks',
         stock,
@@ -61,6 +65,7 @@ async function show(req, res) {
         quote,
         req,
         chartParsed,
+        preselectPortfolio,
       });
     });
   });
