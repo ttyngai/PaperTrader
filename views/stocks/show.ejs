@@ -1,8 +1,6 @@
-<!-- Show stock that you added, and show available portfolio, and how much to buy/sell. Jump to that portfolio when done -->
 <%- include('../partials/header') %>
 <div>
   <h1><%= quote[0].longName%> (Ticker: <%= stock.ticker%>)</h1>
-
   <table id="list">
     <thead>
       <tr>
@@ -16,9 +14,7 @@
       </tr>
     </tbody>
   </table>
-
   <% if (portfolios.length !==0) {%>
-
   <form
     id="transaction"
     action="/stocks/<%= stock._id%>/transactions"
@@ -46,7 +42,6 @@
   <%} %>
 </div>
 <div id="chart_div"></div>
-
 <script
   type="text/javascript"
   src="https://www.gstatic.com/charts/loader.js"
@@ -54,14 +49,13 @@
 <script type="text/javascript">
   google.charts.load('current', { packages: ['corechart'] });
   google.charts.setOnLoadCallback(drawChart);
-
   function drawChart() {
     var data = google.visualization.arrayToDataTable(<%- JSON.stringify(chartParsed)%>, true);
     var options = {
       legend: 'none',
       colors: ['white'],
-      vAxis: { gridlineColor: 'transparent', textStyle: { color: '#FFF' } },
-      hAxis: { gridlineColor: 'transparent', textStyle: { color: '#FFF' }, showTextEvery: 5 },
+      vAxis: { gridlineColor: '#010101', textStyle: { color: '#FFF' }, },
+      hAxis: { gridlineColor: '', textStyle: { color: '#FFF' }, showTextEvery: 5 },
       backgroundColor: 'transparent',
       candlestick: {
         risingColor: { stroke: '#028602', fill: '#028602' },
@@ -71,9 +65,7 @@
     var chart = new google.visualization.CandlestickChart(
       document.getElementById('chart_div')
     );
-
     chart.draw(data, options);
   }
 </script>
-
 <%- include('../partials/footer') %>
