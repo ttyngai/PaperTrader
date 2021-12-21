@@ -13,11 +13,15 @@
         <input
           type="number"
           name="price"
-          class="buySellNumBox"
-          id="buySellPriceBox"
+          class="buySellNumBox"  
           value="<%=quote[0].preRegAfterCombinedPrice.toFixed(2)%>"
-          readonly="readonly"
-        />
+
+          id="<%= isGold ? 'isGoldPriceBox':'buySellPriceBox'  %>"
+
+          <%= isGold ? '':'readonly' %>
+      
+          />
+
         <select name="portfolioId" class="buySellNumBox" id="buySellPortfolioBox">
           <% portfolios.forEach(function(p){ %>
           <option value="<%= p._id%>"  <%- (p._id.toString()===preselectPortfolio.toString())? 'selected':''   %>  ><%=p.name%></option>
@@ -52,7 +56,7 @@
     <tr class="portfolioListTitle">
 
       <th class="tickerLeft tickerTitle">Mark</th>
-      <th>Open</th>
+      <th>PrevClose</th>
       <th>Day%Chng</th>
       <th>Volume</th>
       <th>MktCap(M)</th>
@@ -62,7 +66,7 @@
 <tbody>
   <tr class="">
     <th class="tickerLeft tickerTitle"><%= quote[0].preRegAfterCombinedPrice.toFixed(2)%></th>
-    <th><%= quote[0].regularMarketOpen.toFixed(2)%></th>
+    <th><%= quote[0].regularMarketPreviousClose.toFixed(2)%></th>
     <th class="
     <%=(quote[0].regularMarketChangePercent>0)?'stockGreen':
     ''%>
@@ -74,13 +78,10 @@
 
     <th>$<%= Intl.NumberFormat('en-US').format((quote[0].marketCap/1000000).toFixed(0))%></th>
     <%} else {%>
-
       <th>n/a</th>
-
       <%} %>
   <% if (quote[0].forwardPE){  %>
     <th><%= quote[0].forwardPE.toFixed(2)%></th>
-    
     <%} else {%>
       <th>n/a</th>
   <%} %>

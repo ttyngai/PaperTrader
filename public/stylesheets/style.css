@@ -474,10 +474,18 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
   width: 20vw;
   max-width: 16rem;
 }
+
 #buySellPriceBox {
+  background-color: rgb(34, 34, 34);
+  color: rgba(221, 188, 0, 0.37);
   width: 20vw;
   max-width: 16rem;
 }
+#isGoldPriceBox {
+  width: 20vw;
+  max-width: 16rem;
+}
+
 #buySellPortfolioBox {
   width: 35vw;
   max-width: 16rem;

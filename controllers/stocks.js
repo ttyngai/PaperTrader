@@ -57,6 +57,12 @@ async function show(req, res) {
       const quote = await StockPrice.getStock(ticker);
       //Get charting data
       const chartParsed = await StockPrice.getChartData(stock.ticker, 1, 61);
+      console.log(req.user);
+      let isGold = false;
+      if (req.user.isGold) {
+        isGold = true;
+      }
+      console.log('gold', isGold);
       res.render('stocks/show', {
         title: 'Stocks',
         stock,
@@ -65,6 +71,7 @@ async function show(req, res) {
         req,
         chartParsed,
         preselectPortfolio,
+        isGold,
       });
     });
   });
