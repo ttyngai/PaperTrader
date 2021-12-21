@@ -11,13 +11,14 @@ module.exports = {
 
 async function index(req, res) {
   // pass in array of tickers
-  let tickers = [];
+
   Stock.find({ user: req.user }, async function (err, stocksFound) {
     // Sort alphabetically
     stocksFound.sort(function (a, b) {
       if (a.ticker > b.ticker) return 1;
       if (a.ticker < b.ticker) return -1;
     });
+    let tickers = [];
     // push to single ticker
     stocksFound.forEach(function (s) {
       tickers.push(s.ticker);
