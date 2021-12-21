@@ -7,9 +7,14 @@ module.exports = {
   getChartData,
 };
 
-async function getStock(array, stocksFound) {
-  let tickers = array.toString();
-  let stocks = [];
+async function getStock(stocksInput) {
+  // push to single string for one call
+  let tickersString = [];
+  stocksInput.forEach(function (s) {
+    tickersString.push(s.ticker);
+  });
+  let tickers = tickersString.toString();
+  let stocksOutput = [];
   if (tickers.length !== 0) {
     await fetch(
       `https://query1.finance.yahoo.com/v7/finance/quote?lang=en-US&region=US&corsDomain=finance.yahoo.com&symbols=${tickers}`
@@ -17,8 +22,8 @@ async function getStock(array, stocksFound) {
       .then((res) => res.json())
       .then((quote) => {
         stockInfo = quote.quoteResponse.result.forEach(function (s, idx) {
-          s._id = stocksFound[idx]._id;
-          s.hide = stocksFound[idx].hide;
+          s._id = stocksInput[idx]._id;
+          s.hide = stocksInput[idx].hide;
           // Switch between premarket(09:00-14:30UTC)/regularmarket(14:30-21:00UTC)/afterhours(21:00-01:00UTC)
           const hour = new Date().getUTCHours();
           const minute = new Date().getUTCMinutes();
@@ -36,12 +41,12 @@ async function getStock(array, stocksFound) {
           else if (hourNumber >= 21 || hourNumber < 9) {
             s.preRegAfterCombinedPrice = s.postMarketPrice;
           }
-          stocks.push(s);
+          stocksOutput.push(s);
         });
       })
       .catch((err) => console.log(err));
   }
-  return stocks;
+  return stocksOutput;
 }
 async function checkStock(ticker) {
   console.log('checking this?');

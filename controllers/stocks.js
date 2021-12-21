@@ -18,11 +18,7 @@ async function index(req, res) {
       if (a.ticker > b.ticker) return 1;
       if (a.ticker < b.ticker) return -1;
     });
-    let tickers = [];
-    // push to single ticker
-    stocksFound.forEach(function (s) {
-      tickers.push(s.ticker);
-    });
+
     // Check if all are hidden(empty), allow watchlist to show "No symbols added"
     let listNotEmpty = false;
     stocksFound.forEach(function (s) {
@@ -30,7 +26,7 @@ async function index(req, res) {
         listNotEmpty = true;
       }
     });
-    const stocks = await StockPrice.getStock(tickers, stocksFound);
+    const stocks = await StockPrice.getStock(stocksFound);
     res.render('stocks/index', { title: 'Stocks', stocks, listNotEmpty, req });
   });
 }
