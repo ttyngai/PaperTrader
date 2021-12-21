@@ -21,7 +21,7 @@
       <a class="navTitle navButtons" href="/"  >PaperTrader™</a>
       <% if (user) { %>
         <p  class="nav navUser">(<%= req.user.name.split(' ')[0]%>)</p>
-      <a  href="/stocks" <%-   title === 'Stocks' ? 'class="navButtons activeNav"':'class="navButtons"'  %>  >Trade</a>
+      <a  href="/stocks" <%-   title === 'Stocks' ? 'class="navButtons activeNav"':'class="navButtons"'  %>  >Stocks</a>
       <a  href="/portfolios" <%- title === 'Portfolios' ? 'class="navButtons activeNav"':'class="navButtons"'%>> Portfolio</a>
       <a class="navButtons" href="/logout">Logout</a>
       <% } else { %>

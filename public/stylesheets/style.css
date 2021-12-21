@@ -58,20 +58,20 @@ nav {
 }
 
 .navButtons {
-  padding: 0 0.5rem;
+  padding: 0 1rem;
   color: var(--whiteFont);
 }
 .navButtons:hover {
   color: white;
   border-bottom: 0.2rem solid var(--stockYellow);
-  padding: 0 0.5rem;
+  padding: 0 1rem;
   text-decoration: none;
   transition: all 0.2s ease-in-out;
 }
 .activeNav {
   color: var(--stockYellow);
   font-weight: bold;
-  padding: 0 0.5rem;
+  padding: 0 1rem;
 }
 
 .navUser {
