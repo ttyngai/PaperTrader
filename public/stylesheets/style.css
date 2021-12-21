@@ -77,7 +77,6 @@ nav {
 .navUser {
   font-size: 0.7rem;
   color: var(--greyFont);
-  /* padding: 0 0.1rem; */
 }
 
 .navPadding {
@@ -222,6 +221,15 @@ table {
   right: 50%;
   font-size: 2rem;
   transform: translateX(7.5rem);
+}
+.stockInfoContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.stockInfoTable {
+  width: 95vw;
+  max-width: 1024px;
 }
 
 #portfolioTable {
