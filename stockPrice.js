@@ -12,7 +12,6 @@ async function getStock(array, stocksFound) {
   let tickers = array.toString();
   let stocks = [];
   if (tickers.length !== 0) {
-    // if there is a username, we will make a request!
     await fetch(
       `https://query1.finance.yahoo.com/v7/finance/quote?lang=en-US&region=US&corsDomain=finance.yahoo.com&symbols=${tickers}`
     )
@@ -21,17 +20,33 @@ async function getStock(array, stocksFound) {
         stockInfo = quote.quoteResponse.result.forEach(function (s, idx) {
           s._id = stocksFound[idx]._id;
           s.hide = stocksFound[idx].hide;
+          // Switch between premarket(09:00-14:30UTC)/regularmarket(14:30-21:00UTC)/afterhours(21:00-01:00UTC)
+          const hour = new Date().getUTCHours();
+          const minute = new Date().getUTCMinutes();
+          const minuteFraction = minute / 60;
+          const hourNumber = hour + minuteFraction;
+          // premarket(09:00-14:30UTC)
+          if (hourNumber >= 9 && hourNumber < 14.5) {
+            s.preRegAfterCombinedPrice = s.preMarketPrice;
+          }
+          //  regularmarket(14:30-21:00UTC)
+          else if (hourNumber >= 14.5 && hourNumber < 21) {
+            s.preRegAfterCombinedPrice = s.regularMarketPrice;
+          }
+          //  afterhours(21:00-08:59UTC)
+          else if (hourNumber >= 21 || hourNumber < 9) {
+            s.preRegAfterCombinedPrice = s.postMarketPrice;
+          }
           stocks.push(s);
         });
       })
       .catch((err) => console.log(err));
   }
+  console.log(stocks);
   return stocks;
 }
-
 async function checkStock(ticker) {
   let exist;
-
   await fetch(
     `https://query1.finance.yahoo.com/v7/finance/quote?lang=en-US&region=US&corsDomain=finance.yahoo.com&symbols=${ticker}`
   )

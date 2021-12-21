@@ -127,7 +127,7 @@ table {
   color: var(--greyFont);
 }
 #stockName {
-  font-size: 0.65rem;
+  font-size: 0.8rem;
   text-align: left;
   color: var(--stockYellow);
 }
@@ -529,6 +529,6 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
     padding: 0 0.5rem;
   }
   #stockName {
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
 }

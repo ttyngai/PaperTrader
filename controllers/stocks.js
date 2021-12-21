@@ -29,7 +29,6 @@ async function index(req, res) {
         listNotEmpty = true;
       }
     });
-
     const stocks = await StockPrice.getStock(tickers, stocksFound);
     res.render('stocks/index', { title: 'Stocks', stocks, listNotEmpty, req });
   });
@@ -56,7 +55,7 @@ async function show(req, res) {
     Portfolio.find({ user: req.user._id }, async function (err, portfolios) {
       const quote = await StockPrice.getOneStock(stock.ticker);
       //Get charting data
-      const chartParsed = await StockPrice.getChartData(stock.ticker, 1, 51);
+      const chartParsed = await StockPrice.getChartData(stock.ticker, 1, 61);
       res.render('stocks/show', {
         title: 'Stocks',
         stock,
@@ -77,7 +76,6 @@ async function create(req, res) {
   const duplicate = await Stock.findOne({
     $and: [{ ticker: req.body.ticker }, { user: req.user._id }],
   }).catch((err) => console.log('Duplicate Error', err));
-
   if (check && !duplicate) {
     const stock = new Stock(req.body);
     stock.user = req.user._id;
@@ -89,7 +87,6 @@ async function create(req, res) {
       res.redirect(`/stocks`);
     });
   }
-
   if (duplicate) {
     Stock.findOne(
       {
