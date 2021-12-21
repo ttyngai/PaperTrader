@@ -14,7 +14,7 @@
           type="number"
           name="price"
           class="buySellNumBox"
-          value="<%=quote[0].regularMarketPrice.toFixed(2)%>"
+          value="<%=quote[0].preRegAfterCombinedPrice.toFixed(2)%>"
           readonly="readonly"
         />
         <select name="portfolioId" class="buySellNumBox">
@@ -51,8 +51,9 @@
     <tr class="portfolioListTitle">
       <th class="tickerLeft tickerTitle">Bid</th>
       <th>Ask</th>
+      <th>Mark</th>
       <th>Open</th>
-      <th>%Chng</th>
+      <th>Day%Chng</th>
       <th>Volume</th>
       <th>MktCap(M)</th>
     </tr>
@@ -61,6 +62,7 @@
   <tr class="">
     <th class="tickerLeft tickerTitle"><%= quote[0].bid%></th>
     <th><%= quote[0].ask%></th>
+    <th><%= quote[0].preRegAfterCombinedPrice%></th>
     <th><%= quote[0].regularMarketOpen%></th>
     <th class="
     <%=(quote[0].regularMarketChangePercent>0)?'stockGreen':

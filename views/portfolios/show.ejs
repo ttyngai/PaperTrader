@@ -64,7 +64,7 @@
     </table>
     <br />
   </div>
-  <% if (prices[0]){%>
+  <% if (prices){%>
   <h3 class="portfolioSections">Holdings</h3>
   <table class="holdingsList">
     <thead>
@@ -80,7 +80,7 @@
     </thead>
 
     <tbody>
-      <% prices[0].forEach(function(p) { %>
+      <% prices.forEach(function(p) { %>
       <tr class="portfolioList">
         <td class="tickerLeft">
           <form
@@ -101,7 +101,7 @@
         >
           <%= p.shares %>
         </td>
-        <td><%=p.regularMarketPrice %></td>
+        <td><%=p.preRegAfterCombinedPrice %></td>
         <td
           class="
             <%=(p.regularMarketChangePercent>0)?'stockGreen':
@@ -110,29 +110,30 @@
             ''%>
           "
         >
-          <%= (((p.regularMarketPrice-p.avgPrice)/p.avgPrice)*100).toFixed(2)
+          <%=
+          (((p.preRegAfterCombinedPrice-p.avgPrice)/p.avgPrice)*100).toFixed(2)
           %>%
         </td>
 
         <td
           class="
-            <%=(p.regularMarketPrice
+            <%=(p.preRegAfterCombinedPrice
             -
             p.avgPrice>0)?'stockGreen':
             ''%>
-            <%=(p.regularMarketPrice
+            <%=(p.preRegAfterCombinedPrice
             -
             p.avgPrice<0)?'stockRed':
             ''%>
           "
         >
-          $<%= Intl.NumberFormat('en-US').format(((p.regularMarketPrice -
+          $<%= Intl.NumberFormat('en-US').format(((p.preRegAfterCombinedPrice -
           p.avgPrice)*p.shares).toFixed(2)) %>
         </td>
         <td><%= p.avgPrice.toFixed(2) %></td>
         <td>
           $<%=
-          Intl.NumberFormat('en-US').format((p.regularMarketPrice*p.shares).toFixed(2))
+          Intl.NumberFormat('en-US').format((p.preRegAfterCombinedPrice*p.shares).toFixed(2))
           %>
         </td>
       </tr>

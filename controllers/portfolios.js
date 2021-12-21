@@ -12,9 +12,6 @@ module.exports = {
 };
 
 async function index(req, res) {
-  // test of charts
-
-  // test of charts above
   const portfolios = await Portfolio.find({ user: req.user });
   res.render('portfolios/index', { title: 'Portfolios', portfolios, req });
 }
@@ -55,8 +52,8 @@ function show(req, res) {
       let realizedPL = 0;
       let totalHoldings = 0;
       if (holdings[0]) {
-        prices = await StockPrice.getStockNoId(tickers);
-        prices[0].forEach(function (p, idx) {
+        prices = await StockPrice.getOneStock(tickers);
+        prices.forEach(function (p, idx) {
           p.shares = holdings[idx].shares;
           p.avgPrice = holdings[idx].avgCost;
           // Match and attach _id to prices[0] to be passed onto render in show
@@ -67,10 +64,10 @@ function show(req, res) {
           });
         });
         // Calculating P/L holdings and all transactions for this particular portfolio
-        prices[0].forEach(function (p) {
-          unrealizedPL += p.shares * (p.regularMarketPrice - p.avgPrice);
+        prices.forEach(function (p) {
+          unrealizedPL += p.shares * (p.preRegAfterCombinedPrice - p.avgPrice);
         });
-        prices[0].forEach(function (p) {
+        prices.forEach(function (p) {
           totalHoldings += p.shares * p.avgPrice;
         });
       }
