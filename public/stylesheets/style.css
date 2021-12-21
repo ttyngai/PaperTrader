@@ -49,6 +49,14 @@ nav {
   font-weight: bold;
 }
 
+#stockTitleAtShow {
+  color: var(--stockYellow);
+}
+
+.stockShowControls {
+  padding: 1rem 0 0 1rem;
+}
+
 #loginButton {
   background-color: var(--nav);
   border: 0.2rem solid var(--stockYellow);
@@ -281,6 +289,12 @@ table {
   border: none;
 }
 
+#transaction {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+}
+
 .portfolioListTitle {
   border-bottom: 0.1rem solid var(--greyFont);
 }
@@ -342,15 +356,16 @@ table {
   background-color: black;
   border: 1px solid red;
   color: red;
+  font-weight: bold;
   border-radius: 0.25rem;
   margin: 10px 0 0 0;
   padding: 0 2rem;
-  font-size: 1.5rem;
+  font-size: 2rem;
   opacity: 60%;
 }
 
 #portfolioDeleteFinal:hover {
-  background-color: var(--stockRed);
+  background-color: red;
   color: white;
   transition: all 0.25s ease-in-out;
 }
@@ -398,7 +413,6 @@ table {
   padding: 0 0 0 2rem;
 }
 .buySell {
-  /* padding: 0 2rem; */
   text-align: right;
 }
 .positionTitle {
@@ -418,13 +432,16 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
   width: 100vw;
   height: 100vw;
 }
+
 .buySellButtons {
   background-color: black;
   border: none;
   font-size: 1.5rem;
   padding: 0 1rem;
   border-radius: 0.25rem;
-  margin: 0 0rem 0 0;
+  margin: 0.2rem -0.2rem 0.2rem 0.2rem;
+  width: 25vw;
+  max-width: 10rem;
 }
 #buyButton {
   color: greenyellow;
@@ -452,7 +469,9 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
   border-radius: 0.25rem;
   padding: 0 1rem;
   font-size: 1.5rem;
-  max-width: 10rem;
+  width: 28vw;
+  max-width: 16rem;
+  margin: 0 0.2rem;
 }
 .buySellNumBox:focus {
   border: 0.1rem solid var(--stockYellow);

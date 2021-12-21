@@ -1,19 +1,15 @@
 <%- include('../partials/header') %>
-<div>
+<div class="stockShowControls">
   <div>
-  <h1><%= quote[0].longName%> (Ticker: <%= stock.ticker%>)</h1>
+  <h1 id="stockTitleAtShow"><%= quote[0].longName%> (<%= stock.ticker%>)</h1>
 
   <% if (portfolios.length !==0) {%>
-
-
-
       <form
         id="transaction"
         action="/stocks/<%= stock._id%>/transactions"
         method="POST"
       >
-        <input type="text" min="0" class="buySellNumBox" name="shares" placeholder="Shares" autofocus />
-        
+        <input type="text" min="0" class="buySellNumBox" name="shares" placeholder="Shares" autocomplete="off" autofocus />
         <input
           type="number"
           name="price"
@@ -21,23 +17,35 @@
           value="<%=quote[0].regularMarketPrice.toFixed(2)%>"
           readonly="readonly"
         />
-        <br>
-
-  
-        <button type="submit" class="buySellButtons" id="buyButton" name="button" value="buy">Buy</button>
-        <button type="submit" class="buySellButtons" id="sellButton" name="button" value="sell">Sell</button>
         <select name="portfolioId" class="buySellNumBox">
           <% portfolios.forEach(function(p){ %>
           <option value="<%= p._id%>"  <%- (p._id.toString()===preselectPortfolio.toString())? 'selected':''   %>  ><%=p.name%></option>
           <%}) %>
         </select>
+      </div>
+      <div>
+        <button type="submit" class="buySellButtons" id="buyButton" name="button" value="buy">Buy</button>
+        <button type="submit" class="buySellButtons" id="sellButton" name="button" value="sell">Sell</button>
+      </div>
       </form>
-    </div>
+  
   <%} else {%>
 
-  <a href="/portfolios/new">Start Trading</a>
+    <h4>Create your portfolio today.</h4>
+    <form action="/portfolios" method="POST">
+      <input
+        class="search"
+        autocomplete="off"
+        type="text"
+        name="name"
+        placeholder="e.g. Spouse, Pet"
+        maxlength="16"
+      />
+      <input type="submit" class="formButton" value="Create" />
+    </form>
   <%} %>
 </div>
+
 <div id="chart_div"></div>
 <script
   type="text/javascript"
