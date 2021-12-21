@@ -353,15 +353,14 @@ table {
   transition: all 0.25s ease-in-out;
 }
 #portfolioDeleteFinal {
-  background-color: black;
-  border: 1px solid red;
-  color: red;
-  font-weight: bold;
+  background-color: var(--darkRed);
+  border: 2px solid red;
+  color: white;
   border-radius: 0.25rem;
   margin: 10px 0 0 0;
   padding: 0 2rem;
-  font-size: 2rem;
-  opacity: 60%;
+  font-size: 2.5rem;
+  opacity: 70%;
 }
 
 #portfolioDeleteFinal:hover {
@@ -430,7 +429,7 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
 
 #chart_div {
   width: 100vw;
-  height: 100vw;
+  height: 50vw;
 }
 
 .buySellButtons {
