@@ -117,6 +117,7 @@ function update(req, res) {
     res.redirect(`/portfolios/${req.params.id}`);
   });
 }
+
 // Deletes selected portfolio and redirect to portfolio page
 function deletePortfolio(req, res) {
   Portfolio.findById({ _id: req.params.id }, function (err, portfolio) {

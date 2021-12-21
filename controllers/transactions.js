@@ -22,7 +22,6 @@ function create(req, res) {
       if (req.body.button === 'sell') {
         req.body.shares = req.body.shares * -1;
       }
-
       portfolio.transactions.push(req.body);
       portfolio.save(function (err) {
         if (err) console.log(err);

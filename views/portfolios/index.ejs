@@ -9,7 +9,6 @@
       <%= req.user.name.split(' ')[0] %>,<br />
       start a portfolio.
     </div>
-
     <% }%> <% portfolios.forEach(function(p){%>
     <tr>
       <td>
@@ -18,11 +17,9 @@
         </form>
       </td>
     </tr>
-
     <% }); %>
   </tbody>
 </table>
-
 <form id="portfolioForm" action="/portfolios" method="POST">
   <input
     class="search"

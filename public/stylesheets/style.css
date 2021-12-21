@@ -312,7 +312,7 @@ table {
   color: var(--stockYellow);
   transform: scale(0.75);
   border-radius: 0.25rem;
-  margin: 0rem 0 0 -3.5rem;
+  margin: 0rem 0 0 -3rem;
   font-size: 1.5rem;
 }
 
@@ -336,7 +336,6 @@ table {
 }
 .portfolioDelete {
   border: none;
-  /* border: 1px solid var(--stockRed); */
   background-color: black;
   color: var(--stockRed);
   border-radius: 0.25rem;
@@ -351,15 +350,14 @@ table {
   transition: all 0.25s ease-in-out;
 }
 #portfolioDeleteFinal {
-  background-color: var(--darkRed);
-  border: 2px solid red;
-  color: white;
-  border-radius: 0.25rem;
-  margin: 10px 0 0 0;
+  background-color: black;
+  border: 2px solid var(--stockRed);
+  color: var(--stockRed);
+  border-radius: 0.5rem;
+  margin: 1.25rem 0 0 0;
   padding: 0 2rem;
   font-size: 2rem;
-  opacity: 70%;
-  width: 40vw;
+  width: 75vw;
   max-width: 30rem;
 }
 
@@ -367,6 +365,7 @@ table {
   background-color: red;
   color: white;
   transition: all 0.25s ease-in-out;
+  opacity: 100%;
 }
 .blink_me:hover {
   animation: blinker 0.5s linear infinite;
@@ -382,11 +381,11 @@ table {
   background-color: black;
   border: 1px solid var(--stockYellow);
   color: var(--stockYellow);
-  border-radius: 0.25rem;
-  margin: 10px 0 0 0;
+  border-radius: 0.5rem;
+  margin: 1.25rem 0 0 0;
   padding: 0 2rem;
   font-size: 2rem;
-  width: 40vw;
+  width: 75vw;
   max-width: 30rem;
 }
 

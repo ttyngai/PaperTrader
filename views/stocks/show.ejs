@@ -2,7 +2,6 @@
 <div class="stockShowControls">
   <div>
   <h1 id="stockTitleAtShow"><%= quote[0].longName%> (<%= stock.ticker%>)</h1>
-
   <% if (portfolios.length !==0) {%>
       <form
         id="transaction"
@@ -52,10 +51,9 @@
 <table class="stockInfoTable">
   <thead>
     <tr class="portfolioListTitle">
-
       <th class="tickerLeft tickerTitle">Mark</th>
       <th>PrevClose</th>
-      <th>Day%Chng</th>
+      <th>%Day</th>
       <th>Volume</th>
       <th>MktCap(M)</th>
       <th>ForwardPE</th>
@@ -73,7 +71,6 @@
   "><%= (quote[0].regularMarketChangePercent).toFixed(2)%>%</th>
     <th><%= quote[0].regularMarketVolume%></th>
     <% if (quote[0].forwardPE){  %>
-
     <th>$<%= Intl.NumberFormat('en-US').format((quote[0].marketCap/1000000).toFixed(0))%></th>
     <%} else {%>
       <th>n/a</th>
@@ -88,6 +85,7 @@
 </tbody>
 </table>
 </div>
+
 <script
   type="text/javascript"
   src="https://www.gstatic.com/charts/loader.js"
