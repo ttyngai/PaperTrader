@@ -67,37 +67,6 @@ async function checkStock(ticker) {
     .catch((err) => console.log(err));
   return exist;
 }
-
-// async function getOneStock(ticker) {
-//   let stock = [];
-//   await fetch(
-//     `https://query1.finance.yahoo.com/v7/finance/quote?lang=en-US&region=US&corsDomain=finance.yahoo.com&symbols=${ticker}`
-//   )
-//     .then((res) => res.json())
-//     .then((quote) => {
-//       quote.quoteResponse.result.forEach(function (s) {
-//         const hour = new Date().getUTCHours();
-//         const minute = new Date().getUTCMinutes();
-//         const minuteFraction = minute / 60;
-//         const hourNumber = hour + minuteFraction;
-//         // premarket(09:00-14:30UTC)
-//         if (hourNumber >= 9 && hourNumber < 14.5) {
-//           s.preRegAfterCombinedPrice = s.preMarketPrice;
-//         }
-//         //  regularmarket(14:30-21:00UTC)
-//         else if (hourNumber >= 14.5 && hourNumber < 21) {
-//           s.preRegAfterCombinedPrice = s.regularMarketPrice;
-//         }
-//         //  afterhours(21:00-08:59UTC)
-//         else if (hourNumber >= 21 || hourNumber < 9) {
-//           s.preRegAfterCombinedPrice = s.postMarketPrice;
-//         }
-//         stock.push(s);
-//       });
-//     })
-//     .catch((err) => console.log(err));
-//   return stock;
-// }
 async function getChartData(ticker, candleTime, howManyCandles) {
   let array = [];
   let object;
