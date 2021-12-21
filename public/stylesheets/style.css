@@ -57,20 +57,6 @@ nav {
   padding: 1rem 0 0 1rem;
 }
 
-#loginButton {
-  background-color: var(--nav);
-  border: 0.2rem solid var(--stockYellow);
-  color: var(--stockYellow);
-  border-radius: 1rem;
-  padding: 0.2em 0.5em;
-  font-size: 0.9em;
-  font-weight: bold;
-}
-#loginButton:hover {
-  background-color: var(--stockYellow);
-  color: black;
-  transition: all 0.25s ease-in-out;
-}
 .navButtons {
   padding: 0 0.5rem;
   color: var(--whiteFont);
@@ -195,8 +181,8 @@ table {
   background-color: black;
   border: 0.2rem solid var(--stockYellow);
   color: var(--stockYellow);
-  border-radius: 1rem;
-  padding: 0.2em 0.5em;
+  border-radius: 0.5rem;
+  padding: 0.1em 0.5em;
   font-size: 0.9em;
   font-weight: bold;
 }
@@ -247,12 +233,12 @@ table {
 #portfolioMod {
   background: black;
   color: white;
-  border: 0.2rem solid var(--stockYellow);
+  border: 3px solid var(--stockYellow);
   width: 70vw;
   max-width: 30rem;
   border-radius: 1rem;
-  padding: 0.2em 0.5em;
-  font-size: 0.7em;
+  padding: 0.1em 0.5em;
+  font-size: 1em;
 }
 #portfolioMod:hover {
   background-color: var(--transparentYellow);
@@ -478,12 +464,13 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
 }
 
 .heroContent {
+  text-align: center;
+  margin: 12rem 0 0 0;
 }
 .heroContainer {
-  text-align: center;
 }
 .heroTitle {
-  font-size: 4.5rem;
+  font-size: 4rem;
 }
 .motto {
   font-size: 1.5rem;
@@ -492,9 +479,9 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
   background-color: black;
   border: 3px solid var(--stockYellow);
   color: var(--stockYellow);
-  border-radius: 0.5rem;
-  padding: 0 2rem;
-  font-size: 2rem;
+  border-radius: 0.75rem;
+  padding: 0 3rem;
+  font-size: 2.5rem;
   font-weight: bold;
 }
 
@@ -511,7 +498,7 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
 
 @keyframes blinker {
   50% {
-    opacity: 40%;
+    opacity: 30%;
   }
 }
 
