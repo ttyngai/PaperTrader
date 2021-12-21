@@ -3,6 +3,7 @@
 <form id="searchForm" action="/stocks" method="POST">
   <input
     class="search"
+    id="stockSearchBox"
     type="text"
     autocomplete="off"
     name="ticker"
@@ -86,13 +87,15 @@
 <script>
   window.setTimeout(function () {
     window.location.reload();
-  }, 30000);
-
-  // json stringify objects into strings
-  // json.parse string versino back to object itself
-  // localStore.get
-
-  // grab from local Storageif theres osmehtng there put into input value
-  // websockets socket.io liveupdate
-  // live sockets for node
+  }, 5000);
+  const tempInput = localStorage.searchBoxInput;
+  if (tempInput) {
+    document.getElementById('stockSearchBox').value = tempInput;
+  }
+  document
+    .getElementById('stockSearchBox')
+    .addEventListener('input', function () {
+      localStorage.searchBoxInput =
+        document.getElementById('stockSearchBox').value;
+    });
 </script>

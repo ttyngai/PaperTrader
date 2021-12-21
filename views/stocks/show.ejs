@@ -18,7 +18,7 @@
           id="<%= user.premium ? 'premiumPriceBox':'buySellPriceBox'  %>"
           <%- (!user.premium) ? 'readonly':'' %>
           />
-          <input type="text" min="0" class="buySellNumBox" id="buySellSharesBox" name="shares" placeholder="Shares" autocomplete="off" />
+          <input type="text" min="0" class="buySellNumBox" id="buySellSharesBox" name="shares" placeholder="Shares" autocomplete="off"    />
         <select name="portfolioId" class="buySellNumBox" id="buySellPortfolioBox">
           <% portfolios.forEach(function(p){ %>
           <option value="<%= p._id%>"  <%- (p._id.toString()===preselectPortfolio.toString())? 'selected':''   %>  ><%=p.name%></option>
@@ -125,4 +125,11 @@
   window.setTimeout(function () {
     window.location.reload();
   }, 30000);
+const tempInput = localStorage.shareBoxInput
+if (tempInput) {
+  document.getElementById('buySellSharesBox').value = tempInput
+}
+  document.getElementById('buySellSharesBox').addEventListener("input", function(){
+    localStorage.shareBoxInput = document.getElementById('buySellSharesBox').value
+  })
 </script>
