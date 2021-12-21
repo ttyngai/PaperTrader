@@ -359,7 +359,7 @@ table {
   border-radius: 0.25rem;
   margin: 10px 0 0 0;
   padding: 0 2rem;
-  font-size: 2.5rem;
+  font-size: 2rem;
   opacity: 70%;
 }
 
@@ -475,6 +475,44 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
 .buySellNumBox:focus {
   border: 0.1rem solid var(--stockYellow);
   background-color: black;
+}
+
+.heroContent {
+}
+.heroContainer {
+  text-align: center;
+}
+.heroTitle {
+  font-size: 4.5rem;
+}
+.motto {
+  font-size: 1.5rem;
+}
+#heroStart {
+  background-color: black;
+  border: 3px solid var(--stockYellow);
+  color: var(--stockYellow);
+  border-radius: 0.5rem;
+  padding: 0 2rem;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.blink_me_hero {
+  animation: blinker 2s ease-in-out infinite;
+}
+.blink_me_hero:hover {
+  animation: blinker 1s ease-in-out infinite;
+}
+#heroStart:hover {
+  background-color: var(--stockYellow);
+  color: black;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 40%;
+  }
 }
 
 @media (min-width: 478px) {
