@@ -278,7 +278,6 @@ table {
 }
 .portfolioList {
   text-align: right;
-  border-bottom: 0.1rem solid var(--greyFont);
 }
 
 .transactionBorderBottom {
@@ -435,7 +434,7 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
   padding: 0 0.5rem;
   border-radius: 0.25rem;
   margin: 0.2rem -0.2rem 0.2rem 0.2rem;
-  width: 20vw;
+  width: 22vw;
   max-width: 12rem;
 }
 #buyButton {
@@ -462,7 +461,7 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
   border: 0.2rem solid var(--stockYellow);
   color: var(--stockYellow);
   border-radius: 0.25rem;
-  padding: 0 1rem;
+  padding: 0 0 0 1rem;
   font-size: 1.5rem;
   margin: 0 0.2rem;
 }
@@ -471,18 +470,28 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
   background-color: black;
 }
 #buySellSharesBox {
-  width: 20vw;
+  width: 22vw;
   max-width: 16rem;
 }
 
 #buySellPriceBox {
   background-color: rgb(34, 34, 34);
   color: rgba(221, 188, 0, 0.37);
-  width: 20vw;
+  padding: 0 0 0 1.3rem;
+  width: 22vw;
   max-width: 16rem;
 }
-#isGoldPriceBox {
-  width: 20vw;
+
+#buySellPriceBoxDollarSign {
+  color: var(--stockYellow);
+  padding: 0.4rem 0 0 0.8rem;
+  font-size: 1.2rem;
+  position: absolute;
+}
+
+#premiumPriceBox {
+  padding: 0 0 0 1.3rem;
+  width: 22vw;
   max-width: 16rem;
 }
 

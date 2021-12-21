@@ -135,7 +135,7 @@ async function getChartData(ticker, candleTime, howManyCandles) {
     })
     .catch((err) => console.log(err));
   // for testing undefined charts
-  console.log(array);
+  // console.log(array);
 
   return array;
 }

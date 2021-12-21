@@ -10,6 +10,7 @@ const userSchema = new Schema(
     },
     email: String,
     avatar: String,
+    premium: { type: Boolean, default: false },
   },
   {
     timestamps: true,

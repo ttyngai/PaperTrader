@@ -9,19 +9,18 @@
         action="/stocks/<%= stock._id%>/transactions"
         method="POST"
       >
-        <input type="text" min="0" class="buySellNumBox" id="buySellSharesBox" name="shares" placeholder="Shares" autocomplete="off" autofocus />
+ 
+        <span id="buySellPriceBoxDollarSign">$</span>
         <input
-          type="number"
+          type="text"
           name="price"
+          min="0"
           class="buySellNumBox"  
           value="<%=quote[0].preRegAfterCombinedPrice.toFixed(2)%>"
-
-          id="<%= isGold ? 'isGoldPriceBox':'buySellPriceBox'  %>"
-
-          <%= isGold ? '':'readonly' %>
-      
+          id="<%= premium ? 'premiumPriceBox':'buySellPriceBox'  %>"
+          <%- (!premium) ? 'readonly':'' %>
           />
-
+          <input type="text" min="0" class="buySellNumBox" id="buySellSharesBox" name="shares" placeholder="Shares" autocomplete="off" />
         <select name="portfolioId" class="buySellNumBox" id="buySellPortfolioBox">
           <% portfolios.forEach(function(p){ %>
           <option value="<%= p._id%>"  <%- (p._id.toString()===preselectPortfolio.toString())? 'selected':''   %>  ><%=p.name%></option>
