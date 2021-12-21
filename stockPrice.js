@@ -102,7 +102,7 @@ async function getChartData(ticker, candleTime, howManyCandles) {
   let array = [];
   let object;
   await fetch(
-    `https://query1.finance.yahoo.com/v7/finance/chart/${ticker}?range=${howManyCandles}m&interval=${candleTime}m&indicators=quote&includeTimestamps=true`
+    `https://query1.finance.yahoo.com/v7/finance/chart/${ticker}?range=${howManyCandles}m&interval=${candleTime}m`
   )
     .then((res) => res.json())
     .then(function (data) {
@@ -166,7 +166,7 @@ async function getChartData(ticker, candleTime, howManyCandles) {
     })
     .catch((err) => console.log(err));
   // for testing undefined charts
-  // console.log(array);
+  console.log(array);
 
   return array;
 }
