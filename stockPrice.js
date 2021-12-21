@@ -2,18 +2,23 @@ const fetch = require('node-fetch');
 
 module.exports = {
   getStock,
-  getOneStock,
   checkStock,
   getChartData,
 };
 
 async function getStock(stocksInput) {
-  // push to single string for one call
+  // If single stock, convert into string
+  let tickers;
   let tickersString = [];
-  stocksInput.forEach(function (s) {
-    tickersString.push(s.ticker);
-  });
-  let tickers = tickersString.toString();
+  if (typeof stocksInput !== 'string') {
+    // push to single string for one call
+    stocksInput.forEach(function (s) {
+      tickersString.push(s.ticker);
+    });
+    tickers = tickersString.toString();
+  } else {
+    tickers = stocksInput;
+  }
   let stocksOutput = [];
   if (tickers.length !== 0) {
     await fetch(
@@ -49,7 +54,6 @@ async function getStock(stocksInput) {
   return stocksOutput;
 }
 async function checkStock(ticker) {
-  console.log('checking this?');
   let exist;
   await fetch(
     `https://query1.finance.yahoo.com/v7/finance/quote?lang=en-US&region=US&corsDomain=finance.yahoo.com&symbols=${ticker}`
@@ -57,7 +61,6 @@ async function checkStock(ticker) {
     .then((res) => res.json())
     .then((quote) => {
       if (quote.quoteResponse.result.length !== 0) {
-        console.log('why errer', quote.quoteResponse.result[0]);
         exist = quote.quoteResponse.result[0].regularMarketPrice;
       }
     })
@@ -65,36 +68,36 @@ async function checkStock(ticker) {
   return exist;
 }
 
-async function getOneStock(ticker) {
-  let stock = [];
-  await fetch(
-    `https://query1.finance.yahoo.com/v7/finance/quote?lang=en-US&region=US&corsDomain=finance.yahoo.com&symbols=${ticker}`
-  )
-    .then((res) => res.json())
-    .then((quote) => {
-      quote.quoteResponse.result.forEach(function (s) {
-        const hour = new Date().getUTCHours();
-        const minute = new Date().getUTCMinutes();
-        const minuteFraction = minute / 60;
-        const hourNumber = hour + minuteFraction;
-        // premarket(09:00-14:30UTC)
-        if (hourNumber >= 9 && hourNumber < 14.5) {
-          s.preRegAfterCombinedPrice = s.preMarketPrice;
-        }
-        //  regularmarket(14:30-21:00UTC)
-        else if (hourNumber >= 14.5 && hourNumber < 21) {
-          s.preRegAfterCombinedPrice = s.regularMarketPrice;
-        }
-        //  afterhours(21:00-08:59UTC)
-        else if (hourNumber >= 21 || hourNumber < 9) {
-          s.preRegAfterCombinedPrice = s.postMarketPrice;
-        }
-        stock.push(s);
-      });
-    })
-    .catch((err) => console.log(err));
-  return stock;
-}
+// async function getOneStock(ticker) {
+//   let stock = [];
+//   await fetch(
+//     `https://query1.finance.yahoo.com/v7/finance/quote?lang=en-US&region=US&corsDomain=finance.yahoo.com&symbols=${ticker}`
+//   )
+//     .then((res) => res.json())
+//     .then((quote) => {
+//       quote.quoteResponse.result.forEach(function (s) {
+//         const hour = new Date().getUTCHours();
+//         const minute = new Date().getUTCMinutes();
+//         const minuteFraction = minute / 60;
+//         const hourNumber = hour + minuteFraction;
+//         // premarket(09:00-14:30UTC)
+//         if (hourNumber >= 9 && hourNumber < 14.5) {
+//           s.preRegAfterCombinedPrice = s.preMarketPrice;
+//         }
+//         //  regularmarket(14:30-21:00UTC)
+//         else if (hourNumber >= 14.5 && hourNumber < 21) {
+//           s.preRegAfterCombinedPrice = s.regularMarketPrice;
+//         }
+//         //  afterhours(21:00-08:59UTC)
+//         else if (hourNumber >= 21 || hourNumber < 9) {
+//           s.preRegAfterCombinedPrice = s.postMarketPrice;
+//         }
+//         stock.push(s);
+//       });
+//     })
+//     .catch((err) => console.log(err));
+//   return stock;
+// }
 async function getChartData(ticker, candleTime, howManyCandles) {
   let array = [];
   let object;

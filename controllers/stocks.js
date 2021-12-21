@@ -50,7 +50,11 @@ async function show(req, res) {
       preselectPortfolio = req.params.portfolioId;
     }
     Portfolio.find({ user: req.user._id }, async function (err, portfolios) {
-      const quote = await StockPrice.getOneStock(stock.ticker);
+      let ticker = [];
+      let obj = {};
+      obj['ticker'] = stock.ticker;
+      ticker.push(obj);
+      const quote = await StockPrice.getStock(ticker);
       //Get charting data
       const chartParsed = await StockPrice.getChartData(stock.ticker, 1, 61);
       res.render('stocks/show', {

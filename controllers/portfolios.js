@@ -45,14 +45,16 @@ function show(req, res) {
       });
       let tickers = [];
       holdings.forEach(function (s) {
-        tickers.push(s.ticker, holdings);
+        let obj = {};
+        obj['ticker'] = s.ticker;
+        tickers.push(obj);
       });
       let prices = [];
       let unrealizedPL = 0;
       let realizedPL = 0;
       let totalHoldings = 0;
       if (holdings[0]) {
-        prices = await StockPrice.getOneStock(tickers);
+        prices = await StockPrice.getStock(tickers);
         prices.forEach(function (p, idx) {
           p.shares = holdings[idx].shares;
           p.avgPrice = holdings[idx].avgCost;
