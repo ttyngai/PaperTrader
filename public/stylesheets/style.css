@@ -7,8 +7,8 @@
   --stockYellow: rgb(221, 188, 0);
   --mustardYellow: rgb(204, 204, 77);
   --transparentYellow: rgba(221, 188, 0, 0.37);
-  --stockGreen: rgb(102, 255, 0);
-  --oldStockGreen: rgb(2, 134, 2);
+  --stockGreen: rgb(115, 255, 0);
+  --oldStockGreen: rgb(0, 100, 0);
   --stockRed: red;
   --oldStockRed: rgb(170, 0, 57);
   --darkRed: rgb(65, 2, 2);
@@ -432,11 +432,11 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
   background-color: black;
   border: none;
   font-size: 1.5rem;
-  padding: 0 1rem;
+  padding: 0 0.5rem;
   border-radius: 0.25rem;
   margin: 0.2rem -0.2rem 0.2rem 0.2rem;
-  width: 25vw;
-  max-width: 10rem;
+  width: 20vw;
+  max-width: 12rem;
 }
 #buyButton {
   color: greenyellow;
@@ -459,18 +459,28 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
 
 .buySellNumBox {
   background-color: black;
-  border: 0.1rem solid var(--stockYellow);
+  border: 0.2rem solid var(--stockYellow);
   color: var(--stockYellow);
   border-radius: 0.25rem;
   padding: 0 1rem;
   font-size: 1.5rem;
-  width: 28vw;
-  max-width: 16rem;
   margin: 0 0.2rem;
 }
 .buySellNumBox:focus {
-  border: 0.1rem solid var(--stockYellow);
+  border: 0.2rem solid var(--stockYellow);
   background-color: black;
+}
+#buySellSharesBox {
+  width: 20vw;
+  max-width: 16rem;
+}
+#buySellPriceBox {
+  width: 20vw;
+  max-width: 16rem;
+}
+#buySellPortfolioBox {
+  width: 35vw;
+  max-width: 16rem;
 }
 
 .heroContent {

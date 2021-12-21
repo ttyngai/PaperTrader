@@ -9,15 +9,16 @@
         action="/stocks/<%= stock._id%>/transactions"
         method="POST"
       >
-        <input type="text" min="0" class="buySellNumBox" name="shares" placeholder="Shares" autocomplete="off" autofocus />
+        <input type="text" min="0" class="buySellNumBox" id="buySellSharesBox" name="shares" placeholder="Shares" autocomplete="off" autofocus />
         <input
           type="number"
           name="price"
           class="buySellNumBox"
+          id="buySellPriceBox"
           value="<%=quote[0].preRegAfterCombinedPrice.toFixed(2)%>"
           readonly="readonly"
         />
-        <select name="portfolioId" class="buySellNumBox">
+        <select name="portfolioId" class="buySellNumBox" id="buySellPortfolioBox">
           <% portfolios.forEach(function(p){ %>
           <option value="<%= p._id%>"  <%- (p._id.toString()===preselectPortfolio.toString())? 'selected':''   %>  ><%=p.name%></option>
           <%}) %>
@@ -78,7 +79,7 @@
 
       <%} %>
   <% if (quote[0].forwardPE){  %>
-    <th><%= quote[0].forwardPE%></th>
+    <th><%= quote[0].forwardPE.toFixed(2)%></th>
     
     <%} else {%>
       <th>n/a</th>
@@ -96,6 +97,7 @@
   google.charts.load('current', { packages: ['corechart'] });
   google.charts.setOnLoadCallback(drawChart);
   function drawChart() {
+    let stockGreen = '#00ff00'
     var data = google.visualization.arrayToDataTable(<%- JSON.stringify(chartParsed)%>, true);
     var options = {
       legend: 'none',
@@ -111,8 +113,8 @@
       hAxis: { gridlineColor: 'transparent', textStyle: { color: '#FFF',fontSize:10  }, showTextEvery: 10,  },
       backgroundColor: 'transparent',
       candlestick: {
-        risingColor: { stroke: '#028602', strokeWidth:1,fill: '#028602' },
-        fallingColor: { stroke: '#aa0039', strokeWidth:1,fill: '#aa0039' },
+        risingColor: { stroke: stockGreen, strokeWidth:1,fill: stockGreen },
+        fallingColor: { stroke: 'red', strokeWidth:1,fill: 'red' },
       },
     };
     var chart = new google.visualization.CandlestickChart(
