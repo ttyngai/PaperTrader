@@ -7,8 +7,10 @@
   --stockYellow: rgb(221, 188, 0);
   --mustardYellow: rgb(204, 204, 77);
   --transparentYellow: rgba(221, 188, 0, 0.37);
-  --stockGreen: rgb(2, 134, 2);
-  --stockRed: rgb(170, 0, 57);
+  --stockGreen: rgb(102, 255, 0);
+  --oldStockGreen: rgb(2, 134, 2);
+  --stockRed: red;
+  --oldStockRed: rgb(170, 0, 57);
   --darkRed: rgb(65, 2, 2);
 }
 

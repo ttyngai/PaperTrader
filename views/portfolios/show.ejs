@@ -28,8 +28,9 @@
       <tr>
         <td class="positionTitle">Position Size:</td>
         <td>
-          $<%=
-          Intl.NumberFormat('en-US').format(Math.abs(totalHoldings+unrealizedPL).toFixed(2))%>
+          $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
+          maximumFractionDigits:
+          2,}).format(Math.abs(totalHoldings+unrealizedPL).toFixed(2))%>
         </td>
       </tr>
       <tr>
@@ -43,7 +44,8 @@
             ''%>
           "
         >
-          $<%= Intl.NumberFormat('en-US').format(unrealizedPL.toFixed(2))%>
+          $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
+          maximumFractionDigits: 2,}).format(unrealizedPL.toFixed(2))%>
         </td>
       </tr>
       <tr>
@@ -57,8 +59,9 @@
             ''%>
           "
         >
-          $<%=
-          Intl.NumberFormat('en-US').format((totalHoldings-realizedPL).toFixed(2))%>
+          $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
+          maximumFractionDigits:
+          2,}).format((totalHoldings-realizedPL).toFixed(2))%>
         </td>
       </tr>
     </table>
@@ -101,7 +104,7 @@
         >
           <%= p.shares %>
         </td>
-        <td><%=p.preRegAfterCombinedPrice %></td>
+        <td><%=p.preRegAfterCombinedPrice.toFixed(2) %></td>
         <td
           class="
             <%=(p.regularMarketChangePercent>0)?'stockGreen':
@@ -127,14 +130,15 @@
             ''%>
           "
         >
-          $<%= Intl.NumberFormat('en-US').format(((p.preRegAfterCombinedPrice -
+          $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
+          maximumFractionDigits: 2,}).format(((p.preRegAfterCombinedPrice -
           p.avgPrice)*p.shares).toFixed(2)) %>
         </td>
         <td><%= p.avgPrice.toFixed(2) %></td>
         <td>
-          $<%=
-          Intl.NumberFormat('en-US').format((p.preRegAfterCombinedPrice*p.shares).toFixed(2))
-          %>
+          $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
+          maximumFractionDigits:
+          2,}).format((p.preRegAfterCombinedPrice*p.shares).toFixed(2)) %>
         </td>
       </tr>
       <% }); %>
@@ -173,7 +177,7 @@
         <%} %>
         <td><%= Math.abs(t.shares) %></td>
 
-        <td><%= t.price %></td>
+        <td><%= t.price.toFixed(2) %></td>
         <td><%= t.createdAt.toLocaleDateString() %></td>
       </tr>
       <% }); %>
