@@ -9,7 +9,6 @@
         action="/stocks/<%= stock._id%>/transactions"
         method="POST"
       >
- 
         <span id="buySellPriceBoxDollarSign">$</span>
         <input
           type="text"
@@ -17,8 +16,8 @@
           min="0"
           class="buySellNumBox"  
           value="<%=quote[0].preRegAfterCombinedPrice.toFixed(2)%>"
-          id="<%= premium ? 'premiumPriceBox':'buySellPriceBox'  %>"
-          <%- (!premium) ? 'readonly':'' %>
+          id="<%= user.premium ? 'premiumPriceBox':'buySellPriceBox'  %>"
+          <%- (!user.premium) ? 'readonly':'' %>
           />
           <input type="text" min="0" class="buySellNumBox" id="buySellSharesBox" name="shares" placeholder="Shares" autocomplete="off" />
         <select name="portfolioId" class="buySellNumBox" id="buySellPortfolioBox">

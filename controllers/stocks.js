@@ -57,12 +57,6 @@ async function show(req, res) {
       const quote = await StockPrice.getStock(ticker);
       //Get charting data
       const chartParsed = await StockPrice.getChartData(stock.ticker, 1, 61);
-      // Check isGold member
-      let premium = false;
-      if (req.user.premium) {
-        premium = true;
-      }
-
       res.render('stocks/show', {
         title: 'Stocks',
         stock,
@@ -71,7 +65,6 @@ async function show(req, res) {
         req,
         chartParsed,
         preselectPortfolio,
-        premium,
       });
     });
   });
