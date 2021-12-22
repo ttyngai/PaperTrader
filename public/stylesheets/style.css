@@ -44,7 +44,7 @@ nav {
 }
 
 .navTitle {
-  position: absolute;
+  /* position: absolute; */
   left: 2vw;
   padding: 1rem;
   color: var(--stockYellow);
