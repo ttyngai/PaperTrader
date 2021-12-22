@@ -145,6 +145,7 @@ table {
 
 #eachStock {
   border-bottom: 0.1rem solid var(--greyFont);
+  white-space: nowrap;
 }
 .stockListRight {
   color: var(--whiteFont);
@@ -218,8 +219,8 @@ table {
 }
 #removeStock:hover {
   background-color: var(--stockRed);
-  transform: scale(1.3);
-  transition: all 0.15s ease-in-out;
+
+  transition: all 0s ease-in-out;
 }
 
 #removeHeader {
@@ -580,5 +581,8 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
   }
   #stockName {
     font-size: 1rem;
+    /* text-overflow: ellipsis; */
+    white-space: nowrap;
+    overflow: hidden;
   }
 }
