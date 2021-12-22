@@ -19,6 +19,7 @@
 <section class="navPadding">
     <nav>
       <a class="navTitle navButtons" href="/"  >PaperTrader Live</a>
+      
       <% if (user) { %>
         <a  href="/memberships" <%-   req.user.premium ? 'class="navButtons activeNav"':'class="basicUser"'  %>  ><%- req.user.premium? 'Premium':'(Basic)'  %></a>
       <a  href="/stocks" <%-   title === 'Stocks' ? 'class="navButtons activeNav"':'class="navButtons"'  %>  >Stocks</a>
@@ -28,6 +29,7 @@
       <a class="navButtons formButton" href="/auth/google" class="login">Login</a>
       <% } %>
     </nav>
+
   </section>
   </body>
 </html>
@@ -35,3 +37,4 @@
 <script>
 localStorage.referrer = document.referrer
 </script>
+
