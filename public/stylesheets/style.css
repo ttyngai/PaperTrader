@@ -553,7 +553,7 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
 
 @keyframes blinker {
   50% {
-    opacity: 30%;
+    opacity: 75%;
   }
 }
 
