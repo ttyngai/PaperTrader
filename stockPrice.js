@@ -113,7 +113,7 @@ async function getChartData(ticker, candleTime, howManyCandles) {
           bar.push(open[howManyCandles - 1]);
           array.push(bar);
           //
-          console.log('last candle', open[howManyCandles - 1]);
+          console.log('last candle check', open[howManyCandles - 1]);
         }
       }
     })

@@ -1,27 +1,11 @@
 <%- include('../partials/header') %>
 <div class="stockShowControls">
   <div>
-
-
-
-  
-
-
-
   <% if ( quote[0]){ %>
     <h1 id="stockTitleAtShow"><%= quote[0].longName%> (<%= stock.ticker%>)</h1>
     <%} else {%>
     <h1>n/a</h1>
     <%} %> 
-
-
-
-
-
-
-
-
-
   <% if (portfolios.length !==0) {%>
       <form
         id="transaction"
@@ -83,18 +67,20 @@
   <% if (quote[0]){%>
 <tbody>
   <tr class="detailInfo">
-    <th class=" tickerLeft tickerTitle
-    <%=(quote[0].regularMarketChangePercent>0)?'stockGreen':
-    ''%>
-    <%=(quote[0].regularMarketChangePercent<0)?'stockRed':
-    ''%>">
-  <%= quote[0].preRegAfterCombinedPrice%>
-</th>
-    <th>
-      <%= quote[0].regularMarketPreviousClose%>
-    </th>
-
-
+<% if (quote[0].preRegAfterCombinedPrice){ %>
+  <th class=" tickerLeft tickerTitle
+  <%=(quote[0].regularMarketChangePercent>0)?'stockGreen':
+  ''%>
+  <%=(quote[0].regularMarketChangePercent<0)?'stockRed':
+  ''%>"><%= (quote[0].preRegAfterCombinedPrice).toFixed(2)%>%</th>
+  <%} else {%>
+  <th>n/a</th>
+  <%} %>
+    <% if (quote[0].regularMarketPreviousClose){ %>
+      <th><%= (quote[0].regularMarketPreviousClose).toFixed(2)%>%</th>
+      <%} else {%>
+      <th>n/a</th>
+      <%} %>
   <% if (quote[0].regularMarketChangePercent){ %>
     <th class="
     <%=(quote[0].regularMarketChangePercent>0)?'stockGreen':
@@ -105,8 +91,11 @@
     <%} else {%>
     <th>n/a</th>
     <%} %>
-
-    <th><%= quote[0].regularMarketVolume%></th>
+  <% if (quote[0].regularMarketVolume){ %>
+    <th ><%= quote[0].regularMarketVolume%></th>
+    <%} else {%>
+    <th>n/a</th>
+    <%} %>
     <% if (quote[0].forwardPE){  %>
     <th>$<%= Intl.NumberFormat('en-US').format((quote[0].marketCap/1000000).toFixed(0))%></th>
     <%} else {%>
