@@ -317,7 +317,7 @@ table {
 }
 .portfolioEdit {
   position: absolute;
-  background-color: black;
+  background-color: transparent;
   border: none;
   color: black;
   transform: scale(0.75);
