@@ -197,17 +197,19 @@
   window.setTimeout(function () {
     window.location.reload();
   }, 10000);
-  const tempInput = localStorage.portfolioEdit;
+  console.log('abc', <% portInputId%>);
 
-  if (tempInput) {
-    document.getElementById('portfolioEditting').value = tempInput;
-  }
-  document
-    .getElementById('portfolioEditting')
-    .addEventListener('input', function () {
-      localStorage.portfolioEdit =
-        document.getElementById('portfolioEditting').value;
-    });
-  console.log('id');
-  console.log(<%= JSON.stringify(prices) %>);
+  // const tempInput = localStorage.portfolioEdit;
+
+  // if (tempInput) {
+  //   document.getElementById('portfolioEditting').value = tempInput;
+  // }
+  // document
+  //   .getElementById('portfolioEditting')
+  //   .addEventListener('input', function () {
+  //     localStorage.portfolioEdit =
+  //       document.getElementById('portfolioEditting').value;
+  //   });
+
+  // console.log(<%= JSON.stringify(prices) %>);
 </script>
