@@ -338,7 +338,7 @@ table {
   border-radius: 0.25rem;
   padding: 0 1rem;
   font-size: 1.5rem;
-  max-width: 20rem;
+  max-width: 15rem;
 }
 #portfolioEditting:focus {
   border: 0.1rem solid var(--stockYellow);
