@@ -215,13 +215,14 @@
       .addEventListener('input', function () {
         localStorage.inputField =
           document.getElementById('portfolioEditting').value;
+         // Portfolio name edit button show up
+        document.getElementById('portfolioOkButton').classList.add('portfolioEditReveal')
       });
     document
       .getElementById('portfolioEditting')
       .addEventListener('click', function () {
         localStorage.activeFocus = 'portfolioEditting';
-        // Portfolio name edit button show up
-        document.getElementById('portfolioOkButton').classList.add('portfolioEditReveal')
+
       });
     if (localStorage.activeFocus) {
       document.getElementById(localStorage.activeFocus).focus();
