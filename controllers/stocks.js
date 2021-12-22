@@ -70,12 +70,12 @@ async function show(req, res) {
   });
 }
 async function create(req, res) {
-  let temp = JSON.parse(JSON.stringify(req.body.ticker));
-  console.log(temp, typeof temp);
-  req.body.ticker = req.body.ticker.toUpperCase();
-  // Check stock exist
-  const check = await StockPrice.checkStock(req.body.ticker);
-  console.log('check stock', req.body.ticker);
+  let check;
+  if (!JSON.parse(JSON.stringify(req.body.ticker)).includes('=')) {
+    req.body.ticker = req.body.ticker.toUpperCase();
+    // Check stock exist
+    check = await StockPrice.checkStock(req.body.ticker);
+  }
   // Check stock duplicate
   const duplicate = await Stock.findOne({
     $and: [{ ticker: req.body.ticker }, { user: req.user._id }],
