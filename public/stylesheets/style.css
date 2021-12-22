@@ -49,6 +49,7 @@ nav {
   padding: 1rem;
   color: var(--stockYellow);
   font-weight: bold;
+  white-space: nowrap;
 }
 
 #stockTitleAtShow {
