@@ -20,7 +20,7 @@
     <nav>
       <a class="navTitle navButtons" href="/"  >PaperTrader™</a>
       <% if (user) { %>
-        <a  href="/memberships" <%-   req.user.premium ? 'class="navButtons activeNav"':'class="navButtons"'  %>  >Premium</a>
+        <a  href="/memberships" <%-   req.user.premium ? 'class="navButtons activeNav"':'class="basicUser"'  %>  ><%- req.user.premium? 'Premium':'(Basic)'  %></a>
       <a  href="/stocks" <%-   title === 'Stocks' ? 'class="navButtons activeNav"':'class="navButtons"'  %>  >Stocks</a>
       <a  href="/portfolios" <%- title === 'Portfolios' ? 'class="navButtons activeNav"':'class="navButtons"'%>> Portfolio</a>
       <a class="navButtons" href="/logout">Logout</a>
@@ -31,3 +31,7 @@
   </section>
   </body>
 </html>
+<script>
+  localStorage.referrer = document.referrer;
+
+</script>

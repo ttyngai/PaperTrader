@@ -1,4 +1,5 @@
 <%- include('../partials/header') %>
+
 <div class="portfolioContent">
   <div class="portfolioSections">
     <div id="portfolioControl">
@@ -24,6 +25,7 @@
         <input type="submit" class="portfolioDelete" value="Delete" />
       </form>
     </div>
+
     <table id="PLSection">
       <tr>
         <td class="positionTitle">Position Size:</td>
@@ -190,26 +192,25 @@
     <%}%>
   </table>
 </div>
-
 <%- include('../partials/footer') %>
 <!-- Refresh Script -->
 <script>
   window.setTimeout(function () {
     window.location.reload();
   }, 10000);
-  console.log('abc', <% portInputId%>);
 
-  // const tempInput = localStorage.portfolioEdit;
-
-  // if (tempInput) {
-  //   document.getElementById('portfolioEditting').value = tempInput;
-  // }
-  // document
-  //   .getElementById('portfolioEditting')
-  //   .addEventListener('input', function () {
-  //     localStorage.portfolioEdit =
-  //       document.getElementById('portfolioEditting').value;
-  //   });
-
-  // console.log(<%= JSON.stringify(prices) %>);
+  // Refresh input retainer
+  if (localStorage.referrer !== window.location.href) {
+    delete localStorage.inputField;
+  }
+  const tempInput = localStorage.inputField;
+  if (tempInput && localStorage.referrer === window.location.href) {
+    document.getElementById('portfolioEditting').value = tempInput;
+  }
+  document
+    .getElementById('portfolioEditting')
+    .addEventListener('input', function () {
+      localStorage.inputField =
+        document.getElementById('portfolioEditting').value;
+    });
 </script>

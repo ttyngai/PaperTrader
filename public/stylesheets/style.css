@@ -81,6 +81,15 @@ nav {
   color: var(--greyFont);
 }
 
+.basicUser {
+  color: var(--greyFont);
+  padding: 0 1rem 0 0;
+}
+.basicUser:hover {
+  color: var(--stockYellow);
+  text-decoration: none;
+}
+
 .navPadding {
   padding-bottom: 3rem;
 }
@@ -480,7 +489,7 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
   max-width: 16rem;
 }
 
-#buySellPriceBox {
+.buySellPriceBox {
   background-color: rgb(34, 34, 34);
   color: rgba(221, 188, 0, 0.37);
   padding: 0 0 0 1.3rem;
@@ -495,7 +504,7 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
   position: absolute;
 }
 
-#premiumPriceBox {
+.premiumPriceBox {
   padding: 0 0 0 1.3rem;
   width: 22vw;
   max-width: 16rem;
@@ -504,6 +513,10 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
 #buySellPortfolioBox {
   width: 35vw;
   max-width: 16rem;
+}
+
+.detailInfo {
+  text-align: center;
 }
 
 .heroContent {

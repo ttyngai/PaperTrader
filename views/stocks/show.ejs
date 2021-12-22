@@ -13,9 +13,10 @@
           type="text"
           name="price"
           min="0"
-          class="buySellNumBox"  
+          autocomplete="off"
+          id="buySellPriceBoxId"
           value="<%=quote[0].preRegAfterCombinedPrice.toFixed(2)%>"
-          id="<%= user.premium ? 'premiumPriceBox':'buySellPriceBox'  %>"
+          class="<%= user.premium ? 'buySellNumBox premiumPriceBox':'buySellNumBox buySellPriceBox'  %>"
           <%- (!user.premium) ? 'readonly':'' %>
           />
           <input type="text" min="0" class="buySellNumBox" id="buySellSharesBox" name="shares" placeholder="Shares" autocomplete="off"    />
@@ -50,7 +51,7 @@
 <div class="stockInfoContent">
 <table class="stockInfoTable">
   <thead>
-    <tr class="portfolioListTitle">
+    <tr class="portfolioListTitle detailInfo">
       <th class="tickerLeft tickerTitle">Mark</th>
       <th>PrevClose</th>
       <th>%Day</th>
@@ -60,8 +61,13 @@
     </tr>
   </thead>
 <tbody>
-  <tr class="">
-    <th class="tickerLeft tickerTitle"><%= quote[0].preRegAfterCombinedPrice.toFixed(2)%></th>
+  <tr class="detailInfo">
+    <th class=" tickerLeft tickerTitle
+    <%=(quote[0].regularMarketChangePercent>0)?'stockGreen':
+    ''%>
+    <%=(quote[0].regularMarketChangePercent<0)?'stockRed':
+    ''%>
+  "><%= quote[0].preRegAfterCombinedPrice.toFixed(2)%></th>
     <th><%= quote[0].regularMarketPreviousClose.toFixed(2)%></th>
     <th class="
     <%=(quote[0].regularMarketChangePercent>0)?'stockGreen':
@@ -80,12 +86,10 @@
     <%} else {%>
       <th>n/a</th>
   <%} %>
-  
   </tr>
 </tbody>
 </table>
 </div>
-
 <script
   type="text/javascript"
   src="https://www.gstatic.com/charts/loader.js"
@@ -124,12 +128,71 @@
 <script>
   window.setTimeout(function () {
     window.location.reload();
-  }, 30000);
-const tempInput = localStorage.shareBoxInput
-if (tempInput) {
-  document.getElementById('buySellSharesBox').value = tempInput
-}
-  document.getElementById('buySellSharesBox').addEventListener("input", function(){
-    localStorage.shareBoxInput = document.getElementById('buySellSharesBox').value
-  })
+  }, 1000000);
+  // Refresh input retainer*3
+    if(localStorage.referrer !== window.location.href){
+      delete localStorage.inputField
+      delete localStorage.inputField2
+      delete localStorage.inputField3
+      delete localStorage.activeFocus
+    }
+  // check if anything in inputField stored
+  const tempInput = localStorage.inputField;
+  // If we stored value in tempInput, and we just reloaded, box is in use
+  // We will take value out and populate the box
+  if (tempInput && localStorage.referrer === window.location.href) {
+    document.getElementById('buySellSharesBox').value = tempInput;
+  }
+  const tempInput2 = localStorage.inputField2;
+  if (tempInput2 && localStorage.referrer === window.location.href) {
+    document.getElementById('buySellPriceBoxId').value = tempInput2;
+  }
+  // ///////////////////////////////////////
+  const tempInput3 = localStorage.inputField3;
+  if (tempInput3 && localStorage.referrer === window.location.href) {
+    document.getElementById('buySellPortfolioBox').value = tempInput3;
+  }
+  // On input #1
+  document
+    .getElementById('buySellSharesBox')
+    .addEventListener('input', function () {
+      localStorage.inputField =
+      document.getElementById('buySellSharesBox').value;
+      localStorage.activeFocus = 'buySellSharesBox'
+    });
+   // On click #1
+  document
+    .getElementById('buySellSharesBox')
+    .addEventListener('click', function () {
+      localStorage.activeFocus = 'buySellSharesBox'
+    });
+      // On input #2
+  document
+    .getElementById('buySellPriceBoxId')
+    .addEventListener('input', function () {
+      localStorage.inputField2 =
+      document.getElementById('buySellPriceBoxId').value;
+    });
+    // On click #2
+  document
+    .getElementById('buySellPriceBoxId')
+    .addEventListener('click', function () {
+      localStorage.activeFocus = 'buySellPriceBoxId'
+    });
+   // On select #3
+  document
+    .getElementById('buySellPortfolioBox')
+    .addEventListener('input', function () {
+      localStorage.inputField3 =
+      document.getElementById('buySellPortfolioBox').value;
+    });
+    // deletes focus if this option is selected
+  document
+    .getElementById('buySellPortfolioBox')
+    .addEventListener('click', function () {
+      delete localStorage.activeFocus
+    });
+   if(localStorage.activeFocus){
+    document.getElementById(localStorage.activeFocus).focus();
+  }
 </script>

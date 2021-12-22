@@ -77,9 +77,6 @@ function show(req, res) {
       portfolio.transactions.forEach(function (t) {
         realizedPL += t.price * t.shares;
       });
-      let portInputId = portfolio.id;
-      // const clone = [...portfolio._id];
-      console.log(portInputId);
       res.render(`portfolios/show`, {
         title: 'Portfolios',
         portfolio,
@@ -88,7 +85,6 @@ function show(req, res) {
         unrealizedPL,
         realizedPL,
         totalHoldings,
-        portInputId,
       });
     });
   });

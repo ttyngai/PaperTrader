@@ -87,15 +87,19 @@
 <script>
   window.setTimeout(function () {
     window.location.reload();
-  }, 5000);
-  const tempInput = localStorage.searchBoxInput;
-  if (tempInput) {
+  }, 500000);
+
+  // Refresh input retainer
+  if (localStorage.referrer !== window.location.href) {
+    delete localStorage.inputField;
+  }
+  const tempInput = localStorage.inputField;
+  if (tempInput && localStorage.referrer === window.location.href) {
     document.getElementById('stockSearchBox').value = tempInput;
   }
   document
     .getElementById('stockSearchBox')
     .addEventListener('input', function () {
-      localStorage.searchBoxInput =
-        document.getElementById('stockSearchBox').value;
+      localStorage.inputField = document.getElementById('stockSearchBox').value;
     });
 </script>
