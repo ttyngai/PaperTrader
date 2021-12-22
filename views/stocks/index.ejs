@@ -88,21 +88,26 @@
 <%- include('../partials/footer') %>
 <!-- Refresh Script -->
 <script>
-  window.setTimeout(function () {
-    window.location.reload();
-  }, 10000);
+  //Bonus upgraded refresh rate for premium users
+  let refreshRate=60000;
+  if (<%=user.premium%>){
+    refreshRate = 10000
+  }
+    window.setTimeout(function () {
+      window.location.reload();
+    }, refreshRate);
 
-  // Refresh input retainer
-  if (localStorage.referrer !== window.location.href) {
-    delete localStorage.inputField;
-  }
-  const tempInput = localStorage.inputField;
-  if (tempInput && localStorage.referrer === window.location.href) {
-    document.getElementById('stockSearchBox').value = tempInput;
-  }
-  document
-    .getElementById('stockSearchBox')
-    .addEventListener('input', function () {
-      localStorage.inputField = document.getElementById('stockSearchBox').value;
-    });
+    // Refresh input retainer
+    if (localStorage.referrer !== window.location.href) {
+      delete localStorage.inputField;
+    }
+    const tempInput = localStorage.inputField;
+    if (tempInput && localStorage.referrer === window.location.href) {
+      document.getElementById('stockSearchBox').value = tempInput;
+    }
+    document
+      .getElementById('stockSearchBox')
+      .addEventListener('input', function () {
+        localStorage.inputField = document.getElementById('stockSearchBox').value;
+      });
 </script>

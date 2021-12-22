@@ -129,9 +129,14 @@
 </script>
 <%- include('../partials/footer') %>
 <script>
+    //Bonus upgraded refresh rate for premium users
+let refreshRate=60000;
+if (<%=user.premium%>){
+  refreshRate = 10000
+}
   window.setTimeout(function () {
     window.location.reload();
-  }, 10000);
+  }, refreshRate);
   // Refresh input retainer*3
     if(localStorage.referrer !== window.location.href){
       delete localStorage.inputField
