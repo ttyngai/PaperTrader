@@ -106,7 +106,7 @@
         >
           <%= p.shares %>
         </td>
-        <td><%=p.preRegAfterCombinedPrice.toFixed(2) %></td>
+        <td><%=p.preRegAfterCombinedPrice %></td>
         <td
           class="
             <%=(p.regularMarketChangePercent>0)?'stockGreen':
@@ -119,7 +119,6 @@
           (((p.preRegAfterCombinedPrice-p.avgPrice)/p.avgPrice)*100).toFixed(2)
           %>%
         </td>
-
         <td
           class="
             <%=(p.preRegAfterCombinedPrice
@@ -150,7 +149,6 @@
     <%}%>
   </table>
   <br />
-
   <% if (portfolio.transactions.length!==0){%>
   <div class="portfolioSections">
     <h3>Transactions</h3>
@@ -165,7 +163,6 @@
         <th>Date</th>
       </tr>
     </thead>
-
     <tbody>
       <% portfolio.transactions.forEach(function(t) { %>
       <tr class="portfolioList transactionBorderBottom">
@@ -178,17 +175,13 @@
         <td class="buySell stockRed">Sell</td>
         <%} %>
         <td><%= Math.abs(t.shares) %></td>
-
         <td><%= t.price.toFixed(2) %></td>
         <td><%= t.createdAt.toLocaleDateString() %></td>
       </tr>
       <% }); %>
     </tbody>
-
     <%} else{%>
-
     <h3>No Transactions</h3>
-
     <%}%>
   </table>
 </div>

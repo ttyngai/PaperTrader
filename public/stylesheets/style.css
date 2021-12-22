@@ -163,6 +163,7 @@ table {
   max-width: 10rem;
   height: 100%;
   text-align: left;
+  padding: 0 0 0 1.5rem;
 }
 .tickerButton:hover {
   background-color: var(--stockYellow);
