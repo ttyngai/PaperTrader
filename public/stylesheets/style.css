@@ -492,7 +492,7 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
 
 .buySellPriceBox {
   background-color: rgb(34, 34, 34);
-  color: rgba(221, 188, 0, 0.37);
+  color: var(--stockYellow);
   padding: 0 0 0 1.3rem;
   width: 22vw;
   max-width: 16rem;

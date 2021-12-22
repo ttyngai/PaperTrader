@@ -75,6 +75,7 @@ async function create(req, res) {
     req.body.ticker = req.body.ticker.toUpperCase();
     // Check stock exist
     check = await StockPrice.checkStock(req.body.ticker);
+    console.log('checking', check);
   }
   // Check stock duplicate
   const duplicate = await Stock.findOne({
@@ -91,6 +92,7 @@ async function create(req, res) {
       res.redirect(`/stocks`);
     });
   }
+  //If duplicated, sets hide to false
   if (duplicate) {
     Stock.findOne(
       {

@@ -26,7 +26,7 @@ Highlights:
 
 - Basic user level can use it for demo trading stocks, but a premium user level has access to setting custom "purchase price" to use the app as a portfolio tracker, as well as a faster refresh rate (10s vs 60s)
 
-- When stock chart is required, yahoo finance data is pulled, processed and sent to google charts with specified parameters. This is then rendered in the stock details page. The processing of data includes generating the candlesticks with wick, as well as a easy to see dotted yellow line overlay indicating the most recent price. Since there are three sections of market time, all three are combined before generating a single price.
+- When stock chart is required, yahoo finance data is pulled, processed and sent to google charts with specified parameters. This is then rendered in the stock details page. The processing of data includes generating the candlesticks with wick, as well as a easy to see dotted yellow line overlay indicating the most recent price. Since there are three sections of market time, all three are combined before generating a single price. Horizontal axis adjusted for user timezone with daylight-savings.
 
 - When buying stocks, the input values and input focus remains even during refresh.
 

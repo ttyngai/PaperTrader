@@ -82,6 +82,7 @@ async function getChartData(ticker, candleTime, howManyCandles) {
       let low = object.indicators.quote[0].low;
       let close = object.indicators.quote[0].close;
       for (i = 0; i < howManyCandles; i++) {
+        // below checks for null data
         if (timestamp[i] && low[i] && open[i] && close[i] && high[i]) {
           let bar = [];
           let time = new Date(timestamp[i] * 1000);
@@ -103,6 +104,8 @@ async function getChartData(ticker, candleTime, howManyCandles) {
           bar.push(high[i]);
           bar.push(open[howManyCandles - 1]);
           array.push(bar);
+          //
+          console.log('last candle', open[howManyCandles - 1]);
         }
       }
     })
