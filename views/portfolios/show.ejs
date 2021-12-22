@@ -194,6 +194,7 @@
   // Refresh input retainer
   if (localStorage.referrer !== window.location.href) {
     delete localStorage.inputField;
+    delete localStorage.activeFocus;
   }
   const tempInput = localStorage.inputField;
   if (tempInput && localStorage.referrer === window.location.href) {
@@ -205,4 +206,12 @@
       localStorage.inputField =
         document.getElementById('portfolioEditting').value;
     });
+  document
+    .getElementById('portfolioEditting')
+    .addEventListener('click', function () {
+      localStorage.activeFocus = 'portfolioEditting';
+    });
+  if (localStorage.activeFocus) {
+    document.getElementById(localStorage.activeFocus).focus();
+  }
 </script>
