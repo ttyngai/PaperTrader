@@ -10,7 +10,7 @@
     placeholder="(e.g. AAPL)"
     autofocus
   />
-  <input type="submit" class="formButton" value="Add" />
+  <input type="submit" class="formButton" id="searchTickerButton" value="Add" />
 </form>
 <div id="stockContent">
   <table id="watchListContent">
@@ -109,5 +109,10 @@
       .getElementById('stockSearchBox')
       .addEventListener('input', function () {
         localStorage.inputField = document.getElementById('stockSearchBox').value;
+      });
+      document
+      .getElementById('searchTickerButton')
+      .addEventListener('click', function () {
+        delete localStorage.inputField
       });
 </script>
