@@ -322,7 +322,7 @@ table {
   color: black;
   transform: scale(0.75);
   border-radius: 0.25rem;
-  margin: 0rem 0 0 -3rem;
+  /* margin: 0rem 0 0 -3rem; */
   font-size: 1.5rem;
 }
 
@@ -351,7 +351,7 @@ table {
   border-radius: 0.25rem;
   transform: scale(0.75);
   font-size: 1.5rem;
-  margin: 0 0 0 -0.35rem;
+  /* margin: 0 0 0 -0.35rem; */
 }
 
 .portfolioDelete:hover {
@@ -428,12 +428,12 @@ table {
 .positionTitle {
   padding: 0 0.5rem 0 0;
 }
-
+/* 
 #portfolioControl {
   display: flex;
   flex-direction: row;
   align-items: center;
-}
+} */
 input[type='text']#portfolioEditting::-webkit-input-placeholder {
   color: var(--stockYellow);
 }
