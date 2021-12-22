@@ -38,4 +38,4 @@ Highlights:
 
 - As for styling, most notable is the real time color change of positive and negative figures where applicable. Color themes and styles are of similar style to common trading apps.
 
-- Some dollar signs are omitted to save space
+- Some dollar signs are omitted to save space.
