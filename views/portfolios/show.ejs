@@ -110,7 +110,12 @@
         >
           <%= p.shares %>
         </td>
-        <td><%=p.preRegAfterCombinedPrice %></td>
+
+        <% if (p.preRegAfterCombinedPrice){ %>
+        <td><%= p.preRegAfterCombinedPrice.toFixed(2)%></td>
+        <%} else {%>
+        <td>0</td>
+        <%} %> <% if (p.preRegAfterCombinedPrice-p.avgPrice){ %>
         <td
           class="
             <%=(p.regularMarketChangePercent>0)?'stockGreen':
@@ -120,9 +125,11 @@
           "
         >
           <%=
-          (((p.preRegAfterCombinedPrice-p.avgPrice)/p.avgPrice)*100).toFixed(2)
-          %>%
+          (((p.preRegAfterCombinedPrice-p.avgPrice)/p.avgPrice)*100).toFixed(2)%>%
         </td>
+        <%} else {%>
+        <td>0</td>
+        <%} %> <% if (p.preRegAfterCombinedPrice - p.avgPrice){ %>
         <td
           class="
             <%=(p.preRegAfterCombinedPrice
@@ -137,14 +144,19 @@
         >
           $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
           maximumFractionDigits: 2,}).format(((p.preRegAfterCombinedPrice -
-          p.avgPrice)*p.shares).toFixed(2)) %>
+          p.avgPrice)*p.shares).toFixed(2))%>
         </td>
+        <%} else {%>
+        <td>0</td>
+        <%} %>
+
         <td><%= p.avgPrice.toFixed(2) %></td>
-        <td>
-          $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
-          maximumFractionDigits:
-          2,}).format((p.preRegAfterCombinedPrice*p.shares).toFixed(2)) %>
-        </td>
+
+        <% if (p.preRegAfterCombinedPrice){ %>
+        <td><%= p.preRegAfterCombinedPrice.toFixed(2)%></td>
+        <%} else {%>
+        <td>0</td>
+        <%} %>
       </tr>
       <% }); %>
     </tbody>

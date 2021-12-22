@@ -67,7 +67,10 @@ function show(req, res) {
         });
         // Calculating P/L holdings and all transactions for this particular portfolio
         prices.forEach(function (p) {
-          unrealizedPL += p.shares * (p.preRegAfterCombinedPrice - p.avgPrice);
+          let priceCheckNonZero = p.preRegAfterCombinedPrice
+            ? p.preRegAfterCombinedPrice
+            : p.avgPrice;
+          unrealizedPL += p.shares * (priceCheckNonZero - p.avgPrice);
         });
         prices.forEach(function (p) {
           totalHoldings += p.shares * p.avgPrice;
@@ -77,6 +80,7 @@ function show(req, res) {
       portfolio.transactions.forEach(function (t) {
         realizedPL += t.price * t.shares;
       });
+      console.log('realizewd?', unrealizedPL, realizedPL, totalHoldings);
       res.render(`portfolios/show`, {
         title: 'Portfolios',
         portfolio,
