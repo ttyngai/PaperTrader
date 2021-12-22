@@ -26,7 +26,10 @@ async function index(req, res) {
         listNotEmpty = true;
       }
     });
+
+    console.log('stocksFound to be sent to getStock', stocksFound);
     const stocks = await StockPrice.getStock(stocksFound);
+    console.log('returned tickers', stocks);
     res.render('stocks/index', { title: 'Stocks', stocks, listNotEmpty, req });
   });
 }
@@ -74,7 +77,12 @@ async function create(req, res) {
   if (!JSON.parse(JSON.stringify(req.body.ticker)).includes('=')) {
     req.body.ticker = req.body.ticker.toUpperCase();
     // Check stock exist
-    check = await StockPrice.checkStock(req.body.ticker);
+    let ticker = [];
+    let obj = {};
+    obj['ticker'] = req.body.ticker;
+    ticker.push(obj);
+
+    check = await StockPrice.getStock(ticker, true);
     console.log('checking', check);
   }
   // Check stock duplicate
@@ -94,6 +102,10 @@ async function create(req, res) {
   }
   //If duplicated, sets hide to false
   if (duplicate) {
+    console.log('duplicated!');
+    console.log('Find ticker: ', req.body.ticker);
+    console.log('by user: ', req.user._id);
+
     Stock.findOne(
       {
         $and: [{ ticker: req.body.ticker }, { user: req.user._id }],

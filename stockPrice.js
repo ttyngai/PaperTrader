@@ -2,11 +2,11 @@ const fetch = require('node-fetch');
 
 module.exports = {
   getStock,
-  checkStock,
+  // checkStock,
   getChartData,
 };
 
-async function getStock(stocksInput) {
+async function getStock(stocksInput, simpleCheck) {
   // If single stock, convert into string
   let tickers;
   let tickersString = [];
@@ -20,13 +20,19 @@ async function getStock(stocksInput) {
     tickers = stocksInput;
   }
   let stocksOutput = [];
+  let exist;
   if (tickers.length !== 0) {
     await fetch(
       `https://query1.finance.yahoo.com/v7/finance/quote?lang=en-US&region=US&corsDomain=finance.yahoo.com&symbols=${tickers}`
     )
       .then((res) => res.json())
       .then((quote) => {
+        // simple check if stock exist
+        if (simpleCheck && quote.quoteResponse.result.length !== 0) {
+          exist = true;
+        }
         stockInfo = quote.quoteResponse.result.forEach(function (s, idx) {
+          //Check and match both stocks
           s._id = stocksInput[idx]._id;
           s.hide = stocksInput[idx].hide;
           // Switch between premarket(09:00-14:30UTC)/regularmarket(14:30-21:00UTC)/afterhours(21:00-01:00UTC)
@@ -51,22 +57,24 @@ async function getStock(stocksInput) {
       })
       .catch((err) => console.log(err));
   }
-  return stocksOutput;
+  return simpleCheck ? exist : stocksOutput;
 }
-async function checkStock(ticker) {
-  let exist;
-  await fetch(
-    `https://query1.finance.yahoo.com/v7/finance/quote?lang=en-US&region=US&corsDomain=finance.yahoo.com&symbols=${ticker}`
-  )
-    .then((res) => res.json())
-    .then((quote) => {
-      if (quote.quoteResponse.result.length !== 0) {
-        exist = quote.quoteResponse.result[0].regularMarketPrice;
-      }
-    })
-    .catch((err) => console.log(err));
-  return exist;
-}
+
+// async function checkStock(ticker) {
+//   let exist;
+//   await fetch(
+//     `https://query1.finance.yahoo.com/v7/finance/quote?lang=en-US&region=US&corsDomain=finance.yahoo.com&symbols=${ticker}`
+//   )
+//     .then((res) => res.json())
+//     .then((quote) => {
+//       if (quote.quoteResponse.result.length !== 0) {
+//         exist = quote.quoteResponse.result[0].regularMarketPrice;
+//       }
+//     })
+//     .catch((err) => console.log(err));
+//   return exist;
+// }
+
 async function getChartData(ticker, candleTime, howManyCandles) {
   let array = [];
   let object;

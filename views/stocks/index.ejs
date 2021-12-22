@@ -34,9 +34,14 @@
             <input type="submit" class="tickerButton" value="<%= s.symbol %>" />
           </form>
         </td>
+
+        <% if (s.shortName){ %>
         <td class="stockListRight" id="stockName">
           <%= s.shortName.substring(0,18)%>
         </td>
+        <%} else {%>
+        <td>n/a</td>
+        <%} %> <% if (s.regularMarketChangePercent) {%>
         <td
           class="
             stockListRight
@@ -46,14 +51,16 @@
             ''%>
           "
         >
-          <%= s.regularMarketChangePercent.toFixed(2) %>%
+          <%=s.regularMarketChangePercent.toFixed(2) %>
         </td>
-
-        <% if (s.preRegAfterCombinedPrice){ %>
+        <% }else {%>
+        <td class="stockListRight">n/a</td>
+        <% }%> <% if (s.preRegAfterCombinedPrice){ %>
         <td><%= s.preRegAfterCombinedPrice.toFixed(2)%></td>
         <%} else {%>
         <td>n/a</td>
-        <%} %>
+        <%} %> <% if (s.preRegAfterCombinedPrice-s.regularMarketPreviousClose)
+        {%>
 
         <td
           class="
@@ -68,9 +75,22 @@
           (s.preRegAfterCombinedPrice-s.regularMarketPreviousClose).toFixed(2)
           %>
         </td>
+
+        <% }else {%>
+        <td class="stockListRight">n/a</td>
+        <% }%> <% if (s.regularMarketPreviousClose) {%>
         <td class="stockListRight">
-          <%= s.regularMarketPreviousClose.toFixed(2) %>
+          <%=s.regularMarketPreviousClose.toFixed(2) %>
         </td>
+        <% }else {%>
+        <td class="stockListRight">n/a</td>
+        <% }%> <% if (s.regularMarketPreviousClose) {%>
+        <td class="stockListRight">
+          <%=s.regularMarketPreviousClose.toFixed(2) %>
+        </td>
+        <% }else {%>
+        <td class="stockListRight">n/a</td>
+        <% }%>
 
         <td class="removeButtonSlot">
           <form action="/stocks/<%= s._id %>?_method=UPDATE" method="POST">
