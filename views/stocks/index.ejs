@@ -34,7 +34,7 @@
           </form>
         </td>
         <td class="stockListRight" id="stockName">
-          <%= s.longName.substring(0,18)%>
+          <%= s.shortName.substring(0,18)%>
         </td>
         <td
           class="
@@ -48,9 +48,12 @@
           <%= s.regularMarketChangePercent.toFixed(2) %>%
         </td>
 
-        <td class="stockListRight">
-          <%= s.preRegAfterCombinedPrice.toFixed(2) %>
-        </td>
+        <% if (s.preRegAfterCombinedPrice){ %>
+        <td><%= s.preRegAfterCombinedPrice.toFixed(2)%></td>
+        <%} else {%>
+        <td>n/a</td>
+        <%} %>
+
         <td
           class="
             stockListRight
