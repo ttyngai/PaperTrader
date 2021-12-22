@@ -64,7 +64,9 @@
             ''%>
           "
         >
-          <%= (s.preRegAfterCombinedPrice-s.regularMarketOpen).toFixed(2) %>
+          <%=
+          (s.preRegAfterCombinedPrice-s.regularMarketPreviousClose).toFixed(2)
+          %>
         </td>
         <td class="stockListRight">
           <%= s.regularMarketPreviousClose.toFixed(2) %>
