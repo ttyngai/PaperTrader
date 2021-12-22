@@ -102,11 +102,11 @@ a {
   left: 50vw;
   max-width: 1024px;
 }
-#stockContent {
+/* #stockContent {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
+} */
 tr {
   text-align: right;
 }
@@ -142,6 +142,10 @@ table {
   font-size: 0.8rem;
   text-align: left;
   color: var(--stockYellow);
+  font-size: 1rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 #eachStock {
@@ -581,9 +585,5 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
     padding: 0 0.5rem;
   }
   #stockName {
-    font-size: 1rem;
-    /* text-overflow: ellipsis; */
-    white-space: nowrap;
-    overflow: hidden;
   }
 }
