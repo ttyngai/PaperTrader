@@ -30,7 +30,6 @@
         <input type="submit" class="portfolioDelete" value="Delete" />
       </form>
     </div>
-
     <table id="PLSection">
       <tr>
         <td class="positionTitle">Position Size:</td>
@@ -222,7 +221,6 @@
       .getElementById('portfolioEditting')
       .addEventListener('click', function () {
         localStorage.activeFocus = 'portfolioEditting';
-
       });
     if (localStorage.activeFocus) {
       document.getElementById(localStorage.activeFocus).focus();
