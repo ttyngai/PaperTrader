@@ -85,7 +85,9 @@ async function getChartData(ticker, candleTime, howManyCandles) {
         if (timestamp[i] && low[i] && open[i] && close[i] && high[i]) {
           let bar = [];
           let time = new Date(timestamp[i] * 1000);
-          let hour = time.getHours();
+          // For user current timezone
+          let offset = new Date().getTimezoneOffset() / 60;
+          let hour = time.getUTCHours() - offset;
           let minute = time.getMinutes();
           if (minute < 10) {
             minute = `0${minute}`;
@@ -103,43 +105,10 @@ async function getChartData(ticker, candleTime, howManyCandles) {
           array.push(bar);
         }
       }
-
-      // // Enable this function to add lines after the market price
-
-      // addDotsAfter()
-      // let arrayDataLength = array.length;
-      // for (i = 0; i < 5; i++) {
-      //   let bar = [];
-      //   let time = new Date(
-      //     (timestamp[arrayDataLength - 1] + 60 * (i + 1)) * 1000
-      //   );
-      //   let hour = time.getHours();
-      //   let minute = time.getMinutes();
-      //   if (minute < 10) {
-      //     minute = `0${minute}`;
-      //   }
-      //   if (hour < 10) {
-      //     hour = `0${hour}`;
-      //   }
-      //   let newTime = `${hour}:${minute}`;
-      //   let lastDots;
-      //   if (close[howManyCandles - 1] > open[howManyCandles - 1]) {
-      //     lastDots = 0.001;
-      //   } else {
-      //     lastDots = -0.001;
-      //   }
-      //   bar.push(newTime);
-      //   bar.push(open[howManyCandles - 1]);
-      //   bar.push(open[howManyCandles - 1]);
-      //   bar.push(open[howManyCandles - 1] + lastDots);
-      //   bar.push(open[howManyCandles - 1]);
-      //   bar.push(open[howManyCandles - 1]);
-      //   array.push(bar);
-      // }
     })
     .catch((err) => console.log(err));
   // for testing undefined charts
-  // console.log(array);
+  console.log(array);
 
   return array;
 }
