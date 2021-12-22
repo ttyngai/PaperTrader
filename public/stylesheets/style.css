@@ -101,6 +101,7 @@ a {
   width: 100vw;
   left: 50vw;
   max-width: 1024px;
+  margin: auto;
 }
 /* #stockContent {
   display: flex;
