@@ -514,6 +514,9 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
 #buySellPortfolioBox {
   width: 35vw;
   max-width: 16rem;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 .detailInfo {
