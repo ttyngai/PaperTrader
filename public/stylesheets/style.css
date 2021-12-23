@@ -27,7 +27,12 @@ html {
 
 body {
   background-color: var(--background);
-  /* margin: auto; */
+}
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
 }
 
 nav {
@@ -89,7 +94,7 @@ a {
 #watchListContent {
   width: 100vw;
   max-width: 800px;
-  margin: auto;
+  /* margin: auto; */
 }
 
 tr {
@@ -125,11 +130,18 @@ table {
 #stockName {
   text-align: left;
   color: var(--stockYellow);
-  font-size: 1.2rem;
+  font-size: 1rem;
+  max-width: 8rem;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
   padding: 0 0 0 0.5rem;
+}
+
+.stockContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #eachStock {
