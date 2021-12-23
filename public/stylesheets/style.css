@@ -6,6 +6,7 @@
   --lightGrey: lightgrey;
   --stockYellow: rgb(221, 188, 0);
   --mustardYellow: rgb(204, 204, 77);
+  --darkYellow: rgb(151, 151, 1);
   --transparentYellow: rgba(221, 188, 0, 0.37);
   --stockGreen: rgb(115, 255, 0);
   --oldStockGreen: rgb(0, 100, 0);
@@ -147,13 +148,15 @@ table {
 }
 
 .tickerButton {
-  background-color: black;
+  /* border: 1px solid var(--darkYellow); */
   border: none;
+  border-radius: 0.5rem;
+  background-color: black;
   width: 100%;
   max-width: 10rem;
   height: 100%;
-  text-align: left;
-  padding: 0 1rem 0 1rem;
+  text-align: center;
+  padding: 0.25rem 1rem 0.25rem 1rem;
 }
 .tickerButton:hover {
   background-color: var(--stockYellow);
@@ -199,7 +202,6 @@ table {
 #removeStock {
   background-color: transparent;
   color: var(--greyFont);
-  /* font-size: 0.7em; */
   text-align: center;
   vertical-align: middle;
   border-radius: 2rem;
