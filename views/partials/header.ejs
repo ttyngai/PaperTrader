@@ -18,20 +18,16 @@
   <body>
 <section class="navPadding">
     <nav>
-      <a class="navTitle navButtons" href="/"  >PaperTrader Live</a>
-
+      <a class="navTitle navButtons" href="/">PaperTrader Live</a>
       <% if (user) { %>
         <a  href="/memberships" <%-   req.user.premium ? 'class="activeNav navButtons"':'class="basicUser navButton"'  %>  ><%- req.user.premium? 'Premium':'Basic'  %></a>
-
       <a  href="/stocks" <%-   title === 'Stocks' ? 'class="activeNav navButtons"':'class="navButtons"'  %>  >Stocks</a>
-
       <a  href="/portfolios" <%- title === 'Portfolios' ? 'class="navButtons activeNav"':'class="navButtons"'%>> Portfolio</a>
       <a class="navButtons" href="/logout">Logout</a>
       <% } else { %>
       <a class="navButtons formButton" href="/auth/google" class="login">Login</a>
       <% } %>
     </nav>
-
   </section>
   </body>
 </html>
