@@ -3,7 +3,6 @@ const fetch = require('node-fetch');
 module.exports = {
   getStock,
   getChartData,
-  // checkStock,
 };
 
 async function getStock(stocksInput, simpleCheck) {
@@ -63,21 +62,6 @@ async function getStock(stocksInput, simpleCheck) {
   console.log('exist?', exist);
   return simpleCheck ? exist : stocksOutput;
 }
-
-// async function checkStock(ticker) {
-//   let exist;
-//   await fetch(
-//     `https://query1.finance.yahoo.com/v7/finance/quote?lang=en-US&region=US&corsDomain=finance.yahoo.com&symbols=${ticker}`
-//   )
-//     .then((res) => res.json())
-//     .then((quote) => {
-//       if (quote.quoteResponse.result.length !== 0) {
-//         exist = quote.quoteResponse.result[0].regularMarketPrice;
-//       }
-//     })
-//     .catch((err) => console.log(err));
-//   return exist;
-// }
 
 async function getChartData(ticker, candleTime, howManyCandles) {
   let array = [];
