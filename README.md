@@ -1,16 +1,15 @@
 ## **PaperTrader Live**
 
-PaperTrader is a training tool for people to learn the basics of trading.
+PaperTrader is a training tool for experiencing the stock market without any monetary risk.
 
-**Please click this linke to start the game:**
-
+**Please click this linke to start the app:**
 https://papertraderlive.herokuapp.com/
 
-![Game of BlackJack](https://i.imgur.com/kxdlxxM.png 'ScreenShot of app use')
+![Watchlist](https://i.imgur.com/kxdlxxM.png 'ScreenShot of watchlist')
 
-![Game of BlackJack](https://i.imgur.com/NLM4xne.png 'ScreenShot of app use')
+![Chart](https://i.imgur.com/NLM4xne.png 'ScreenShot of stock chart')
 
-![Game of BlackJack](https://i.imgur.com/VCrVfQi.png 'ScreenShot of app use')
+![Portfolio](https://i.imgur.com/VCrVfQi.png 'ScreenShot of portfolio')
 
 **Tehcnologies used:**
 
