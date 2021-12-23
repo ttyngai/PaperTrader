@@ -20,6 +20,7 @@
     <thead>
       <tr id="stockListTitle">
         <th class="tickerLeft tickerTitle">Ticker</th>
+
         <th></th>
         <th>%Chg</th>
         <th>Price</th>
@@ -39,7 +40,7 @@
 
         <% if (s.shortName){ %>
         <td class="stockListRight" id="stockName">
-          <%= s.shortName.substring(0,20)%>
+          <%= s.shortName.toUpperCase().substring(0,20)%>
         </td>
         <%} else {%>
         <td>n/a</td>
