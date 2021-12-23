@@ -21,7 +21,6 @@ html {
   font-size: 0.8rem;
 }
 * {
-  /* box-sizing: border-box; */
   font-family: Helvetica;
   color: white;
 }
@@ -33,19 +32,16 @@ body {
 nav {
   display: flex;
   align-items: center;
-  /* justify-content: right; */
   background-color: var(--nav);
   width: 100vw;
   height: 2rem;
   text-align: right;
-  position: fixed;
   float: top;
   padding: 1.5rem;
   z-index: 2;
 }
 
 .navTitle {
-  /* position: absolute; */
   left: 2vw;
   padding: 1rem;
   color: var(--stockYellow);
@@ -80,9 +76,6 @@ nav {
 .basicUser:hover {
   color: var(--stockYellow);
 }
-.navPadding {
-  padding-bottom: 3rem;
-}
 a {
   text-decoration: none;
 }
@@ -96,7 +89,6 @@ tr {
 .tickerLeft {
   text-align: left;
   font-weight: bold;
-  padding: 0.2rem;
 }
 .ticker {
   padding: 0 0 0 0.5rem;
@@ -154,8 +146,7 @@ table {
 
 .tickerButton {
   border: none;
-  /* border: 1px solid var(--darkYellow); */
-  border-radius: 0.25rem;
+
   background-color: var(--tickerYellow);
   width: 100%;
   max-width: 8rem;
@@ -177,19 +168,19 @@ table {
   text-align: center;
 }
 .search {
+  border: 1px solid var(--stockYellow);
   width: 15rem;
   border-radius: 0.5rem;
-  font-size: 0.9em;
-  background-color: var(--lightGrey);
-  color: black;
+  font-size: 1em;
+  background-color: black;
+  color: var(--stockYellow);
   outline: 0;
   padding: 0.3rem 1.5rem;
-  border: none;
 }
 
 .formButton {
   background-color: black;
-  border: 0.2rem solid var(--stockYellow);
+  border: 0.1rem solid var(--stockYellow);
   color: var(--stockYellow);
   border-radius: 0.5rem;
   padding: 0.1em 0.5em;
@@ -208,8 +199,8 @@ table {
   color: var(--greyFont);
   text-align: center;
   vertical-align: middle;
-  border-radius: 2rem;
-  padding: 0.2em 0.6em;
+  border-radius: 0.5rem;
+  outline: 0;
   border: none;
 }
 #removeStock:hover {
@@ -561,7 +552,6 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
   }
 
   .tickerButton {
-    /* padding: 0.5rem 1rem; */
     font-size: 2rem;
   }
 

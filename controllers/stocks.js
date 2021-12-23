@@ -8,19 +8,15 @@ module.exports = {
   create,
   hide,
 };
-
 async function index(req, res) {
   // pass in array of tickers
-
   Stock.find({ user: req.user }, async function (err, stocksFound) {
     // Sort alphabetically
     stocksFound.sort(function (a, b) {
       if (a.ticker > b.ticker) return 1;
       if (a.ticker < b.ticker) return -1;
     });
-
     const stocks = await StockPrice.getStock(stocksFound);
-    console.log('stocks found', stocks);
     // Check if all are hidden(empty), allow watchlist to show "No symbols added"
     let listNotEmpty = false;
     stocks.forEach(function (s) {
@@ -28,7 +24,6 @@ async function index(req, res) {
         listNotEmpty = true;
       }
     });
-
     res.render('stocks/index', { title: 'Stocks', stocks, listNotEmpty, req });
   });
 }
