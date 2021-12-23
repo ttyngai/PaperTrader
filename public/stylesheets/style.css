@@ -7,6 +7,7 @@
   --stockYellow: rgb(221, 188, 0);
   --mustardYellow: rgb(204, 204, 77);
   --darkYellow: rgb(151, 151, 1);
+  --tickerYellow: rgba(255, 220, 24, 0.144);
   --transparentYellow: rgba(221, 188, 0, 0.37);
   --stockGreen: rgb(115, 255, 0);
   --oldStockGreen: rgb(0, 100, 0);
@@ -86,7 +87,7 @@ a {
   text-decoration: none;
 }
 #watchListContent {
-  width: 95vw;
+  width: 100vw;
   max-width: 800px;
 }
 tr {
@@ -153,14 +154,13 @@ table {
 
 .tickerButton {
   border: none;
-  border: 1px solid var(--darkYellow);
+  /* border: 1px solid var(--darkYellow); */
   border-radius: 0.25rem;
-  background-color: black;
+  background-color: var(--tickerYellow);
   width: 100%;
   max-width: 8rem;
   height: 100%;
   text-align: center;
-  /* padding: 0.5rem 1rem; */
   font-size: 1.5rem;
 }
 .tickerButton:hover {
