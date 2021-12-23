@@ -66,8 +66,7 @@ nav {
 }
 .navButtons:hover {
   color: white;
-  border-bottom: 0.2rem solid var(--stockYellow);
-
+  border-bottom: 0.1rem solid var(--stockYellow);
   text-decoration: none;
   transition: all 0.2s ease-in-out;
 }
@@ -75,20 +74,12 @@ nav {
   color: var(--stockYellow);
   /* font-weight: bold; */
 }
-
-.navUser {
-  font-size: 0.7rem;
-  color: var(--greyFont);
-}
-
 .basicUser {
   color: var(--greyFont);
 }
 .basicUser:hover {
   color: var(--stockYellow);
-  text-decoration: none;
 }
-
 .navPadding {
   padding-bottom: 3rem;
 }
