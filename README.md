@@ -1,14 +1,22 @@
-PaperTrader Live
+## **PaperTrader Live**
 
-Screenshots
+PaperTrader is a training tool for people to learn the basics of trading.
 
-technologies used
+**Please click this linke to start the game:**
 
-getting started
+https://papertraderlive.herokuapp.com/
 
-next step
+![Game of BlackJack](https://i.imgur.com/kxdlxxM.png 'ScreenShot of app use')
 
-PaperTrader is a training tool for
+![Game of BlackJack](https://i.imgur.com/NLM4xne.png 'ScreenShot of app use')
+
+![Game of BlackJack](https://i.imgur.com/VCrVfQi.png 'ScreenShot of app use')
+
+**Tehcnologies used:**
+
+- MongoDB
+- Express.js
+- Node.js
 
 Highlights:
 

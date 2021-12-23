@@ -2,14 +2,15 @@ const fetch = require('node-fetch');
 
 module.exports = {
   getStock,
-  // checkStock,
   getChartData,
+  // checkStock,
 };
 
 async function getStock(stocksInput, simpleCheck) {
   // If single stock, convert into string
   let tickers;
   let tickersString = [];
+  let exist = false;
   if (typeof stocksInput !== 'string') {
     // push to single string for one call
     stocksInput.forEach(function (s) {
@@ -20,46 +21,46 @@ async function getStock(stocksInput, simpleCheck) {
     tickers = stocksInput;
   }
   let stocksOutput = [];
-  let exist;
   if (tickers.length !== 0) {
     await fetch(
       `https://query1.finance.yahoo.com/v7/finance/quote?lang=en-US&region=US&corsDomain=finance.yahoo.com&symbols=${tickers}`
     )
       .then((res) => res.json())
       .then((quote) => {
+        //below
         // simple check if stock exist
-        if (simpleCheck && quote.quoteResponse.result.length !== undefined) {
-          exist = true;
 
-          return res.redirect('/stocks');
-        } else {
+        if (!simpleCheck && quote.quoteResponse.result[0]) {
+          stockInfo = quote.quoteResponse.result.forEach(function (s, idx) {
+            //Check and match both stocks
+            s._id = stocksInput[idx]._id;
+            s.hide = stocksInput[idx].hide;
+            // Switch between premarket(09:00-14:30UTC)/regularmarket(14:30-21:00UTC)/afterhours(21:00-01:00UTC)
+            const hour = new Date().getUTCHours();
+            const minute = new Date().getUTCMinutes();
+            const minuteFraction = minute / 60;
+            const hourNumber = hour + minuteFraction;
+            // premarket(09:00-14:30UTC)
+            if (hourNumber >= 9 && hourNumber < 14.5) {
+              s.preRegAfterCombinedPrice = s.preMarketPrice;
+            }
+            //  regularmarket(14:30-21:00UTC)
+            else if (hourNumber >= 14.5 && hourNumber < 21) {
+              s.preRegAfterCombinedPrice = s.regularMarketPrice;
+            }
+            //  afterhours(21:00-08:59UTC)
+            else if (hourNumber >= 21 || hourNumber < 9) {
+              s.preRegAfterCombinedPrice = s.postMarketPrice;
+            }
+            stocksOutput.push(s);
+          });
+        } else if (simpleCheck && quote.quoteResponse.result[0]) {
+          exist = true;
         }
-        stockInfo = quote.quoteResponse.result.forEach(function (s, idx) {
-          //Check and match both stocks
-          s._id = stocksInput[idx]._id;
-          s.hide = stocksInput[idx].hide;
-          // Switch between premarket(09:00-14:30UTC)/regularmarket(14:30-21:00UTC)/afterhours(21:00-01:00UTC)
-          const hour = new Date().getUTCHours();
-          const minute = new Date().getUTCMinutes();
-          const minuteFraction = minute / 60;
-          const hourNumber = hour + minuteFraction;
-          // premarket(09:00-14:30UTC)
-          if (hourNumber >= 9 && hourNumber < 14.5) {
-            s.preRegAfterCombinedPrice = s.preMarketPrice;
-          }
-          //  regularmarket(14:30-21:00UTC)
-          else if (hourNumber >= 14.5 && hourNumber < 21) {
-            s.preRegAfterCombinedPrice = s.regularMarketPrice;
-          }
-          //  afterhours(21:00-08:59UTC)
-          else if (hourNumber >= 21 || hourNumber < 9) {
-            s.preRegAfterCombinedPrice = s.postMarketPrice;
-          }
-          stocksOutput.push(s);
-        });
-      })
-      .catch((err) => console.log(err));
+      });
   }
+  console.log('simple check?', simpleCheck);
+  console.log('exist?', exist);
   return simpleCheck ? exist : stocksOutput;
 }
 
