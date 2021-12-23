@@ -95,14 +95,13 @@ a {
   width: 100vw;
   max-width: 800px;
 }
-
 tr {
   text-align: right;
 }
 .tickerLeft {
   text-align: left;
   font-weight: bold;
-  padding: 0.2rem;
+  padding: 0.5rem;
 }
 .ticker {
   padding: 0 0 0 0.5rem;
