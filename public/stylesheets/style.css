@@ -61,20 +61,20 @@ nav {
 }
 
 .navButtons {
-  padding: 0 1rem;
+  padding: 0 0.5rem;
   color: var(--whiteFont);
 }
 .navButtons:hover {
   color: white;
   border-bottom: 0.2rem solid var(--stockYellow);
-  padding: 0 1rem;
+  /* padding: 0 1rem; */
   text-decoration: none;
   transition: all 0.2s ease-in-out;
 }
 .activeNav {
   color: var(--stockYellow);
   font-weight: bold;
-  padding: 0 1rem;
+  /* padding: 0 0.5rem; */
 }
 
 .navUser {
@@ -84,7 +84,7 @@ nav {
 
 .basicUser {
   color: var(--greyFont);
-  padding: 0 1rem 0 0;
+  /* padding: 0 1rem 0 0; */
 }
 .basicUser:hover {
   color: var(--stockYellow);
@@ -571,20 +571,18 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
   body {
     font-size: 1.2rem;
   }
-  .navButton,
+  /* .navButton,
   .activeNav {
     padding: 0 1rem;
-  }
-  .activeNav:hover {
+  } */
+  /* .activeNav:hover {
     padding: 0 1rem;
-  }
+  } */
   #listPortfolio {
     padding: 0.5rem;
   }
-  .navUser {
+  /* .navUser {
     font-size: 0.8rem;
     padding: 0 0.5rem;
-  }
-  #stockName {
-  }
+  } */
 }
