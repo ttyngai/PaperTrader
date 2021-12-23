@@ -27,7 +27,7 @@ html {
 
 body {
   background-color: var(--background);
-  margin: auto;
+  /* margin: auto; */
 }
 
 nav {
@@ -88,7 +88,7 @@ a {
 }
 #watchListContent {
   width: 100vw;
-  max-width: 1024px;
+  max-width: 800px;
   margin: auto;
 }
 
@@ -96,7 +96,7 @@ tr {
   text-align: right;
 }
 .tickerLeft {
-  text-align: center;
+  text-align: left;
   font-weight: bold;
 }
 .ticker {
@@ -155,7 +155,7 @@ table {
   max-width: 8rem;
   height: 100%;
   text-align: center;
-  padding: 0.5rem 1rem;
+  /* padding: 0.5rem 1rem; */
   font-size: 1.5rem;
 }
 .tickerButton:hover {
@@ -234,7 +234,7 @@ table {
 }
 .stockInfoTable {
   width: 95vw;
-  max-width: 1024px;
+  max-width: 800px;
 }
 
 #portfolioTable {
@@ -277,7 +277,7 @@ table {
 }
 .holdingsList {
   width: 95vw;
-  max-width: 1024px;
+  max-width: 800px;
 }
 .portfolioList {
   text-align: right;
@@ -301,7 +301,7 @@ table {
   display: flex;
   flex-direction: column;
   width: 95vw;
-  max-width: 1024px;
+  max-width: 800px;
 }
 .portfolioEditContainer {
   padding: 0.5rem 0 0 0;
@@ -544,7 +544,7 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
   }
 }
 
-@media (min-width: 478px) {
+@media (min-width: 640px) {
   body {
     font-size: 1.2rem;
   }
@@ -553,5 +553,14 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
   }
   .navButton:hover {
     padding: 0 0.5rem;
+  }
+
+  .tickerButton {
+    /* padding: 0.5rem 1rem; */
+    font-size: 2rem;
+  }
+
+  #stockName {
+    font-size: 1.4rem;
   }
 }
