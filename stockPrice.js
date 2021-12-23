@@ -28,8 +28,11 @@ async function getStock(stocksInput, simpleCheck) {
       .then((res) => res.json())
       .then((quote) => {
         // simple check if stock exist
-        if (simpleCheck && quote.quoteResponse.result.length !== 0) {
+        if (simpleCheck && quote.quoteResponse.result.length !== undefined) {
           exist = true;
+
+          return res.redirect('/stocks');
+        } else {
         }
         stockInfo = quote.quoteResponse.result.forEach(function (s, idx) {
           //Check and match both stocks
