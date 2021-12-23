@@ -22,10 +22,6 @@ function create(req, res) {
   portfolio.userName = req.user.name;
   portfolio.userAvatar = req.user.avatar;
   portfolio.save(function (err) {
-    if (err) {
-      console.log(err);
-      return res.redirect('/portfolios/new');
-    }
     res.redirect(`/portfolios`);
   });
 }

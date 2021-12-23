@@ -197,8 +197,8 @@ table {
 }
 
 #removeStock {
-  background-color: black;
-  color: white;
+  background-color: transparent;
+  color: var(--greyFont);
   /* font-size: 0.7em; */
   text-align: center;
   vertical-align: middle;
@@ -208,7 +208,7 @@ table {
 }
 #removeStock:hover {
   background-color: var(--stockRed);
-
+  color: white;
   transition: all 0s ease-in-out;
 }
 
