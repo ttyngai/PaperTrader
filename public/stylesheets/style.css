@@ -67,14 +67,13 @@ nav {
 .navButtons:hover {
   color: white;
   border-bottom: 0.2rem solid var(--stockYellow);
-  /* padding: 0 1rem; */
+
   text-decoration: none;
   transition: all 0.2s ease-in-out;
 }
 .activeNav {
   color: var(--stockYellow);
-  font-weight: bold;
-  /* padding: 0 0.5rem; */
+  /* font-weight: bold; */
 }
 
 .navUser {
@@ -84,7 +83,6 @@ nav {
 
 .basicUser {
   color: var(--greyFont);
-  /* padding: 0 1rem 0 0; */
 }
 .basicUser:hover {
   color: var(--stockYellow);
@@ -103,17 +101,12 @@ a {
   max-width: 1024px;
   margin: auto;
 }
-/* #stockContent {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-} */
+
 tr {
   text-align: right;
 }
 .tickerLeft {
   text-align: center;
-  /* border-right: 0.1rem solid var(--greyFont); */
   font-weight: bold;
 }
 .ticker {
@@ -329,7 +322,6 @@ table {
   color: black;
   transform: scale(0.75);
   border-radius: 0.25rem;
-  /* margin: 0rem 0 0 -3rem; */
   font-size: 1.5rem;
 }
 
@@ -358,7 +350,6 @@ table {
   border-radius: 0.25rem;
   transform: scale(0.75);
   font-size: 1.5rem;
-  /* margin: 0 0 0 -0.35rem; */
 }
 
 .portfolioDelete:hover {
@@ -435,12 +426,7 @@ table {
 .positionTitle {
   padding: 0 0.5rem 0 0;
 }
-/* 
-#portfolioControl {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-} */
+
 input[type='text']#portfolioEditting::-webkit-input-placeholder {
   color: var(--stockYellow);
 }
@@ -571,18 +557,10 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
   body {
     font-size: 1.2rem;
   }
-  /* .navButton,
-  .activeNav {
-    padding: 0 1rem;
-  } */
-  /* .activeNav:hover {
-    padding: 0 1rem;
-  } */
-  #listPortfolio {
-    padding: 0.5rem;
-  }
-  /* .navUser {
-    font-size: 0.8rem;
+  .navButton {
     padding: 0 0.5rem;
-  } */
+  }
+  .navButton:hover {
+    padding: 0 0.5rem;
+  }
 }
