@@ -28,12 +28,6 @@ html {
 body {
   background-color: var(--background);
 }
-.pageContainer {
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  justify-content: center;
-}
 
 nav {
   display: flex;
@@ -92,7 +86,7 @@ a {
   text-decoration: none;
 }
 #watchListContent {
-  width: 100vw;
+  width: 98vw;
   max-width: 800px;
 }
 tr {
@@ -101,7 +95,7 @@ tr {
 .tickerLeft {
   text-align: left;
   font-weight: bold;
-  padding: 0.5rem;
+  padding: 0.2rem;
 }
 .ticker {
   padding: 0 0 0 0.5rem;
