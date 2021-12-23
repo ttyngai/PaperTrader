@@ -48,9 +48,7 @@
           </td>
 
           <% if (s.shortName){ %>
-          <td class="stockListRight" id="stockName">
-            <%= s.shortName.toUpperCase()%>
-          </td>
+          <td class="stockListRight" id="stockName"><%= s.shortName%></td>
           <%} else {%>
           <td>n/a</td>
           <%} %> <% if (s.regularMarketChangePercent) {%>
