@@ -160,8 +160,8 @@ table {
   transition: all 0.2s ease-in-out;
 }
 #searchForm {
-  padding: 1rem;
-  text-align: right;
+  padding: 1rem 2rem;
+  text-align: left;
 }
 #portfolioForm {
   padding: 2rem 0 1rem 0;
