@@ -213,7 +213,7 @@ table {
   color: black;
 }
 .removeButtonSlot {
-  padding: 0 1rem;
+  text-align: center;
 }
 
 #noStock {
