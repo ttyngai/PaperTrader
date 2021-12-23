@@ -80,20 +80,20 @@ async function create(req, res) {
   const duplicate = await Stock.findOne({
     $and: [{ ticker: req.body.ticker }, { user: req.user._id }],
   }).catch((err) => console.log('Duplicate Error', err));
+  // undefined
   console.log('checking22', check);
+
   if (check && !duplicate) {
+    console.log('Is a stock and not duplicate!');
     const stock = new Stock(req.body);
     stock.user = req.user._id;
     stock.save(function (err) {
-      if (err) {
-        console.log(err);
-        return res.redirect('/stocks');
-      }
       res.redirect(`/stocks`);
     });
   }
   //If duplicated, sets hide to false
   if (duplicate) {
+    console.log('duplicate!', duplicate);
     Stock.findOne(
       {
         $and: [{ ticker: req.body.ticker }, { user: req.user._id }],
@@ -105,8 +105,4 @@ async function create(req, res) {
       }
     );
   }
-
-  setTimeout(function () {
-    res.redirect(`/stocks`);
-  }, 500);
 }
