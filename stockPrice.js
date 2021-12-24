@@ -91,8 +91,7 @@ async function getChartData(ticker, interval, range) {
       let low = object.indicators.quote[0].low;
       let close = object.indicators.quote[0].close;
       let arrayLength = 0;
-      let maxCandles = 450;
-      for (i = 0; i < maxCandles; i++) {
+      for (i = 0; i < timestamp.length; i++) {
         // Check if any data is null
         if (timestamp[i] && low[i] && open[i] && close[i] && high[i]) {
           let row = [];
