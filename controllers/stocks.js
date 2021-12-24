@@ -16,7 +16,7 @@ async function index(req, res) {
       if (a.ticker > b.ticker) return 1;
       if (a.ticker < b.ticker) return -1;
     });
-    const stocks = await StockPrice.getStock(stocksFound);
+    const stocks = await StockPrice.getStock(stocksFound, false);
     // Check if all are hidden(empty), allow watchlist to show "No symbols added"
     let listNotEmpty = false;
     stocks.forEach(function (s) {
@@ -51,7 +51,7 @@ async function show(req, res) {
       let obj = {};
       obj['ticker'] = stock.ticker;
       ticker.push(obj);
-      const quote = await StockPrice.getStock(ticker);
+      const quote = await StockPrice.getStock(ticker, false);
       //Get charting data
       const chartParsed = await StockPrice.getChartData(stock.ticker, 1, 61);
       res.render('stocks/show', {

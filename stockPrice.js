@@ -58,8 +58,9 @@ async function getStock(stocksInput, simpleCheck) {
         }
       });
   }
-  console.log('simple check?', simpleCheck);
-  console.log('exist?', exist);
+  console.log('Simple Check: ', simpleCheck);
+  console.log('isExisting: ', exist);
+  console.log('FunctionOutput: ', simpleCheck ? exist : stocksOutput);
   return simpleCheck ? exist : stocksOutput;
 }
 
