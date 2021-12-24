@@ -590,4 +590,8 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
   #stockName {
     font-size: 1.4rem;
   }
+
+  .formButton {
+    padding: 0.23em 0.5em;
+  }
 }
