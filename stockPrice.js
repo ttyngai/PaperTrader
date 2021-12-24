@@ -19,6 +19,7 @@ async function getStock(stocksInput, simpleCheck) {
   } else {
     tickers = stocksInput;
   }
+
   // Fetch stock from yahoo finance
   let stocksOutput = [];
   if (tickers.length !== 0) {
@@ -31,6 +32,8 @@ async function getStock(stocksInput, simpleCheck) {
 
         if (!simpleCheck && quote.quoteResponse.result[0]) {
           stockInfo = quote.quoteResponse.result.forEach(function (s, idx) {
+            // Check for futures market type symbol
+            let isFutures = s.symbol.includes('=');
             //Check and match both stocks, then apply _id and if it is hidden
             s._id = stocksInput[idx]._id;
             s.hide = stocksInput[idx].hide;
@@ -40,8 +43,12 @@ async function getStock(stocksInput, simpleCheck) {
             const minute = new Date().getUTCMinutes();
             const minuteFraction = minute / 60;
             const hourNumber = hour + minuteFraction;
+            // Check for futures first
+            if (isFutures) {
+              s.preRegAfterCombinedPrice = s.regularMarketPrice;
+            }
             // premarket(09:00-14:30UTC)
-            if (hourNumber >= 9 && hourNumber < 14.5) {
+            else if (hourNumber >= 9 && hourNumber < 14.5) {
               s.preRegAfterCombinedPrice = s.preMarketPrice
                 ? s.preMarketPrice
                 : s.postMarketPrice;
