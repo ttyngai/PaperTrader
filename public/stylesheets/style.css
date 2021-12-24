@@ -182,7 +182,6 @@ table {
   border: 0.1rem solid var(--stockYellow);
   color: var(--stockYellow);
   border-radius: 0.5rem;
-  padding: 0.28em 0.5em;
   font-weight: bold;
 }
 .formButton:hover {
@@ -585,9 +584,5 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
 
   #stockName {
     font-size: 1.4rem;
-  }
-
-  .formButton {
-    padding: 0.23em 0.5em;
   }
 }

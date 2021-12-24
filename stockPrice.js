@@ -6,7 +6,7 @@ module.exports = {
 };
 
 async function getStock(stocksInput, simpleCheck) {
-  // If single stock, convert into string
+  // Converts into string
   let tickers;
   let tickersString = [];
   let exist = false;
@@ -19,6 +19,7 @@ async function getStock(stocksInput, simpleCheck) {
   } else {
     tickers = stocksInput;
   }
+  // Fetch stock from yahoo finance
   let stocksOutput = [];
   if (tickers.length !== 0) {
     await fetch(
@@ -26,12 +27,11 @@ async function getStock(stocksInput, simpleCheck) {
     )
       .then((res) => res.json())
       .then((quote) => {
-        //below
         // simple check if stock exist
 
         if (!simpleCheck && quote.quoteResponse.result[0]) {
           stockInfo = quote.quoteResponse.result.forEach(function (s, idx) {
-            //Check and match both stocks
+            //Check and match both stocks, then apply _id and if it is hidden
             s._id = stocksInput[idx]._id;
             s.hide = stocksInput[idx].hide;
             // Switch between premarket(09:00-14:30UTC)/regularmarket(14:30-21:00UTC)/afterhours(21:00-01:00UTC)
@@ -58,15 +58,13 @@ async function getStock(stocksInput, simpleCheck) {
         }
       });
   }
-  console.log('Simple Check: ', simpleCheck);
-  console.log('isExisting: ', exist);
-  console.log('FunctionOutput: ', simpleCheck ? exist : 'Output stocks');
   return simpleCheck ? exist : stocksOutput;
 }
 
 async function getChartData(ticker, candleTime, howManyCandles) {
   let array = [];
   let object;
+  // Fetch stock charting data from Yahoo finance
   await fetch(
     `https://query1.finance.yahoo.com/v7/finance/chart/${ticker}?range=${howManyCandles}m&interval=${candleTime}m`
   )
@@ -79,7 +77,7 @@ async function getChartData(ticker, candleTime, howManyCandles) {
       let low = object.indicators.quote[0].low;
       let close = object.indicators.quote[0].close;
       for (i = 0; i < howManyCandles; i++) {
-        // below checks for null data
+        // Check if any data is null
         if (timestamp[i] && low[i] && open[i] && close[i] && high[i]) {
           let bar = [];
           let time = new Date(timestamp[i] * 1000);
@@ -102,13 +100,9 @@ async function getChartData(ticker, candleTime, howManyCandles) {
           bar.push(open[howManyCandles - 1]);
           array.push(bar);
           //
-          console.log('last candle check', open[howManyCandles - 1]);
         }
       }
     })
     .catch((err) => console.log(err));
-  // for testing undefined charts
-  console.log(array);
-
   return array;
 }

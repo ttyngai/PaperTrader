@@ -86,11 +86,11 @@
   <table class="holdingsList">
     <thead>
       <tr class="portfolioList portfolioListTitle">
-        <th class="tickerLeft tickerTitle">Stock</th>
+        <th class="tickerLeft tickerTitle">Ticker</th>
         <th>Share</th>
         <th>Price</th>
-        <th>%Gain</th>
-        <th>Profit</th>
+        <th>%P/L</th>
+        <th>$P/L</th>
         <th>Avg Cost</th>
         <th>Size</th>
       </tr>
@@ -180,11 +180,11 @@
   <table class="holdingsList">
     <thead>
       <tr class="portfolioList portfolioListTitle">
-        <th class="tickerLeft tickerTitle">Stock</th>
+        <th class="tickerLeft tickerTitle">Ticker</th>
         <th>Action</th>
         <th>Shares</th>
         <th>Transact Price</th>
-        <th>Date</th>
+        <th>Date & Time</th>
       </tr>
     </thead>
     <tbody>
@@ -200,7 +200,10 @@
         <%} %>
         <td><%= Math.abs(t.shares) %></td>
         <td><%= t.price.toFixed(2) %></td>
-        <td><%= t.createdAt.toLocaleDateString() %></td>
+        <td>
+          <%= t.createdAt.toLocaleDateString() %> <%=
+          t.createdAt.toLocaleTimeString('en-GB') %>
+        </td>
       </tr>
       <% }); %>
     </tbody>
