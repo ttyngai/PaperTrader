@@ -305,7 +305,7 @@ table {
   max-width: 800px;
 }
 .portfolioEditContainer {
-  padding: 0.5rem 0 0 0;
+  /* padding: 0.5rem 0 0.5rem 0; */
 }
 
 .portfolioEdit {
@@ -316,7 +316,7 @@ table {
   border-radius: 0.5rem;
   font-size: 1.5rem;
   z-index: -1;
-  transform: translateX(-2.8rem) scale(0.75) translateY(0.1rem);
+  /* transform: scale(0.75); */
 }
 .portfolioEdit:hover {
   background-color: var(--stockYellow);
@@ -326,10 +326,11 @@ table {
 
 .portfolioEditReveal {
   color: var(--stockYellow);
-  transform: translateX(-2.8rem) scale(0.75) translateY(0.1rem);
+
   transition: all 0.1s ease-in-out;
   z-index: inherit;
 }
+
 #portfolioEditting {
   background-color: black;
   border: 0.1rem solid var(--stockYellow);
@@ -355,7 +356,7 @@ table {
   border-radius: 0.5rem;
   padding: 0 0.75rem;
   font-size: 1.5rem;
-  transform: scale(0.75);
+  /* transform: scale(0.75); */
 }
 
 .portfolioDelete:hover {
@@ -363,6 +364,18 @@ table {
   color: white;
   transition: all 0.1s ease-in-out;
 }
+
+.portfolioDeleteHide {
+  background-color: black;
+  color: black;
+  border: none;
+  z-index: -1;
+}
+
+.portfolioDeleteButtonHide {
+  color: black;
+}
+
 .portfolioDeleteContainer {
   padding: 0.5rem 0 0 0;
 }
