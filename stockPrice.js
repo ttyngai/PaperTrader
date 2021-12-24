@@ -68,7 +68,7 @@ async function getStock(stocksInput, simpleCheck) {
         } else if (simpleCheck && quote.quoteResponse.result[0]) {
           exist = true;
         } else {
-          s.regularMarketPrice = 0;
+          s.preRegAfterCombinedPrice = 0;
         }
       });
   }
