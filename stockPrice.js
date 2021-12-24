@@ -61,12 +61,13 @@ async function getStock(stocksInput, simpleCheck) {
   return simpleCheck ? exist : stocksOutput;
 }
 
-async function getChartData(ticker, candleTime, howManyCandles) {
+async function getChartData(ticker, interval, range) {
   let array = [];
   let object;
+
   // Fetch stock charting data from Yahoo finance
   await fetch(
-    `https://query1.finance.yahoo.com/v7/finance/chart/${ticker}?range=${howManyCandles}m&interval=${candleTime}m`
+    `https://query1.finance.yahoo.com/v7/finance/chart/${ticker}?range=${range}&interval=${interval}`
   )
     .then((res) => res.json())
     .then(function (data) {
@@ -77,10 +78,14 @@ async function getChartData(ticker, candleTime, howManyCandles) {
       let low = object.indicators.quote[0].low;
       let close = object.indicators.quote[0].close;
       let arrayLength = 0;
-      for (i = 0; i < howManyCandles; i++) {
+      // 51 candles total
+      for (i = 0; i < 1440; i++) {
         // Check if any data is null
         if (timestamp[i] && low[i] && open[i] && close[i] && high[i]) {
           let row = [];
+
+          // Date Time section
+          // This is for 1 minuite/ 1 hour range
           let time = new Date(timestamp[i] * 1000);
           // For user current timezone
           let offset = new Date().getTimezoneOffset() / 60;
@@ -92,6 +97,8 @@ async function getChartData(ticker, candleTime, howManyCandles) {
           if (hour < 10) {
             hour = `0${hour}`;
           }
+          // Icebox more timeframes with it's timeframes
+
           let newTime = `${hour}:${minute}`;
           row.push(newTime);
           row.push(low[i]);

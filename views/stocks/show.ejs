@@ -124,6 +124,9 @@
   src="https://www.gstatic.com/charts/loader.js"
 ></script>
 <script type="text/javascript">
+  //This is for timeStamps generation parameters.
+  let timestampPerChart = 6
+let timeStampInterval = Math.floor(<%- JSON.stringify(chartParsed)%>.length/timestampPerChart)
   google.charts.load('current', { packages: ['corechart'] });
   google.charts.setOnLoadCallback(drawChart);
   function drawChart() {
@@ -140,7 +143,7 @@
       vAxis: { gridlineColor: '#393939',minorGridlines:{color:'transparent'}, textStyle: {
         color: '#FFF', fontSize:10
       }, gridlines:{count:10}},
-      hAxis: { gridlineColor: 'transparent', textStyle: { color: '#FFF',fontSize:10  }, showTextEvery: 10,  },
+      hAxis: { gridlineColor: 'transparent', textStyle: { color: '#FFF',fontSize:10  }, showTextEvery: timeStampInterval   },
       backgroundColor: 'transparent',
       candlestick: {
         risingColor: { stroke: stockGreen, strokeWidth:1,fill: stockGreen },

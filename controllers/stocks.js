@@ -53,7 +53,25 @@ async function show(req, res) {
       ticker.push(obj);
       const quote = await StockPrice.getStock(ticker, false);
       //Get charting data
-      const chartParsed = await StockPrice.getChartData(stock.ticker, 1, 61);
+      let validRanges = [
+        '1d',
+        '5d',
+        '1mo',
+        '3mo',
+        '6mo',
+        '1y',
+        '2y',
+        '5y',
+        '10y',
+        'ytd',
+        'max',
+      ];
+      const chartParsed = await StockPrice.getChartData(
+        stock.ticker,
+        `1h`,
+        `1mo`
+      );
+
       res.render('stocks/show', {
         title: 'Stocks',
         stock,
