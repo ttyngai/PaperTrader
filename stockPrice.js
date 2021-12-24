@@ -34,6 +34,7 @@ async function getStock(stocksInput, simpleCheck) {
             //Check and match both stocks, then apply _id and if it is hidden
             s._id = stocksInput[idx]._id;
             s.hide = stocksInput[idx].hide;
+
             // Switch between premarket(09:00-14:30UTC)/regularmarket(14:30-21:00UTC)/afterhours(21:00-01:00UTC)
             const hour = new Date().getUTCHours();
             const minute = new Date().getUTCMinutes();
@@ -41,11 +42,15 @@ async function getStock(stocksInput, simpleCheck) {
             const hourNumber = hour + minuteFraction;
             // premarket(09:00-14:30UTC)
             if (hourNumber >= 9 && hourNumber < 14.5) {
-              s.preRegAfterCombinedPrice = s.preMarketPrice;
+              s.preRegAfterCombinedPrice = s.preMarketPrice
+                ? s.preMarketPrice
+                : s.postMarketPrice;
             }
             //  regularmarket(14:30-21:00UTC)
             else if (hourNumber >= 14.5 && hourNumber < 21) {
-              s.preRegAfterCombinedPrice = s.regularMarketPrice;
+              s.preRegAfterCombinedPrice = s.regularMarketPrice
+                ? s.regularMarketPrice
+                : s.postMarketPrice;
             }
             //  afterhours(21:00-08:59UTC)
             else if (hourNumber >= 21 || hourNumber < 9) {
@@ -55,6 +60,8 @@ async function getStock(stocksInput, simpleCheck) {
           });
         } else if (simpleCheck && quote.quoteResponse.result[0]) {
           exist = true;
+        } else {
+          s.regularMarketPrice = 0;
         }
       });
   }
