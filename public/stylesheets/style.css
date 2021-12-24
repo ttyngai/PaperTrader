@@ -18,7 +18,7 @@
 
 html {
   font-size: 62.5%;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
 }
 * {
   font-family: Helvetica;
@@ -157,6 +157,7 @@ table {
   color: black;
   transition: all 0.1s ease-in-out;
 }
+
 #searchForm {
   padding: 0.5rem 2rem;
   text-align: left;
@@ -567,9 +568,9 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
   }
 }
 
-@media (min-width: 640px) {
+@media (min-width: 520px) {
   body {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
   }
   .navButton {
     padding: 0 0.5rem;

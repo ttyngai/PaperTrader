@@ -66,7 +66,9 @@
           <% }else {%>
           <td class="stockListRight">n/a</td>
           <% }%> <% if (s.preRegAfterCombinedPrice){ %>
-          <td><%= s.preRegAfterCombinedPrice.toFixed(2)%></td>
+          <td class="stockListRight">
+            <%= s.preRegAfterCombinedPrice.toFixed(2)%>
+          </td>
           <%} else {%>
           <td>n/a</td>
           <%} %> <% if (s.preRegAfterCombinedPrice-s.regularMarketPreviousClose)
