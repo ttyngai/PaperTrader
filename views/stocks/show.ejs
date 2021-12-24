@@ -21,6 +21,7 @@
           type="number"
           name="price"
           min="0"
+          max="1000000000"
           autocomplete="off"
           spellcheck="false"
           autocorrect="off"
@@ -29,7 +30,7 @@
           class="<%= user.premium ? 'buySellNumBox premiumPriceBox':'buySellNumBox buySellPriceBox'  %>"
           <%- (!user.premium) ? 'readonly':'' %>
           />
-          <input type="number" min="0" class="buySellNumBox" id="buySellSharesBox" name="shares" placeholder="Shares" autocomplete="off"
+          <input type="number" min="0" max="1000000000"class="buySellNumBox" id="buySellSharesBox" name="shares" placeholder="Shares" autocomplete="off"
           spellcheck="false"
           autocorrect="off"    />
         <select name="portfolioId" class="buySellNumBox" id="buySellPortfolioBox">
