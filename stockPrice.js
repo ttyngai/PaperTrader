@@ -60,7 +60,7 @@ async function getStock(stocksInput, simpleCheck) {
   }
   console.log('Simple Check: ', simpleCheck);
   console.log('isExisting: ', exist);
-  console.log('FunctionOutput: ', simpleCheck ? exist : stocksOutput);
+  console.log('FunctionOutput: ', simpleCheck ? exist : 'Output stocks');
   return simpleCheck ? exist : stocksOutput;
 }
 
