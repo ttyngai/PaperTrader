@@ -512,11 +512,17 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
   max-width: 16rem;
 }
 
-#buySellPriceBoxDollarSign {
+.buySellPriceBoxDollarSign {
   color: var(--stockYellow);
   padding: 0.5rem 0 0 0.8rem;
   font-size: 1.2rem;
   position: absolute;
+}
+.buySellToIndicator {
+  color: var(--stockYellow);
+  font-weight: bold;
+  font-size: 1.5rem;
+  padding: 0.25rem 0 0 0;
 }
 
 .premiumPriceBox {
