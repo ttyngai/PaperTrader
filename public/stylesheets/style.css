@@ -246,6 +246,9 @@ table {
   border-radius: 1rem;
   padding: 0.1em 0.5em;
   font-size: 1em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 #portfolioMod:hover {
   background-color: var(--transparentYellow);
@@ -335,6 +338,9 @@ table {
   padding-left: 1rem;
   font-size: 1.5rem;
   max-width: 15rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 #portfolioEditting:focus {
