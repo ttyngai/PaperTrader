@@ -284,6 +284,10 @@ table {
   text-align: right;
 }
 
+.portfolioOkButton {
+  padding: 0.5rem 0;
+}
+
 .transactionBorderBottom {
   border: none;
 }
@@ -374,10 +378,6 @@ table {
 
 .portfolioDeleteButtonHide {
   color: black;
-}
-
-.portfolioDeleteContainer {
-  padding: 0.5rem 0 0 0;
 }
 
 #portfolioDeleteFinal {
