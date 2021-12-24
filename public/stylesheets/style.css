@@ -304,9 +304,6 @@ table {
   width: 95vw;
   max-width: 800px;
 }
-.portfolioEditContainer {
-  /* padding: 0.5rem 0 0.5rem 0; */
-}
 
 .portfolioEdit {
   position: absolute;
@@ -316,7 +313,6 @@ table {
   border-radius: 0.5rem;
   font-size: 1.5rem;
   z-index: -1;
-  /* transform: scale(0.75); */
 }
 .portfolioEdit:hover {
   background-color: var(--stockYellow);
@@ -326,9 +322,8 @@ table {
 
 .portfolioEditReveal {
   color: var(--stockYellow);
-
   transition: all 0.1s ease-in-out;
-  z-index: inherit;
+  z-index: 1;
 }
 
 #portfolioEditting {
@@ -337,9 +332,9 @@ table {
   color: var(--stockYellow);
   border-radius: 0.25rem;
   padding-left: 1rem;
-  padding-right: 2.5rem;
+  /* padding-right: 2.5rem; */
   font-size: 1.5rem;
-  width: 25rem;
+  width: 20rem;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
