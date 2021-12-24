@@ -76,6 +76,7 @@ async function getChartData(ticker, candleTime, howManyCandles) {
       let high = object.indicators.quote[0].high;
       let low = object.indicators.quote[0].low;
       let close = object.indicators.quote[0].close;
+      let arrayLength = 0;
       for (i = 0; i < howManyCandles; i++) {
         // Check if any data is null
         if (timestamp[i] && low[i] && open[i] && close[i] && high[i]) {
@@ -97,11 +98,14 @@ async function getChartData(ticker, candleTime, howManyCandles) {
           bar.push(open[i]);
           bar.push(close[i]);
           bar.push(high[i]);
-          bar.push(open[howManyCandles - 1]);
           array.push(bar);
-          //
+          arrayLength++;
         }
       }
+      // This is to find the last price to generate a yellow line
+      array.forEach(function (bar) {
+        bar.push(array[array.length - 1][1]);
+      });
     })
     .catch((err) => console.log(err));
   return array;
