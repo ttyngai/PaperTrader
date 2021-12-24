@@ -80,7 +80,7 @@ async function getChartData(ticker, candleTime, howManyCandles) {
       for (i = 0; i < howManyCandles; i++) {
         // Check if any data is null
         if (timestamp[i] && low[i] && open[i] && close[i] && high[i]) {
-          let bar = [];
+          let row = [];
           let time = new Date(timestamp[i] * 1000);
           // For user current timezone
           let offset = new Date().getTimezoneOffset() / 60;
@@ -93,18 +93,18 @@ async function getChartData(ticker, candleTime, howManyCandles) {
             hour = `0${hour}`;
           }
           let newTime = `${hour}:${minute}`;
-          bar.push(newTime);
-          bar.push(low[i]);
-          bar.push(open[i]);
-          bar.push(close[i]);
-          bar.push(high[i]);
-          array.push(bar);
+          row.push(newTime);
+          row.push(low[i]);
+          row.push(open[i]);
+          row.push(close[i]);
+          row.push(high[i]);
+          array.push(row);
           arrayLength++;
         }
       }
-      // This is to find the last price to generate a yellow line
-      array.forEach(function (bar) {
-        bar.push(array[array.length - 1][1]);
+      // This is to find the last price (without undefined rows) to generate a yellow line
+      array.forEach(function (row) {
+        row.push(array[array.length - 1][1]);
       });
     })
     .catch((err) => console.log(err));
