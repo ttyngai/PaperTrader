@@ -79,7 +79,7 @@ async function getChartData(ticker, interval, range) {
       let close = object.indicators.quote[0].close;
       let arrayLength = 0;
       // 51 candles total
-      for (i = 0; i < 1440; i++) {
+      for (i = 0; i < 200; i++) {
         // Check if any data is null
         if (timestamp[i] && low[i] && open[i] && close[i] && high[i]) {
           let row = [];

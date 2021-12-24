@@ -68,8 +68,8 @@ async function show(req, res) {
       ];
       const chartParsed = await StockPrice.getChartData(
         stock.ticker,
-        `1h`,
-        `1mo`
+        `1m`,
+        `1d`
       );
 
       res.render('stocks/show', {
