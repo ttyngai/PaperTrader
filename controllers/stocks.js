@@ -52,7 +52,7 @@ async function show(req, res) {
       obj['ticker'] = stock.ticker;
       ticker.push(obj);
       const quote = await StockPrice.getStock(ticker, false);
-      //Get charting data
+      //Charting data options (icebox)
       let validRanges = [
         '1d',
         '5d',

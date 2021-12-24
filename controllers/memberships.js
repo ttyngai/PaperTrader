@@ -6,8 +6,6 @@ function premium(req, res) {
   User.findById({ _id: req.user.id }, function (err, user) {
     user.premium = !user.premium;
     user.save();
-    setTimeout(function () {
-      res.redirect('back');
-    }, 100);
+    res.redirect('back');
   });
 }

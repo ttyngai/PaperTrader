@@ -39,6 +39,7 @@ function show(req, res) {
         if (a.ticker > b.ticker) return 1;
         if (a.ticker < b.ticker) return -1;
       });
+      // Combining info into one single object to be popualted for the table
       let tickers = [];
       holdings.forEach(function (s) {
         let obj = {};
