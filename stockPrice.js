@@ -83,6 +83,7 @@ async function getChartData(ticker, interval, range) {
   )
     .then((res) => res.json())
     .then(function (data) {
+      // Parse data into array for google charts
       object = data.chart.result[0];
       let timestamp = object.timestamp;
       let open = object.indicators.quote[0].open;
@@ -90,9 +91,7 @@ async function getChartData(ticker, interval, range) {
       let low = object.indicators.quote[0].low;
       let close = object.indicators.quote[0].close;
       let arrayLength = 0;
-      // Candles total
-      let candles = 500;
-      for (i = 0; i < candles; i++) {
+      for (i = 0; i < timestamp.length; i++) {
         // Check if any data is null
         if (timestamp[i] && low[i] && open[i] && close[i] && high[i]) {
           let row = [];
