@@ -62,13 +62,13 @@ async function getStock(stocksInput, simpleCheck) {
             //  afterhours(21:00-08:59UTC)
             else if (hourNumber >= 21 || hourNumber < 9) {
               s.preRegAfterCombinedPrice = s.postMarketPrice;
+            } else {
+              s.preRegAfterCombinedPrice = 0;
             }
             stocksOutput.push(s);
           });
         } else if (simpleCheck && quote.quoteResponse.result[0]) {
           exist = true;
-        } else {
-          s.preRegAfterCombinedPrice = 0;
         }
       });
   }
