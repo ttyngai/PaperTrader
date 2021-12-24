@@ -91,7 +91,8 @@ async function getChartData(ticker, interval, range) {
       let low = object.indicators.quote[0].low;
       let close = object.indicators.quote[0].close;
       let arrayLength = 0;
-      for (i = 0; i < timestamp.length; i++) {
+      let maxCandles = 450;
+      for (i = 0; i < maxCandles; i++) {
         // Check if any data is null
         if (timestamp[i] && low[i] && open[i] && close[i] && high[i]) {
           let row = [];
@@ -101,10 +102,11 @@ async function getChartData(ticker, interval, range) {
           // For user current timezone
           let offset = new Date().getTimezoneOffset() / 60;
           // Fix transition during 12am
-          let hour = time.getUTCHours() - offset;
-          if (hour < 0) {
-            hour += 13;
-          }
+          let hour = time.getUTCHours();
+          //  - offset
+          // if (hour < 0) {
+          //   hour += 13;
+          // }
           let minute = time.getMinutes();
           console.log('hour', hour);
 
