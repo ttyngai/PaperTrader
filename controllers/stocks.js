@@ -72,6 +72,7 @@ async function show(req, res) {
         `1d`
       );
 
+      let testTime = new Date().getTimezoneOffset() / 60;
       res.render('stocks/show', {
         title: 'Stocks',
         stock,
@@ -80,6 +81,7 @@ async function show(req, res) {
         req,
         chartParsed,
         preselectPortfolio,
+        testTime,
       });
     });
   });

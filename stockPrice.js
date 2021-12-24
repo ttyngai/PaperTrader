@@ -99,8 +99,9 @@ async function getChartData(ticker, interval, range) {
           // This is for 1 minuite/ 1 hour range (Icebox)
           let time = new Date(timestamp[i] * 1000);
           // For user current timezone
-          let offset = new Date().getTimezoneOffset() / 60;
-
+          // let offset = new Date().getTimezoneOffset() / 60;
+          // Fix daylight saving, can't use getTimezoneOffset due to iOS
+          // Find 2nd sunday in march:
           // Fix transition during 12am
           let hour = time.getUTCHours() - 5;
           //  - offset
