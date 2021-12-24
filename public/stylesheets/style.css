@@ -182,7 +182,6 @@ table {
   color: var(--stockYellow);
   border-radius: 0.5rem;
   padding: 0.1em 0.5em;
-  font-size: 0.9em;
   font-weight: bold;
 }
 .formButton:hover {

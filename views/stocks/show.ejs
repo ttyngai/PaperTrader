@@ -14,7 +14,7 @@
       >
         <span id="buySellPriceBoxDollarSign">$</span>
         <input
-          type="text"
+          type="number"
           name="price"
           min="0"
           autocomplete="off"
@@ -25,7 +25,7 @@
           class="<%= user.premium ? 'buySellNumBox premiumPriceBox':'buySellNumBox buySellPriceBox'  %>"
           <%- (!user.premium) ? 'readonly':'' %>
           />
-          <input type="text" min="0" class="buySellNumBox" id="buySellSharesBox" name="shares" placeholder="Shares" autocomplete="off"
+          <input type="number" min="0" class="buySellNumBox" id="buySellSharesBox" name="shares" placeholder="Shares" autocomplete="off"
           spellcheck="false"
           autocorrect="off"    />
         <select name="portfolioId" class="buySellNumBox" id="buySellPortfolioBox">
