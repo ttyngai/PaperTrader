@@ -336,6 +336,7 @@ table {
   font-size: 1.5rem;
   max-width: 15rem;
 }
+
 #portfolioEditting:focus {
   border: 0.1rem solid var(--stockYellow);
   background-color: black;
