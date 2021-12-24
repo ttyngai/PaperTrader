@@ -196,7 +196,7 @@ table {
   color: var(--greyFont);
   text-align: center;
   vertical-align: middle;
-  border-radius: 0.5rem;
+  border-radius: 5rem;
   outline: 0;
   border: none;
 }
@@ -239,7 +239,7 @@ table {
 #portfolioMod {
   background: black;
   color: white;
-  border: 3px solid var(--stockYellow);
+  border: 0.2rem solid var(--stockYellow);
   width: 70vw;
   max-width: 30rem;
   border-radius: 1rem;
@@ -367,14 +367,6 @@ table {
   padding: 0.5rem 0 0 0;
 }
 
-/* .portfolioDeleteHide {
-  z-index: -2;
-} */
-/* .portfolioDeleteButtonHide {
-  color: transparent;
-  background-color: transparent;
-} */
-
 #portfolioDeleteFinal {
   background-color: black;
   border: 2px solid var(--stockRed);
@@ -385,6 +377,9 @@ table {
   font-size: 2rem;
   width: 75vw;
   max-width: 30rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 #portfolioDeleteFinal:hover {
