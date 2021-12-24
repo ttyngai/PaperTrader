@@ -181,7 +181,7 @@ table {
   border: 0.1rem solid var(--stockYellow);
   color: var(--stockYellow);
   border-radius: 0.5rem;
-  padding: 0.1em 0.5em;
+  padding: 0.28em 0.5em;
   font-weight: bold;
 }
 .formButton:hover {
@@ -316,7 +316,7 @@ table {
   border-radius: 0.5rem;
   font-size: 1.5rem;
   z-index: -1;
-  transform: translateX(-2.5rem);
+  transform: translateX(-2.8rem) scale(0.75) translateY(0.1rem);
 }
 .portfolioEdit:hover {
   background-color: var(--stockYellow);
@@ -326,7 +326,7 @@ table {
 
 .portfolioEditReveal {
   color: var(--stockYellow);
-  transform: translateX(-2.8rem) scale(0.75);
+  transform: translateX(-2.8rem) scale(0.75) translateY(0.1rem);
   transition: all 0.1s ease-in-out;
   z-index: inherit;
 }
