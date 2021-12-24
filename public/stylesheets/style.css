@@ -316,6 +316,7 @@ table {
   border-radius: 0.5rem;
   font-size: 1.5rem;
   z-index: -1;
+  transform: translateX(-2.5rem);
 }
 .portfolioEdit:hover {
   background-color: var(--stockYellow);
@@ -324,8 +325,8 @@ table {
 }
 
 .portfolioEditReveal {
-  border: 1px solid var(--stockYellow);
   color: var(--stockYellow);
+  transform: translateX(-2.8rem) scale(0.75);
   transition: all 0.1s ease-in-out;
   z-index: inherit;
 }
@@ -335,8 +336,9 @@ table {
   color: var(--stockYellow);
   border-radius: 0.25rem;
   padding-left: 1rem;
+  padding-right: 2.5rem;
   font-size: 1.5rem;
-  max-width: 15rem;
+  width: 25rem;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -353,6 +355,7 @@ table {
   border-radius: 0.5rem;
   padding: 0 0.75rem;
   font-size: 1.5rem;
+  transform: scale(0.75);
 }
 
 .portfolioDelete:hover {
@@ -364,13 +367,13 @@ table {
   padding: 0.5rem 0 0 0;
 }
 
-.portfolioDeleteHide {
+/* .portfolioDeleteHide {
   z-index: -2;
-}
-.portfolioDeleteButtonHide {
+} */
+/* .portfolioDeleteButtonHide {
   color: transparent;
   background-color: transparent;
-}
+} */
 
 #portfolioDeleteFinal {
   background-color: black;
