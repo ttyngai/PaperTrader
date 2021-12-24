@@ -332,7 +332,6 @@ table {
   color: var(--stockYellow);
   border-radius: 0.25rem;
   padding-left: 1rem;
-  /* padding-right: 2.5rem; */
   font-size: 1.5rem;
   width: 20rem;
   text-overflow: ellipsis;
@@ -351,7 +350,6 @@ table {
   border-radius: 0.5rem;
   padding: 0 0.75rem;
   font-size: 1.5rem;
-  /* transform: scale(0.75); */
 }
 
 .portfolioDelete:hover {
