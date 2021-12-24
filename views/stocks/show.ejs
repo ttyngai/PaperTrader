@@ -182,59 +182,61 @@ if (<%=user.premium%>){
   const tempInput = localStorage.inputField;
   // If we stored value in tempInput, and we just reloaded, box is in use
   // We will take value out and populate the box
+  // Input #1 for shares box
   if (tempInput && localStorage.referrer === window.location.href) {
     document.getElementById('buySellSharesBox').value = tempInput;
   }
+  // On input #1
+  document
+  .getElementById('buySellSharesBox')
+  .addEventListener('input', function () {
+    localStorage.inputField =
+    document.getElementById('buySellSharesBox').value;
+    localStorage.activeFocus = 'buySellSharesBox'
+  });
+  // On click #1
+  document
+  .getElementById('buySellSharesBox')
+  .addEventListener('click', function () {
+    localStorage.activeFocus = 'buySellSharesBox'
+  });
+  // Input #2 for price box
   const tempInput2 = localStorage.inputField2;
   if (tempInput2 && localStorage.referrer === window.location.href) {
     document.getElementById('buySellPriceBoxId').value = tempInput2;
   }
-  // ///////////////////////////////////////
+  // On input #2
+  document
+  .getElementById('buySellPriceBoxId')
+  .addEventListener('input', function () {
+    localStorage.inputField2 =
+    document.getElementById('buySellPriceBoxId').value;
+  });
+  // On click #2
+  document
+  .getElementById('buySellPriceBoxId')
+  .addEventListener('click', function () {
+    localStorage.activeFocus = 'buySellPriceBoxId'
+  });
+  // Input #3 for porrtfolio selection box
   const tempInput3 = localStorage.inputField3;
   if (tempInput3 && localStorage.referrer === window.location.href) {
     document.getElementById('buySellPortfolioBox').value = tempInput3;
   }
-  // On input #1
+  // On select #3
   document
-    .getElementById('buySellSharesBox')
-    .addEventListener('input', function () {
-      localStorage.inputField =
-      document.getElementById('buySellSharesBox').value;
-      localStorage.activeFocus = 'buySellSharesBox'
-    });
-   // On click #1
+  .getElementById('buySellPortfolioBox')
+  .addEventListener('input', function () {
+    localStorage.inputField3 =
+    document.getElementById('buySellPortfolioBox').value;
+  });
+  // deletes focus if this option is selected
   document
-    .getElementById('buySellSharesBox')
-    .addEventListener('click', function () {
-      localStorage.activeFocus = 'buySellSharesBox'
-    });
-      // On input #2
-  document
-    .getElementById('buySellPriceBoxId')
-    .addEventListener('input', function () {
-      localStorage.inputField2 =
-      document.getElementById('buySellPriceBoxId').value;
-    });
-    // On click #2
-  document
-    .getElementById('buySellPriceBoxId')
-    .addEventListener('click', function () {
-      localStorage.activeFocus = 'buySellPriceBoxId'
-    });
-   // On select #3
-  document
-    .getElementById('buySellPortfolioBox')
-    .addEventListener('input', function () {
-      localStorage.inputField3 =
-      document.getElementById('buySellPortfolioBox').value;
-    });
-    // deletes focus if this option is selected
-  document
-    .getElementById('buySellPortfolioBox')
-    .addEventListener('click', function () {
-      delete localStorage.activeFocus
-    });
-   if(localStorage.activeFocus){
+  .getElementById('buySellPortfolioBox')
+  .addEventListener('click', function () {
+    delete localStorage.activeFocus
+  });
+  if(localStorage.activeFocus){
     document.getElementById(localStorage.activeFocus).focus();
   }
 </script>

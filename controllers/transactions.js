@@ -16,6 +16,7 @@ function create(req, res) {
     Stock.findById(req.params.id, function (err, stock) {
       req.body.ticker = stock.ticker;
       req.body._id = req.params.id;
+      // Swaps positive to negative if sell button was hit
       if (req.body.button === 'sell') {
         req.body.shares = req.body.shares * -1;
       }

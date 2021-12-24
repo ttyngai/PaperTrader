@@ -111,7 +111,6 @@ function update(req, res) {
     if (req.body.name) {
       portfolio.name = req.body.name;
       portfolio.save();
-    } else {
     }
     res.redirect(`/portfolios/${req.params.id}`);
   });

@@ -28,8 +28,7 @@ async function getStock(stocksInput, simpleCheck) {
     )
       .then((res) => res.json())
       .then((quote) => {
-        // simple check if stock exist
-
+        // Simple check if stock exist
         if (!simpleCheck && quote.quoteResponse.result[0]) {
           stockInfo = quote.quoteResponse.result.forEach(function (s, idx) {
             // Check for futures market type symbol
@@ -37,7 +36,6 @@ async function getStock(stocksInput, simpleCheck) {
             //Check and match both stocks, then apply _id and if it is hidden
             s._id = stocksInput[idx]._id;
             s.hide = stocksInput[idx].hide;
-
             // Switch between premarket(09:00-14:30UTC)/regularmarket(14:30-21:00UTC)/afterhours(21:00-01:00UTC)
             const hour = new Date().getUTCHours();
             const minute = new Date().getUTCMinutes();
@@ -47,19 +45,19 @@ async function getStock(stocksInput, simpleCheck) {
             if (isFutures) {
               s.preRegAfterCombinedPrice = s.regularMarketPrice;
             }
-            // premarket(09:00-14:30UTC)
+            // Premarket(09:00-14:30UTC)
             else if (hourNumber >= 9 && hourNumber < 14.5) {
               s.preRegAfterCombinedPrice = s.preMarketPrice
                 ? s.preMarketPrice
                 : s.postMarketPrice;
             }
-            //  regularmarket(14:30-21:00UTC)
+            //  Regularmarket(14:30-21:00UTC)
             else if (hourNumber >= 14.5 && hourNumber < 21) {
               s.preRegAfterCombinedPrice = s.regularMarketPrice
                 ? s.regularMarketPrice
                 : s.postMarketPrice;
             }
-            //  afterhours(21:00-08:59UTC)
+            //  Afterhours(21:00-08:59UTC)
             else if (hourNumber >= 21 || hourNumber < 9) {
               s.preRegAfterCombinedPrice = s.postMarketPrice;
             } else {
@@ -92,28 +90,34 @@ async function getChartData(ticker, interval, range) {
       let low = object.indicators.quote[0].low;
       let close = object.indicators.quote[0].close;
       let arrayLength = 0;
-      // 51 candles total
-      for (i = 0; i < 200; i++) {
+      // Candles total
+      let candles = 500;
+      for (i = 0; i < candles; i++) {
         // Check if any data is null
         if (timestamp[i] && low[i] && open[i] && close[i] && high[i]) {
           let row = [];
-
           // Date Time section
-          // This is for 1 minuite/ 1 hour range
+          // This is for 1 minuite/ 1 hour range (Icebox)
           let time = new Date(timestamp[i] * 1000);
           // For user current timezone
           let offset = new Date().getTimezoneOffset() / 60;
+          // Fix transition during 12am
           let hour = time.getUTCHours() - offset;
+          if (hour < 0) {
+            hour += 13;
+          }
           let minute = time.getMinutes();
+          console.log('hour', hour);
+
           if (minute < 10) {
             minute = `0${minute}`;
           }
           if (hour < 10) {
             hour = `0${hour}`;
           }
-          // Icebox more timeframes with it's timeframes
-
+          // more timeframes with it's timeframes(Icebox)
           let newTime = `${hour}:${minute}`;
+          console.log('time', newTime);
           row.push(newTime);
           row.push(low[i]);
           row.push(open[i]);
@@ -129,5 +133,6 @@ async function getChartData(ticker, interval, range) {
       });
     })
     .catch((err) => console.log(err));
+  console.log(array);
   return array;
 }
