@@ -102,12 +102,18 @@ async function getChartData(ticker, interval, range) {
           // let offset = new Date().getTimezoneOffset() / 60;
           // Fix daylight saving, can't use getTimezoneOffset due to iOS
           // Find 2nd sunday in march:
-          // Fix transition during 12am
           let hour = time.getUTCHours() - 5;
           //  - offset
-          // if (hour < 0) {
-          //   hour += 13;
-          // }
+
+          // Fix transition during 12am
+          if (hour < 0) {
+            hour += 13;
+          }
+          // turn 24 hour to 12
+          if (hour > 12) {
+            hour = hour - 12;
+          }
+
           let minute = time.getMinutes();
           console.log('hour', hour);
 
