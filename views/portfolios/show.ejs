@@ -26,10 +26,16 @@
         />
       </form>
       <form
-        class="portfolioEditContainer"
+        class="portfolioDeleteContainer"
+        id="portfolioDeleteButton"
         action="/portfolios/<%= portfolio._id %>/delete"
       >
-        <input type="submit" class="portfolioDelete" value="Delete" />
+        <input
+          type="submit"
+          class="portfolioDelete"
+          id="portfolioDeleteButtonText"
+          value="X"
+        />
       </form>
     </div>
     <table id="PLSection">
@@ -229,8 +235,10 @@
         localStorage.inputField =
           document.getElementById('portfolioEditting').value;
          // Portfolio name edit button show up
-        document.getElementById('portfolioOkButton').classList.add('portfolioEditReveal')
-      });
+         document.getElementById('portfolioOkButton').classList.add('portfolioEditReveal')
+         document.getElementById('portfolioDeleteButton').classList.add('portfolioDeleteHide')
+         document.getElementById('portfolioDeleteButtonText').classList.add('portfolioDeleteButtonHide')
+        });
     document
       .getElementById('portfolioEditting')
       .addEventListener('click', function () {

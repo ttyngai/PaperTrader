@@ -2,7 +2,7 @@
 
 PaperTrader is a training tool for experiencing the stock market without any monetary risk.
 
-**Please click this linke to start the app:**
+**Please click this link to start the app:**
 https://papertraderlive.herokuapp.com/
 
 ![Watchlist](https://i.imgur.com/kxdlxxM.png 'ScreenShot of watchlist')
@@ -16,6 +16,7 @@ https://papertraderlive.herokuapp.com/
 - MongoDB
 - Express.js
 - Node.js
+- Google OAuth
 
 Highlights:
 

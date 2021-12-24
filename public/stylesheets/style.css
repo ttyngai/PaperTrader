@@ -269,6 +269,11 @@ table {
   flex-direction: column;
   align-items: center;
 }
+#portfolioControl {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 .holdingsList {
   width: 95vw;
   max-width: 800px;
@@ -300,27 +305,29 @@ table {
 .portfolioEditContainer {
   padding: 0.5rem 0 0 0;
 }
+
 .portfolioEdit {
   position: absolute;
   background-color: transparent;
   border: none;
-  color: black;
-  transform: scale(0.75);
+  color: transparent;
   border-radius: 0.25rem;
   font-size: 1.5rem;
+  z-index: -1;
 }
 
 .portfolioEditReveal {
-  background-color: var(--stockYellow);
-  color: black;
+  border: 1px solid var(--stockYellow);
+  color: var(--stockYellow);
   transition: all 0.25s ease-in-out;
+  z-index: inherit;
 }
 #portfolioEditting {
   background-color: black;
   border: 0.1rem solid var(--stockYellow);
   color: var(--stockYellow);
   border-radius: 0.25rem;
-  padding: 0 1rem;
+  padding-left: 1rem;
   font-size: 1.5rem;
   max-width: 15rem;
 }
@@ -330,11 +337,10 @@ table {
 }
 .portfolioDelete {
   border: none;
-  background-color: black;
+  background-color: transparent;
   color: var(--stockRed);
   border-radius: 0.25rem;
-  transform: scale(0.75);
-  font-size: 1.5rem;
+  padding: 0.5rem 1rem;
 }
 
 .portfolioDelete:hover {
@@ -342,6 +348,18 @@ table {
   color: white;
   transition: all 0.25s ease-in-out;
 }
+.portfolioDeleteContainer {
+  padding: 0.5rem 0 0 0;
+}
+
+.portfolioDeleteHide {
+  z-index: -2;
+}
+.portfolioDeleteButtonHide {
+  color: transparent;
+  background-color: transparent;
+}
+
 #portfolioDeleteFinal {
   background-color: black;
   border: 2px solid var(--stockRed);
@@ -388,7 +406,7 @@ table {
   transition: all 0.25s ease-in-out;
 }
 
-.portfolioDeleteContainer {
+.portfolioDeletePadding {
   text-align: center;
   padding: 6rem 0;
 }
