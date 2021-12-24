@@ -1,6 +1,10 @@
 <%- include('../partials/header') %>
+
 <div class="stockShowControls">
   <div>
+    <form action="/stocks">
+      <button  class="formButton">Back</button>
+    </form>
   <% if ( quote[0]){ %>
     <h1 id="stockTitleAtShow"><%= quote[0].longName%> (<%= stock.ticker%>)</h1>
     <%} else {%>
