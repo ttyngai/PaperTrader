@@ -100,8 +100,9 @@ async function getChartData(ticker, interval, range) {
           let time = new Date(timestamp[i] * 1000);
           // For user current timezone
           let offset = new Date().getTimezoneOffset() / 60;
+
           // Fix transition during 12am
-          let hour = time.getUTCHours();
+          let hour = time.getUTCHours() - 5;
           //  - offset
           // if (hour < 0) {
           //   hour += 13;
