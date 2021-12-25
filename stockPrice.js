@@ -58,8 +58,13 @@ async function getStock(stocksInput, simpleCheck) {
                 : s.postMarketPrice;
             }
             //  Afterhours(21:00-08:59UTC)
-            else if (hourNumber >= 21 || hourNumber < 9) {
+            else if (
+              (hourNumber >= 21 || hourNumber < 9) &&
+              s.postMarketPrice
+            ) {
               s.preRegAfterCombinedPrice = s.postMarketPrice;
+            } else if (s.regularMarketPrice) {
+              s.preRegAfterCombinedPrice = s.regularMarketPrice;
             } else {
               s.preRegAfterCombinedPrice = 0;
             }
