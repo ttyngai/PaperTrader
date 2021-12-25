@@ -22,7 +22,9 @@ function create(req, res) {
       }
       portfolio.transactions.push(req.body);
       portfolio.save(function (err) {
-        if (err) console.log(err);
+        if (err) {
+          return res.redirect('back');
+        }
         res.redirect(`/portfolios/${req.body.portfolioId}`);
       });
     });

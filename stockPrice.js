@@ -107,15 +107,12 @@ async function getChartData(ticker, interval, range) {
         if (timestamp[i] && low[i] && open[i] && close[i] && high[i]) {
           let row = [];
           // Date Time section
-          // This is for 1 minuite/ 1 hour range (Icebox)
+          // (Icebox)Currently for 1 minuite/ 1 hour range, need to expand for different timeframes with button selection
           let time = new Date(timestamp[i] * 1000);
           // For user current timezone
-          // let offset = new Date().getTimezoneOffset() / 60;
-          // Fix daylight saving, can't use getTimezoneOffset due to iOS
+          // (Icebox) Fix daylight saving, can't use getTimezoneOffset due to iOS
           // Find 2nd sunday in march:
           let hour = time.getUTCHours() - 5;
-          //  - offset
-
           // Fix transition during 12am
           if (hour < 0) {
             hour += 13;
@@ -124,10 +121,7 @@ async function getChartData(ticker, interval, range) {
           if (hour > 12) {
             hour = hour - 12;
           }
-
           let minute = time.getMinutes();
-          console.log('hour', hour);
-
           if (minute < 10) {
             minute = `0${minute}`;
           }
@@ -136,7 +130,6 @@ async function getChartData(ticker, interval, range) {
           }
           // more timeframes with it's timeframes(Icebox)
           let newTime = `${hour}:${minute}`;
-          console.log('time', newTime);
           row.push(newTime);
           row.push(low[i]);
           row.push(open[i]);
@@ -152,6 +145,6 @@ async function getChartData(ticker, interval, range) {
       });
     })
     .catch((err) => console.log(err));
-  console.log(array);
+  // console.log(array);
   return array;
 }
