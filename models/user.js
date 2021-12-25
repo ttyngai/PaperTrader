@@ -11,6 +11,7 @@ const userSchema = new Schema(
     email: String,
     avatar: String,
     premium: { type: Boolean, default: false },
+    firstTime: { type: Boolean, default: true },
   },
   {
     timestamps: true,

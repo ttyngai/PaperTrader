@@ -1,6 +1,7 @@
 const Stock = require('../models/stock');
 const Portfolio = require('../models/portfolio');
 const StockPrice = require('../stockPrice');
+const User = require('../models/user');
 
 module.exports = {
   index,
@@ -8,26 +9,69 @@ module.exports = {
   create,
   hide,
 };
-async function index(req, res) {
-  // pass in array of tickers
-  Stock.find({ user: req.user }, async function (err, stocksFound) {
-    // Sort alphabetically
-    stocksFound.sort(function (a, b) {
-      if (a.ticker > b.ticker) return 1;
-      if (a.ticker < b.ticker) return -1;
-    });
-    const stocks = await StockPrice.getStock(stocksFound, false);
-    // Check if all are hidden(empty), allow watchlist to show "No symbols added"
-    let listNotEmpty = false;
-    stocks.forEach(function (s) {
-      if (!s.hide) {
-        listNotEmpty = true;
-      }
-    });
-    res.render('stocks/index', { title: 'Stocks', stocks, listNotEmpty, req });
-  });
-}
 
+// For first time users, populates the watch list with sample tickers.
+const sampleTicker = [
+  { ticker: 'AAPL' },
+  { ticker: 'AMZN' },
+  { ticker: 'AMD' },
+  { ticker: 'MSFT' },
+  { ticker: 'FB' },
+  { ticker: 'HD' },
+  { ticker: 'GOOGL' },
+  { ticker: 'NVDA' },
+  { ticker: 'JPM' },
+  { ticker: 'BA' },
+  { ticker: 'QQQ' },
+  { ticker: 'SPY' },
+  { ticker: 'NFLX' },
+  { ticker: 'DIS' },
+  { ticker: 'ZM' },
+  { ticker: 'WMT' },
+  { ticker: 'COKE' },
+  { ticker: 'V' },
+  { ticker: 'TSLA' },
+];
+
+async function index(req, res) {
+  //Check to see if it's first time login, populates with sample watch list
+  if (req.user.firstTime) {
+    for (i = 0; i < sampleTicker.length; i++) {
+      console.log('sample', sampleTicker[i]);
+      const stock = new Stock(sampleTicker[i]);
+      stock.user = req.user._id;
+      console.log('new stock', stock);
+      await stock.save();
+    }
+    req.user.firstTime = false;
+    req.user.save(function (err) {
+      res.redirect('/stocks');
+    });
+  } else {
+    // pass in array of tickers
+    Stock.find({ user: req.user }, async function (err, stocksFound) {
+      // Sort alphabetically
+      stocksFound.sort(function (a, b) {
+        if (a.ticker > b.ticker) return 1;
+        if (a.ticker < b.ticker) return -1;
+      });
+      const stocks = await StockPrice.getStock(stocksFound, false);
+      // Check if all are hidden(empty), allow watchlist to show "No symbols added"
+      let listNotEmpty = false;
+      stocks.forEach(function (s) {
+        if (!s.hide) {
+          listNotEmpty = true;
+        }
+      });
+      res.render('stocks/index', {
+        title: 'Stocks',
+        stocks,
+        listNotEmpty,
+        req,
+      });
+    });
+  }
+}
 function hide(req, res) {
   Stock.findById(req.params.id, function (err, stock) {
     stock.hide = true;
@@ -106,7 +150,6 @@ async function create(req, res) {
 
   //If duplicated, sets hide to false
   if (duplicate) {
-    console.log('Is a duplicate', duplicate);
     Stock.findOne(
       {
         $and: [{ ticker: req.body.ticker }, { user: req.user._id }],
@@ -121,7 +164,7 @@ async function create(req, res) {
 
   // Is a stock, not a duplicate, create new entry
   if (check && !duplicate) {
-    console.log('This is a real stock. Not duplicates');
+    console.log('re.body', req.body);
     const stock = new Stock(req.body);
     stock.user = req.user._id;
     stock.save(function (err) {
