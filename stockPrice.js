@@ -63,8 +63,10 @@ async function getStock(stocksInput, simpleCheck) {
               s.postMarketPrice
             ) {
               s.preRegAfterCombinedPrice = s.postMarketPrice;
-            } else if (s.regularMarketPrice) {
-              s.preRegAfterCombinedPrice = s.regularMarketPrice;
+            }
+            // Stock went n/a when market wasn't open
+            else if (s.regularMarketPrice) {
+              s.preRegAfterCombinedPrice = 123;
             } else {
               s.preRegAfterCombinedPrice = 0;
             }
