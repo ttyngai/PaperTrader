@@ -239,8 +239,10 @@
         localStorage.inputField =
           document.getElementById('portfolioEditting').value;
          // Portfolio name edit button show up
+         document.getElementById('portfolioOkButton').classList.add('portfolioEditActive')
          document.getElementById('portfolioOkButton').value = 'Ok'
         });
+
     document
       .getElementById('portfolioEditting')
       .addEventListener('click', function () {
