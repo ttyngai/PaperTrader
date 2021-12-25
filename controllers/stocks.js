@@ -1,7 +1,6 @@
 const Stock = require('../models/stock');
 const Portfolio = require('../models/portfolio');
 const StockPrice = require('../stockPrice');
-const User = require('../models/user');
 
 module.exports = {
   index,
@@ -18,8 +17,9 @@ const sampleTicker = [
   { ticker: 'MSFT' },
   { ticker: 'FB' },
   { ticker: 'HD' },
-  { ticker: 'GOOGL' },
+  { ticker: 'KHC' },
   { ticker: 'NVDA' },
+  { ticker: 'TM' },
   { ticker: 'JPM' },
   { ticker: 'BA' },
   { ticker: 'QQQ' },
@@ -37,17 +37,18 @@ async function index(req, res) {
   //Check to see if it's first time login, populates with sample watch list
   if (req.user.firstTime) {
     for (i = 0; i < sampleTicker.length; i++) {
-      console.log('sample', sampleTicker[i]);
       const stock = new Stock(sampleTicker[i]);
       stock.user = req.user._id;
-      console.log('new stock', stock);
       await stock.save();
     }
     req.user.firstTime = false;
     req.user.save(function (err) {
       res.redirect('/stocks');
     });
-  } else {
+  }
+
+  // Not first time user, proceed to show list
+  else {
     // pass in array of tickers
     Stock.find({ user: req.user }, async function (err, stocksFound) {
       // Sort alphabetically

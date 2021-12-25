@@ -374,6 +374,10 @@ table {
   color: black;
 }
 
+.portfolioDeleteContainer {
+  padding-top: 0.25rem;
+}
+
 #portfolioDeleteFinal {
   background-color: black;
   border: 2px solid var(--stockRed);

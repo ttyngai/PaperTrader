@@ -10,7 +10,9 @@ const userSchema = new Schema(
     },
     email: String,
     avatar: String,
+    // Membership
     premium: { type: Boolean, default: false },
+    // First time login, populate watch list
     firstTime: { type: Boolean, default: true },
   },
   {

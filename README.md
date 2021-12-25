@@ -20,6 +20,8 @@ https://papertraderlive.herokuapp.com/
 
 Highlights:
 
+- First time log in user's watch list will be auto populated with sample tickers
+
 - New account has pages that has special empty "greeting" messages. i.e. Portfolio page, stock page, new holdings/transactions page and new profile in watch list
 
 - New stocks can be added by inputting correct ticker, app will fetch the ticker from yahoo finance. Stock data is processed real time. All stocks are sorted before presented.
