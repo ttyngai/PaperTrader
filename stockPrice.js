@@ -46,26 +46,32 @@ async function getStock(stocksInput, simpleCheck) {
               s.preRegAfterCombinedPrice = s.regularMarketPrice;
             }
             // Premarket(09:00-14:30UTC)
-            else if (hourNumber >= 9 && hourNumber < 14.5) {
+            else if (hourNumber >= 9 && hourNumber < 14.5 && s.preMarketPrice) {
               s.preRegAfterCombinedPrice = s.preMarketPrice
                 ? s.preMarketPrice
                 : s.postMarketPrice;
             }
             //  Regularmarket(14:30-21:00UTC)
-            else if (hourNumber >= 14.5 && hourNumber < 21) {
+            else if (
+              hourNumber >= 14.5 &&
+              hourNumber < 21 &&
+              s.regularMarketPrice
+            ) {
               s.preRegAfterCombinedPrice = s.regularMarketPrice
                 ? s.regularMarketPrice
                 : s.postMarketPrice;
             }
             //  Afterhours(21:00-08:59UTC)
-            else if (hourNumber >= 21 || hourNumber < 9) {
+            else if (
+              (hourNumber >= 21 || hourNumber < 9) &&
+              s.postMarketPrice
+            ) {
               s.preRegAfterCombinedPrice = s.postMarketPrice;
             }
             // Stock went n/a when market wasn't
-            // else if (s.regularMarketPrice) {
-            //   s.preRegAfterCombinedPrice = s.regularMarketPrice;
-            // }
-            else {
+            else if (s.regularMarketPrice) {
+              s.preRegAfterCombinedPrice = s.regularMarketPrice;
+            } else {
               s.preRegAfterCombinedPrice = 0;
             }
             stocksOutput.push(s);
