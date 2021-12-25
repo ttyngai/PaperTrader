@@ -22,7 +22,7 @@
           type="submit"
           class="portfolioEdit"
           id="portfolioOkButton"
-          value="Rename"
+          value="Edit"
         />
       </form>
 
@@ -239,15 +239,17 @@
         localStorage.inputField =
           document.getElementById('portfolioEditting').value;
          // Portfolio name edit button show up
-         document.getElementById('portfolioOkButton').classList.add('portfolioEditReveal')
-        //  document.getElementById('portfolioDeleteButton').classList.add('portfolioDeleteHide')
-        //  document.getElementById('portfolioDeleteButtonText').classList.add('portfolioDeleteButtonHide')
-
-
+         document.getElementById('portfolioOkButton').value = 'Ok'
         });
     document
       .getElementById('portfolioEditting')
       .addEventListener('click', function () {
+        localStorage.activeFocus = 'portfolioEditting';
+      });
+    document
+      .getElementById('portfolioOkButton')
+      .addEventListener('click', function () {
+        console.log("hello")
         localStorage.activeFocus = 'portfolioEditting';
       });
     if (localStorage.activeFocus) {
