@@ -21,7 +21,7 @@
         <input
           type="submit"
           class="portfolioEdit"
-          id="portfolioOkButton"
+          id="portfolioEditButton"
           value="Edit"
         />
       </form>
@@ -239,8 +239,8 @@
         localStorage.inputField =
           document.getElementById('portfolioEditting').value;
          // Portfolio name edit button show up
-         document.getElementById('portfolioOkButton').classList.add('portfolioEditActive')
-         document.getElementById('portfolioOkButton').value = 'Ok'
+         document.getElementById('portfolioEditButton').classList.add('portfolioEditActive')
+         document.getElementById('portfolioEditButton').value = 'Save'
         });
 
     document
@@ -249,7 +249,7 @@
         localStorage.activeFocus = 'portfolioEditting';
       });
     document
-      .getElementById('portfolioOkButton')
+      .getElementById('portfolioEditButton')
       .addEventListener('click', function () {
         console.log("hello")
         localStorage.activeFocus = 'portfolioEditting';

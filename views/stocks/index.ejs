@@ -10,7 +10,6 @@
       placeholder="(e.g. AAPL)"
       spellcheck="false"
       autocorrect="off"
-      autofocus
     />
     <input
       type="submit"
@@ -132,6 +131,7 @@
     // Refresh input retainer
     if (localStorage.referrer !== window.location.href) {
       delete localStorage.inputField;
+      delete localStorage.activeFocus
     }
     const tempInput = localStorage.inputField;
     if (tempInput && localStorage.referrer === window.location.href) {
@@ -147,4 +147,13 @@
       .addEventListener('click', function () {
         delete localStorage.inputField
       });
+
+      document
+      .getElementById('stockSearchBox')
+      .addEventListener('click', function () {
+        localStorage.activeFocus = 'stockSearchBox';
+      });
+    if (localStorage.activeFocus) {
+      document.getElementById(localStorage.activeFocus).focus();
+    }
 </script>
