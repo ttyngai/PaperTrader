@@ -160,11 +160,6 @@ table {
 .tickerButton:hover {
   background-color: var(--stockYellow);
   color: black;
-  /* transition: all 0.1s ease-in-out; */
-}
-.tickerButton:active {
-  background-color: var(--stockYellow);
-  color: black;
 }
 
 #searchForm {
@@ -197,7 +192,6 @@ table {
   background-color: var(--stockYellow);
   color: black;
   font-weight: bold;
-  transition: all 0.1s ease-in-out;
 }
 
 #removeStock {
@@ -212,7 +206,6 @@ table {
 #removeStock:hover {
   background-color: var(--stockRed);
   color: white;
-  transition: all 0s ease-in-out;
 }
 
 #removeHeader {
@@ -261,7 +254,6 @@ table {
 #portfolioMod:hover {
   background-color: var(--transparentYellow);
   transform: scale(1.05);
-  transition: all 0.1s ease-in-out;
 }
 
 #portfolioTitle {
@@ -326,7 +318,6 @@ table {
 .portfolioEdit:hover {
   background-color: var(--stockYellow);
   color: black;
-  transition: all 0.1s ease-in-out;
 }
 
 .portfolioEditActive {
@@ -350,7 +341,6 @@ table {
 
 #portfolioEditting:hover {
   border: 0.1rem solid var(--stockYellow);
-  transition: all 0.1s ease-in-out;
 }
 
 #portfolioEditting:focus {
@@ -369,7 +359,6 @@ table {
 .portfolioDelete:hover {
   background-color: var(--stockRed);
   color: white;
-  transition: all 0.1s ease-in-out;
 }
 
 .portfolioDeleteHide {
@@ -405,7 +394,6 @@ table {
 #portfolioDeleteFinal:hover {
   background-color: red;
   color: white;
-  transition: all 0.25s ease-in-out;
   opacity: 100%;
 }
 .blink_me:hover {
@@ -433,7 +421,6 @@ table {
 #portfolioDeleteBack:hover {
   background-color: var(--stockYellow);
   color: black;
-  transition: all 0.25s ease-in-out;
 }
 
 .portfolioDeletePadding {
@@ -487,7 +474,6 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
 #buyButton:hover {
   background-color: greenyellow;
   color: black;
-  transition: all 0.1s ease-in-out;
 }
 #sellButton {
   color: red;
@@ -496,7 +482,6 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
 #sellButton:hover {
   background-color: red;
   color: white;
-  transition: all 0.1s ease-in-out;
 }
 
 .buySellNumBox {
