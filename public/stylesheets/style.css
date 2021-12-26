@@ -160,7 +160,7 @@ table {
 .tickerButton:hover {
   background-color: var(--stockYellow);
   color: black;
-  transition: all 0.1s ease-in-out;
+  /* transition: all 0.1s ease-in-out; */
 }
 .tickerButton:active {
   background-color: var(--stockYellow);
