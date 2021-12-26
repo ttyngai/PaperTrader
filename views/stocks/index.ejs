@@ -156,13 +156,30 @@
     if (localStorage.activeFocus) {
       document.getElementById(localStorage.activeFocus).focus();
     }
-    let countDownTime = 60;
-    function countDown(){
-      document.getElementById('countDown').innerHTML = countDownTime
-      countDownTime--;
+
+    if(document.getElementById('countDownNumBasic')){
+    let countDownTimeBasic = 60;
+    function countDownBasic(){
+      document.getElementById('countDownNumBasic').innerHTML = countDownTimeBasic
+      countDownTimeBasic--;
       setTimeout(function(){
-        countDown()
+        countDownBasic()
       },1000)
     }
-    countDown()
+
+    countDownBasic()
+  }
+
+
+  if(document.getElementById('countDownNumPremium')){
+    let countDownTimePremium = 10;
+    function countDownPremium(){
+      document.getElementById('countDownNumPremium').innerHTML = countDownTimePremium
+      countDownTimePremium--;
+      setTimeout(function(){
+        countDownPremium()
+      },1000)
+    }
+    countDownPremium()
+  }
 </script>

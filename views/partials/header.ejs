@@ -20,7 +20,7 @@
     <nav>
       <a class="navTitle navButtons" href="/">PaperTrader Live</a>
       <% if (user) { %>
-        <a  href="/memberships" <%-   req.user.premium ? 'class="activeNav navButtons"':'class="navButtons basicUser"'  %>  ><%- req.user.premium? 'Premium':'Basic(<span id="countDown">60</span>)'  %></a>
+        <a  href="/memberships" <%-   req.user.premium ? 'class="activeNav navButtons"':'class="navButtons basicUser"'  %>  ><%- req.user.premium? 'Premium(<span id="countDownNumPremium"></span>)':'Basic(<span id="countDownNumBasic"></span>)'  %></a>
       <a  href="/stocks" <%-   title === 'Stocks' ? 'class="activeNav navButtons"':'class="navButtons"'  %>  >Stocks</a>
       <a  href="/portfolios" <%- title === 'Portfolios' ? 'class="navButtons activeNav"':'class="navButtons"'%>> Portfolio</a>
       <a class="navButtons" href="/logout">Logout</a>
