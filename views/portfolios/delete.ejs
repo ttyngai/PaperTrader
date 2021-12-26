@@ -1,5 +1,4 @@
 <%- include('../partials/header') %>
-
 <div class="portfolioContent">
   <div class="portfolioDeletePadding">
     <h5>This action cannot be reversed.</h5>
@@ -25,7 +24,6 @@
       if(<%=req.user.premium%>){
         membershipLevel = 'Premium'
       } else {
-
         membershipLevel = 'Basic'
       }
       let countDownString = membershipLevel
