@@ -251,8 +251,8 @@
     document
       .getElementById('portfolioEditButton')
       .addEventListener('click', function () {
-        console.log("hello")
         localStorage.activeFocus = 'portfolioEditting';
+        document.getElementById('portfolioEditting').classList.add('portfolioEditFocus');
       });
     if (localStorage.activeFocus) {
       document.getElementById(localStorage.activeFocus).focus();
