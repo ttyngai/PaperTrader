@@ -163,10 +163,10 @@
   let membershipLevel;
     if(<%=req.user.premium%>){
       countDownNum = 10;
-      membershipLevel = 'Basic'
+      membershipLevel = 'Premium'
     } else {
       countDownNum = 60;
-      membershipLevel = 'Premium'
+      membershipLevel = 'Basic'
     }
         function countDown(){
           let countDownString = `${membershipLevel}(${countDownNum})`
