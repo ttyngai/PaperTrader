@@ -75,10 +75,10 @@ nav {
 .basicUser:hover {
   color: var(--stockYellow);
 }
-#countDownNumBasic {
+#countDownNum {
   color: var(--greyFont);
 }
-#countDownNumBasic:hover {
+#countDownNum:hover {
   color: var(--stockYellow);
 }
 a {
