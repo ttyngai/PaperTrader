@@ -19,3 +19,15 @@
   </div>
 </div>
 <%- include('../partials/footer') %>
+<script>
+  let countDownNum;
+    let membershipLevel;
+      if(<%=req.user.premium%>){
+        membershipLevel = 'Premium'
+      } else {
+
+        membershipLevel = 'Basic'
+      }
+      let countDownString = membershipLevel
+      document.getElementById('countDownNum').innerHTML = countDownString
+</script>

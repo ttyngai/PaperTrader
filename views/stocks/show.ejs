@@ -240,4 +240,23 @@ if (<%=user.premium%>){
   if(localStorage.activeFocus){
     document.getElementById(localStorage.activeFocus).focus();
   }
+  
+  let countDownNum;
+  let membershipLevel;
+    if(<%=req.user.premium%>){
+      countDownNum = 10;
+      membershipLevel = 'Premium'
+    } else {
+      countDownNum = 60;
+      membershipLevel = 'Basic'
+    }
+        function countDown(){
+          let countDownString = `${membershipLevel}(${countDownNum})`
+          document.getElementById('countDownNum').innerHTML = countDownString
+          countDownNum--;
+          setTimeout(function(){
+            countDown()
+          },1000)
+        }
+        countDown()
 </script>
