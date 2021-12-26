@@ -156,4 +156,13 @@
     if (localStorage.activeFocus) {
       document.getElementById(localStorage.activeFocus).focus();
     }
+    let countDownTime = 60;
+    function countDown(){
+      document.getElementById('countDown').innerHTML = countDownTime
+      countDownTime--;
+      setTimeout(function(){
+        countDown()
+      },1000)
+    }
+    countDown()
 </script>
