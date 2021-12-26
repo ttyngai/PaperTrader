@@ -160,13 +160,16 @@
         // if(document.getElementById('countDownNumBasic')){
 
   let countDownNum;
+  let membershipLevel;
     if(<%=req.user.premium%>){
       countDownNum = 10;
+      membershipLevel = 'Basic'
     } else {
       countDownNum = 60;
+      membershipLevel = 'Premium'
     }
         function countDown(){
-          let countDownString = `(${countDownNum})`
+          let countDownString = `${membershipLevel}(${countDownNum})`
           document.getElementById('countDownNum').innerHTML = countDownString
           countDownNum--;
           setTimeout(function(){
