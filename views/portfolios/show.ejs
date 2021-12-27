@@ -161,8 +161,12 @@
 
         <td><%= p.avgPrice.toFixed(2) %></td>
 
-        <% if (p.preRegAfterCombinedPrice){ %>
-        <td><%= p.preRegAfterCombinedPrice.toFixed(2)%></td>
+        <% if (p.preRegAfterCombinedPrice*p.shares){ %>
+        <td>
+          $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
+          maximumFractionDigits:
+          2,}).format((p.preRegAfterCombinedPrice*p.shares).toFixed(2))%>
+        </td>
         <%} else {%>
         <td>0</td>
         <%} %>

@@ -29,7 +29,6 @@ const sampleTicker = [
   { ticker: 'ZM' },
   { ticker: 'WMT' },
   { ticker: 'COKE' },
-  { ticker: 'V' },
   { ticker: 'TSLA' },
 ];
 
