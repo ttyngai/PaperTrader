@@ -56,6 +56,7 @@ async function index(req, res) {
         if (a.ticker > b.ticker) return 1;
         if (a.ticker < b.ticker) return -1;
       });
+
       const stocks = await StockPrice.getStock(stocksFound, false);
       // Check if all are hidden(empty), allow watchlist to show "No symbols added"
       let listNotEmpty = false;

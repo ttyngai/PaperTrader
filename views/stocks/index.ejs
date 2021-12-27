@@ -50,17 +50,19 @@
           <td class="stockListRight" id="stockName"><%= s.shortName%></td>
           <%} else {%>
           <td>n/a</td>
-          <%} %> <% if (s.regularMarketChangePercent) {%>
+          <%} %> <% if (s.preRegAfterCombinedPrice-s.regularMarketPreviousClose)
+          {%>
           <td
             class="
               stockListRight
-              <%=(s.regularMarketChangePercent>0)?'stockGreen':
+              <%=((s.preRegAfterCombinedPrice-s.regularMarketPreviousClose)>0)?'stockGreen':
               ''%>
-              <%=(s.regularMarketChangePercent<0)?'stockRed':
+              <%=((s.preRegAfterCombinedPrice-s.regularMarketPreviousClose)<0)?'stockRed':
               ''%>
             "
           >
-            <%=s.regularMarketChangePercent.toFixed(2) %>%
+            <%=(100*(s.preRegAfterCombinedPrice-s.regularMarketPreviousClose)/s.regularMarketPreviousClose).toFixed(2)
+            %>%
           </td>
           <% }else {%>
           <td class="stockListRight">n/a</td>
