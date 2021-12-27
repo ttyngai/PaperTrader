@@ -81,12 +81,12 @@
   <% if (quote[0]){%>
 <tbody>
   <tr class="detailInfo">
-<% if (quote[0].preRegAfterCombinedPrice-quote[0].regularMarketPreviousClose){ %>
+<% if (quote[0].preRegAfterCombinedPrice){ %>
   <th class=" tickerLeft tickerTitle
-  <%=((quote[0].preRegAfterCombinedPrice-quote[0].regularMarketPreviousClose)>0)?'stockGreen':
+  <%=((quote[0].preRegAfterCombinedPrice)>0)?'stockGreen':
   ''%>
-  <%=((quote[0].preRegAfterCombinedPrice-quote[0].regularMarketPreviousClose)<0)?'stockRed':
-  ''%>"><%= (100*(quote[0].preRegAfterCombinedPrice-quote[0].regularMarketPreviousClose)/quote[0].regularMarketPreviousClose).toFixed(2)%></th>
+  <%=((quote[0].preRegAfterCombinedPrice)<0)?'stockRed':
+  ''%>"><%= (quote[0].preRegAfterCombinedPrice)%></th>
   <%} else {%>
   <th>n/a</th>
   <%} %>
@@ -95,13 +95,13 @@
       <%} else {%>
       <th>n/a</th>
       <%} %>
-  <% if (quote[0].regularMarketPreviousClose){ %>
+  <% if (quote[0].preRegAfterCombinedPrice-quote[0].regularMarketPreviousClose){ %>
     <th class="
-    <%=(quote[0].regularMarketChangePercent>0)?'stockGreen':
-    ''%>
-    <%=(quote[0].regularMarketChangePercent<0)?'stockRed':
-    ''%>
-  "><%= (quote[0].regularMarketChangePercent).toFixed(2)%>%</th>
+    <%=((quote[0].preRegAfterCombinedPrice-quote[0].regularMarketPreviousClose)>0)?'stockGreen':
+  ''%>
+  <%=((quote[0].preRegAfterCombinedPrice-quote[0].regularMarketPreviousClose)<0)?'stockRed':
+  ''%>
+  "><%= (100*(quote[0].preRegAfterCombinedPrice-quote[0].regularMarketPreviousClose)/quote[0].regularMarketPreviousClose).toFixed(2)%>%</th>
     <%} else {%>
     <th>n/a</th>
     <%} %>
