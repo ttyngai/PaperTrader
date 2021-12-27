@@ -128,7 +128,7 @@ async function getChartData(ticker, interval, range) {
           if (hour < 10) {
             hour = `0${hour}`;
           }
-          // more timeframes with it's timeframes(Icebox)
+          // More timeframes with it's timeframes(Icebox)
           let newTime = `${hour}:${minute}`;
           row.push(newTime);
           row.push(low[i]);

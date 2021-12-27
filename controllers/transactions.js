@@ -12,7 +12,7 @@ function create(req, res) {
     if (!portfolio.user.equals(req.user._id)) {
       return res.redirect('/stocks');
     }
-
+    // Find stock to be transacted
     Stock.findById(req.params.id, function (err, stock) {
       req.body.ticker = stock.ticker;
       req.body._id = req.params.id;

@@ -8,7 +8,6 @@ module.exports = {
   create,
   hide,
 };
-
 // For first time users, populates the watch list with sample tickers.
 const sampleTicker = [
   { ticker: 'AAPL' },
@@ -31,7 +30,6 @@ const sampleTicker = [
   { ticker: 'COKE' },
   { ticker: 'TSLA' },
 ];
-
 async function index(req, res) {
   //Check to see if it's first time login, populates with sample watch list
   if (req.user.firstTime) {
@@ -45,17 +43,15 @@ async function index(req, res) {
       res.redirect('/stocks');
     });
   }
-
   // Not first time user, proceed to show list
   else {
-    // pass in array of tickers
+    // Pass in array of tickers
     Stock.find({ user: req.user }, async function (err, stocksFound) {
       // Sort alphabetically
       stocksFound.sort(function (a, b) {
         if (a.ticker > b.ticker) return 1;
         if (a.ticker < b.ticker) return -1;
       });
-
       // Seperate futures
       let futures = [];
       let nonFutures = [];
@@ -64,9 +60,7 @@ async function index(req, res) {
           ? futures.push(stock)
           : nonFutures.push(stock);
       });
-
       const stocksSorted = futures.concat(nonFutures);
-
       const stocks = await StockPrice.getStock(stocksSorted, false);
       // Check if all are hidden(empty), allow watchlist to show "No symbols added"
       let listNotEmpty = false;
@@ -84,6 +78,7 @@ async function index(req, res) {
     });
   }
 }
+// Hide stock
 function hide(req, res) {
   Stock.findById(req.params.id, function (err, stock) {
     stock.hide = true;
@@ -91,7 +86,6 @@ function hide(req, res) {
     res.redirect('/stocks');
   });
 }
-
 async function show(req, res) {
   Stock.findById(req.params.id, function (err, stock) {
     //Protect route unless from logged in user
@@ -124,10 +118,9 @@ async function show(req, res) {
       ];
       const chartParsed = await StockPrice.getChartData(
         stock.ticker,
-        `1m`,
+        `5m`,
         `1d`
       );
-
       // let testTime = new Date().getTimezoneOffset() / 60;
       res.render('stocks/show', {
         title: 'Stocks',
@@ -150,7 +143,6 @@ async function create(req, res) {
   obj['ticker'] = req.body.ticker;
   ticker.push(obj);
   check = await StockPrice.getStock(ticker, true);
-
   // Check stock duplicate
   const duplicate = await Stock.findOne({
     $and: [{ ticker: req.body.ticker }, { user: req.user._id }],
@@ -159,7 +151,6 @@ async function create(req, res) {
   if (!check) {
     res.redirect('/stocks');
   }
-
   //If duplicated, sets hide to false
   if (duplicate) {
     Stock.findOne(
@@ -173,7 +164,6 @@ async function create(req, res) {
       }
     );
   }
-
   // Is a stock, not a duplicate, create new entry
   if (check && !duplicate) {
     console.log('re.body', req.body);
