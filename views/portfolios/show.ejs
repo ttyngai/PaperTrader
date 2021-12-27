@@ -216,10 +216,6 @@
 <%- include('../partials/footer') %>
 <!-- Refresh Script -->
 <script>
-  if (localStorage.activeFocus) {
-        document.getElementById(localStorage.activeFocus).focus();
-      }
-    console.log(localStorage)
     //Bonus upgraded refresh rate for premium users
       let refreshRate=60000;
     if (<%=user.premium%>){
@@ -232,31 +228,62 @@
       if (localStorage.referrer !== window.location.href ) {
         delete localStorage.inputField;
         delete localStorage.activeFocus;
+        localStorage.saveWasClicked = false
       }
-      const tempInput = localStorage.inputField;
-      if (tempInput && localStorage.referrer === window.location.href) {
-        document.getElementById('portfolioEditting').value = tempInput;
+      if (localStorage.saveWasClicked){
+        localStorage.saveWasClicked = false
       }
-      document
-        .getElementById('portfolioEditting')
-        .addEventListener('input', function () {
-          localStorage.inputField =
-            document.getElementById('portfolioEditting').value;
-           // Portfolio name edit button show up
-           document.getElementById('portfolioEditButton').classList.add('portfolioEditActive')
-           document.getElementById('portfolioEditButton').value = 'Save'
-          });
-
-      document
-        .getElementById('portfolioEditting')
-        .addEventListener('click', function () {
-          localStorage.activeFocus = 'portfolioEditting';
-        });
+      // Register input box is of focus, refreshes to focus() on input box
       document
         .getElementById('portfolioEditButton')
         .addEventListener('click', function () {
           localStorage.activeFocus = 'portfolioEditting';
         });
+
+      // If local portfolio edit was previously focused, we need save button handy
+      if (localStorage.activeFocus) {
+        document.getElementById(localStorage.activeFocus).focus();
+      }
+
+  // Store input in localStorage to be used later
+      const tempInput = localStorage.inputField;
+      if (tempInput && localStorage.referrer === window.location.href) {
+        document.getElementById('portfolioEditting').value = tempInput;
+      }
+
+      // Nested eventListener. If save button is activated, a second click will deactive focus() on input next refresh, since edit action is completed
+      document
+        .getElementById('portfolioEditting')
+        .addEventListener('input', function () {
+          localStorage.inputField =
+            document.getElementById('portfolioEditting').value;
+            document.getElementById('portfolioEditButton').classList.add('portfolioEditActive')
+           document.getElementById('portfolioEditButton').value = 'Save'
+           document
+        .getElementById('portfolioEditButton')
+        .addEventListener('click', function(){
+          delete localStorage.activeFocus
+        })
+          });
+
+          // Nested eventListener. If save button is activated, a second click will deactive focus() on input next refresh, since edit action is completed
+      document
+        .getElementById('portfolioEditting')
+        .addEventListener('focus', function () {
+          if(localStorage.saveWasClicked){
+          document.getElementById('portfolioEditButton').classList.add('portfolioEditActive')
+           document.getElementById('portfolioEditButton').value = 'Save'
+           document
+        .getElementById('portfolioEditButton')
+        .addEventListener('click', function(){
+          delete localStorage.activeFocus
+        })
+
+          }
+        });
+
+
+        // Countdown before refresh
     let countDownNum;
     let membershipLevel;
       if(<%=req.user.premium%>){
