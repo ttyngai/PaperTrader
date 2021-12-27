@@ -55,9 +55,9 @@
           <td
             class="
               stockListRight
-              <%=((s.preRegAfterCombinedPrice-s.regularMarketPreviousClose)>0)?'stockGreen':
+              <%=((s.preRegAfterCombinedPrice-s.regularMarketPreviousClose)>0.001)?'stockGreen':
               ''%>
-              <%=((s.preRegAfterCombinedPrice-s.regularMarketPreviousClose)<0)?'stockRed':
+              <%=((s.preRegAfterCombinedPrice-s.regularMarketPreviousClose)<-0.001)?'stockRed':
               ''%>
             "
           >
@@ -78,9 +78,9 @@
           <td
             class="
               stockListRight
-              <%=((s.preRegAfterCombinedPrice-s.regularMarketOpen).toFixed(2)>0)?'stockGreen':
+              <%=((s.preRegAfterCombinedPrice-s.regularMarketOpen).toFixed(2)>0.001)?'stockGreen':
               ''%>
-              <%=((s.preRegAfterCombinedPrice-s.regularMarketOpen).toFixed(2)<0)?'stockRed':
+              <%=((s.preRegAfterCombinedPrice-s.regularMarketOpen).toFixed(2)<-0.001)?'stockRed':
               ''%>
             "
           >
