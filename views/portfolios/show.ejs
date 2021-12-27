@@ -78,6 +78,22 @@
           maximumFractionDigits:
           2,}).format((totalHoldings-realizedPL).toFixed(2))%>
         </td>
+<tr>
+        <td class="positionTitle">Total P/L:</td>
+        <td
+          class="
+            PLPrices
+            <%=(totalHoldings-realizedPL>0.001)?'stockGreen':
+            ''%>
+            <%=(totalHoldings-realizedPL<-0.001)?'stockRed':
+            ''%>
+          "
+        >
+          $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
+          maximumFractionDigits:
+          2,}).format((totalHoldings-realizedPL+unrealizedPL).toFixed(2))%>
+        </td>
+      </tr>
       </tr>
     </table>
     <br />
