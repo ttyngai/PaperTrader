@@ -315,9 +315,9 @@ table {
   font-size: 1rem;
   z-index: -1;
 }
-.portfolioEditFocus {
+/* .portfolioEditFocus {
   border: 1px solid var(--stockYellow);
-}
+} */
 .portfolioEdit:hover {
   background-color: var(--stockYellow);
   color: black;
@@ -334,9 +334,9 @@ table {
   border: 0.1rem solid black;
   color: var(--stockYellow);
   border-radius: 0.25rem;
-  padding-left: 1rem;
+  padding-left: 0.5rem;
   font-size: 1.5rem;
-  width: 20rem;
+  width: 16rem;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;

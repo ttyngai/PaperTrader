@@ -53,9 +53,9 @@
         <td
           class="
             PLPrices
-            <%=(unrealizedPL>0)?'stockGreen':
+            <%=(unrealizedPL>0.001)?'stockGreen':
             ''%>
-            <%=(unrealizedPL<0)?'stockRed':
+            <%=(unrealizedPL<-0.001)?'stockRed':
             ''%>
           "
         >
@@ -68,9 +68,9 @@
         <td
           class="
             PLPrices
-            <%=(totalHoldings-realizedPL>0)?'stockGreen':
+            <%=(totalHoldings-realizedPL>0.001)?'stockGreen':
             ''%>
-            <%=(totalHoldings-realizedPL<0)?'stockRed':
+            <%=(totalHoldings-realizedPL<-0.001)?'stockRed':
             ''%>
           "
         >
@@ -216,63 +216,63 @@
 <%- include('../partials/footer') %>
 <!-- Refresh Script -->
 <script>
-  //Bonus upgraded refresh rate for premium users
-    let refreshRate=60000;
-  if (<%=user.premium%>){
-    refreshRate = 10000
-  }
-    window.setTimeout(function () {
-      window.location.reload();
-    }, refreshRate);
-    // Refresh input retainer
-    if (localStorage.referrer !== window.location.href) {
-      delete localStorage.inputField;
-      delete localStorage.activeFocus;
+  if (localStorage.activeFocus) {
+        document.getElementById(localStorage.activeFocus).focus();
+      }
+    console.log(localStorage)
+    //Bonus upgraded refresh rate for premium users
+      let refreshRate=60000;
+    if (<%=user.premium%>){
+      refreshRate = 10000
     }
-    const tempInput = localStorage.inputField;
-    if (tempInput && localStorage.referrer === window.location.href) {
-      document.getElementById('portfolioEditting').value = tempInput;
-    }
-    document
-      .getElementById('portfolioEditting')
-      .addEventListener('input', function () {
-        localStorage.inputField =
-          document.getElementById('portfolioEditting').value;
-         // Portfolio name edit button show up
-         document.getElementById('portfolioEditButton').classList.add('portfolioEditActive')
-         document.getElementById('portfolioEditButton').value = 'Save'
-        });
+      window.setTimeout(function () {
+        window.location.reload();
+      }, refreshRate);
+      // Refresh input retainer
+      if (localStorage.referrer !== window.location.href ) {
+        delete localStorage.inputField;
+        delete localStorage.activeFocus;
+      }
+      const tempInput = localStorage.inputField;
+      if (tempInput && localStorage.referrer === window.location.href) {
+        document.getElementById('portfolioEditting').value = tempInput;
+      }
+      document
+        .getElementById('portfolioEditting')
+        .addEventListener('input', function () {
+          localStorage.inputField =
+            document.getElementById('portfolioEditting').value;
+           // Portfolio name edit button show up
+           document.getElementById('portfolioEditButton').classList.add('portfolioEditActive')
+           document.getElementById('portfolioEditButton').value = 'Save'
+          });
 
-    document
-      .getElementById('portfolioEditting')
-      .addEventListener('click', function () {
-        localStorage.activeFocus = 'portfolioEditting';
-      });
-    document
-      .getElementById('portfolioEditButton')
-      .addEventListener('click', function () {
-        localStorage.activeFocus = 'portfolioEditting';
-        document.getElementById('portfolioEditting').classList.add('portfolioEditFocus');
-      });
-    if (localStorage.activeFocus) {
-      document.getElementById(localStorage.activeFocus).focus();
-    }
-  let countDownNum;
-  let membershipLevel;
-    if(<%=req.user.premium%>){
-      countDownNum = 10;
-      membershipLevel = 'Premium'
-    } else {
-      countDownNum = 60;
-      membershipLevel = 'Basic'
-    }
-        function countDown(){
-          let countDownString = `${membershipLevel}(${countDownNum})`
-          document.getElementById('countDownNum').innerHTML = countDownString
-          countDownNum--;
-          setTimeout(function(){
-            countDown()
-          },1000)
-        }
-        countDown()
+      document
+        .getElementById('portfolioEditting')
+        .addEventListener('click', function () {
+          localStorage.activeFocus = 'portfolioEditting';
+        });
+      document
+        .getElementById('portfolioEditButton')
+        .addEventListener('click', function () {
+          localStorage.activeFocus = 'portfolioEditting';
+        });
+    let countDownNum;
+    let membershipLevel;
+      if(<%=req.user.premium%>){
+        countDownNum = 10;
+        membershipLevel = 'Premium'
+      } else {
+        countDownNum = 60;
+        membershipLevel = 'Basic'
+      }
+          function countDown(){
+            let countDownString = `${membershipLevel}(${countDownNum})`
+            document.getElementById('countDownNum').innerHTML = countDownString
+            countDownNum--;
+            setTimeout(function(){
+              countDown()
+            },1000)
+          }
+          countDown()
 </script>
