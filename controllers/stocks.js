@@ -103,19 +103,19 @@ async function show(req, res) {
       ticker.push(obj);
       const quote = await StockPrice.getStock(ticker, false);
       //Charting data options (icebox)
-      let validRanges = [
-        '1d',
-        '5d',
-        '1mo',
-        '3mo',
-        '6mo',
-        '1y',
-        '2y',
-        '5y',
-        '10y',
-        'ytd',
-        'max',
-      ];
+      // let validRanges = [
+      //   '1d',
+      //   '5d',
+      //   '1mo',
+      //   '3mo',
+      //   '6mo',
+      //   '1y',
+      //   '2y',
+      //   '5y',
+      //   '10y',
+      //   'ytd',
+      //   'max',
+      // ];
       const chartParsed = await StockPrice.getChartData(
         stock.ticker,
         `5m`,
