@@ -57,7 +57,18 @@ async function index(req, res) {
         if (a.ticker < b.ticker) return -1;
       });
 
-      const stocks = await StockPrice.getStock(stocksFound, false);
+      // Seperate futures
+      let futures = [];
+      let nonFutures = [];
+      stocksFound.forEach(function (stock) {
+        stock.ticker.includes('=')
+          ? futures.push(stock)
+          : nonFutures.push(stock);
+      });
+
+      const stocksSorted = futures.concat(nonFutures);
+
+      const stocks = await StockPrice.getStock(stocksSorted, false);
       // Check if all are hidden(empty), allow watchlist to show "No symbols added"
       let listNotEmpty = false;
       stocks.forEach(function (s) {
