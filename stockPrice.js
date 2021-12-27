@@ -145,6 +145,5 @@ async function getChartData(ticker, interval, range) {
       });
     })
     .catch((err) => console.log(err));
-  // console.log(array);
   return array;
 }

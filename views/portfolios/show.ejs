@@ -1,5 +1,5 @@
 <%- include('../partials/header') %>
-
+<!-- Portfolio Name/Editting -->
 <div class="portfolioContent">
   <div class="portfolioSections">
     <div id="portfolioControl">
@@ -25,7 +25,6 @@
           value="Edit"
         />
       </form>
-
       <form
         class="portfolioDeleteContainer"
         id="portfolioDeleteButton"
@@ -40,6 +39,7 @@
       </form>
     </div>
     <table id="PLSection">
+      <!-- Position Size -->
       <tr>
         <td class="positionTitle">Position Size:</td>
         <td>
@@ -48,6 +48,7 @@
           2,}).format(Math.abs(totalHoldings+unrealizedPL).toFixed(2))%>
         </td>
       </tr>
+      <!-- Holdings P/L -->
       <tr>
         <td class="positionTitle">Holdings P/L:</td>
         <td
@@ -63,6 +64,7 @@
           maximumFractionDigits: 2,}).format(unrealizedPL.toFixed(2))%>
         </td>
       </tr>
+      <!-- Realized P/L -->
       <tr>
         <td class="positionTitle">Realized P/L:</td>
         <td
@@ -78,7 +80,8 @@
           maximumFractionDigits:
           2,}).format((totalHoldings-realizedPL).toFixed(2))%>
         </td>
-<tr>
+        <!-- Total P/L -->
+        <tr>
         <td class="positionTitle">Total P/L:</td>
         <td
           class="
@@ -112,10 +115,11 @@
         <th>Size</th>
       </tr>
     </thead>
-
     <tbody>
       <% prices.forEach(function(p) { %>
-      <tr class="portfolioList">
+        <!-- Holdings -->
+        <tr class="portfolioList">
+        <!-- Tickers -->
         <td class="tickerLeft">
           <form
             class="tickerForm"
@@ -124,7 +128,7 @@
             <input type="submit" class="tickerButton" value="<%= p.symbol %>" />
           </form>
         </td>
-
+        <!-- Shares -->
         <td
           class="
             <%=(p.shares>0)?'stockGreen':
@@ -135,12 +139,14 @@
         >
           <%= p.shares %>
         </td>
-
+        <!-- Price -->
         <% if (p.preRegAfterCombinedPrice){ %>
         <td><%= p.preRegAfterCombinedPrice.toFixed(2)%></td>
         <%} else {%>
         <td>0</td>
-        <%} %> <% if (p.preRegAfterCombinedPrice-p.avgPrice){ %>
+        <%} %> 
+        <!-- %P/L -->
+        <% if (p.preRegAfterCombinedPrice-p.avgPrice){ %>
         <td
           class="
             <%=(p.regularMarketChangePercent>0.001)?'stockGreen':
@@ -154,7 +160,9 @@
         </td>
         <%} else {%>
         <td>0</td>
-        <%} %> <% if (p.preRegAfterCombinedPrice - p.avgPrice){ %>
+        <%} %> 
+        <!-- $P/L -->
+        <% if (p.preRegAfterCombinedPrice - p.avgPrice){ %>
         <td
           class="
             <%=(p.preRegAfterCombinedPrice
@@ -174,9 +182,9 @@
         <%} else {%>
         <td>0</td>
         <%} %>
-
+          <!-- Average Price -->
         <td><%= p.avgPrice.toFixed(2) %></td>
-
+        <!-- Position Size -->
         <% if (p.preRegAfterCombinedPrice*p.shares){ %>
         <td>
           $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
@@ -211,16 +219,21 @@
     <tbody>
       <% portfolio.transactions.forEach(function(t) { %>
       <tr class="portfolioList transactionBorderBottom">
+        <!-- Ticker -->
         <td class="tickerLeft tickerTitle tickerTransactionUnbold">
           <%= t.ticker %>
         </td>
+        <!-- Action(Buy/Sell) -->
         <% if(t.shares>0) { %>
         <td class="buySell stockGreen">Buy</td>
         <%} else {%>
         <td class="buySell stockRed">Sell</td>
         <%} %>
+        <!-- Shares -->
         <td><%= Math.abs(t.shares) %></td>
+        <!-- Transaction Price -->
         <td><%= t.price.toFixed(2) %></td>
+        <!-- Date & Time of transaction -->
         <td>
           <%= t.createdAt.toLocaleDateString() %> <%=
           t.createdAt.toLocaleTimeString('en-GB') %>
@@ -265,7 +278,7 @@
         document.getElementById(localStorage.activeFocus).focus();
       }
 
-  // Store input in localStorage to be used later
+      // Store input in localStorage to be used later
       const tempInput = localStorage.inputField;
       if (tempInput && localStorage.referrer === window.location.href) {
         document.getElementById('portfolioEditting').value = tempInput;
@@ -285,7 +298,6 @@
           delete localStorage.activeFocus
         })
           });
-
           // Nested eventListener. If save button is activated, a second click will deactive focus() on input next refresh, since edit action is completed
       document
         .getElementById('portfolioEditting')
@@ -298,11 +310,8 @@
         .addEventListener('click', function(){
           delete localStorage.activeFocus
         })
-
           }
         });
-
-
         // Countdown before refresh
     let countDownNum;
     let membershipLevel;

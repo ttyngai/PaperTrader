@@ -1,5 +1,6 @@
 <%- include('../partials/header') %>
 <div class="pageContainer">
+  <!-- Form for adding stocks -->
   <form id="searchForm" action="/stocks" method="POST">
     <input
       class="search"
@@ -18,6 +19,7 @@
       value="Add"
     />
   </form>
+  <!-- Stocks watchlist container -->
   <div class="stockContent">
     <table id="watchListContent">
       <%if (listNotEmpty==true){ %>
@@ -36,6 +38,7 @@
       <tbody id="wholeForm">
         <% stocks.forEach(function(s) {if (!s.hide) { %>
         <tr id="eachStock">
+          <!-- Stock Ticker -->
           <td class="tickerLeft">
             <form class="tickerForm" action="/stocks/<%= s._id %>">
               <input
@@ -45,13 +48,14 @@
               />
             </form>
           </td>
-
+          <!-- Stock company name -->
           <% if (s.shortName){ %>
           <td class="stockListRight" id="stockName"><%= s.shortName%></td>
           <%} else {%>
           <td>n/a</td>
-          <%} %> <% if (s.preRegAfterCombinedPrice-s.regularMarketPreviousClose)
-          {%>
+          <%} %>
+          <!-- %Change -->
+          <% if (s.preRegAfterCombinedPrice-s.regularMarketPreviousClose) {%>
           <td
             class="
               stockListRight
@@ -66,14 +70,17 @@
           </td>
           <% }else {%>
           <td class="stockListRight">n/a</td>
-          <% }%> <% if (s.preRegAfterCombinedPrice){ %>
+          <% }%>
+          <!-- Stock Price -->
+          <% if (s.preRegAfterCombinedPrice){ %>
           <td class="stockListRight">
             <%= s.preRegAfterCombinedPrice.toFixed(2)%>
           </td>
           <%} else {%>
           <td>n/a</td>
-          <%} %> <% if (s.preRegAfterCombinedPrice-s.regularMarketPreviousClose)
-          {%>
+          <%} %>
+          <!-- $ Change -->
+          <% if (s.preRegAfterCombinedPrice-s.regularMarketPreviousClose) {%>
 
           <td
             class="
@@ -88,18 +95,18 @@
             (s.preRegAfterCombinedPrice-s.regularMarketPreviousClose).toFixed(2)
             %>
           </td>
-
           <% }else {%>
-
           <td class="stockListRight">n/a</td>
-          <% }%> <% if (s.regularMarketPreviousClose) {%>
+          <% }%>
+          <!-- Previous day market close -->
+          <% if (s.regularMarketPreviousClose) {%>
           <td class="stockListRight">
             <%=s.regularMarketPreviousClose.toFixed(2) %>
           </td>
           <% }else {%>
           <td class="stockListRight">n/a</td>
           <% }%>
-
+          <!-- Remove button -->
           <td class="removeButtonSlot">
             <form action="/stocks/<%= s._id %>?_method=UPDATE" method="POST">
               <button id="removeStock" type="submit">X</button>
@@ -110,6 +117,7 @@
       </tbody>
       <%} else{ %>
       <tbody>
+        <!-- If list empty, "Empty" message is rendered -->
         <tr id="noStock">
           <td>Stock list empty.</td>
         </tr>
@@ -121,59 +129,63 @@
 <%- include('../partials/footer') %>
 <!-- Refresh Script -->
 <script>
-      //Bonus upgraded refresh rate for premium users
-      let refreshRate=60000;
-      if (<%=user.premium%>){
-        refreshRate = 10000
+    //Bonus upgraded refresh rate for premium users
+    let refreshRate=60000;
+    if (<%=user.premium%>){
+      refreshRate = 10000
+    }
+      window.setTimeout(function () {
+        window.location.reload();
+      }, refreshRate);
+
+      // Refresh input retainer
+      if (localStorage.referrer !== window.location.href) {
+        delete localStorage.inputField;
+        delete localStorage.activeFocus
       }
-        window.setTimeout(function () {
-          window.location.reload();
-        }, refreshRate);
-
-        // Refresh input retainer
-        if (localStorage.referrer !== window.location.href) {
-          delete localStorage.inputField;
-          delete localStorage.activeFocus
-        }
-        const tempInput = localStorage.inputField;
-        if (tempInput && localStorage.referrer === window.location.href) {
-          document.getElementById('stockSearchBox').value = tempInput;
-        }
+      const tempInput = localStorage.inputField;
+      if (tempInput && localStorage.referrer === window.location.href) {
+        document.getElementById('stockSearchBox').value = tempInput;
+      }
+      // Save input prior to refresh
+      document
+        .getElementById('stockSearchBox')
+        .addEventListener('input', function () {
+          localStorage.inputField = document.getElementById('stockSearchBox').value;
+        });
+      // When search button is pressed, clear inputfield
         document
-          .getElementById('stockSearchBox')
-          .addEventListener('input', function () {
-            localStorage.inputField = document.getElementById('stockSearchBox').value;
-          });
-          document
-          .getElementById('searchTickerButton')
-          .addEventListener('click', function () {
-            delete localStorage.inputField
-          });
-
-          document
-          .getElementById('stockSearchBox')
-          .addEventListener('click', function () {
-            localStorage.activeFocus = 'stockSearchBox';
-          });
-        if (localStorage.activeFocus) {
-          document.getElementById(localStorage.activeFocus).focus();
-        }
+        .getElementById('searchTickerButton')
+        .addEventListener('click', function () {
+          delete localStorage.inputField
+        });
+      // When stock search box is clicked, remember to remain focus even after refresh
+        document
+        .getElementById('stockSearchBox')
+        .addEventListener('click', function () {
+          localStorage.activeFocus = 'stockSearchBox';
+        });
+      // Checks to see if box should be focus while page loads
+      if (localStorage.activeFocus) {
+        document.getElementById(localStorage.activeFocus).focus();
+      }
+      // Membership refresh time count down
   let countDownNum;
   let membershipLevel;
-    if(<%=req.user.premium%>){
-      countDownNum = 10;
-      membershipLevel = 'Premium'
-    } else {
-      countDownNum = 60;
-      membershipLevel = 'Basic'
-    }
-        function countDown(){
-          let countDownString = `${membershipLevel}(${countDownNum})`
-          document.getElementById('countDownNum').innerHTML = countDownString
-          countDownNum--;
-          setTimeout(function(){
-            countDown()
-          },1000)
-        }
-        countDown()
+  if(<%=req.user.premium%>){
+    countDownNum = 10;
+    membershipLevel = 'Premium'
+  } else {
+    countDownNum = 60;
+    membershipLevel = 'Basic'
+  }
+      function countDown(){
+        let countDownString = `${membershipLevel}(${countDownNum})`
+        document.getElementById('countDownNum').innerHTML = countDownString
+        countDownNum--;
+        setTimeout(function(){
+          countDown()
+        },1000)
+      }
+      countDown()
 </script>
