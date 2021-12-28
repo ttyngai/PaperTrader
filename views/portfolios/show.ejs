@@ -147,7 +147,7 @@
         <td>0</td>
         <%} %>
         <!-- %P/L -->
-        <% if (p.preRegAfterCombinedPrice-p.avgPrice){ %>
+        <% if (p.avgPrice && p.preRegAfterCombinedPrice-p.avgPrice){ %>
         <td
           class="
             <%=(p.regularMarketChangePercent>0.0001)?'stockGreen':
@@ -214,7 +214,7 @@
         <th>Action</th>
         <th>Shares</th>
         <th>Transact Price</th>
-        <th>Date & Time</th>
+        <th>Date & Time (Local)</th>
       </tr>
     </thead>
     <tbody>
