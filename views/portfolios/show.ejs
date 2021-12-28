@@ -150,9 +150,9 @@
         <% if (p.avgPrice && p.preRegAfterCombinedPrice-p.avgPrice){ %>
         <td
           class="
-            <%=(p.regularMarketChangePercent>0.0001)?'stockGreen':
+            <%=((p.preRegAfterCombinedPrice-p.avgPrice)>0.0001)?'stockGreen':
             ''%>
-            <%=(p.regularMarketChangePercent<-0.0001)?'stockRed':
+            <%=((p.preRegAfterCombinedPrice-p.avgPrice)<-0.0001)?'stockRed':
             ''%>
           "
         >
