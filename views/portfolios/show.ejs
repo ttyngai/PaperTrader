@@ -304,7 +304,7 @@
 
     if (localStorage.inputField && localStorage.inputField !== document.getElementById('portfolioEditting').value){
       document.getElementById('portfolioEditButton').classList.add('portfolioEditActive')
-      document.getElementById('portfolioEditButton').value = 'Save'
+      // document.getElementById('portfolioEditButton').value = 'Save'
       document.getElementById('portfolioEditButton').addEventListener('click', function(){
         console.log("Something when save was clicked")
         localStorage.saveWasClicked = true
@@ -326,8 +326,8 @@
       .addEventListener('input', function () {
         localStorage.inputField =
         document.getElementById('portfolioEditting').value;
-      //     document.getElementById('portfolioEditButton').classList.add('portfolioEditActive')
-      //    document.getElementById('portfolioEditButton').value = 'Save'
+          document.getElementById('portfolioEditButton').classList.add('portfolioEditActive')
+        //  document.getElementById('portfolioEditButton').value = 'Save'
       //    document.getElementById('portfolioEditButton').addEventListener('click', function(){
       //     localStorage.saveWasClicked = true
       //   console.log("Something when save was clicked")
