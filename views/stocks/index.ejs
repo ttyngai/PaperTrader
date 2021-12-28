@@ -59,9 +59,9 @@
           <td
             class="
               stockListRight
-              <%=((s.preRegAfterCombinedPrice-s.regularMarketPreviousClose)>0.001)?'stockGreen':
+              <%=((s.preRegAfterCombinedPrice-s.regularMarketPreviousClose)>0.0001)?'stockGreen':
               ''%>
-              <%=((s.preRegAfterCombinedPrice-s.regularMarketPreviousClose)<-0.001)?'stockRed':
+              <%=((s.preRegAfterCombinedPrice-s.regularMarketPreviousClose)<-0.0001)?'stockRed':
               ''%>
             "
           >
@@ -72,11 +72,16 @@
           <td class="stockListRight">n/a</td>
           <% }%>
           <!-- Stock Price -->
-          <% if (s.preRegAfterCombinedPrice){ %>
+          <% if (s.preRegAfterCombinedPrice){ %> <% if
+          (s.preRegAfterCombinedPrice>99999){ %>
+          <td class="stockListRight">
+            <%= (s.preRegAfterCombinedPrice/1000).toFixed(2)%>k
+          </td>
+          <%} else {%>
           <td class="stockListRight">
             <%= s.preRegAfterCombinedPrice.toFixed(2)%>
           </td>
-          <%} else {%>
+          <%} %> <%} else {%>
           <td>n/a</td>
           <%} %>
           <!-- $ Change -->
@@ -85,9 +90,9 @@
           <td
             class="
               stockListRight
-              <%=((s.preRegAfterCombinedPrice-s.regularMarketOpen).toFixed(2)>0.001)?'stockGreen':
+              <%=((s.preRegAfterCombinedPrice-s.regularMarketOpen).toFixed(2)>0.0001)?'stockGreen':
               ''%>
-              <%=((s.preRegAfterCombinedPrice-s.regularMarketOpen).toFixed(2)<-0.001)?'stockRed':
+              <%=((s.preRegAfterCombinedPrice-s.regularMarketOpen).toFixed(2)<-0.0001)?'stockRed':
               ''%>
             "
           >
@@ -98,14 +103,19 @@
           <% }else {%>
           <td class="stockListRight">n/a</td>
           <% }%>
+
           <!-- Previous day market close -->
-          <% if (s.regularMarketPreviousClose) {%>
+          <% if (s.regularMarketPreviousClose) {%> <% if
+          (s.regularMarketPreviousClose>99999) {%>
           <td class="stockListRight">
-            <%=s.regularMarketPreviousClose.toFixed(2) %>
+            <%=(s.regularMarketPreviousClose/1000).toFixed(2) %>k
           </td>
-          <% }else {%>
+          <% } else {%>
+          <td><%=s.regularMarketPreviousClose.toFixed(2) %></td>
+          <% }%> <% } else {%>
           <td class="stockListRight">n/a</td>
           <% }%>
+
           <!-- Remove button -->
           <td class="removeButtonSlot">
             <form action="/stocks/<%= s._id %>?_method=UPDATE" method="POST">

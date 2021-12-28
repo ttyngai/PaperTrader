@@ -54,9 +54,9 @@
         <td
           class="
             PLPrices
-            <%=(unrealizedPL>0.001)?'stockGreen':
+            <%=(unrealizedPL>0.0001)?'stockGreen':
             ''%>
-            <%=(unrealizedPL<-0.001)?'stockRed':
+            <%=(unrealizedPL<-0.0001)?'stockRed':
             ''%>
           "
         >
@@ -70,9 +70,9 @@
         <td
           class="
             PLPrices
-            <%=(totalHoldings-realizedPL>0.001)?'stockGreen':
+            <%=(totalHoldings-realizedPL>0.0001)?'stockGreen':
             ''%>
-            <%=(totalHoldings-realizedPL<-0.001)?'stockRed':
+            <%=(totalHoldings-realizedPL<-0.0001)?'stockRed':
             ''%>
           "
         >
@@ -86,9 +86,9 @@
         <td
           class="
             PLPrices
-            <%=(totalHoldings-realizedPL>0.001)?'stockGreen':
+            <%=(totalHoldings-realizedPL>0.0001)?'stockGreen':
             ''%>
-            <%=(totalHoldings-realizedPL<-0.001)?'stockRed':
+            <%=(totalHoldings-realizedPL<-0.0001)?'stockRed':
             ''%>
           "
         >
@@ -149,9 +149,9 @@
         <% if (p.preRegAfterCombinedPrice-p.avgPrice){ %>
         <td
           class="
-            <%=(p.regularMarketChangePercent>0.001)?'stockGreen':
+            <%=(p.regularMarketChangePercent>0.0001)?'stockGreen':
             ''%>
-            <%=(p.regularMarketChangePercent<-0.001)?'stockRed':
+            <%=(p.regularMarketChangePercent<-0.0001)?'stockRed':
             ''%>
           "
         >
@@ -167,11 +167,11 @@
           class="
             <%=(p.preRegAfterCombinedPrice
             -
-            p.avgPrice>0.001)?'stockGreen':
+            p.avgPrice>0.0001)?'stockGreen':
             ''%>
             <%=(p.preRegAfterCombinedPrice
             -
-            p.avgPrice<-0.001)?'stockRed':
+            p.avgPrice<-0.0001)?'stockRed':
             ''%>
           "
         >
@@ -303,8 +303,12 @@
         .getElementById('portfolioEditting')
         .addEventListener('focus', function () {
           if(localStorage.saveWasClicked){
-          document.getElementById('portfolioEditButton').classList.add('portfolioEditActive')
-           document.getElementById('portfolioEditButton').value = 'Save'
+          // Assign active focus to edit box
+          document
+        .getElementById('portfolioEditting')
+        .addEventListener('click', function () {
+          localStorage.activeFocus = 'portfolioEditting';
+        });
            document
         .getElementById('portfolioEditButton')
         .addEventListener('click', function(){
@@ -312,6 +316,10 @@
         })
           }
         });
+        // Focus!
+        if (localStorage.activeFocus) {
+        document.getElementById(localStorage.activeFocus).focus();
+      }
         // Countdown before refresh
     let countDownNum;
     let membershipLevel;

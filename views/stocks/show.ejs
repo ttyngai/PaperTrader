@@ -94,9 +94,9 @@
     <!-- Stock Price -->
 <% if (quote[0].preRegAfterCombinedPrice){ %>
   <td class=" tickerLeft tickerTitle
-  <%=((quote[0].preRegAfterCombinedPrice)>0.001)?'stockGreen':
+  <%=((quote[0].preRegAfterCombinedPrice)>0.0001)?'stockGreen':
   ''%>
-  <%=((quote[0].preRegAfterCombinedPrice)<-0.001)?'stockRed':
+  <%=((quote[0].preRegAfterCombinedPrice)<-0.0001)?'stockRed':
   ''%>"><%= (quote[0].preRegAfterCombinedPrice)%></td>
   <%} else {%>
   <td>n/a</td>
@@ -110,9 +110,9 @@
       <!-- % Change today -->
   <% if (quote[0].preRegAfterCombinedPrice-quote[0].regularMarketPreviousClose){ %>
     <td class="
-    <%=((quote[0].preRegAfterCombinedPrice-quote[0].regularMarketPreviousClose)>0.001)?'stockGreen':
+    <%=((quote[0].preRegAfterCombinedPrice-quote[0].regularMarketPreviousClose)>0.0001)?'stockGreen':
   ''%>
-  <%=((quote[0].preRegAfterCombinedPrice-quote[0].regularMarketPreviousClose)<-0.001)?'stockRed':
+  <%=((quote[0].preRegAfterCombinedPrice-quote[0].regularMarketPreviousClose)<-0.0001)?'stockRed':
   ''%>
   "><%= (100*(quote[0].preRegAfterCombinedPrice-quote[0].regularMarketPreviousClose)/quote[0].regularMarketPreviousClose).toFixed(2)%>%</td>
     <%} else {%>
