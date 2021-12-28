@@ -23,7 +23,7 @@
           type="submit"
           class="portfolioEdit"
           id="portfolioEditButton"
-          value="Edit"
+          value="Update"
         />
       </form>
       <form
@@ -296,13 +296,12 @@
     document.getElementById('portfolioEditting').focus();
     localStorage.saveWasClicked = false
     }
-
-
     // First click of edit, with refresh, the next round will focus on input
     document.getElementById('portfolioEditButton').addEventListener('click', function(){
       localStorage.wasFocusedOn = 'portfolioEditting'
       // document.getElementById(localStorage.wasFocusedOn).focus();
     })
+
     if (localStorage.inputField && localStorage.inputField !== document.getElementById('portfolioEditting').value){
       document.getElementById('portfolioEditButton').classList.add('portfolioEditActive')
       document.getElementById('portfolioEditButton').value = 'Save'
@@ -312,10 +311,10 @@
       })
     }
     // Reverts save button to edit button if no change
-    if (localStorage.inputField == document.getElementById('portfolioEditting').value){
-      document.getElementById('portfolioEditButton').classList.remove('portfolioEditActive')
-         document.getElementById('portfolioEditButton').value = 'Edit'
-    }
+    // if (localStorage.inputField == document.getElementById('portfolioEditting').value){
+    //   document.getElementById('portfolioEditButton').classList.remove('portfolioEditActive')
+    //      document.getElementById('portfolioEditButton').value = 'Edit'
+    // }
     // Store input in localStorage to be used later
     const tempInput = localStorage.inputField;
     if (tempInput && localStorage.referrer === refWithoutQuestionMark) {
@@ -327,12 +326,12 @@
       .addEventListener('input', function () {
         localStorage.inputField =
         document.getElementById('portfolioEditting').value;
-          document.getElementById('portfolioEditButton').classList.add('portfolioEditActive')
-         document.getElementById('portfolioEditButton').value = 'Save'
-         document.getElementById('portfolioEditButton').addEventListener('click', function(){
-          localStorage.saveWasClicked = true
-        console.log("Something when save was clicked")
-      })
+      //     document.getElementById('portfolioEditButton').classList.add('portfolioEditActive')
+      //    document.getElementById('portfolioEditButton').value = 'Save'
+      //    document.getElementById('portfolioEditButton').addEventListener('click', function(){
+      //     localStorage.saveWasClicked = true
+      //   console.log("Something when save was clicked")
+      // })
         });
     // Detect focus
     localStorage.wasFocused = true;
