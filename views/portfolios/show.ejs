@@ -257,88 +257,14 @@
       window.setTimeout(function () {
         window.location.reload();
       }, refreshRate); 
-      // First click of edit
-      document.getElementById('portfolioEditButton').addEventListener('click', function(){
-      localStorage.activeFocus = 'portfolioEditting'
-      document.getElementById('portfolioEditting').focus()
-      })
-      // Refresh input retainer
-      let refWithoutQuestionMark = window.location.href;
-      if (window.location.href[window.location.href.length-1]=='?'){
-        refWithoutQuestionMark = refWithoutQuestionMark.slice(0,-1)
-      }
-      if (localStorage.referrer !== refWithoutQuestionMark ) {
-        delete localStorage.inputField;
-        delete localStorage.activeFocus;
-        localStorage.saveWasClicked = false
-      }
-      // If local portfolio edit was previously focused, we need save button handy
-      if (localStorage.activeFocus) {
-      document.getElementById(localStorage.activeFocus).focus();
-      }
-      if (localStorage.saveWasClicked){
-        localStorage.saveWasClicked = false
-      }
-      // If inputfield was changed but has not been saved, save button will remain appeared after refresh
-      !localStorage.saveWasClicked && 
-      console.log("value",document.getElementById('portfolioEditting').value)
-      if (localStorage.inputField && localStorage.inputField !== document.getElementById('portfolioEditting').value){
-        document.getElementById('portfolioEditButton').classList.add('portfolioEditActive')
-           document.getElementById('portfolioEditButton').value = 'Save'
-      }
-      // Reverts save button to edit button if no change
-      if (localStorage.inputField == document.getElementById('portfolioEditting').value){
-        document.getElementById('portfolioEditButton').classList.remove('portfolioEditActive')
-           document.getElementById('portfolioEditButton').value = 'Edit'
-      }
-      // Register input box is of focus, refreshes to focus() on input box
-      document
-        .getElementById('portfolioEditButton')
-        .addEventListener('click', function () {
-          localStorage.activeFocus = 'portfolioEditting';
-        });
-      // Store input in localStorage to be used later
-      const tempInput = localStorage.inputField;
-      if (tempInput && localStorage.referrer === refWithoutQuestionMark) {
-        document.getElementById('portfolioEditting').value = tempInput;
-      }
-      // Nested eventListener. If save button is activated, a second click will deactive focus() on input next refresh, since edit action is completed
-      document
-        .getElementById('portfolioEditting')
-        .addEventListener('input', function () {
-          localStorage.inputField =
-            document.getElementById('portfolioEditting').value;
-            document.getElementById('portfolioEditButton').classList.add('portfolioEditActive')
-           document.getElementById('portfolioEditButton').value = 'Save'
-           document
-        .getElementById('portfolioEditButton')
-        .addEventListener('click', function(){
-          delete localStorage.activeFocus
-          localStorage.saveWasClicked = true
-        })
-          });
-          // Nested eventListener. If save button is activated, a second click will deactive focus() on input next refresh, since edit action is completed
-      document
-        .getElementById('portfolioEditting')
-        .addEventListener('focus', function () {
-          if(localStorage.saveWasClicked){
-          // Assign active focus to edit
-          localStorage.activeFocus = 'portfolioEditting';
-           document
-        .getElementById('portfolioEditButton')
-        .addEventListener('click', function(){
-          delete localStorage.activeFocus
-        })
-          }
-        });
-
-        // Countdown before refresh
-    let countDownNum;
-    let membershipLevel;
+      // Countdown before refresh
+      let countDownNum;
+      let membershipLevel;
       if(<%=req.user.premium%>){
         countDownNum = 10;
         membershipLevel = 'Premium'
       } else {
+
         countDownNum = 60;
         membershipLevel = 'Basic'
       }
@@ -351,6 +277,66 @@
             },1000)
           }
           countDown()
+      // Convert href with '?' to without
+      let refWithoutQuestionMark = window.location.href;
+      if (window.location.href[window.location.href.length-1]=='?'){
+        refWithoutQuestionMark = refWithoutQuestionMark.slice(0,-1)
+      }
+      // Referred from elsewhere, purge all variables
+      if (localStorage.referrer !== refWithoutQuestionMark ) {
+        delete localStorage.inputField;
+        delete localStorage.wasFocusedOn;
+        delete localStorage.saveWasClicked
+      }
+      console.log("Renders: ", localStorage.wasFocusedOn)
+      // !localStorage.saveWasClicked  && 
+      if(localStorage.wasFocusedOn){
+      document.getElementById(localStorage.wasFocusedOn).focus();
+      localStorage.saveWasClicked = false
+      }
+      // First click of edit, with refresh, the next round will focus on input
+      document.getElementById('portfolioEditButton').addEventListener('click', function(){
+        localStorage.wasFocusedOn = 'portfolioEditting'
+        document.getElementById(localStorage.wasFocusedOn).focus();
+      })
+      if (localStorage.inputField && localStorage.inputField !== document.getElementById('portfolioEditting').value){
 
-    
+        document.getElementById('portfolioEditButton').classList.add('portfolioEditActive')
+           document.getElementById('portfolioEditButton').value = 'Save'
+      }
+      // Reverts save button to edit button if no change
+      if (localStorage.inputField == document.getElementById('portfolioEditting').value){
+        document.getElementById('portfolioEditButton').classList.remove('portfolioEditActive')
+           document.getElementById('portfolioEditButton').value = 'Edit'
+      }
+      // Store input in localStorage to be used later
+      const tempInput = localStorage.inputField;
+      if (tempInput && localStorage.referrer === refWithoutQuestionMark) {
+        document.getElementById('portfolioEditting').value = tempInput;
+      }
+      // On input, save will present itself
+      document
+        .getElementById('portfolioEditting')
+        .addEventListener('input', function () {
+          localStorage.inputField =
+            document.getElementById('portfolioEditting').value;
+            document.getElementById('portfolioEditButton').classList.add('portfolioEditActive')
+           document.getElementById('portfolioEditButton').value = 'Save'
+          });
+      // Detect focus
+      localStorage.wasFocused = true;
+      checkFocused()
+      function checkFocused(){
+        setTimeout(function(){
+      if ( document.activeElement === document.getElementById('portfolioEditting')){
+        localStorage.wasFocusedOn = document.activeElement.id
+        // console.log("Focused!", localStorage.wasFocusedOn)
+        checkFocused()
+      } else {
+        localStorage.wasFocusedOn = document.activeElement.id
+        // console.log("Not Focused!", localStorage.wasFocusedOn)
+        checkFocused()
+      }
+      },100)
+      }
 </script>
