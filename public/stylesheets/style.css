@@ -120,8 +120,8 @@ table {
 #stockName {
   text-align: left;
   color: var(--stockYellow);
-  font-size: 1rem;
-  max-width: 8rem;
+  font-size: 0.8rem;
+  max-width: 5rem;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -152,10 +152,10 @@ table {
   border: none;
   background-color: var(--tickerYellow);
   width: 100%;
-  max-width: 8rem;
+  max-width: 5rem;
   height: 100%;
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1rem;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -583,22 +583,55 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
   }
 }
 
-@media (min-width: 520px) {
+@media (min-width: 375px) {
   body {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
   }
-  .navButton {
-    padding: 0 0.5rem;
-  }
-  .navButton:hover {
-    padding: 0 0.5rem;
-  }
-
   .tickerButton {
-    font-size: 2rem;
+    font-size: 1.2rem;
+    max-width: 6rem;
   }
-
   #stockName {
-    font-size: 1.4rem;
+    font-size: 1rem;
+    max-width: 6rem;
+  }
+}
+@media (min-width: 414px) {
+  body {
+    font-size: 1.2rem;
+  }
+  .tickerButton {
+    font-size: 1.3rem;
+    max-width: 7rem;
+  }
+  #stockName {
+    font-size: 1.05rem;
+    max-width: 12rem;
+  }
+}
+@media (min-width: 600px) {
+  body {
+    font-size: 1.5rem;
+  }
+  .tickerButton {
+    font-size: 1.5rem;
+    max-width: 10rem;
+  }
+  #stockName {
+    font-size: 1.2rem;
+    max-width: 15rem;
+  }
+}
+@media (min-width: 768px) {
+  body {
+    font-size: 1.5rem;
+  }
+  .tickerButton {
+    font-size: 1.8rem;
+    max-width: 12rem;
+  }
+  #stockName {
+    font-size: 1.5rem;
+    max-width: 20rem;
   }
 }
