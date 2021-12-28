@@ -256,15 +256,40 @@
     }
       window.setTimeout(function () {
         window.location.reload();
-      }, refreshRate);
+      }, refreshRate); 
+      // First click of edit
+      document.getElementById('portfolioEditButton').addEventListener('click', function(){
+      localStorage.activeFocus = 'portfolioEditting'
+      document.getElementById('portfolioEditting').focus()
+      })
       // Refresh input retainer
-      if (localStorage.referrer !== window.location.href ) {
+      let refWithoutQuestionMark = window.location.href;
+      if (window.location.href[window.location.href.length-1]=='?'){
+        refWithoutQuestionMark = refWithoutQuestionMark.slice(0,-1)
+      }
+      if (localStorage.referrer !== refWithoutQuestionMark ) {
         delete localStorage.inputField;
         delete localStorage.activeFocus;
         localStorage.saveWasClicked = false
       }
+      // If local portfolio edit was previously focused, we need save button handy
+      if (localStorage.activeFocus) {
+      document.getElementById(localStorage.activeFocus).focus();
+      }
       if (localStorage.saveWasClicked){
         localStorage.saveWasClicked = false
+      }
+      // If inputfield was changed but has not been saved, save button will remain appeared after refresh
+      !localStorage.saveWasClicked && 
+      console.log("value",document.getElementById('portfolioEditting').value)
+      if (localStorage.inputField && localStorage.inputField !== document.getElementById('portfolioEditting').value){
+        document.getElementById('portfolioEditButton').classList.add('portfolioEditActive')
+           document.getElementById('portfolioEditButton').value = 'Save'
+      }
+      // Reverts save button to edit button if no change
+      if (localStorage.inputField == document.getElementById('portfolioEditting').value){
+        document.getElementById('portfolioEditButton').classList.remove('portfolioEditActive')
+           document.getElementById('portfolioEditButton').value = 'Edit'
       }
       // Register input box is of focus, refreshes to focus() on input box
       document
@@ -272,18 +297,11 @@
         .addEventListener('click', function () {
           localStorage.activeFocus = 'portfolioEditting';
         });
-
-      // If local portfolio edit was previously focused, we need save button handy
-      if (localStorage.activeFocus) {
-        document.getElementById(localStorage.activeFocus).focus();
-      }
-
       // Store input in localStorage to be used later
       const tempInput = localStorage.inputField;
-      if (tempInput && localStorage.referrer === window.location.href) {
+      if (tempInput && localStorage.referrer === refWithoutQuestionMark) {
         document.getElementById('portfolioEditting').value = tempInput;
       }
-
       // Nested eventListener. If save button is activated, a second click will deactive focus() on input next refresh, since edit action is completed
       document
         .getElementById('portfolioEditting')
@@ -296,6 +314,7 @@
         .getElementById('portfolioEditButton')
         .addEventListener('click', function(){
           delete localStorage.activeFocus
+          localStorage.saveWasClicked = true
         })
           });
           // Nested eventListener. If save button is activated, a second click will deactive focus() on input next refresh, since edit action is completed
@@ -303,12 +322,8 @@
         .getElementById('portfolioEditting')
         .addEventListener('focus', function () {
           if(localStorage.saveWasClicked){
-          // Assign active focus to edit box
-          document
-        .getElementById('portfolioEditting')
-        .addEventListener('click', function () {
+          // Assign active focus to edit
           localStorage.activeFocus = 'portfolioEditting';
-        });
            document
         .getElementById('portfolioEditButton')
         .addEventListener('click', function(){
@@ -316,10 +331,7 @@
         })
           }
         });
-        // Focus!
-        if (localStorage.activeFocus) {
-        document.getElementById(localStorage.activeFocus).focus();
-      }
+
         // Countdown before refresh
     let countDownNum;
     let membershipLevel;
@@ -339,4 +351,6 @@
             },1000)
           }
           countDown()
+
+    
 </script>
