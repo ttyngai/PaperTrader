@@ -110,6 +110,7 @@
         <th class="tickerLeft tickerTitle">Ticker</th>
         <th>Share</th>
         <th>Price</th>
+        <th>$P/L Day</th>
         <th>%P/L</th>
         <th>$P/L</th>
         <th>Avg Cost</th>
@@ -146,6 +147,42 @@
         <%} else {%>
         <td>0</td>
         <%} %>
+
+        <!-- $ Change -->
+        <% if (p.preRegAfterCombinedPrice-p.regularMarketPreviousClose) {%> <%
+        if
+        (Math.abs((p.preRegAfterCombinedPrice-p.regularMarketPreviousClose)*p.shares)>9999){%>
+        <td
+          class="
+            stockListRight
+            <%=((p.preRegAfterCombinedPrice-p.regularMarketOpen).toFixed(2)>0.0001)?'stockGreen':
+            ''%>
+            <%=((p.preRegAfterCombinedPrice-p.regularMarketOpen).toFixed(2)<-0.0001)?'stockRed':
+            ''%>
+          "
+        >
+          <%=
+          ((p.preRegAfterCombinedPrice-p.regularMarketPreviousClose)*p.shares/1000).toFixed(2)
+          %>k
+        </td>
+        <% }else {%>
+        <td
+          class="
+            stockListRight
+            <%=((p.preRegAfterCombinedPrice-p.regularMarketOpen).toFixed(2)>0.0001)?'stockGreen':
+            ''%>
+            <%=((p.preRegAfterCombinedPrice-p.regularMarketOpen).toFixed(2)<-0.0001)?'stockRed':
+            ''%>
+          "
+        >
+          <%=
+          ((p.preRegAfterCombinedPrice-p.regularMarketPreviousClose)*p.shares).toFixed(2)
+          %>
+        </td>
+        <% }%> <% }else {%>
+        <td class="stockListRight">n/a</td>
+        <% }%>
+
         <!-- %P/L -->
         <% if (p.avgPrice && p.preRegAfterCombinedPrice-p.avgPrice){ %>
         <td
@@ -163,7 +200,8 @@
         <td>0</td>
         <%} %>
         <!-- $P/L -->
-        <% if (p.preRegAfterCombinedPrice - p.avgPrice){ %>
+        <% if (p.preRegAfterCombinedPrice - p.avgPrice){ %> <% if
+        (((p.preRegAfterCombinedPrice - p.avgPrice)*p.shares)>9999){ %>
         <td
           class="
             <%=(p.preRegAfterCombinedPrice
@@ -176,23 +214,49 @@
             ''%>
           "
         >
-          $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
+          <%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
+          maximumFractionDigits: 2,}).format(((p.preRegAfterCombinedPrice -
+          p.avgPrice)*p.shares/1000).toFixed(2))%>k
+        </td>
+
+        <%} else {%>
+        <td
+          class="
+            <%=(p.preRegAfterCombinedPrice
+            -
+            p.avgPrice>0.0001)?'stockGreen':
+            ''%>
+            <%=(p.preRegAfterCombinedPrice
+            -
+            p.avgPrice<-0.0001)?'stockRed':
+            ''%>
+          "
+        >
+          <%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
           maximumFractionDigits: 2,}).format(((p.preRegAfterCombinedPrice -
           p.avgPrice)*p.shares).toFixed(2))%>
         </td>
-        <%} else {%>
+        <%} %> <%} else {%>
         <td>0</td>
         <%} %>
+
         <!-- Average Price -->
         <td><%= p.avgPrice.toFixed(2) %></td>
         <!-- Position Size -->
-        <% if (p.preRegAfterCombinedPrice*p.shares){ %>
+        <% if (p.preRegAfterCombinedPrice*p.shares){ %> <% if
+        ((p.preRegAfterCombinedPrice*p.shares)>9999){ %>
         <td>
-          $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
+          <%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
+          maximumFractionDigits:
+          2,}).format(((p.preRegAfterCombinedPrice*p.shares)/1000).toFixed(2))%>k
+        </td>
+        <%} else {%>
+        <td>
+          <%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
           maximumFractionDigits:
           2,}).format((p.preRegAfterCombinedPrice*p.shares).toFixed(2))%>
         </td>
-        <%} else {%>
+        <%} %> <%} else {%>
         <td>0</td>
         <%} %>
       </tr>
