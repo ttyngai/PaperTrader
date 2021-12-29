@@ -322,7 +322,11 @@
         <!-- Shares -->
         <td><%= Math.abs(t.shares) %></td>
         <!-- Transaction Price -->
+        <%if(t.price>9999){%>
+        <td><%= (t.price/1000).toFixed(1) %>k</td>
+        <%}else{%>
         <td><%= t.price.toFixed(2) %></td>
+        <%}%>
         <!-- Date & Time of transaction -->
         <td>
           <%= t.createdAt.toLocaleDateString() %> <%=
