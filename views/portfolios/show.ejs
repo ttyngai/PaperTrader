@@ -127,8 +127,8 @@
         <th>Shares</th>
         <th>Price</th>
         <th>$Day</th>
-        <th>%P/L</th>
         <th>$P/L</th>
+        <th>%P/L</th>
         <th>Cost</th>
         <th>Size</th>
       </tr>
@@ -201,22 +201,6 @@
         <td class="stockListRight">n/a</td>
         <% }%>
 
-        <!-- %P/L -->
-        <% if (p.avgPrice && p.preRegAfterCombinedPrice-p.avgPrice){ %>
-        <td
-          class="
-            <%=((p.preRegAfterCombinedPrice-p.avgPrice)>0.0001)?'stockGreen':
-            ''%>
-            <%=((p.preRegAfterCombinedPrice-p.avgPrice)<-0.0001)?'stockRed':
-            ''%>
-          "
-        >
-          <%=
-          (((p.preRegAfterCombinedPrice-p.avgPrice)/p.avgPrice)*100).toFixed(2)%>%
-        </td>
-        <%} else {%>
-        <td>0</td>
-        <%} %>
         <!-- $P/L -->
         <% if (p.preRegAfterCombinedPrice - p.avgPrice){ %> <% if
         (((p.preRegAfterCombinedPrice - p.avgPrice)*p.shares)>999){ %>
@@ -257,7 +241,22 @@
         <%} %> <%} else {%>
         <td>0</td>
         <%} %>
-
+        <!-- %P/L -->
+        <% if (p.avgPrice && p.preRegAfterCombinedPrice-p.avgPrice){ %>
+        <td
+          class="
+            <%=((p.preRegAfterCombinedPrice-p.avgPrice)>0.0001)?'stockGreen':
+            ''%>
+            <%=((p.preRegAfterCombinedPrice-p.avgPrice)<-0.0001)?'stockRed':
+            ''%>
+          "
+        >
+          <%=
+          (((p.preRegAfterCombinedPrice-p.avgPrice)/p.avgPrice)*100).toFixed(2)%>%
+        </td>
+        <%} else {%>
+        <td>0</td>
+        <%} %>
         <!-- Average Price -->
         <%if (p.avgPrice > 9999){%>
 
