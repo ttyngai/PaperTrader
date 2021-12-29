@@ -159,6 +159,8 @@ table {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
 }
 .tickerButton:hover {
   background-color: var(--stockYellow);
