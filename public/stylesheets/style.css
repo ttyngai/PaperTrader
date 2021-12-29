@@ -580,7 +580,7 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
   }
 }
 
-@media (min-width: 376px) {
+@media (min-width: 374px) {
   body {
     font-size: 1.2rem;
   }
@@ -593,7 +593,7 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
     max-width: 6rem;
   }
 }
-@media (min-width: 429px) {
+@media (min-width: 427px) {
   body {
     font-size: 1.2rem;
   }
