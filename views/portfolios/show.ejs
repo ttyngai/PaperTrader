@@ -40,6 +40,22 @@
       </form>
     </div>
     <table id="PLSection">
+      <!-- Day P/L -->
+      <tr>
+        <td class="positionTitle">Day P/L:</td>
+        <td
+          class="
+            PLPrices
+            <%=(dayPL>0.0001)?'stockGreen':
+            ''%>
+            <%=(dayPL<-0.0001)?'stockRed':
+            ''%>
+          "
+        >
+          $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
+          maximumFractionDigits: 2,}).format((dayPL).toFixed(2))%>
+        </td>
+      </tr>
       <!-- Holdings P/L -->
       <tr>
         <td class="positionTitle">Holdings P/L:</td>
@@ -71,22 +87,6 @@
           $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
           maximumFractionDigits:
           2,}).format((totalHoldings-realizedPL).toFixed(2))%>
-        </td>
-      </tr>
-      <!-- Day P/L -->
-      <tr>
-        <td class="positionTitle">Day P/L:</td>
-        <td
-          class="
-            PLPrices
-            <%=(dayPL>0.0001)?'stockGreen':
-            ''%>
-            <%=(dayPL<-0.0001)?'stockRed':
-            ''%>
-          "
-        >
-          $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
-          maximumFractionDigits: 2,}).format((dayPL).toFixed(2))%>
         </td>
       </tr>
       <!-- Total P/L -->
