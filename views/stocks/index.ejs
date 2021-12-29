@@ -75,7 +75,7 @@
           <% if (s.preRegAfterCombinedPrice){ %> <% if
           (s.preRegAfterCombinedPrice>99999){ %>
           <td class="stockListRight">
-            <%= (s.preRegAfterCombinedPrice/1000).toFixed(1)%>K
+            <%= (s.preRegAfterCombinedPrice/1000).toFixed(1)%>k
           </td>
           <%} else {%>
           <td class="stockListRight">
@@ -122,7 +122,7 @@
           <% if (s.regularMarketPreviousClose) {%> <% if
           (s.regularMarketPreviousClose>99999) {%>
           <td class="stockListRight">
-            <%=(s.regularMarketPreviousClose/1000).toFixed(1) %>K
+            <%=(s.regularMarketPreviousClose/1000).toFixed(1) %>k
           </td>
           <% } else {%>
           <td><%=s.regularMarketPreviousClose.toFixed(2) %></td>

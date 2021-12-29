@@ -160,7 +160,7 @@
         <!-- Price -->
         <% if (p.preRegAfterCombinedPrice){ %> <% if
         (p.preRegAfterCombinedPrice>99999){ %>
-        <td><%= (p.preRegAfterCombinedPrice/1000).toFixed(2)%>K</td>
+        <td><%= (p.preRegAfterCombinedPrice/1000).toFixed(2)%>k</td>
         <%} else {%>
         <td><%= p.preRegAfterCombinedPrice.toFixed(2)%></td>
         <%} %> <%} else {%>
@@ -169,7 +169,7 @@
         <!-- $ Change -->
         <% if (p.preRegAfterCombinedPrice-p.regularMarketPreviousClose) {%> <%
         if
-        (Math.abs((p.preRegAfterCombinedPrice-p.regularMarketPreviousClose)*p.shares)>9999){%>
+        (Math.abs((p.preRegAfterCombinedPrice-p.regularMarketPreviousClose)*p.shares)>999){%>
         <td
           class="
             stockListRight
@@ -180,8 +180,8 @@
           "
         >
           <%=
-          ((p.preRegAfterCombinedPrice-p.regularMarketPreviousClose)*p.shares/1000).toFixed(2)
-          %>K
+          ((p.preRegAfterCombinedPrice-p.regularMarketPreviousClose)*p.shares/1000).toFixed(1)
+          %>k
         </td>
         <% }else {%>
         <td
@@ -219,7 +219,7 @@
         <%} %>
         <!-- $P/L -->
         <% if (p.preRegAfterCombinedPrice - p.avgPrice){ %> <% if
-        (((p.preRegAfterCombinedPrice - p.avgPrice)*p.shares)>9999){ %>
+        (((p.preRegAfterCombinedPrice - p.avgPrice)*p.shares)>999){ %>
         <td
           class="
             <%=(p.preRegAfterCombinedPrice
@@ -234,7 +234,7 @@
         >
           <%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 1,
           maximumFractionDigits: 1,}).format(((p.preRegAfterCombinedPrice -
-          p.avgPrice)*p.shares/1000).toFixed(1))%>K
+          p.avgPrice)*p.shares/1000).toFixed(1))%>k
         </td>
 
         <%} else {%>
@@ -261,7 +261,7 @@
         <!-- Average Price -->
         <%if (p.avgPrice > 9999){%>
 
-        <td><%= (p.avgPrice/1000).toFixed(2) %>K</td>
+        <td><%= (p.avgPrice/1000).toFixed(2) %>k</td>
 
         <%} else {%>
 
@@ -274,7 +274,7 @@
         <td>
           <%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 1,
           maximumFractionDigits:
-          1,}).format(((p.preRegAfterCombinedPrice*p.shares)/1000).toFixed(1))%>K
+          1,}).format(((p.preRegAfterCombinedPrice*p.shares)/1000).toFixed(1))%>k
         </td>
         <%} else {%>
         <td>
