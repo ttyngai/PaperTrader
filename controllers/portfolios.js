@@ -86,6 +86,14 @@ function show(req, res) {
             p.shares;
         }
       });
+      //Find "USDCAD=X"
+      let usdCad;
+      prices.forEach(function (p) {
+        if (p.symbol === 'USDCAD=X') {
+          usdCad = p.preRegAfterCombinedPrice;
+        }
+      });
+
       res.render(`portfolios/show`, {
         title: 'Portfolios',
         portfolio,
@@ -95,6 +103,7 @@ function show(req, res) {
         realizedPL,
         totalHoldings,
         dayPL,
+        usdCad,
       });
     });
   });
