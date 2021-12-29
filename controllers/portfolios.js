@@ -50,6 +50,7 @@ function show(req, res) {
       let unrealizedPL = 0;
       let realizedPL = 0;
       let totalHoldings = 0;
+      let dayPL = 0;
       if (holdings[0]) {
         prices = await StockPrice.getStock(tickers);
         prices.forEach(function (p, idx) {
@@ -77,6 +78,14 @@ function show(req, res) {
       portfolio.transactions.forEach(function (t) {
         realizedPL += t.price * t.shares;
       });
+      //Day Gains
+      prices.forEach(function (p) {
+        if (p.preRegAfterCombinedPrice - p.regularMarketPreviousClose) {
+          dayPL +=
+            (p.preRegAfterCombinedPrice - p.regularMarketPreviousClose) *
+            p.shares;
+        }
+      });
       res.render(`portfolios/show`, {
         title: 'Portfolios',
         portfolio,
@@ -85,6 +94,7 @@ function show(req, res) {
         unrealizedPL,
         realizedPL,
         totalHoldings,
+        dayPL,
       });
     });
   });

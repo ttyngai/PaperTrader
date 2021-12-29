@@ -73,6 +73,22 @@
           2,}).format((totalHoldings-realizedPL).toFixed(2))%>
         </td>
       </tr>
+      <!-- Day P/L -->
+      <tr>
+        <td class="positionTitle">Day P/L:</td>
+        <td
+          class="
+            PLPrices
+            <%=(dayPL>0.0001)?'stockGreen':
+            ''%>
+            <%=(dayPL<-0.0001)?'stockRed':
+            ''%>
+          "
+        >
+          $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
+          maximumFractionDigits: 2,}).format((dayPL).toFixed(2))%>
+        </td>
+      </tr>
       <!-- Total P/L -->
       <tr>
         <td class="positionTitle">Total P/L:</td>
@@ -113,13 +129,13 @@
         <th>$Day</th>
         <th>%P/L</th>
         <th>$P/L</th>
-        <th>Avg Cost</th>
+        <th>AvgCost</th>
         <th>Size</th>
       </tr>
     </thead>
     <tbody>
       <% prices.forEach(function(p) { %>
-      <!-- Holdings -->
+      <!-- Holdings List-->
       <tr class="portfolioList">
         <!-- Tickers -->
         <td class="tickerLeft">
@@ -142,12 +158,14 @@
           <%= p.shares %>
         </td>
         <!-- Price -->
-        <% if (p.preRegAfterCombinedPrice){ %>
-        <td><%= p.preRegAfterCombinedPrice.toFixed(2)%></td>
+        <% if (p.preRegAfterCombinedPrice){ %> <% if
+        (p.preRegAfterCombinedPrice>99999){ %>
+        <td><%= (p.preRegAfterCombinedPrice/1000).toFixed(2)%>k</td>
         <%} else {%>
+        <td><%= p.preRegAfterCombinedPrice.toFixed(2)%></td>
+        <%} %> <%} else {%>
         <td>0</td>
         <%} %>
-
         <!-- $ Change -->
         <% if (p.preRegAfterCombinedPrice-p.regularMarketPreviousClose) {%> <%
         if
@@ -241,7 +259,15 @@
         <%} %>
 
         <!-- Average Price -->
+        <%if (p.avgPrice > 9999){%>
+
+        <td><%= (p.avgPrice/1000).toFixed(2) %>k</td>
+
+        <%} else {%>
+
         <td><%= p.avgPrice.toFixed(2) %></td>
+        <%} %>
+
         <!-- Position Size -->
         <% if (p.preRegAfterCombinedPrice*p.shares){ %> <% if
         ((p.preRegAfterCombinedPrice*p.shares)>9999){ %>
