@@ -160,7 +160,7 @@
         <!-- Price -->
         <% if (p.preRegAfterCombinedPrice){ %> <% if
         (p.preRegAfterCombinedPrice>99999){ %>
-        <td><%= (p.preRegAfterCombinedPrice/1000).toFixed(2)%>k</td>
+        <td><%= (p.preRegAfterCombinedPrice/1000).toFixed(2)%>K</td>
         <%} else {%>
         <td><%= p.preRegAfterCombinedPrice.toFixed(2)%></td>
         <%} %> <%} else {%>
@@ -181,7 +181,7 @@
         >
           <%=
           ((p.preRegAfterCombinedPrice-p.regularMarketPreviousClose)*p.shares/1000).toFixed(2)
-          %>k
+          %>K
         </td>
         <% }else {%>
         <td
@@ -234,7 +234,7 @@
         >
           <%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
           maximumFractionDigits: 2,}).format(((p.preRegAfterCombinedPrice -
-          p.avgPrice)*p.shares/1000).toFixed(2))%>k
+          p.avgPrice)*p.shares/1000).toFixed(2))%>K
         </td>
 
         <%} else {%>
@@ -261,7 +261,7 @@
         <!-- Average Price -->
         <%if (p.avgPrice > 9999){%>
 
-        <td><%= (p.avgPrice/1000).toFixed(2) %>k</td>
+        <td><%= (p.avgPrice/1000).toFixed(2) %>K</td>
 
         <%} else {%>
 
@@ -274,7 +274,7 @@
         <td>
           <%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
           maximumFractionDigits:
-          2,}).format(((p.preRegAfterCombinedPrice*p.shares)/1000).toFixed(2))%>k
+          2,}).format(((p.preRegAfterCombinedPrice*p.shares)/1000).toFixed(2))%>K
         </td>
         <%} else {%>
         <td>

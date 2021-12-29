@@ -83,7 +83,7 @@
       <th class="tickerLeft tickerTitle">Mark</th>
       <th>PrevClose</th>
       <th>%Day</th>
-      <th>Volume</th>
+      <th>Volume(M)</th>
       <th>MktCap(M)</th>
       <th>ForwardPE</th>
     </tr>
@@ -97,7 +97,7 @@
   <%=((quote[0].preRegAfterCombinedPrice)>0.0001)?'stockGreen':
   ''%>
   <%=((quote[0].preRegAfterCombinedPrice)<-0.0001)?'stockRed':
-  ''%>"><%= (quote[0].preRegAfterCombinedPrice)%></td>
+  ''%>"><%= (quote[0].preRegAfterCombinedPrice.toFixed(2))%></td>
   <%} else {%>
   <td>n/a</td>
   <%} %>
@@ -120,7 +120,7 @@
     <%} %>
     <!-- Volume Traded -->
   <% if (quote[0].regularMarketVolume){ %>
-    <td ><%= quote[0].regularMarketVolume%></td>
+    <td ><%= (quote[0].regularMarketVolume/1000000).toFixed(2)%></td>
     <%} else {%>
     <td>n/a</td>
     <%} %>
