@@ -13,6 +13,7 @@ module.exports = {
 
 async function index(req, res) {
   const portfolios = await Portfolio.find({ user: req.user });
+  // Portfolio List is sorted alphabetically regardless of uppercase/lowercase
   portfolios.sort(function (a, b) {
     if (a.name.toUpperCase() > b.name.toUpperCase()) return 1;
     if (a.name.toUpperCase() < b.name.toUpperCase()) return -1;
@@ -93,7 +94,7 @@ function show(req, res) {
       //Find "USDCAD=X"
       let usdCad;
       prices.forEach(function (p) {
-        if (p.symbol === 'USDCAD=X') {
+        if (p.symbol === 'USDCAD=X' || p.symbol === 'CAD=X') {
           usdCad = p.preRegAfterCombinedPrice;
         }
       });
