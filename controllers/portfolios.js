@@ -13,6 +13,10 @@ module.exports = {
 
 async function index(req, res) {
   const portfolios = await Portfolio.find({ user: req.user });
+  portfolios.sort(function (a, b) {
+    if (a.name.toUpperCase() > b.name.toUpperCase()) return 1;
+    if (a.name.toUpperCase() < b.name.toUpperCase()) return -1;
+  });
   res.render('portfolios/index', { title: 'Portfolios', portfolios, req });
 }
 // Create new portfolio
