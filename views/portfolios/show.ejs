@@ -232,9 +232,9 @@
             ''%>
           "
         >
-          <%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
-          maximumFractionDigits: 2,}).format(((p.preRegAfterCombinedPrice -
-          p.avgPrice)*p.shares/1000).toFixed(2))%>K
+          <%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 1,
+          maximumFractionDigits: 1,}).format(((p.preRegAfterCombinedPrice -
+          p.avgPrice)*p.shares/1000).toFixed(1))%>K
         </td>
 
         <%} else {%>
@@ -272,9 +272,9 @@
         <% if (p.preRegAfterCombinedPrice*p.shares){ %> <% if
         ((p.preRegAfterCombinedPrice*p.shares)>9999){ %>
         <td>
-          <%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
+          <%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 1,
           maximumFractionDigits:
-          2,}).format(((p.preRegAfterCombinedPrice*p.shares)/1000).toFixed(2))%>K
+          1,}).format(((p.preRegAfterCombinedPrice*p.shares)/1000).toFixed(1))%>K
         </td>
         <%} else {%>
         <td>
