@@ -186,16 +186,16 @@
         <%} %> <%} else {%>
         <td>0</td>
         <%} %>
-        <!-- $ Change -->
+        <!-- $ Change Day -->
         <% if (p.preRegAfterCombinedPrice-p.regularMarketPreviousClose) {%> <%
         if
         (Math.abs((p.preRegAfterCombinedPrice-p.regularMarketPreviousClose)*p.shares)>999){%>
         <td
           class="
             stockListRight
-            <%=((p.preRegAfterCombinedPrice-p.regularMarketOpen).toFixed(2)>0.0001)?'stockGreen':
+            <%=((p.preRegAfterCombinedPrice-p.regularMarketPreviousClose).toFixed(2)>0.0001)?'stockGreen':
             ''%>
-            <%=((p.preRegAfterCombinedPrice-p.regularMarketOpen).toFixed(2)<-0.0001)?'stockRed':
+            <%=((p.preRegAfterCombinedPrice-p.regularMarketPreviousClose).toFixed(2)<-0.0001)?'stockRed':
             ''%>
           "
         >

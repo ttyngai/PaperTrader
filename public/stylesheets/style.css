@@ -159,8 +159,8 @@ table {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
 }
 .tickerButton:hover {
   background-color: var(--stockYellow);
@@ -516,7 +516,7 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
 
 .buySellPriceBoxDollarSign {
   color: var(--stockYellow);
-  padding: 0.5rem 0 0 0.8rem;
+  padding: 0.4rem 0 0 0.8rem;
   font-size: 1.2rem;
   position: absolute;
 }
@@ -589,6 +589,8 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
   .tickerButton {
     font-size: 1.2rem;
     max-width: 6rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
   }
   #stockName {
     font-size: 1rem;
@@ -602,9 +604,11 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
   .tickerButton {
     font-size: 1.3rem;
     max-width: 7rem;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
   }
   #stockName {
-    font-size: 1.05rem;
+    font-size: 1.15rem;
     max-width: 12rem;
   }
 }
@@ -615,6 +619,8 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
   .tickerButton {
     font-size: 1.5rem;
     max-width: 10rem;
+    padding-top: 0.35rem;
+    padding-bottom: 0.35rem;
   }
   #stockName {
     font-size: 1.2rem;
@@ -628,6 +634,8 @@ input[type='text']#portfolioEditting::-webkit-input-placeholder {
   .tickerButton {
     font-size: 1.8rem;
     max-width: 12rem;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
   }
   #stockName {
     font-size: 1.5rem;

@@ -1,9 +1,6 @@
 var express = require('express');
 var router = express.Router();
 const portfoliosCtrl = require('../controllers/portfolios');
-
-// POST "/portfolios" - new form route
-// router.get('/new', portfoliosCtrl.new);
 // POST "/portfolios" - Create Route
 router.post('/', portfoliosCtrl.create);
 
