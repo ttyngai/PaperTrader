@@ -106,6 +106,15 @@
           2,}).format((totalHoldings-realizedPL+unrealizedPL).toFixed(2))%>
         </td>
       </tr>
+      <!-- Position Size -->
+      <tr>
+        <td class="positionTitle">Position Size:</td>
+        <td>
+          $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
+          maximumFractionDigits:
+          2,}).format(Math.abs(totalHoldings+unrealizedPL).toFixed(2))%>
+        </td>
+      </tr>
       <!-- Special CAD P/L for personal use, only shows up if USDCAD=X symbol is added into holdings -->
       <!-- Day P/L CAD -->
       <%if((dayPL)&&usdCad){%>
@@ -144,15 +153,6 @@
         </td>
       </tr>
       <%}%>
-      <!-- Position Size -->
-      <tr>
-        <td class="positionTitle">Position Size:</td>
-        <td>
-          $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
-          maximumFractionDigits:
-          2,}).format(Math.abs(totalHoldings+unrealizedPL).toFixed(2))%>
-        </td>
-      </tr>
     </table>
     <br />
   </div>
