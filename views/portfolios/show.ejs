@@ -107,6 +107,25 @@
         </td>
       </tr>
       <!-- Special CAD P/L for personal use, only shows up if USDCAD=X symbol is added into holdings -->
+      <!-- Day P/L CAD -->
+      <%if((dayPL)&&usdCad){%>
+      <tr>
+        <td class="positionTitle">CAD Day P/L:</td>
+        <td
+          class="
+            PLPrices
+            <%=(dayPL>0.0001)?'stockGreen':
+            ''%>
+            <%=(dayPL<-0.0001)?'stockRed':
+            ''%>
+          "
+        >
+          $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
+          maximumFractionDigits: 2,}).format((dayPL*usdCad).toFixed(2))%>
+        </td>
+      </tr>
+      <%}%>
+      <!-- Total P/L CAD -->
       <%if(((totalHoldings-realizedPL+unrealizedPL))&&usdCad){%>
       <tr>
         <td class="positionTitle">CAD P/L:</td>
