@@ -70,8 +70,8 @@ function show(req, res) {
         });
         // Calculating P/L holdings and all transactions for this particular portfolio
         prices.forEach(function (p) {
-          let priceCheckNonZero = p.preRegAfterCombinedPrice
-            ? p.preRegAfterCombinedPrice
+          let priceCheckNonZero = p.combinedPrice
+            ? p.combinedPrice
             : p.avgPrice;
           unrealizedPL += p.shares * (priceCheckNonZero - p.avgPrice);
         });
@@ -85,17 +85,15 @@ function show(req, res) {
       });
       //Day Gains
       prices.forEach(function (p) {
-        if (p.preRegAfterCombinedPrice - p.regularMarketPreviousClose) {
-          dayPL +=
-            (p.preRegAfterCombinedPrice - p.regularMarketPreviousClose) *
-            p.shares;
+        if (p.combinedPrice - p.regularMarketPreviousClose) {
+          dayPL += (p.combinedPrice - p.regularMarketPreviousClose) * p.shares;
         }
       });
       //Find "USDCAD=X"
       let usdCad;
       prices.forEach(function (p) {
         if (p.symbol === 'USDCAD=X' || p.symbol === 'CAD=X') {
-          usdCad = p.preRegAfterCombinedPrice;
+          usdCad = p.combinedPrice;
         }
       });
 

@@ -32,7 +32,7 @@
           spellcheck="false"
           autocorrect="off"
           id="buySellPriceBoxId"
-          value="<%- quote[0].preRegAfterCombinedPrice%>"
+          value="<%- quote[0].combinedPrice%>"
           class="<%= user.premium ? 'buySellNumBox premiumPriceBox':'buySellNumBox buySellPriceBox'  %>"
           <%- (!user.premium) ? 'readonly':'' %>
           />
@@ -92,12 +92,12 @@
 <tbody>
   <tr class="detailInfo">
     <!-- Stock Price -->
-<% if (quote[0].preRegAfterCombinedPrice){ %>
+<% if (quote[0].combinedPrice){ %>
   <td class=" tickerLeft tickerTitle
-  <%=((quote[0].preRegAfterCombinedPrice)>0.0001)?'stockGreen':
+  <%=((quote[0].combinedPrice)>0.0001)?'stockGreen':
   ''%>
-  <%=((quote[0].preRegAfterCombinedPrice)<-0.0001)?'stockRed':
-  ''%>"><%= (quote[0].preRegAfterCombinedPrice.toFixed(2))%></td>
+  <%=((quote[0].combinedPrice)<-0.0001)?'stockRed':
+  ''%>"><%= (quote[0].combinedPrice.toFixed(2))%></td>
   <%} else {%>
   <td>n/a</td>
   <%} %>
@@ -108,13 +108,13 @@
       <td>n/a</td>
       <%} %>
       <!-- % Change today -->
-  <% if (quote[0].preRegAfterCombinedPrice-quote[0].regularMarketPreviousClose){ %>
+  <% if (quote[0].combinedPrice-quote[0].regularMarketPreviousClose){ %>
     <td class="
-    <%=((quote[0].preRegAfterCombinedPrice-quote[0].regularMarketPreviousClose)>0.0001)?'stockGreen':
+    <%=((quote[0].combinedPrice-quote[0].regularMarketPreviousClose)>0.0001)?'stockGreen':
   ''%>
-  <%=((quote[0].preRegAfterCombinedPrice-quote[0].regularMarketPreviousClose)<-0.0001)?'stockRed':
+  <%=((quote[0].combinedPrice-quote[0].regularMarketPreviousClose)<-0.0001)?'stockRed':
   ''%>
-  "><%= (100*(quote[0].preRegAfterCombinedPrice-quote[0].regularMarketPreviousClose)/quote[0].regularMarketPreviousClose).toFixed(2)%>%</td>
+  "><%= (100*(quote[0].combinedPrice-quote[0].regularMarketPreviousClose)/quote[0].regularMarketPreviousClose).toFixed(2)%>%</td>
     <%} else {%>
     <td>n/a</td>
     <%} %>

@@ -197,43 +197,41 @@
           <%= p.shares %>
         </td>
         <!-- Price -->
-        <% if (p.preRegAfterCombinedPrice){ %> <% if
-        (p.preRegAfterCombinedPrice>99999){ %>
-        <td><%= (p.preRegAfterCombinedPrice/1000).toFixed(2)%>k</td>
+        <% if (p.combinedPrice){ %> <% if (p.combinedPrice>99999){ %>
+        <td><%= (p.combinedPrice/1000).toFixed(2)%>k</td>
         <%} else {%>
-        <td><%= p.preRegAfterCombinedPrice.toFixed(2)%></td>
+        <td><%= p.combinedPrice.toFixed(2)%></td>
         <%} %> <%} else {%>
         <td>0</td>
         <%} %>
         <!-- $ Change Day -->
-        <% if (p.preRegAfterCombinedPrice-p.regularMarketPreviousClose) {%> <%
-        if
-        (Math.abs((p.preRegAfterCombinedPrice-p.regularMarketPreviousClose)*p.shares)>999){%>
+        <% if (p.combinedPrice-p.regularMarketPreviousClose) {%> <% if
+        (Math.abs((p.combinedPrice-p.regularMarketPreviousClose)*p.shares)>999){%>
         <td
           class="
             stockListRight
-            <%=((p.preRegAfterCombinedPrice-p.regularMarketPreviousClose).toFixed(2)>0.0001)?'stockGreen':
+            <%=((p.combinedPrice-p.regularMarketPreviousClose).toFixed(2)>0.0001)?'stockGreen':
             ''%>
-            <%=((p.preRegAfterCombinedPrice-p.regularMarketPreviousClose).toFixed(2)<-0.0001)?'stockRed':
+            <%=((p.combinedPrice-p.regularMarketPreviousClose).toFixed(2)<-0.0001)?'stockRed':
             ''%>
           "
         >
           <%=
-          ((p.preRegAfterCombinedPrice-p.regularMarketPreviousClose)*p.shares/1000).toFixed(1)
+          ((p.combinedPrice-p.regularMarketPreviousClose)*p.shares/1000).toFixed(1)
           %>k
         </td>
         <% }else {%>
         <td
           class="
             stockListRight
-            <%=((p.preRegAfterCombinedPrice-p.regularMarketOpen).toFixed(2)>0.0001)?'stockGreen':
+            <%=((p.combinedPrice-p.regularMarketOpen).toFixed(2)>0.0001)?'stockGreen':
             ''%>
-            <%=((p.preRegAfterCombinedPrice-p.regularMarketOpen).toFixed(2)<-0.0001)?'stockRed':
+            <%=((p.combinedPrice-p.regularMarketOpen).toFixed(2)<-0.0001)?'stockRed':
             ''%>
           "
         >
           <%=
-          ((p.preRegAfterCombinedPrice-p.regularMarketPreviousClose)*p.shares).toFixed(2)
+          ((p.combinedPrice-p.regularMarketPreviousClose)*p.shares).toFixed(2)
           %>
         </td>
         <% }%> <% }else {%>
@@ -241,73 +239,72 @@
         <% }%>
         <!-- %Day -->
         <% if (p.regularMarketPreviousClose&&
-        p.preRegAfterCombinedPrice-p.regularMarketPreviousClose){ %>
+        p.combinedPrice-p.regularMarketPreviousClose){ %>
         <td
           class="
-            <%=((p.preRegAfterCombinedPrice-p.regularMarketPreviousClose)>0.0001)?'stockGreen':
+            <%=((p.combinedPrice-p.regularMarketPreviousClose)>0.0001)?'stockGreen':
             ''%>
-            <%=((p.preRegAfterCombinedPrice-p.regularMarketPreviousClose)<-0.0001)?'stockRed':
+            <%=((p.combinedPrice-p.regularMarketPreviousClose)<-0.0001)?'stockRed':
             ''%>
           "
         >
           <%=
-          (((p.preRegAfterCombinedPrice-p.regularMarketPreviousClose)/p.regularMarketPreviousClose)*100).toFixed(2)%>%
+          (((p.combinedPrice-p.regularMarketPreviousClose)/p.regularMarketPreviousClose)*100).toFixed(2)%>%
         </td>
         <%} else {%>
         <td>0</td>
         <%} %>
         <!-- $P/L -->
-        <% if (p.preRegAfterCombinedPrice - p.avgPrice){ %> <% if
-        (((p.preRegAfterCombinedPrice - p.avgPrice)*p.shares)>999){ %>
+        <% if (p.combinedPrice - p.avgPrice){ %> <% if (((p.combinedPrice -
+        p.avgPrice)*p.shares)>999){ %>
         <td
           class="
-            <%=(p.preRegAfterCombinedPrice
+            <%=(p.combinedPrice
             -
             p.avgPrice>0.0001)?'stockGreen':
             ''%>
-            <%=(p.preRegAfterCombinedPrice
+            <%=(p.combinedPrice
             -
             p.avgPrice<-0.0001)?'stockRed':
             ''%>
           "
         >
           <%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 1,
-          maximumFractionDigits: 1,}).format(((p.preRegAfterCombinedPrice -
+          maximumFractionDigits: 1,}).format(((p.combinedPrice -
           p.avgPrice)*p.shares/1000).toFixed(1))%>k
         </td>
 
         <%} else {%>
         <td
           class="
-            <%=(p.preRegAfterCombinedPrice
+            <%=(p.combinedPrice
             -
             p.avgPrice>0.0001)?'stockGreen':
             ''%>
-            <%=(p.preRegAfterCombinedPrice
+            <%=(p.combinedPrice
             -
             p.avgPrice<-0.0001)?'stockRed':
             ''%>
           "
         >
           <%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
-          maximumFractionDigits: 2,}).format(((p.preRegAfterCombinedPrice -
+          maximumFractionDigits: 2,}).format(((p.combinedPrice -
           p.avgPrice)*p.shares).toFixed(2))%>
         </td>
         <%} %> <%} else {%>
         <td>0</td>
         <%} %>
         <!-- %P/L -->
-        <% if (p.avgPrice && p.preRegAfterCombinedPrice-p.avgPrice){ %>
+        <% if (p.avgPrice && p.combinedPrice-p.avgPrice){ %>
         <td
           class="
-            <%=((p.preRegAfterCombinedPrice-p.avgPrice)>0.0001)?'stockGreen':
+            <%=((p.combinedPrice-p.avgPrice)>0.0001)?'stockGreen':
             ''%>
-            <%=((p.preRegAfterCombinedPrice-p.avgPrice)<-0.0001)?'stockRed':
+            <%=((p.combinedPrice-p.avgPrice)<-0.0001)?'stockRed':
             ''%>
           "
         >
-          <%=
-          (((p.preRegAfterCombinedPrice-p.avgPrice)/p.avgPrice)*100).toFixed(2)%>%
+          <%= (((p.combinedPrice-p.avgPrice)/p.avgPrice)*100).toFixed(2)%>%
         </td>
         <%} else {%>
         <td>0</td>
@@ -323,18 +320,18 @@
         <%} %>
 
         <!-- Position Size -->
-        <% if (p.preRegAfterCombinedPrice*p.shares){ %> <% if
-        ((p.preRegAfterCombinedPrice*p.shares)>9999){ %>
+        <% if (p.combinedPrice*p.shares){ %> <% if
+        ((p.combinedPrice*p.shares)>9999){ %>
         <td>
           <%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 1,
           maximumFractionDigits:
-          1,}).format(((p.preRegAfterCombinedPrice*p.shares)/1000).toFixed(1))%>k
+          1,}).format(((p.combinedPrice*p.shares)/1000).toFixed(1))%>k
         </td>
         <%} else {%>
         <td>
           <%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
           maximumFractionDigits:
-          2,}).format((p.preRegAfterCombinedPrice*p.shares).toFixed(2))%>
+          2,}).format((p.combinedPrice*p.shares).toFixed(2))%>
         </td>
         <%} %> <%} else {%>
         <td>0</td>

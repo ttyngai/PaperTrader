@@ -43,11 +43,11 @@ async function getStock(stocksInput, simpleCheck) {
             const hourNumber = hour + minuteFraction;
             // Check for futures first
             if (isFutures) {
-              s.preRegAfterCombinedPrice = s.regularMarketPrice;
+              s.combinedPrice = s.regularMarketPrice;
             }
             // Premarket(09:00-14:30UTC)
             else if (hourNumber >= 9 && hourNumber < 14.5 && s.preMarketPrice) {
-              s.preRegAfterCombinedPrice = s.preMarketPrice
+              s.combinedPrice = s.preMarketPrice
                 ? s.preMarketPrice
                 : s.postMarketPrice;
             }
@@ -57,7 +57,7 @@ async function getStock(stocksInput, simpleCheck) {
               hourNumber < 21 &&
               s.regularMarketPrice
             ) {
-              s.preRegAfterCombinedPrice = s.regularMarketPrice
+              s.combinedPrice = s.regularMarketPrice
                 ? s.regularMarketPrice
                 : s.postMarketPrice;
             }
@@ -66,13 +66,13 @@ async function getStock(stocksInput, simpleCheck) {
               (hourNumber >= 21 || hourNumber < 9) &&
               s.postMarketPrice
             ) {
-              s.preRegAfterCombinedPrice = s.postMarketPrice;
+              s.combinedPrice = s.postMarketPrice;
             }
             // Stock went n/a when market wasn't
             else if (s.regularMarketPrice) {
-              s.preRegAfterCombinedPrice = s.regularMarketPrice;
+              s.combinedPrice = s.regularMarketPrice;
             } else {
-              s.preRegAfterCombinedPrice = 0;
+              s.combinedPrice = 0;
             }
             stocksOutput.push(s);
           });

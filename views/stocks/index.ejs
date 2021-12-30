@@ -55,64 +55,58 @@
           <td>n/a</td>
           <%} %>
           <!-- %Change -->
-          <% if (s.preRegAfterCombinedPrice-s.regularMarketPreviousClose) {%>
+          <% if (s.combinedPrice-s.regularMarketPreviousClose) {%>
           <td
             class="
               stockListRight
-              <%=((s.preRegAfterCombinedPrice-s.regularMarketPreviousClose)>0.0001)?'stockGreen':
+              <%=((s.combinedPrice-s.regularMarketPreviousClose)>0.0001)?'stockGreen':
               ''%>
-              <%=((s.preRegAfterCombinedPrice-s.regularMarketPreviousClose)<-0.0001)?'stockRed':
+              <%=((s.combinedPrice-s.regularMarketPreviousClose)<-0.0001)?'stockRed':
               ''%>
             "
           >
-            <%=(100*(s.preRegAfterCombinedPrice-s.regularMarketPreviousClose)/s.regularMarketPreviousClose).toFixed(2)
+            <%=(100*(s.combinedPrice-s.regularMarketPreviousClose)/s.regularMarketPreviousClose).toFixed(2)
             %>%
           </td>
           <% }else {%>
           <td class="stockListRight">n/a</td>
           <% }%>
           <!-- Stock Price -->
-          <% if (s.preRegAfterCombinedPrice){ %> <% if
-          (s.preRegAfterCombinedPrice>99999){ %>
+          <% if (s.combinedPrice){ %> <% if (s.combinedPrice>99999){ %>
           <td class="stockListRight">
-            <%= (s.preRegAfterCombinedPrice/1000).toFixed(1)%>k
+            <%= (s.combinedPrice/1000).toFixed(1)%>k
           </td>
           <%} else {%>
-          <td class="stockListRight">
-            <%= s.preRegAfterCombinedPrice.toFixed(2)%>
-          </td>
+          <td class="stockListRight"><%= s.combinedPrice.toFixed(2)%></td>
           <%} %> <%} else {%>
           <td>n/a</td>
           <%} %>
           <!-- $ Change -->
-          <% if (s.preRegAfterCombinedPrice-s.regularMarketPreviousClose) {%> <%
-          if ((s.preRegAfterCombinedPrice-s.regularMarketPreviousClose)>999) {%>
+          <% if (s.combinedPrice-s.regularMarketPreviousClose) {%> <% if
+          ((s.combinedPrice-s.regularMarketPreviousClose)>999) {%>
           <td
             class="
               stockListRight
-              <%=((s.preRegAfterCombinedPrice-s.regularMarketOpen).toFixed(2)>0.0001)?'stockGreen':
+              <%=((s.combinedPrice-s.regularMarketOpen).toFixed(2)>0.0001)?'stockGreen':
               ''%>
-              <%=((s.preRegAfterCombinedPrice-s.regularMarketOpen).toFixed(2)<-0.0001)?'stockRed':
+              <%=((s.combinedPrice-s.regularMarketOpen).toFixed(2)<-0.0001)?'stockRed':
               ''%>
             "
           >
-            <%=
-            ((s.preRegAfterCombinedPrice-s.regularMarketPreviousClose)/1000).toFixed(1)
+            <%= ((s.combinedPrice-s.regularMarketPreviousClose)/1000).toFixed(1)
             %>k
           </td>
           <% }else {%>
           <td
             class="
               stockListRight
-              <%=((s.preRegAfterCombinedPrice-s.regularMarketOpen).toFixed(2)>0.0001)?'stockGreen':
+              <%=((s.combinedPrice-s.regularMarketOpen).toFixed(2)>0.0001)?'stockGreen':
               ''%>
-              <%=((s.preRegAfterCombinedPrice-s.regularMarketOpen).toFixed(2)<-0.0001)?'stockRed':
+              <%=((s.combinedPrice-s.regularMarketOpen).toFixed(2)<-0.0001)?'stockRed':
               ''%>
             "
           >
-            <%=
-            (s.preRegAfterCombinedPrice-s.regularMarketPreviousClose).toFixed(2)
-            %>
+            <%= (s.combinedPrice-s.regularMarketPreviousClose).toFixed(2) %>
           </td>
           <% }%> <% }else {%>
           <td class="stockListRight">n/a</td>
