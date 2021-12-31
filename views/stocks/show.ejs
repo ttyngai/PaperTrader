@@ -162,7 +162,7 @@ let timeStampInterval = Math.floor(<%- JSON.stringify(chartParsed)%>.length/time
       //Chart area that takes up room(away from axis)
       chartArea:{'width': '80%', 'height': '85%'},
       seriesType: 'candlesticks',
-      series: {1: {type: 'line',lineDashStyle: [4, 4]}},
+      series: {1: {type: 'line',lineDashStyle: [20, 10],lineWidth: 1}},
       //First value is wick color, second is horizontal line
       colors: ['#242424', 'yellow' ],
       vAxis: { gridlineColor: '#393939',minorGridlines:{color:'transparent'}, textStyle: {
