@@ -109,10 +109,8 @@ async function getChartData(ticker, interval, range) {
           // Date Time section
           // (Icebox)Currently for 1 minuite/ 1 hour range, need to expand for different timeframes with button selection
           let time = new Date(timestamp[i] * 1000);
-          // For user current timezone
-          // (Icebox) Fix daylight saving, can't use getTimezoneOffset due to iOS
-          // Find 2nd sunday in march:
-          let hour = time.getUTCHours() - 5;
+          // Using "gmtoffset" item from API
+          let hour = time.getUTCHours() + object.meta.gmtoffset / 60 / 60;
           // Fix transition during 12am
           if (hour < 0) {
             hour += 13;
