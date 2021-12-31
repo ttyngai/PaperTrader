@@ -29,19 +29,15 @@
       <% } %>
     </nav>
   </section>
+  <section class="navPadding"></section>
   </body>
 </html>
 <!-- This is to populate all windows with localStorage referrer -->
 <script>
-
-
 localStorage.referrer = document.referrer
 // Remove referrer links with '?'
 if (document.referrer[document.referrer.length-1] =='?'){
   localStorage.referrer = localStorage.referrer.slice(0,-1)
 }
-
-
-
 </script>
 

@@ -1,41 +1,43 @@
 <%- include('../partials/header') %>
-<table id="portfolioTable">
-  <!-- Portfolio title/Or "start a portfolio" message if portfolio empty -->
-  <tbody>
-    <%if (portfolios.length!==0) {%>
-    <div id="portfolioTitle">Portfolio</div>
-    <%}else{ %>
-    <div id="portfolioTitle">
-      <%= req.user.name.split(' ')[0] %>,<br />
-      start a portfolio.
-    </div>
-    <% }%>
-    <!-- Portfolio display -->
-    <% portfolios.forEach(function(p){%>
-    <tr>
-      <td>
-        <form id="listPortfolio" action="/portfolios/<%= p._id %>">
-          <input type="submit" id="portfolioMod" value="<%=p.name%>" />
-        </form>
-      </td>
-    </tr>
-    <% }); %>
-  </tbody>
-</table>
-<!-- Form for adding new portfolio -->
-<form id="portfolioForm" action="/portfolios" method="POST">
-  <input
-    class="search"
-    type="text"
-    name="name"
-    placeholder="e.g. Child, Spouse"
-    maxlength="30"
-    autocomplete="off"
-    spellcheck="false"
-    autocorrect="off"
-  />
-  <input type="submit" class="formButton" value="Create" />
-</form>
+<div class="pageContainer">
+  <table id="portfolioTable">
+    <!-- Portfolio title/Or "start a portfolio" message if portfolio empty -->
+    <tbody>
+      <%if (portfolios.length!==0) {%>
+      <div id="portfolioTitle">Portfolio</div>
+      <%}else{ %>
+      <div id="portfolioTitle">
+        <%= req.user.name.split(' ')[0] %>,<br />
+        start a portfolio.
+      </div>
+      <% }%>
+      <!-- Portfolio display -->
+      <% portfolios.forEach(function(p){%>
+      <tr>
+        <td>
+          <form id="listPortfolio" action="/portfolios/<%= p._id %>">
+            <input type="submit" id="portfolioMod" value="<%=p.name%>" />
+          </form>
+        </td>
+      </tr>
+      <% }); %>
+    </tbody>
+  </table>
+  <!-- Form for adding new portfolio -->
+  <form id="portfolioForm" action="/portfolios" method="POST">
+    <input
+      class="search"
+      type="text"
+      name="name"
+      placeholder="e.g. Child, Spouse"
+      maxlength="30"
+      autocomplete="off"
+      spellcheck="false"
+      autocorrect="off"
+    />
+    <input type="submit" class="formButton" value="Create" />
+  </form>
+</div>
 <%- include('../partials/footer') %>
 <!-- Script for membership display -->
 <script>

@@ -1,396 +1,402 @@
 <%- include('../partials/header') %>
-<!-- Portfolio Name/Editting -->
-<div class="portfolioContent">
-  <div class="portfolioSections">
-    <div id="portfolioControl">
-      <form
-        class="portfolioEditContainer"
-        id="portfolioEdittingForm"
-        method="POST"
-      >
-        <input
-          type="text"
-          name="name"
-          id="portfolioEditting"
-          value="<%= portfolio.name %>"
-          maxlength="30"
-          autocomplete="off"
-          spellcheck="false"
-          autocorrect="off"
-        />
+<div class="pageContainer">
+  <!-- Portfolio Name/Editting -->
+  <div class="portfolioContent">
+    <div class="portfolioSections">
+      <div id="portfolioControl">
+        <form
+          class="portfolioEditContainer"
+          id="portfolioEdittingForm"
+          method="POST"
+        >
+          <input
+            type="text"
+            name="name"
+            id="portfolioEditting"
+            value="<%= portfolio.name %>"
+            maxlength="30"
+            autocomplete="off"
+            spellcheck="false"
+            autocorrect="off"
+          />
 
-        <input
-          type="submit"
-          class="portfolioEdit"
-          id="portfolioEditButton"
-          value="Update"
-        />
-      </form>
-      <form
-        class="portfolioDeleteContainer"
-        id="portfolioDeleteButton"
-        action="/portfolios/<%= portfolio._id %>/delete"
-      >
-        <input
-          type="submit"
-          class="portfolioDelete"
-          id="portfolioDeleteButtonText"
-          value="X"
-        />
-      </form>
+          <input
+            type="submit"
+            class="portfolioEdit"
+            id="portfolioEditButton"
+            value="Update"
+          />
+        </form>
+        <form
+          class="portfolioDeleteContainer"
+          id="portfolioDeleteButton"
+          action="/portfolios/<%= portfolio._id %>/delete"
+        >
+          <input
+            type="submit"
+            class="portfolioDelete"
+            id="portfolioDeleteButtonText"
+            value="X"
+          />
+        </form>
+      </div>
+      <table id="PLSection">
+        <!-- Day P/L -->
+        <tr>
+          <td class="positionTitle">Day P/L:</td>
+          <td
+            class="
+              PLPrices
+              <%=(dayPL>0.0001)?'stockGreen':
+              ''%>
+              <%=(dayPL<-0.0001)?'stockRed':
+              ''%>
+            "
+          >
+            $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
+            maximumFractionDigits: 2,}).format((dayPL).toFixed(2))%>
+          </td>
+        </tr>
+        <!-- Holdings P/L -->
+        <tr>
+          <td class="positionTitle">Holdings P/L:</td>
+          <td
+            class="
+              PLPrices
+              <%=(unrealizedPL>0.0001)?'stockGreen':
+              ''%>
+              <%=(unrealizedPL<-0.0001)?'stockRed':
+              ''%>
+            "
+          >
+            $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
+            maximumFractionDigits: 2,}).format(unrealizedPL.toFixed(2))%>
+          </td>
+        </tr>
+        <!-- Realized P/L -->
+        <tr>
+          <td class="positionTitle">Realized P/L:</td>
+          <td
+            class="
+              PLPrices
+              <%=(totalHoldings-realizedPL>0.0001)?'stockGreen':
+              ''%>
+              <%=(totalHoldings-realizedPL<-0.0001)?'stockRed':
+              ''%>
+            "
+          >
+            $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
+            maximumFractionDigits:
+            2,}).format((totalHoldings-realizedPL).toFixed(2))%>
+          </td>
+        </tr>
+        <!-- Total P/L -->
+        <tr>
+          <td class="positionTitle">Total P/L:</td>
+          <td
+            class="
+              PLPrices
+              <%=((totalHoldings-realizedPL+unrealizedPL)>0.0001)?'stockGreen':
+              ''%>
+              <%=((totalHoldings-realizedPL+unrealizedPL)<-0.0001)?'stockRed':
+              ''%>
+            "
+          >
+            $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
+            maximumFractionDigits:
+            2,}).format((totalHoldings-realizedPL+unrealizedPL).toFixed(2))%>
+          </td>
+        </tr>
+        <!-- Position Size -->
+        <tr>
+          <td class="positionTitle">Position Size:</td>
+          <td>
+            $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
+            maximumFractionDigits:
+            2,}).format(Math.abs(totalHoldings+unrealizedPL).toFixed(2))%>
+          </td>
+        </tr>
+        <!-- Special CAD P/L for personal use, only shows up if USDCAD=X symbol is added into holdings -->
+        <!-- Day P/L CAD -->
+        <%if((dayPL)&&usdCad){%>
+        <tr>
+          <td class="positionTitle">CAD Day P/L:</td>
+          <td
+            class="
+              PLPrices
+              <%=(dayPL>0.0001)?'stockGreen':
+              ''%>
+              <%=(dayPL<-0.0001)?'stockRed':
+              ''%>
+            "
+          >
+            $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
+            maximumFractionDigits: 2,}).format((dayPL*usdCad).toFixed(2))%>
+          </td>
+        </tr>
+        <%}%>
+        <!-- Total P/L CAD -->
+        <%if(((totalHoldings-realizedPL+unrealizedPL))&&usdCad){%>
+        <tr>
+          <td class="positionTitle">CAD P/L:</td>
+          <td
+            class="
+              PLPrices
+              <%=((totalHoldings-realizedPL+unrealizedPL)>0.0001)?'stockGreen':
+              ''%>
+              <%=((totalHoldings-realizedPL+unrealizedPL)<-0.0001)?'stockRed':
+              ''%>
+            "
+          >
+            $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
+            maximumFractionDigits:
+            2,}).format(((totalHoldings-realizedPL+unrealizedPL)*usdCad).toFixed(2))%>
+          </td>
+        </tr>
+        <%}%>
+      </table>
+      <br />
     </div>
-    <table id="PLSection">
-      <!-- Day P/L -->
-      <tr>
-        <td class="positionTitle">Day P/L:</td>
-        <td
-          class="
-            PLPrices
-            <%=(dayPL>0.0001)?'stockGreen':
-            ''%>
-            <%=(dayPL<-0.0001)?'stockRed':
-            ''%>
-          "
-        >
-          $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
-          maximumFractionDigits: 2,}).format((dayPL).toFixed(2))%>
-        </td>
-      </tr>
-      <!-- Holdings P/L -->
-      <tr>
-        <td class="positionTitle">Holdings P/L:</td>
-        <td
-          class="
-            PLPrices
-            <%=(unrealizedPL>0.0001)?'stockGreen':
-            ''%>
-            <%=(unrealizedPL<-0.0001)?'stockRed':
-            ''%>
-          "
-        >
-          $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
-          maximumFractionDigits: 2,}).format(unrealizedPL.toFixed(2))%>
-        </td>
-      </tr>
-      <!-- Realized P/L -->
-      <tr>
-        <td class="positionTitle">Realized P/L:</td>
-        <td
-          class="
-            PLPrices
-            <%=(totalHoldings-realizedPL>0.0001)?'stockGreen':
-            ''%>
-            <%=(totalHoldings-realizedPL<-0.0001)?'stockRed':
-            ''%>
-          "
-        >
-          $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
-          maximumFractionDigits:
-          2,}).format((totalHoldings-realizedPL).toFixed(2))%>
-        </td>
-      </tr>
-      <!-- Total P/L -->
-      <tr>
-        <td class="positionTitle">Total P/L:</td>
-        <td
-          class="
-            PLPrices
-            <%=((totalHoldings-realizedPL+unrealizedPL)>0.0001)?'stockGreen':
-            ''%>
-            <%=((totalHoldings-realizedPL+unrealizedPL)<-0.0001)?'stockRed':
-            ''%>
-          "
-        >
-          $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
-          maximumFractionDigits:
-          2,}).format((totalHoldings-realizedPL+unrealizedPL).toFixed(2))%>
-        </td>
-      </tr>
-      <!-- Position Size -->
-      <tr>
-        <td class="positionTitle">Position Size:</td>
-        <td>
-          $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
-          maximumFractionDigits:
-          2,}).format(Math.abs(totalHoldings+unrealizedPL).toFixed(2))%>
-        </td>
-      </tr>
-      <!-- Special CAD P/L for personal use, only shows up if USDCAD=X symbol is added into holdings -->
-      <!-- Day P/L CAD -->
-      <%if((dayPL)&&usdCad){%>
-      <tr>
-        <td class="positionTitle">CAD Day P/L:</td>
-        <td
-          class="
-            PLPrices
-            <%=(dayPL>0.0001)?'stockGreen':
-            ''%>
-            <%=(dayPL<-0.0001)?'stockRed':
-            ''%>
-          "
-        >
-          $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
-          maximumFractionDigits: 2,}).format((dayPL*usdCad).toFixed(2))%>
-        </td>
-      </tr>
-      <%}%>
-      <!-- Total P/L CAD -->
-      <%if(((totalHoldings-realizedPL+unrealizedPL))&&usdCad){%>
-      <tr>
-        <td class="positionTitle">CAD P/L:</td>
-        <td
-          class="
-            PLPrices
-            <%=((totalHoldings-realizedPL+unrealizedPL)>0.0001)?'stockGreen':
-            ''%>
-            <%=((totalHoldings-realizedPL+unrealizedPL)<-0.0001)?'stockRed':
-            ''%>
-          "
-        >
-          $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
-          maximumFractionDigits:
-          2,}).format(((totalHoldings-realizedPL+unrealizedPL)*usdCad).toFixed(2))%>
-        </td>
-      </tr>
+    <% if (prices.length){%>
+    <h3 class="portfolioSections">Holdings</h3>
+    <table class="holdingsList">
+      <thead>
+        <tr class="portfolioList portfolioListTitle">
+          <th class="tickerLeft tickerTitle">Ticker</th>
+          <th>Shares</th>
+          <th>Price</th>
+          <th>$Day</th>
+          <th>%Day</th>
+          <th>$P/L</th>
+          <th>%P/L</th>
+          <th>Cost</th>
+          <th>Size</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% prices.forEach(function(p) { %>
+        <!-- Holdings List-->
+        <tr class="portfolioList">
+          <!-- Tickers -->
+          <td class="tickerLeft">
+            <form
+              class="tickerForm"
+              action="/stocks/<%= p._id %>/<%= portfolio._id%>"
+            >
+              <input
+                type="submit"
+                class="tickerButton"
+                value="<%= p.symbol %>"
+              />
+            </form>
+          </td>
+          <!-- Shares -->
+          <td
+            class="
+              <%=(p.shares>0)?'stockGreen':
+              ''%>
+              <%=(p.shares<0)?'stockRed':
+              ''%>
+            "
+          >
+            <%= p.shares %>
+          </td>
+          <!-- Price -->
+          <% if (p.combinedPrice){ %> <% if (p.combinedPrice>99999){ %>
+          <td><%= (p.combinedPrice/1000).toFixed(2)%>k</td>
+          <%} else {%>
+          <td><%= p.combinedPrice.toFixed(2)%></td>
+          <%} %> <%} else {%>
+          <td>0</td>
+          <%} %>
+          <!-- $ Change Day -->
+          <% if (p.combinedPrice-p.regularMarketPreviousClose) {%> <% if
+          (Math.abs((p.combinedPrice-p.regularMarketPreviousClose)*p.shares)>999){%>
+          <td
+            class="
+              stockListRight
+              <%=((p.combinedPrice-p.regularMarketPreviousClose).toFixed(2)>0.0001)?'stockGreen':
+              ''%>
+              <%=((p.combinedPrice-p.regularMarketPreviousClose).toFixed(2)<-0.0001)?'stockRed':
+              ''%>
+            "
+          >
+            <%=
+            ((p.combinedPrice-p.regularMarketPreviousClose)*p.shares/1000).toFixed(1)
+            %>k
+          </td>
+          <% }else {%>
+          <td
+            class="
+              stockListRight
+              <%=((p.combinedPrice-p.regularMarketOpen).toFixed(2)>0.0001)?'stockGreen':
+              ''%>
+              <%=((p.combinedPrice-p.regularMarketOpen).toFixed(2)<-0.0001)?'stockRed':
+              ''%>
+            "
+          >
+            <%=
+            ((p.combinedPrice-p.regularMarketPreviousClose)*p.shares).toFixed(2)
+            %>
+          </td>
+          <% }%> <% }else {%>
+          <td class="stockListRight">n/a</td>
+          <% }%>
+          <!-- %Day -->
+          <% if (p.regularMarketPreviousClose&&
+          p.combinedPrice-p.regularMarketPreviousClose){ %>
+          <td
+            class="
+              <%=((p.combinedPrice-p.regularMarketPreviousClose)>0.0001)?'stockGreen':
+              ''%>
+              <%=((p.combinedPrice-p.regularMarketPreviousClose)<-0.0001)?'stockRed':
+              ''%>
+            "
+          >
+            <%=
+            (((p.combinedPrice-p.regularMarketPreviousClose)/p.regularMarketPreviousClose)*100).toFixed(2)%>%
+          </td>
+          <%} else {%>
+          <td>0</td>
+          <%} %>
+          <!-- $P/L -->
+          <% if (p.combinedPrice - p.avgPrice){ %> <% if (((p.combinedPrice -
+          p.avgPrice)*p.shares)>999){ %>
+          <td
+            class="
+              <%=(p.combinedPrice
+              -
+              p.avgPrice>0.0001)?'stockGreen':
+              ''%>
+              <%=(p.combinedPrice
+              -
+              p.avgPrice<-0.0001)?'stockRed':
+              ''%>
+            "
+          >
+            <%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 1,
+            maximumFractionDigits: 1,}).format(((p.combinedPrice -
+            p.avgPrice)*p.shares/1000).toFixed(1))%>k
+          </td>
+
+          <%} else {%>
+          <td
+            class="
+              <%=(p.combinedPrice
+              -
+              p.avgPrice>0.0001)?'stockGreen':
+              ''%>
+              <%=(p.combinedPrice
+              -
+              p.avgPrice<-0.0001)?'stockRed':
+              ''%>
+            "
+          >
+            <%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
+            maximumFractionDigits: 2,}).format(((p.combinedPrice -
+            p.avgPrice)*p.shares).toFixed(2))%>
+          </td>
+          <%} %> <%} else {%>
+          <td>0</td>
+          <%} %>
+          <!-- %P/L -->
+          <% if (p.avgPrice && p.combinedPrice-p.avgPrice){ %>
+          <td
+            class="
+              <%=((p.combinedPrice-p.avgPrice)>0.0001)?'stockGreen':
+              ''%>
+              <%=((p.combinedPrice-p.avgPrice)<-0.0001)?'stockRed':
+              ''%>
+            "
+          >
+            <%= (((p.combinedPrice-p.avgPrice)/p.avgPrice)*100).toFixed(2)%>%
+          </td>
+          <%} else {%>
+          <td>0</td>
+          <%} %>
+          <!-- Average Price -->
+          <%if (p.avgPrice > 9999){%>
+
+          <td><%= (p.avgPrice/1000).toFixed(2) %>k</td>
+
+          <%} else {%>
+
+          <td><%= p.avgPrice.toFixed(2) %></td>
+          <%} %>
+
+          <!-- Position Size -->
+          <% if (p.combinedPrice*p.shares){ %> <% if
+          ((p.combinedPrice*p.shares)>9999){ %>
+          <td>
+            <%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 1,
+            maximumFractionDigits:
+            1,}).format(((p.combinedPrice*p.shares)/1000).toFixed(1))%>k
+          </td>
+          <%} else {%>
+          <td>
+            <%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
+            maximumFractionDigits:
+            2,}).format((p.combinedPrice*p.shares).toFixed(2))%>
+          </td>
+          <%} %> <%} else {%>
+          <td>0</td>
+          <%} %>
+        </tr>
+        <% }); %>
+      </tbody>
+      <%} else{%>
+      <h3>No Holdings</h3>
       <%}%>
     </table>
     <br />
+    <% if (portfolio.transactions.length!==0){%>
+    <div class="portfolioSections">
+      <h3>Transactions</h3>
+    </div>
+    <table class="holdingsList">
+      <thead>
+        <tr class="portfolioList portfolioListTitle">
+          <th class="tickerLeft tickerTitle">Ticker</th>
+          <th>Action</th>
+          <th>Shares</th>
+          <th>Transact Price</th>
+          <th>Date & Time (Local)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% portfolio.transactions.forEach(function(t) { %>
+        <tr class="portfolioList transactionBorderBottom">
+          <!-- Ticker -->
+          <td class="tickerLeft tickerTitle tickerTransactionUnbold">
+            <%= t.ticker %>
+          </td>
+          <!-- Action(Buy/Sell) -->
+          <% if(t.shares>0) { %>
+          <td class="buySell stockGreen">Buy</td>
+          <%} else {%>
+          <td class="buySell stockRed">Sell</td>
+          <%} %>
+          <!-- Shares -->
+          <td><%= Math.abs(t.shares) %></td>
+          <!-- Transaction Price -->
+          <%if(t.price>9999){%>
+          <td><%= (t.price/1000).toFixed(1) %>k</td>
+          <%}else{%>
+          <td><%= t.price.toFixed(2) %></td>
+          <%}%>
+          <!-- Date & Time of transaction -->
+          <td>
+            <%= t.createdAt.toLocaleDateString() %> <%=
+            t.createdAt.toLocaleTimeString('en-GB') %>
+          </td>
+        </tr>
+        <% }); %>
+      </tbody>
+      <%} else{%>
+      <h3>No Transactions</h3>
+      <%}%>
+    </table>
   </div>
-  <% if (prices.length){%>
-  <h3 class="portfolioSections">Holdings</h3>
-  <table class="holdingsList">
-    <thead>
-      <tr class="portfolioList portfolioListTitle">
-        <th class="tickerLeft tickerTitle">Ticker</th>
-        <th>Shares</th>
-        <th>Price</th>
-        <th>$Day</th>
-        <th>%Day</th>
-        <th>$P/L</th>
-        <th>%P/L</th>
-        <th>Cost</th>
-        <th>Size</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% prices.forEach(function(p) { %>
-      <!-- Holdings List-->
-      <tr class="portfolioList">
-        <!-- Tickers -->
-        <td class="tickerLeft">
-          <form
-            class="tickerForm"
-            action="/stocks/<%= p._id %>/<%= portfolio._id%>"
-          >
-            <input type="submit" class="tickerButton" value="<%= p.symbol %>" />
-          </form>
-        </td>
-        <!-- Shares -->
-        <td
-          class="
-            <%=(p.shares>0)?'stockGreen':
-            ''%>
-            <%=(p.shares<0)?'stockRed':
-            ''%>
-          "
-        >
-          <%= p.shares %>
-        </td>
-        <!-- Price -->
-        <% if (p.combinedPrice){ %> <% if (p.combinedPrice>99999){ %>
-        <td><%= (p.combinedPrice/1000).toFixed(2)%>k</td>
-        <%} else {%>
-        <td><%= p.combinedPrice.toFixed(2)%></td>
-        <%} %> <%} else {%>
-        <td>0</td>
-        <%} %>
-        <!-- $ Change Day -->
-        <% if (p.combinedPrice-p.regularMarketPreviousClose) {%> <% if
-        (Math.abs((p.combinedPrice-p.regularMarketPreviousClose)*p.shares)>999){%>
-        <td
-          class="
-            stockListRight
-            <%=((p.combinedPrice-p.regularMarketPreviousClose).toFixed(2)>0.0001)?'stockGreen':
-            ''%>
-            <%=((p.combinedPrice-p.regularMarketPreviousClose).toFixed(2)<-0.0001)?'stockRed':
-            ''%>
-          "
-        >
-          <%=
-          ((p.combinedPrice-p.regularMarketPreviousClose)*p.shares/1000).toFixed(1)
-          %>k
-        </td>
-        <% }else {%>
-        <td
-          class="
-            stockListRight
-            <%=((p.combinedPrice-p.regularMarketOpen).toFixed(2)>0.0001)?'stockGreen':
-            ''%>
-            <%=((p.combinedPrice-p.regularMarketOpen).toFixed(2)<-0.0001)?'stockRed':
-            ''%>
-          "
-        >
-          <%=
-          ((p.combinedPrice-p.regularMarketPreviousClose)*p.shares).toFixed(2)
-          %>
-        </td>
-        <% }%> <% }else {%>
-        <td class="stockListRight">n/a</td>
-        <% }%>
-        <!-- %Day -->
-        <% if (p.regularMarketPreviousClose&&
-        p.combinedPrice-p.regularMarketPreviousClose){ %>
-        <td
-          class="
-            <%=((p.combinedPrice-p.regularMarketPreviousClose)>0.0001)?'stockGreen':
-            ''%>
-            <%=((p.combinedPrice-p.regularMarketPreviousClose)<-0.0001)?'stockRed':
-            ''%>
-          "
-        >
-          <%=
-          (((p.combinedPrice-p.regularMarketPreviousClose)/p.regularMarketPreviousClose)*100).toFixed(2)%>%
-        </td>
-        <%} else {%>
-        <td>0</td>
-        <%} %>
-        <!-- $P/L -->
-        <% if (p.combinedPrice - p.avgPrice){ %> <% if (((p.combinedPrice -
-        p.avgPrice)*p.shares)>999){ %>
-        <td
-          class="
-            <%=(p.combinedPrice
-            -
-            p.avgPrice>0.0001)?'stockGreen':
-            ''%>
-            <%=(p.combinedPrice
-            -
-            p.avgPrice<-0.0001)?'stockRed':
-            ''%>
-          "
-        >
-          <%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 1,
-          maximumFractionDigits: 1,}).format(((p.combinedPrice -
-          p.avgPrice)*p.shares/1000).toFixed(1))%>k
-        </td>
-
-        <%} else {%>
-        <td
-          class="
-            <%=(p.combinedPrice
-            -
-            p.avgPrice>0.0001)?'stockGreen':
-            ''%>
-            <%=(p.combinedPrice
-            -
-            p.avgPrice<-0.0001)?'stockRed':
-            ''%>
-          "
-        >
-          <%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
-          maximumFractionDigits: 2,}).format(((p.combinedPrice -
-          p.avgPrice)*p.shares).toFixed(2))%>
-        </td>
-        <%} %> <%} else {%>
-        <td>0</td>
-        <%} %>
-        <!-- %P/L -->
-        <% if (p.avgPrice && p.combinedPrice-p.avgPrice){ %>
-        <td
-          class="
-            <%=((p.combinedPrice-p.avgPrice)>0.0001)?'stockGreen':
-            ''%>
-            <%=((p.combinedPrice-p.avgPrice)<-0.0001)?'stockRed':
-            ''%>
-          "
-        >
-          <%= (((p.combinedPrice-p.avgPrice)/p.avgPrice)*100).toFixed(2)%>%
-        </td>
-        <%} else {%>
-        <td>0</td>
-        <%} %>
-        <!-- Average Price -->
-        <%if (p.avgPrice > 9999){%>
-
-        <td><%= (p.avgPrice/1000).toFixed(2) %>k</td>
-
-        <%} else {%>
-
-        <td><%= p.avgPrice.toFixed(2) %></td>
-        <%} %>
-
-        <!-- Position Size -->
-        <% if (p.combinedPrice*p.shares){ %> <% if
-        ((p.combinedPrice*p.shares)>9999){ %>
-        <td>
-          <%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 1,
-          maximumFractionDigits:
-          1,}).format(((p.combinedPrice*p.shares)/1000).toFixed(1))%>k
-        </td>
-        <%} else {%>
-        <td>
-          <%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
-          maximumFractionDigits:
-          2,}).format((p.combinedPrice*p.shares).toFixed(2))%>
-        </td>
-        <%} %> <%} else {%>
-        <td>0</td>
-        <%} %>
-      </tr>
-      <% }); %>
-    </tbody>
-    <%} else{%>
-    <h3>No Holdings</h3>
-    <%}%>
-  </table>
-  <br />
-  <% if (portfolio.transactions.length!==0){%>
-  <div class="portfolioSections">
-    <h3>Transactions</h3>
-  </div>
-  <table class="holdingsList">
-    <thead>
-      <tr class="portfolioList portfolioListTitle">
-        <th class="tickerLeft tickerTitle">Ticker</th>
-        <th>Action</th>
-        <th>Shares</th>
-        <th>Transact Price</th>
-        <th>Date & Time (Local)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% portfolio.transactions.forEach(function(t) { %>
-      <tr class="portfolioList transactionBorderBottom">
-        <!-- Ticker -->
-        <td class="tickerLeft tickerTitle tickerTransactionUnbold">
-          <%= t.ticker %>
-        </td>
-        <!-- Action(Buy/Sell) -->
-        <% if(t.shares>0) { %>
-        <td class="buySell stockGreen">Buy</td>
-        <%} else {%>
-        <td class="buySell stockRed">Sell</td>
-        <%} %>
-        <!-- Shares -->
-        <td><%= Math.abs(t.shares) %></td>
-        <!-- Transaction Price -->
-        <%if(t.price>9999){%>
-        <td><%= (t.price/1000).toFixed(1) %>k</td>
-        <%}else{%>
-        <td><%= t.price.toFixed(2) %></td>
-        <%}%>
-        <!-- Date & Time of transaction -->
-        <td>
-          <%= t.createdAt.toLocaleDateString() %> <%=
-          t.createdAt.toLocaleTimeString('en-GB') %>
-        </td>
-      </tr>
-      <% }); %>
-    </tbody>
-    <%} else{%>
-    <h3>No Transactions</h3>
-    <%}%>
-  </table>
 </div>
 <%- include('../partials/footer') %>
 <!-- Refresh Script -->

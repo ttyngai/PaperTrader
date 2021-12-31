@@ -30,6 +30,7 @@ body {
 }
 
 nav {
+  position: fixed;
   display: flex;
   align-items: center;
   background-color: var(--nav);
@@ -46,6 +47,10 @@ nav {
   color: var(--stockYellow);
   font-weight: bold;
   white-space: nowrap;
+}
+
+.pageContainer {
+  padding-top: 3.5rem;
 }
 
 #stockTitleAtShow {
@@ -556,7 +561,7 @@ input[type='number'] {
 
 .heroContent {
   text-align: center;
-  margin: 12rem 0 0 0;
+  /* margin: 12rem 0 0 0; */
 }
 .heroTitle {
   font-size: 3.5rem;
