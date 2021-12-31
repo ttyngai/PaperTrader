@@ -137,11 +137,14 @@ async function getChartData(ticker, interval, range) {
           arrayLength++;
         }
       }
+      // Allow last candle to fluctuate with moving price
+      array[array.length - 1][2] = array[array.length - 2][3];
       // This is to find the last price (without undefined rows) to generate a yellow line
       array.forEach(function (row) {
         row.push(array[array.length - 1][1]);
       });
     })
     .catch((err) => console.log(err));
+  console.log('Yellow', array[array.length - 1]);
   return array;
 }
