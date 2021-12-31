@@ -561,7 +561,7 @@ input[type='number'] {
 
 .heroContent {
   text-align: center;
-  /* margin: 12rem 0 0 0; */
+  margin: 10rem 0 0 0;
 }
 .heroTitle {
   font-size: 3.5rem;
