@@ -87,9 +87,9 @@
           <td
             class="
               stockListRight
-              <%=((s.combinedPrice-s.regularMarketOpen).toFixed(2)>0.0001)?'stockGreen':
+              <%=((s.combinedPrice-s.regularMarketPreviousClose).toFixed(2)>0.0001)?'stockGreen':
               ''%>
-              <%=((s.combinedPrice-s.regularMarketOpen).toFixed(2)<-0.0001)?'stockRed':
+              <%=((s.combinedPrice-s.regularMarketPreviousClose).toFixed(2)<-0.0001)?'stockRed':
               ''%>
             "
           >
@@ -100,9 +100,9 @@
           <td
             class="
               stockListRight
-              <%=((s.combinedPrice-s.regularMarketOpen).toFixed(2)>0.0001)?'stockGreen':
+              <%=((s.combinedPrice-s.regularMarketPreviousClose).toFixed(2)>0.0001)?'stockGreen':
               ''%>
-              <%=((s.combinedPrice-s.regularMarketOpen).toFixed(2)<-0.0001)?'stockRed':
+              <%=((s.combinedPrice-s.regularMarketPreviousClose).toFixed(2)<-0.0001)?'stockRed':
               ''%>
             "
           >
