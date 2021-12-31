@@ -160,19 +160,19 @@ let timeStampInterval = Math.floor(<%- JSON.stringify(chartParsed)%>.length/time
     var options = {
       legend: 'none',
       //Chart area that takes up room(away from axis)
-      chartArea:{'width': '80%', 'height': '85%'},
+      chartArea: {'width': '80%', 'height': '85%'},
       seriesType: 'candlesticks',
-      series: {1: {type: 'line',lineDashStyle: [20, 10],lineWidth: 1}},
+      series: {1: {type: 'line', lineDashStyle: [16, 8], lineWidth: 1}},
       //First value is wick color, second is horizontal line
       colors: ['#242424', 'yellow' ],
-      vAxis: { gridlineColor: '#393939',minorGridlines:{color:'transparent'}, textStyle: {
+      vAxis: {gridlineColor: '#393939', minorGridlines: {color:'transparent'}, textStyle: {
         color: '#FFF', fontSize:10
       }, gridlines:{count:10}},
-      hAxis: { gridlineColor: 'transparent', textStyle: { color: '#FFF',fontSize:10  }, showTextEvery: timeStampInterval   },
+      hAxis: {gridlineColor: 'transparent', textStyle: {color: '#FFF', fontSize: 10}, showTextEvery: timeStampInterval },
       backgroundColor: 'transparent',
       candlestick: {
-        risingColor: { stroke: stockGreen, strokeWidth:1,fill: stockGreen },
-        fallingColor: { stroke: 'red', strokeWidth:1,fill: 'red' },
+        risingColor: {stroke: stockGreen, strokeWidth:1, fill: stockGreen},
+        fallingColor: {stroke: 'red', strokeWidth: 1, fill: 'red'},
       },
     };
     var chart = new google.visualization.CandlestickChart(
