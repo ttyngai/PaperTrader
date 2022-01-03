@@ -171,7 +171,7 @@ let timeStampInterval = Math.floor(<%- JSON.stringify(chartParsed)%>.length/time
       hAxis: {gridlineColor: 'transparent', textStyle: {color: '#FFF', fontSize: 10}, showTextEvery: timeStampInterval },
       backgroundColor: 'transparent',
       candlestick: {
-        risingColor: {stroke: stockGreen, strokeWidth:1, fill: stockGreen},
+        risingColor: {stroke: stockGreen, strokeWidth: 1, fill: stockGreen},
         fallingColor: {stroke: 'red', strokeWidth: 1, fill: 'red'},
       },
     };
@@ -191,8 +191,14 @@ if (<%=user.premium%>){
   window.setTimeout(function () {
     window.location.reload();
   }, refreshRate);
+
+  // Convert href with '?' to without
+  let refWithoutQuestionMark = window.location.href;
+  if (window.location.href[window.location.href.length-1]=='?'){
+    refWithoutQuestionMark = refWithoutQuestionMark.slice(0,-1)
+  }
   // Refresh input retainer*3
-    if(localStorage.referrer !== window.location.href){
+    if(localStorage.referrer !== refWithoutQuestionMark){
       delete localStorage.inputField
       delete localStorage.inputField2
       delete localStorage.inputField3
@@ -203,7 +209,7 @@ if (<%=user.premium%>){
   // If we stored value in tempInput, and we just reloaded, box is in use
   // We will take value out and populate the box
   // Input #1 for shares box
-  if (tempInput && localStorage.referrer === window.location.href) {
+  if (tempInput && localStorage.referrer === refWithoutQuestionMark) {
     document.getElementById('buySellSharesBox').value = tempInput;
   }
   // On input #1
@@ -222,7 +228,7 @@ if (<%=user.premium%>){
   });
   // Input #2 for price box
   const tempInput2 = localStorage.inputField2;
-  if (tempInput2 && localStorage.referrer === window.location.href) {
+  if (tempInput2 && localStorage.referrer === refWithoutQuestionMark) {
     document.getElementById('buySellPriceBoxId').value = tempInput2;
   }
   // On input #2
@@ -240,7 +246,7 @@ if (<%=user.premium%>){
   });
   // Input #3 for porrtfolio selection box
   const tempInput3 = localStorage.inputField3;
-  if (tempInput3 && localStorage.referrer === window.location.href) {
+  if (tempInput3 && localStorage.referrer === refWithoutQuestionMark) {
     document.getElementById('buySellPortfolioBox').value = tempInput3;
   }
   // On select #3
