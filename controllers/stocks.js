@@ -6,7 +6,7 @@ module.exports = {
   index,
   show,
   create,
-  hide,
+  hideOrDelete,
 };
 // For first time users, populates the watch list with sample tickers.
 const sampleTicker = [
@@ -78,12 +78,29 @@ async function index(req, res) {
     });
   }
 }
-// Hide stock
-function hide(req, res) {
+// Hide stock if in transaction, delete if never transacted
+function hideOrDelete(req, res) {
   Stock.findById(req.params.id, function (err, stock) {
-    stock.hide = true;
-    stock.save();
-    res.redirect('/stocks');
+    Portfolio.find({ user: req.user._id }, function (err, portfolios) {
+      let found;
+      portfolios.forEach(function (p) {
+        p.transactions.forEach(function (t) {
+          if (t._id.toString() === stock._id.toString()) {
+            found = true;
+          }
+        });
+      });
+      // If used in transaction before, will hide but not delete
+      if (found) {
+        stock.hide = true;
+        stock.save();
+      }
+      // If not used in transaction before, will delete to not clutter up db
+      else {
+        stock.remove();
+      }
+      res.redirect('/stocks');
+    });
   });
 }
 async function show(req, res) {
@@ -166,7 +183,6 @@ async function create(req, res) {
   }
   // Is a stock, not a duplicate, create new entry
   if (check && !duplicate) {
-    console.log('re.body', req.body);
     const stock = new Stock(req.body);
     stock.user = req.user._id;
     stock.save(function (err) {

@@ -14,6 +14,6 @@ router.get('/:id/:portfolioId', stocksCtrl.show);
 router.get('/:id', stocksCtrl.show);
 
 // Deleting a review to "/reviews/:id"
-router.post('/:id', stocksCtrl.hide);
+router.post('/:id', stocksCtrl.hideOrDelete);
 
 module.exports = router;
