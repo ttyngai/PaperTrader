@@ -31,13 +31,14 @@ function create(req, res) {
     });
   });
 }
-
+// Remove transaction
 function deleteTransaction(req, res) {
   Portfolio.find(req.user._id, function (err, portfolios) {
-    portfolios.forEach(function (p) {
-      p.transactions.forEach(function (t) {
+    portfolios.forEach(function (p, pIdx) {
+      p.transactions.forEach(function (t, tIdx) {
         if (req.params.id === t._id.toString()) {
-          console.log('the transaction', t);
+          portfolios[pIdx].transactions[tIdx].remove();
+          portfolios[pIdx].save();
         }
       });
     });
