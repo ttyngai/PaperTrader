@@ -155,14 +155,18 @@
       window.setTimeout(function () {
         window.location.reload();
       }, refreshRate);
-
+    // Convert href with '?' to without
+    let refWithoutQuestionMark = window.location.href;
+    if (window.location.href[window.location.href.length-1]=='?'){
+      refWithoutQuestionMark = refWithoutQuestionMark.slice(0,-1)
+    }
       // Refresh input retainer
-      if (localStorage.referrer !== window.location.href) {
+      if (localStorage.referrer !== refWithoutQuestionMark) {
         delete localStorage.inputField;
         delete localStorage.activeFocus
       }
       const tempInput = localStorage.inputField;
-      if (tempInput && localStorage.referrer === window.location.href) {
+      if (tempInput && localStorage.referrer === refWithoutQuestionMark) {
         document.getElementById('stockSearchBox').value = tempInput;
       }
       // Save input prior to refresh
