@@ -361,6 +361,7 @@
           <th>Shares</th>
           <th>Transact Price</th>
           <th>Date & Time (Local)</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -388,6 +389,15 @@
           <td>
             <%= t.createdAt.toLocaleDateString() %> <%=
             t.createdAt.toLocaleTimeString('en-GB') %>
+          </td>
+          <!-- Remove button -->
+          <td class="removeButtonSlot">
+            <form
+              action="/transactions/<%= t._id %>/<%= portfolio._id%>?_method=DELETE"
+              method="POST"
+            >
+              <button id="removeStock" type="submit">X</button>
+            </form>
           </td>
         </tr>
         <% }); %>

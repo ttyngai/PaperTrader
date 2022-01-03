@@ -3,6 +3,7 @@ const Stock = require('../models/stock');
 
 module.exports = {
   create,
+  delete: deleteTransaction,
 };
 
 function create(req, res) {
@@ -28,5 +29,18 @@ function create(req, res) {
         res.redirect(`/portfolios/${req.body.portfolioId}`);
       });
     });
+  });
+}
+
+function deleteTransaction(req, res) {
+  Portfolio.find(req.user._id, function (err, portfolios) {
+    portfolios.forEach(function (p) {
+      p.transactions.forEach(function (t) {
+        if (req.params.id === t._id.toString()) {
+          console.log('the transaction', t);
+        }
+      });
+    });
+    res.redirect(`/portfolios/${req.params.portfolioId}`);
   });
 }

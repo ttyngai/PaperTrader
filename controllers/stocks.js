@@ -84,6 +84,10 @@ function hideOrDelete(req, res) {
     Portfolio.find({ user: req.user._id }, function (err, portfolios) {
       let found;
       portfolios.forEach(function (p) {
+        //Protect route unless from logged in user
+        if (!p.user.equals(req.user._id)) {
+          return res.redirect('/portfolios');
+        }
         p.transactions.forEach(function (t) {
           if (t._id.toString() === stock._id.toString()) {
             found = true;
