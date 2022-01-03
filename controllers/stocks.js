@@ -89,7 +89,7 @@ function hideOrDelete(req, res) {
           return res.redirect('/portfolios');
         }
         p.transactions.forEach(function (t) {
-          if (t._id.toString() === stock._id.toString()) {
+          if (t.stockId === stock._id.toString()) {
             found = true;
           }
         });
