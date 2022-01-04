@@ -172,7 +172,7 @@
           <% if (p.combinedPrice-p.regularMarketPreviousClose) {%> <% if
           (Math.abs((p.combinedPrice-p.regularMarketPreviousClose)*p.shares)>999){%>
           <td
-            class="stockListRight <%=((p.combinedPrice-p.regularMarketPreviousClose).toFixed(2)>0.0001)?'stockGreen': ''%> <%=((p.combinedPrice-p.regularMarketPreviousClose).toFixed(2)<-0.0001)?'stockRed': ''%>"
+            class="stockListRight <%=(((p.combinedPrice-p.regularMarketPreviousClose)*p.shares).toFixed(2)>0.0001)?'stockGreen': ''%> <%=(((p.combinedPrice-p.regularMarketPreviousClose)*p.shares).toFixed(2)<-0.0001)?'stockRed': ''%>"
           >
             <%=
             ((p.combinedPrice-p.regularMarketPreviousClose)*p.shares/1000).toFixed(1)
@@ -180,7 +180,7 @@
           </td>
           <% }else {%>
           <td
-            class="stockListRight <%=((p.combinedPrice-p.regularMarketOpen).toFixed(2)>0.0001)?'stockGreen': ''%> <%=((p.combinedPrice-p.regularMarketOpen).toFixed(2)<-0.0001)?'stockRed': ''%>"
+            class="stockListRight <%=(((p.combinedPrice-p.regularMarketPreviousClose)*p.shares).toFixed(2)>0.0001)?'stockGreen': ''%> <%=(((p.combinedPrice-p.regularMarketPreviousClose)*p.shares).toFixed(2)<-0.0001)?'stockRed': ''%>"
           >
             <%=
             ((p.combinedPrice-p.regularMarketPreviousClose)*p.shares).toFixed(2)
