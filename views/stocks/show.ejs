@@ -94,9 +94,9 @@
     <!-- Stock Price -->
 <% if (quote[0].combinedPrice){ %>
   <td class=" tickerLeft tickerTitle
-  <%=((quote[0].combinedPrice)>0.00001)?'stockGreen':
+  <%=((quote[0].combinedPrice-quote[0].regularMarketPreviousClose)>0.00001)?'stockGreen':
   ''%>
-  <%=((quote[0].combinedPrice)<-0.00001)?'stockRed':
+  <%=((quote[0].combinedPrice-quote[0].regularMarketPreviousClose)<-0.00001)?'stockRed':
   ''%>"><%= (quote[0].combinedPrice.toFixed(2))%></td>
   <%} else {%>
   <td>n/a</td>

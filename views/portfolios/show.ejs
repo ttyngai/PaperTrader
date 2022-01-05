@@ -162,11 +162,19 @@
           </td>
           <!-- Price -->
           <% if (p.combinedPrice){ %> <% if (p.combinedPrice>99999){ %>
-          <td><%= (p.combinedPrice/1000).toFixed(2)%>k</td>
+          <td
+            class="<%=((p.combinedPrice-p.regularMarketPreviousClose)>0.00001)?'stockGreen': ''%> <%=((p.combinedPrice-p.regularMarketPreviousClose)<-0.00001)?'stockRed': ''%>"
+          >
+            <%= (p.combinedPrice/1000).toFixed(2)%>k
+          </td>
           <%} else {%>
-          <td><%= p.combinedPrice.toFixed(2)%></td>
+          <td
+            class="<%=((p.combinedPrice-p.regularMarketPreviousClose)>0.00001)?'stockGreen': ''%> <%=((p.combinedPrice-p.regularMarketPreviousClose)<-0.00001)?'stockRed': ''%>"
+          >
+            <%= p.combinedPrice.toFixed(2)%>
+          </td>
           <%} %> <%} else {%>
-          <td>0</td>
+          <td>n/a</td>
           <%} %>
           <!-- $ Change Day -->
           <% if (p.combinedPrice-p.regularMarketPreviousClose) {%> <% if

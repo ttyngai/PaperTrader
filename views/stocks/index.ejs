@@ -72,11 +72,17 @@
           <% }%>
           <!-- Stock Price -->
           <% if (s.combinedPrice){ %> <% if (s.combinedPrice>99999){ %>
-          <td class="stockListRight">
+          <td
+            class="stockListRight <%=((s.combinedPrice-s.regularMarketPreviousClose)>0.00001)?'stockGreen': ''%> <%=((s.combinedPrice-s.regularMarketPreviousClose)<-0.00001)?'stockRed': ''%>"
+          >
             <%= (s.combinedPrice/1000).toFixed(1)%>k
           </td>
           <%} else {%>
-          <td class="stockListRight"><%= s.combinedPrice.toFixed(2)%></td>
+          <td
+            class="stockListRight <%=((s.combinedPrice-s.regularMarketPreviousClose)>0.00001)?'stockGreen': ''%> <%=((s.combinedPrice-s.regularMarketPreviousClose)<-0.00001)?'stockRed': ''%>"
+          >
+            <%= s.combinedPrice.toFixed(2)%>
+          </td>
           <%} %> <%} else {%>
           <td>n/a</td>
           <%} %>
