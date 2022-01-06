@@ -142,7 +142,6 @@ async function show(req, res) {
         `5m`,
         `1d`
       );
-      // let testTime = new Date().getTimezoneOffset() / 60;
       res.render('stocks/show', {
         title: 'Stocks',
         stock,

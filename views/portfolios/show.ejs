@@ -163,23 +163,11 @@
           <% if (p.combinedPrice){ %>
           <!-- For showing 4 decimal places with USD/CAD -->
           <% if (p.symbol.includes('CAD=X')){ %>
-          <td
-            class="<%=((p.combinedPrice-p.regularMarketPreviousClose)>0)?'stockGreen': ''%> <%=((p.combinedPrice-p.regularMarketPreviousClose)<0)?'stockRed': ''%>"
-          >
-            <%= p.combinedPrice.toFixed(4)%>
-          </td>
+          <td><%= p.combinedPrice.toFixed(4)%></td>
           <% } else if (p.combinedPrice>99999){ %>
-          <td
-            class="<%=((p.combinedPrice-p.regularMarketPreviousClose)>0)?'stockGreen': ''%> <%=((p.combinedPrice-p.regularMarketPreviousClose)<0)?'stockRed': ''%>"
-          >
-            <%= (p.combinedPrice/1000).toFixed(2)%>k
-          </td>
+          <td><%= (p.combinedPrice/1000).toFixed(2)%>k</td>
           <%} else {%>
-          <td
-            class="<%=((p.combinedPrice-p.regularMarketPreviousClose)>0)?'stockGreen': ''%> <%=((p.combinedPrice-p.regularMarketPreviousClose)<0)?'stockRed': ''%>"
-          >
-            <%= p.combinedPrice.toFixed(2)%>
-          </td>
+          <td><%= p.combinedPrice.toFixed(2)%></td>
           <%} %> <%} else {%>
           <td>n/a</td>
           <%} %>
