@@ -26,7 +26,6 @@
       <thead>
         <tr id="stockListTitle">
           <th class="tickerLeft tickerTitle">Ticker</th>
-
           <th></th>
           <th>%Chg</th>
           <th>Price</th>
@@ -50,36 +49,43 @@
           </td>
           <!-- Stock company name -->
           <% if (s.longName){ %>
-          <td class="stockListRight" id="stockName"><%= s.longName%></td>
+          <td id="stockName"><%= s.longName%></td>
           <%} else if (s.shortName){%>
-          <td class="stockListRight" id="stockName"><%= s.shortName%></td>
+          <td id="stockName"><%= s.shortName%></td>
           <%} else {%>
           <td>n/a</td>
           <%} %>
           <!-- %Change -->
           <% if (s.combinedPrice-s.regularMarketPreviousClose) {%>
           <td
-            class="stockListRight <%=((s.combinedPrice-s.regularMarketPreviousClose)>0.00001)?'stockGreen': ''%> <%=((s.combinedPrice-s.regularMarketPreviousClose)<-0.00001)?'stockRed': ''%>"
+            class="<%=((s.combinedPrice-s.regularMarketPreviousClose)>0)?'stockGreen': ''%> <%=((s.combinedPrice-s.regularMarketPreviousClose)<0)?'stockRed': ''%>"
           >
             <%=(100*(s.combinedPrice-s.regularMarketPreviousClose)/s.regularMarketPreviousClose).toFixed(2)
             %>%
           </td>
-
           <% }else if (s.combinedPrice==s.regularMarketPreviousClose) {%>
           <td>0.00%</td>
           <% }else {%>
-          <td class="stockListRight">n/a</td>
+          <td>n/a</td>
           <% }%>
           <!-- Stock Price -->
-          <% if (s.combinedPrice){ %> <% if (s.combinedPrice>99999){ %>
+          <% if (s.combinedPrice){ %>
+          <!-- For showing 4 decimal places with USD/CAD -->
+          <% if (s.symbol.includes('CAD=X')){ %>
           <td
-            class="stockListRight <%=((s.combinedPrice-s.regularMarketPreviousClose)>0.00001)?'stockGreen': ''%> <%=((s.combinedPrice-s.regularMarketPreviousClose)<-0.00001)?'stockRed': ''%>"
+            class="<%=((s.combinedPrice-s.regularMarketPreviousClose)>0)?'stockGreen': ''%> <%=((s.combinedPrice-s.regularMarketPreviousClose)<0)?'stockRed': ''%>"
+          >
+            <%= s.combinedPrice.toFixed(4)%>
+          </td>
+          <% }else if (s.combinedPrice>99999){ %>
+          <td
+            class="<%=((s.combinedPrice-s.regularMarketPreviousClose)>0)?'stockGreen': ''%> <%=((s.combinedPrice-s.regularMarketPreviousClose)<0)?'stockRed': ''%>"
           >
             <%= (s.combinedPrice/1000).toFixed(1)%>k
           </td>
           <%} else {%>
           <td
-            class="stockListRight <%=((s.combinedPrice-s.regularMarketPreviousClose)>0.00001)?'stockGreen': ''%> <%=((s.combinedPrice-s.regularMarketPreviousClose)<-0.00001)?'stockRed': ''%>"
+            class="<%=((s.combinedPrice-s.regularMarketPreviousClose)>0)?'stockGreen': ''%> <%=((s.combinedPrice-s.regularMarketPreviousClose)<0)?'stockRed': ''%>"
           >
             <%= s.combinedPrice.toFixed(2)%>
           </td>
@@ -87,40 +93,48 @@
           <td>n/a</td>
           <%} %>
           <!-- $ Change -->
-          <% if (s.combinedPrice-s.regularMarketPreviousClose) {%> <% if
-          ((s.combinedPrice-s.regularMarketPreviousClose)>999) {%>
+          <% if (s.combinedPrice-s.regularMarketPreviousClose) {%>
+          <!-- For showing 4 decimal places with USD/CAD -->
+          <% if (s.symbol.includes('CAD=X')){ %>
           <td
-            class="stockListRight <%=((s.combinedPrice-s.regularMarketPreviousClose).toFixed(2)>0.00001)?'stockGreen': ''%> <%=((s.combinedPrice-s.regularMarketPreviousClose).toFixed(2)<-0.00001)?'stockRed': ''%>"
+            class="<%=((s.combinedPrice-s.regularMarketPreviousClose)>0)?'stockGreen': ''%> <%=((s.combinedPrice-s.regularMarketPreviousClose)<0)?'stockRed': ''%>"
+          >
+            <%= (s.combinedPrice-s.regularMarketPreviousClose).toFixed(4)%>
+          </td>
+          <% } else if ((s.combinedPrice-s.regularMarketPreviousClose)>999) {%>
+          <td
+            class="<%=((s.combinedPrice-s.regularMarketPreviousClose)>0)?'stockGreen': ''%> <%=((s.combinedPrice-s.regularMarketPreviousClose)<0)?'stockRed': ''%>"
           >
             <%= ((s.combinedPrice-s.regularMarketPreviousClose)/1000).toFixed(1)
             %>k
           </td>
           <% }else {%>
           <td
-            class="stockListRight <%=((s.combinedPrice-s.regularMarketPreviousClose).toFixed(2)>0.00001)?'stockGreen': ''%> <%=((s.combinedPrice-s.regularMarketPreviousClose).toFixed(2)<-0.00001)?'stockRed': ''%>"
+            class="<%=((s.combinedPrice-s.regularMarketPreviousClose)>0)?'stockGreen': ''%> <%=((s.combinedPrice-s.regularMarketPreviousClose)<0)?'stockRed': ''%>"
           >
             <%= (s.combinedPrice-s.regularMarketPreviousClose).toFixed(2) %>
           </td>
-          <% }%> <% }else {%>
-          <td class="stockListRight">n/a</td>
+          <% }%> <% }else if (s.combinedPrice==s.regularMarketPreviousClose) {%>
+          <td>0.00</td>
+          <% }else {%>
+          <td>n/a</td>
           <% }%>
-
           <!-- Previous day market close -->
-          <% if (s.regularMarketPreviousClose) {%> <% if
-          (s.regularMarketPreviousClose>99999) {%>
-          <td class="stockListRight">
-            <%=(s.regularMarketPreviousClose/1000).toFixed(1) %>k
-          </td>
+          <% if (s.regularMarketPreviousClose) {%>
+          <!-- For showing 4 decimal places with USD/CAD -->
+          <% if (s.symbol.includes('CAD=X')){ %>
+          <td><%= s.regularMarketPreviousClose.toFixed(4)%></td>
+          <% } else if (s.regularMarketPreviousClose>99999) {%>
+          <td><%=(s.regularMarketPreviousClose/1000).toFixed(1) %>k</td>
           <% } else {%>
           <td><%=s.regularMarketPreviousClose.toFixed(2) %></td>
           <% }%> <% } else {%>
-          <td class="stockListRight">n/a</td>
+          <td>n/a</td>
           <% }%>
-
           <!-- Remove button -->
           <td class="removeButtonSlot">
             <form action="/stocks/<%= s._id %>?_method=UPDATE" method="POST">
-              <button id="removeStock" type="submit">X</button>
+              <button class="removeItem" type="submit">X</button>
             </form>
           </td>
         </tr>

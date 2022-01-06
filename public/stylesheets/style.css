@@ -143,9 +143,6 @@ table {
   border-bottom: 0.1rem solid var(--greyFont);
   white-space: nowrap;
 }
-.stockListRight {
-  color: var(--whiteFont);
-}
 .stockRed {
   color: var(--stockRed);
 }
@@ -204,7 +201,7 @@ table {
   font-weight: bold;
 }
 
-#removeStock {
+.removeItem {
   background-color: transparent;
   color: var(--greyFont);
   text-align: center;
@@ -213,7 +210,7 @@ table {
   outline: 0;
   border: none;
 }
-#removeStock:hover {
+.removeItem:hover {
   background-color: var(--stockRed);
   color: white;
 }

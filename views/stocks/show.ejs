@@ -1,149 +1,159 @@
 <%- include('../partials/header') %>
 <div class="pageContainer">
-<div class="stockShowControls">
-  <div>
-    <!-- Back button -->
-    <form action="/stocks">
-      <button  class="formButton">Back</button>
-    </form>
-  <% if (quote[0]){ %>
-    <!-- Name of stock as Title-->
-    <h1 id="stockTitleAtShow"><%= quote[0].longName%> (<%= stock.ticker%>)</h1>
-    <%} else {%>
-    <h1>n/a</h1>
-    <%} %> 
-
-    <!-- Stock purchase controls -->
-  <% if (portfolios.length !==0) {%>
-    <form
-    id="transaction"
-    action="/stocks/<%= stock._id%>/transactions"
-    method="POST"
-    >
-    <!-- Stock Price -->
-    <span class="buySellPriceBoxDollarSign">$</span>
-        <input
-          type="number" 
-          step="0.000001"
-          name="price"
-          min="0"
-          max="1000000000"
-          autocomplete="off"
-          spellcheck="false"
-          autocorrect="off"
-          id="buySellPriceBoxId"
-          value="<%- quote[0].combinedPrice%>"
-          class="<%= user.premium ? 'buySellNumBox premiumPriceBox':'buySellNumBox buySellPriceBox'  %>"
-          <%- (!user.premium) ? 'readonly':'' %>
-          />
-          <!-- Shares -->
-          <input type="number" min="1" max="1000000000"class="buySellNumBox" id="buySellSharesBox" name="shares" placeholder="Shares" autocomplete="off"
-          spellcheck="false"
-          autocorrect="off"    />
-          <span class="buySellToIndicator">
-            &nbspTo&nbsp
-          </span>
-          <!-- Portfolio selection -->
-        <select name="portfolioId" class="buySellNumBox" id="buySellPortfolioBox">
-          <% portfolios.forEach(function(p){ %>
-          <option value="<%= p._id%>"  <%- (p._id.toString()===preselectPortfolio.toString())? 'selected':''   %>  ><%=p.name%></option>
-          <%}) %>
-        </select>
-      </div>
-      <!-- Buy Sell buttons -->
-      <div>
-        <button type="submit" class="buySellButtons" id="buyButton" name="button" value="buy">Buy</button>
-        <button type="submit" class="buySellButtons" id="sellButton" name="button" value="sell">Sell</button>
-      </div>
-    </form>
-  <%} else {%>
-    <!-- If portfolio empty, asks to create portfolio -->
-    <h4>Create your portfolio today.</h4>
-    <form action="/portfolios" method="POST">
-      <input
-        class="search"
-        autocomplete="off"
-        type="text"
-        name="name"
-        placeholder="e.g. Spouse, Pet"
-        maxlength="16"
-      />
-      <input type="submit" class="formButton" value="Create" />
-    </form>
-  <%} %>
-</div>
-<!-- Chart plugin -->
-<div id="chart_div"></div>
-<br>
-<!-- Stock info -->
-<div class="stockInfoContent">
-<table class="stockInfoTable">
-  <thead>
-    <tr class="portfolioListTitle detailInfo">
-      <th class="tickerLeft tickerTitle">Mark</th>
-      <th>PrevClose</th>
-      <th>%Day</th>
-      <th>Volume(M)</th>
-      <th>MktCap(M)</th>
-      <th>ForwardPE</th>
-    </tr>
-  </thead>
-  <% if (quote[0]){%>
-<tbody>
-  <tr class="detailInfo">
-    <!-- Stock Price -->
-<% if (quote[0].combinedPrice){ %>
-  <td class=" tickerLeft tickerTitle
-  <%=((quote[0].combinedPrice-quote[0].regularMarketPreviousClose)>0.00001)?'stockGreen':
-  ''%>
-  <%=((quote[0].combinedPrice-quote[0].regularMarketPreviousClose)<-0.00001)?'stockRed':
-  ''%>"><%= (quote[0].combinedPrice.toFixed(2))%></td>
-  <%} else {%>
-  <td>n/a</td>
-  <%} %>
-  <!-- Previous Close Price -->
-    <% if (quote[0].regularMarketPreviousClose){ %>
-      <td><%= (quote[0].regularMarketPreviousClose).toFixed(2)%></td>
+  <div class="stockShowControls">
+    <div>
+      <!-- Back button -->
+      <form action="/stocks">
+        <button  class="formButton">Back</button>
+      </form>
+    <% if (quote[0]){ %>
+      <!-- Name of stock as Title-->
+      <h1 id="stockTitleAtShow"><%= quote[0].longName%> (<%= stock.ticker%>)</h1>
       <%} else {%>
-      <td>n/a</td>
-      <%} %>
-      <!-- % Change today -->
-  <% if (quote[0].combinedPrice-quote[0].regularMarketPreviousClose){ %>
-    <td class="
-    <%=((quote[0].combinedPrice-quote[0].regularMarketPreviousClose)>0.00001)?'stockGreen':
-  ''%>
-  <%=((quote[0].combinedPrice-quote[0].regularMarketPreviousClose)<-0.00001)?'stockRed':
-  ''%>
-  "><%= (100*(quote[0].combinedPrice-quote[0].regularMarketPreviousClose)/quote[0].regularMarketPreviousClose).toFixed(2)%>%</td>
-  <% }else if (quote[0].combinedPrice==quote[0].regularMarketPreviousClose) {%>
-    <td>0.00%</td>
+      <h1>n/a</h1>
+      <%} %> 
+
+      <!-- Stock purchase controls -->
+    <% if (portfolios.length !==0) {%>
+      <form
+      id="transaction"
+      action="/stocks/<%= stock._id%>/transactions"
+      method="POST"
+      >
+      <!-- Stock Price -->
+      <span class="buySellPriceBoxDollarSign">$</span>
+          <input
+            type="number" 
+            step="0.000001"
+            name="price"
+            min="0"
+            max="1000000000"
+            autocomplete="off"
+            spellcheck="false"
+            autocorrect="off"
+            id="buySellPriceBoxId"
+            value="<%- quote[0].combinedPrice%>"
+            class="<%= user.premium ? 'buySellNumBox premiumPriceBox':'buySellNumBox buySellPriceBox'  %>"
+            <%- (!user.premium) ? 'readonly':'' %>
+            />
+            <!-- Shares -->
+            <input type="number" min="1" max="1000000000"class="buySellNumBox" id="buySellSharesBox" name="shares" placeholder="Shares" autocomplete="off"
+            spellcheck="false"
+            autocorrect="off"    />
+            <span class="buySellToIndicator">
+              &nbspTo&nbsp
+            </span>
+            <!-- Portfolio selection -->
+          <select name="portfolioId" class="buySellNumBox" id="buySellPortfolioBox">
+            <% portfolios.forEach(function(p){ %>
+            <option value="<%= p._id%>"  <%- (p._id.toString()===preselectPortfolio.toString())? 'selected':''   %>  ><%=p.name%></option>
+            <%}) %>
+          </select>
+        </div>
+        <!-- Buy Sell buttons -->
+        <div>
+          <button type="submit" class="buySellButtons" id="buyButton" name="button" value="buy">Buy</button>
+          <button type="submit" class="buySellButtons" id="sellButton" name="button" value="sell">Sell</button>
+        </div>
+      </form>
     <%} else {%>
-    <td>n/a</td>
+      <!-- If portfolio empty, asks to create portfolio -->
+      <h4>Create your portfolio today.</h4>
+      <form action="/portfolios" method="POST">
+        <input
+          class="search"
+          autocomplete="off"
+          type="text"
+          name="name"
+          placeholder="e.g. Spouse, Pet"
+          maxlength="16"
+        />
+        <input type="submit" class="formButton" value="Create" />
+      </form>
     <%} %>
-    <!-- Volume Traded -->
-  <% if (quote[0].regularMarketVolume){ %>
-    <td ><%= (quote[0].regularMarketVolume/1000000).toFixed(2)%></td>
-    <%} else {%>
-    <td>n/a</td>
-    <%} %>
-    <!-- Market Cap -->
-    <% if (quote[0].forwardPE){  %>
-    <td>$<%= Intl.NumberFormat('en-US').format((quote[0].marketCap/1000000).toFixed(0))%></td>
-    <%} else {%>
-      <td>n/a</td>
-      <%} %>
-      <!-- Forward P/E -->
-  <% if (quote[0].forwardPE){  %>
-    <td><%= quote[0].forwardPE.toFixed(2)%></td>
-    <%} else {%>
-      <td>n/a</td>
-  <%} %>
-  </tr>
-</tbody>
-<%}%>
-</table>
-</div>
-</div>
+  </div>
+  <!-- Chart plugin -->
+  <div id="chart_div"></div>
+    <br>
+      <!-- Stock info -->
+      <div class="stockInfoContent">
+        <table class="stockInfoTable">
+          <thead>
+            <tr class="portfolioListTitle detailInfo">
+              <th class="tickerLeft tickerTitle">Mark</th>
+              <th>PrevClose</th>
+              <th>%Day</th>
+              <th>Volume(M)</th>
+              <th>MktCap(M)</th>
+              <th>ForwardPE</th>
+            </tr>
+          </thead>
+      <% if (quote[0]){%>
+          <tbody>
+            <tr class="detailInfo">
+              <!-- Stock Price -->
+              <!-- For showing 4 decimal places with USD/CAD -->
+              <% if (quote[0].combinedPrice && quote[0].symbol.includes('CAD=X')){ %>
+                <td class="tickerLeft tickerTitle
+                <%=((quote[0].combinedPrice-quote[0].regularMarketPreviousClose)>0)?'stockGreen':
+                ''%>
+                <%=((quote[0].combinedPrice-quote[0].regularMarketPreviousClose)<0)?'stockRed':
+                ''%>"><%= quote[0].combinedPrice.toFixed(4)%></td>
+                <% } else if (quote[0].combinedPrice){ %>
+                <td class="tickerLeft tickerTitle
+                <%=((quote[0].combinedPrice-quote[0].regularMarketPreviousClose)>0)?'stockGreen':
+                ''%>
+                <%=((quote[0].combinedPrice-quote[0].regularMarketPreviousClose)<0)?'stockRed':
+                ''%>"><%= (quote[0].combinedPrice.toFixed(2))%></td>
+                <%} else {%>
+                <td>n/a</td>
+              <%} %>
+              <!-- Previous Close Price -->
+              <!-- For showing 4 decimal places with USD/CAD -->
+              <% if (quote[0].regularMarketPreviousClose && quote[0].symbol.includes('CAD=X')){ %>
+                <td><%= quote[0].regularMarketPreviousClose.toFixed(4)%></td>
+                <% } else if (quote[0].regularMarketPreviousClose){ %>
+                <td><%= (quote[0].regularMarketPreviousClose).toFixed(2)%></td>
+                <%} else {%>
+                <td>n/a</td>
+              <%} %>
+              <!-- % Change today -->
+              <% if (quote[0].combinedPrice-quote[0].regularMarketPreviousClose){ %>
+                <td class="
+                <%=((quote[0].combinedPrice-quote[0].regularMarketPreviousClose)>0)?'stockGreen':
+                ''%>
+                <%=((quote[0].combinedPrice-quote[0].regularMarketPreviousClose)<0)?'stockRed':
+                ''%>
+                "><%= (100*(quote[0].combinedPrice-quote[0].regularMarketPreviousClose)/quote[0].regularMarketPreviousClose).toFixed(2)%>%</td>
+                <% }else if (quote[0].combinedPrice==quote[0].regularMarketPreviousClose) {%>
+                <td>0.00%</td>
+                <%} else {%>
+                <td>n/a</td>
+              <%} %>
+              <!-- Volume Traded -->
+              <% if (quote[0].regularMarketVolume){ %>
+                <td ><%= (quote[0].regularMarketVolume/1000000).toFixed(2)%></td>
+                <%} else {%>
+                <td>n/a</td>
+                <%} %>
+                <!-- Market Cap -->
+                <% if (quote[0].forwardPE){  %>
+                <td>$<%= Intl.NumberFormat('en-US').format((quote[0].marketCap/1000000).toFixed(0))%></td>
+                <%} else {%>
+                <td>n/a</td>
+              <%} %>
+              <!-- Forward P/E -->
+              <% if (quote[0].forwardPE){  %>
+                <td><%= quote[0].forwardPE.toFixed(2)%></td>
+                <%} else {%>
+                <td>n/a</td>
+              <%} %>
+            </tr>
+          </tbody>
+        <%}%>
+      </table>
+    </div>
+  </div>
 <!-- Google Chart Plugin -->
 <script
   type="text/javascript"
