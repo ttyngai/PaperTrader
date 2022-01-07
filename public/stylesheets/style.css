@@ -194,11 +194,13 @@ table {
   color: var(--stockYellow);
   border-radius: 0.5rem;
   font-weight: bold;
+  outline: none;
 }
 .formButton:hover {
   background-color: var(--stockYellow);
   color: black;
   font-weight: bold;
+  outline: none;
 }
 .backButton {
   padding-bottom: 0.25rem;
@@ -334,7 +336,6 @@ table {
 .portfolioEditActive {
   background-color: var(--stockYellow);
   color: black;
-  transition: all 0.1s ease-in-out;
 }
 
 #portfolioEditting {
