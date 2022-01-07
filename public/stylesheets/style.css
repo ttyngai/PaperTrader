@@ -563,8 +563,8 @@ input[type='number'] {
   color: var(--stockYellow);
   border-radius: 0.25rem;
   width: 10vw;
-  min-width: 6rem;
-  max-width: 8rem;
+  min-width: 7rem;
+  max-width: 9rem;
   text-align: center;
 }
 .timeframeSelected {
