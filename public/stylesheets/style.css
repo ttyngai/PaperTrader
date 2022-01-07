@@ -565,8 +565,8 @@ input[type='number'] {
   border: 0.1rem solid var(--stockYellow);
   color: var(--stockYellow);
   border-radius: 0.25rem;
-  width: 18vw;
-  min-width: 6rem;
+  width: 15vw;
+  min-width: 5rem;
   max-width: 9rem;
   text-align: center;
 }
