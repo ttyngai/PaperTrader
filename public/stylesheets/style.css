@@ -8,8 +8,8 @@
   --transparentYellow: rgba(221, 188, 0, 0.37);
   --stockGreen: rgb(115, 255, 0);
   --brightGreen: greenyellow;
-  --stockRed: rgb(255, 80, 0);
-  --brightRed: rgb(255, 0, 0);
+  --stockRed: red;
+  --brightRed: red;
 }
 
 html {
