@@ -562,7 +562,9 @@ input[type='number'] {
   border: 0.1rem solid var(--stockYellow);
   color: var(--stockYellow);
   border-radius: 0.25rem;
-  /* font-weight: bold; */
+  width: 10vw;
+  min-width: 6rem;
+  max-width: 10rem;
 }
 .timeframeSelected {
   background-color: var(--stockYellow);
@@ -571,7 +573,6 @@ input[type='number'] {
 .timeframeSelector:hover {
   background-color: var(--stockYellow);
   color: black;
-  /* font-weight: bold; */
 }
 #timeframeSelectorContainer {
   width: 95vw;
@@ -579,7 +580,6 @@ input[type='number'] {
   margin: auto;
   padding-top: 1rem;
 }
-
 .heroContent {
   text-align: center;
   margin: 10rem 0 0 0;
