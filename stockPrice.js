@@ -92,16 +92,16 @@ async function getChartData(ticker, timeFrameMode) {
     range = '1d';
     timeAxisMode = 'time';
   } else if (timeFrameMode == 2) {
-    interval = '15m';
+    interval = '30m';
     range = '5d';
     timeAxisMode = 'date';
   } else if (timeFrameMode == 3) {
-    interval = '1h';
+    interval = '90m';
     range = '1mo';
     timeAxisMode = 'date';
   } else if (timeFrameMode == 4) {
     interval = '1d';
-    range = '6mo';
+    range = '3mo';
     timeAxisMode = 'date';
   } else if (timeFrameMode == 5) {
     interval = '1wk';
