@@ -5,6 +5,9 @@ const stocksCtrl = require('../controllers/stocks');
 // POST "/stocks" - Create Route
 router.post('/', stocksCtrl.create);
 
+// Change timeframe
+router.post('/changeTimeframe/:stockId', stocksCtrl.changeTimeframe);
+
 //GET "/stocks", index route
 router.get('/', stocksCtrl.index);
 

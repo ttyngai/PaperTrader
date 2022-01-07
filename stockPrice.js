@@ -84,9 +84,33 @@ async function getStock(stocksInput, simpleCheck) {
   return simpleCheck ? exist : stocksOutput;
 }
 
-async function getChartData(ticker, interval, range) {
+async function getChartData(ticker, timeFrameMode) {
   let array = [];
   let object;
+
+  // User specific preferred chart timeframe
+  let interval, range;
+  if (timeFrameMode == 1) {
+    interval = '5m';
+    range = '1d';
+    timeAxisMode = 'time';
+  } else if (timeFrameMode == 2) {
+    interval = '15m';
+    range = '5d';
+    timeAxisMode = 'date';
+  } else if (timeFrameMode == 3) {
+    interval = '1h';
+    range = '1mo';
+    timeAxisMode = 'date';
+  } else if (timeFrameMode == 4) {
+    interval = '1d';
+    range = '6mo';
+    timeAxisMode = 'date';
+  } else if (timeFrameMode == 5) {
+    interval = '1wk';
+    range = '2y';
+    timeAxisMode = 'month';
+  }
 
   // Fetch stock charting data from Yahoo finance
   await fetch(
@@ -108,27 +132,44 @@ async function getChartData(ticker, interval, range) {
           let row = [];
           // Date Time section
           // (Icebox)Currently for 1 minuite/ 1 hour range, need to expand for different timeframes with button selection
+          // timeAxisMode == "time"
           let time = new Date(timestamp[i] * 1000);
-          // Using "gmtoffset" item from API
-          let hour = time.getUTCHours() + object.meta.gmtoffset / 60 / 60;
-          // Fix transition during 12am
-          if (hour < 0) {
-            hour += 13;
+          if (timeAxisMode == 'time') {
+            // Using "gmtoffset" item from API
+            let hour = time.getUTCHours() + object.meta.gmtoffset / 60 / 60;
+            // Fix transition during 12am
+            if (hour < 0) {
+              hour += 13;
+            }
+            // turn 24 hour to 12
+            if (hour > 12) {
+              hour = hour - 12;
+            }
+            let minute = time.getMinutes();
+            if (minute < 10) {
+              minute = `0${minute}`;
+            }
+            if (hour < 10) {
+              hour = `0${hour}`;
+            }
+            row.push(`${hour}:${minute}`);
           }
-          // turn 24 hour to 12
-          if (hour > 12) {
-            hour = hour - 12;
+          // timeAxisMode == "date"
+          else if (timeAxisMode == 'date') {
+            let time = new Date((timestamp[i] + object.meta.gmtoffset) * 1000);
+            let month = time.getUTCMonth() + 1;
+            let day = time.getUTCDate();
+            row.push(`${month}/${day}`);
           }
-          let minute = time.getMinutes();
-          if (minute < 10) {
-            minute = `0${minute}`;
+          // timeAxisMode == "month"
+          else if (timeAxisMode == 'month') {
+            let time = new Date((timestamp[i] + object.meta.gmtoffset) * 1000);
+            let month = time.getUTCMonth() + 1;
+            let year = time.getUTCFullYear();
+            row.push(`${month}/${year}`);
           }
-          if (hour < 10) {
-            hour = `0${hour}`;
-          }
+
           // More timeframes with it's timeframes(Icebox)
-          let newTime = `${hour}:${minute}`;
-          row.push(newTime);
           row.push(low[i]);
           row.push(open[i]);
           row.push(close[i]);

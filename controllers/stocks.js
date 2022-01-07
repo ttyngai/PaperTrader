@@ -7,6 +7,7 @@ module.exports = {
   show,
   create,
   hideOrDelete,
+  changeTimeframe,
 };
 // For first time users, populates the watch list with sample tickers.
 const sampleTicker = [
@@ -78,6 +79,14 @@ async function index(req, res) {
     });
   }
 }
+// Change timeframe on stock charts
+function changeTimeframe(req, res) {
+  console.log('what time frame', req.body.button);
+  req.user.preferredTimeframe = req.body.button;
+  req.user.save(function () {
+    res.redirect(`/stocks/${req.params.stockId}`);
+  });
+}
 // Hide stock if in transaction, delete if never transacted
 function hideOrDelete(req, res) {
   Stock.findById(req.params.id, function (err, stock) {
@@ -123,24 +132,11 @@ async function show(req, res) {
       obj['ticker'] = stock.ticker;
       ticker.push(obj);
       const quote = await StockPrice.getStock(ticker, false);
-      //Charting data options (icebox)
-      // let validRanges = [
-      //   '1d',
-      //   '5d',
-      //   '1mo',
-      //   '3mo',
-      //   '6mo',
-      //   '1y',
-      //   '2y',
-      //   '5y',
-      //   '10y',
-      //   'ytd',
-      //   'max',
-      // ];
+      // Charting data options
+      // Time Mode '1':5m/1d/time, '2':15m/5d/date, '3':1h/1mo/date, '4':1d/6mo/date, '5':1wk/2y/month
       const chartParsed = await StockPrice.getChartData(
         stock.ticker,
-        `5m`,
-        `1d`
+        req.user.preferredTimeframe
       );
       res.render('stocks/show', {
         title: 'Stocks',

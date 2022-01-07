@@ -557,6 +557,29 @@ input[type='number'] {
   text-align: center;
 }
 
+.timeframeSelector {
+  background-color: black;
+  border: 0.1rem solid var(--stockYellow);
+  color: var(--stockYellow);
+  border-radius: 0.25rem;
+  /* font-weight: bold; */
+}
+.timeframeSelected {
+  background-color: var(--stockYellow);
+  color: black;
+}
+.timeframeSelector:hover {
+  background-color: var(--stockYellow);
+  color: black;
+  /* font-weight: bold; */
+}
+#timeframeSelectorContainer {
+  width: 95vw;
+  max-width: 800px;
+  margin: auto;
+  padding-top: 1rem;
+}
+
 .heroContent {
   text-align: center;
   margin: 10rem 0 0 0;
@@ -577,21 +600,9 @@ input[type='number'] {
   font-weight: bold;
 }
 
-.blink_me_hero {
-  animation: blinker 2s ease-in-out infinite;
-}
-.blink_me_hero:hover {
-  animation: blinker 1s ease-in-out infinite;
-}
 #heroStart:hover {
   background-color: var(--stockYellow);
   color: black;
-}
-
-@keyframes blinker {
-  50% {
-    opacity: 75%;
-  }
 }
 
 @media (min-width: 374px) {
