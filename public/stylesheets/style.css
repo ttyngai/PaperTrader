@@ -184,7 +184,7 @@ table {
   font-size: 1em;
   background-color: black;
   color: var(--stockYellow);
-  outline: 0;
+  outline: none;
   padding: 0.3rem 1.5rem;
 }
 
@@ -210,12 +210,13 @@ table {
   text-align: center;
   vertical-align: middle;
   border-radius: 5rem;
-  outline: 0;
+  outline: none;
   border: none;
 }
 .removeItem:hover {
   background-color: var(--stockRed);
   color: white;
+  outline: none;
 }
 
 #removeHeader {
@@ -472,6 +473,7 @@ table {
   margin: 0.2rem -0.1rem 0.2rem 0.2rem;
   width: 22vw;
   max-width: 12rem;
+  outline: none;
 }
 #buyButton {
   color: greenyellow;
@@ -480,6 +482,7 @@ table {
 #buyButton:hover {
   background-color: greenyellow;
   color: black;
+  outline: none;
 }
 #sellButton {
   color: red;
@@ -488,6 +491,7 @@ table {
 #sellButton:hover {
   background-color: red;
   color: white;
+  outline: none;
 }
 
 .buySellNumBox {
@@ -570,6 +574,7 @@ input[type='number'] {
 .timeframeSelector:hover {
   background-color: var(--stockYellow);
   color: black;
+  outline: none;
 }
 #timeframeSelectorContainer {
   width: 95vw;
