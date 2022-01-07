@@ -3,17 +3,13 @@
   --background: #000000;
   --greyFont: #727272;
   --whiteFont: white;
-  --lightGrey: lightgrey;
   --stockYellow: rgb(221, 188, 0);
-  --mustardYellow: rgb(204, 204, 77);
-  --darkYellow: rgb(151, 151, 1);
   --tickerYellow: rgba(255, 220, 24, 0.144);
   --transparentYellow: rgba(221, 188, 0, 0.37);
   --stockGreen: rgb(115, 255, 0);
-  --oldStockGreen: rgb(0, 100, 0);
-  --stockRed: red;
-  --oldStockRed: rgb(170, 0, 57);
-  --darkRed: rgb(65, 2, 2);
+  --brightGreen: greenyellow;
+  --stockRed: rgb(255, 80, 0);
+  --brightRed: rgb(255, 0, 0);
 }
 
 html {
@@ -22,7 +18,7 @@ html {
 }
 * {
   font-family: Helvetica;
-  color: white;
+  color: var(--whiteFont);
 }
 
 body {
@@ -66,7 +62,7 @@ nav {
   color: var(--whiteFont);
 }
 .navButtons:hover {
-  color: white;
+  color: var(--whiteFont);
   border-bottom: 0.1rem solid var(--stockYellow);
   text-decoration: none;
   transition: all 0.2s ease-in-out;
@@ -179,7 +175,7 @@ table {
 }
 .search {
   border: 1px solid var(--stockYellow);
-  width: 15rem;
+  max-width: 18rem;
   border-radius: 0.5rem;
   font-size: 1em;
   background-color: black;
@@ -217,7 +213,7 @@ table {
 }
 .removeItem:hover {
   background-color: var(--stockRed);
-  color: white;
+  color: var(--whiteFont);
   outline: none;
 }
 
@@ -251,9 +247,9 @@ table {
   text-align: center;
   align-items: center;
 }
-#portfolioMod {
+.portfolioSelection {
   background: black;
-  color: white;
+  color: var(--whiteFont);
   border: 0.2rem solid var(--stockYellow);
   width: 70vw;
   max-width: 30rem;
@@ -264,13 +260,13 @@ table {
   white-space: nowrap;
   overflow: hidden;
 }
-#portfolioMod:hover {
+.portfolioSelection:hover {
   background-color: var(--transparentYellow);
   transform: scale(1.05);
 }
 
 #portfolioTitle {
-  color: var(--lightGrey);
+  color: var(--whiteFont);
   padding: 8rem 0 0 0;
   text-align: center;
   font-size: 3.5rem;
@@ -369,7 +365,7 @@ table {
 
 .portfolioDelete:hover {
   background-color: var(--stockRed);
-  color: white;
+  color: var(--whiteFont);
 }
 
 .portfolioDeleteHide {
@@ -403,8 +399,8 @@ table {
 }
 
 #portfolioDeleteFinal:hover {
-  background-color: red;
-  color: white;
+  background-color: var(--stockRed);
+  color: var(--whiteFont);
   opacity: 100%;
 }
 .blink_me:hover {
@@ -477,21 +473,21 @@ table {
   outline: none;
 }
 #buyButton {
-  color: greenyellow;
-  border: 2px solid greenyellow;
+  color: var(--brightGreen);
+  border: 2px solid var(--brightGreen);
 }
 #buyButton:hover {
-  background-color: greenyellow;
+  background-color: var(--brightGreen);
   color: black;
   outline: none;
 }
 #sellButton {
-  color: red;
-  border: 2px solid red;
+  color: var(--brightRed);
+  border: 2px solid var(--brightRed);
 }
 #sellButton:hover {
-  background-color: red;
-  color: white;
+  background-color: var(--brightRed);
+  color: var(--whiteFont);
   outline: none;
 }
 

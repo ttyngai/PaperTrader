@@ -16,7 +16,11 @@
       <tr>
         <td>
           <form id="listPortfolio" action="/portfolios/<%= p._id %>">
-            <input type="submit" id="portfolioMod" value="<%=p.name%>" />
+            <input
+              type="submit"
+              class="portfolioSelection"
+              value="<%=p.name%>"
+            />
           </form>
         </td>
       </tr>
