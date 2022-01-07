@@ -14,7 +14,10 @@ function create(req, res) {
     }
     // Find stock to be transacted
     Stock.findById(req.params.id, function (err, stock) {
-      console.log('price here?', req.body);
+      // Remove $ infront of price if user added it
+      if (req.body.price.charAt(0) == '$') {
+        req.body.price = req.body.price.substring(1);
+      }
       req.body.ticker = stock.ticker;
       req.body.stockId = req.params.id;
       // Swaps positive to negative if sell button was hit
