@@ -177,14 +177,13 @@
   src="https://www.gstatic.com/charts/loader.js"
 ></script>
 <script type="text/javascript">
-  
-  //This is for timeStamps generation parameters.
-  let timestampPerChart = 4
-  // Timestamp interval automatically determined by candle sticks available
+//This is for timeStamps generation parameters.
+let timestampPerChart = 4
+// Timestamp interval automatically determined by candle sticks available
 let timeStampInterval = Math.floor(<%- JSON.stringify(chartParsed)%>.length/timestampPerChart)-1
   google.charts.load('current', { packages: ['corechart'] });
   google.charts.setOnLoadCallback(drawChart);
-  function drawChart() {
+  async function drawChart() {
     let stockGreen = '#00ff00'
     var data = google.visualization.arrayToDataTable(<%- JSON.stringify(chartParsed)%>, true);
     var options = {
@@ -208,9 +207,24 @@ let timeStampInterval = Math.floor(<%- JSON.stringify(chartParsed)%>.length/time
     var chart = new google.visualization.CandlestickChart(
       document.getElementById('chart_div')
     );
-    chart.draw(data, options);
+    await chart.draw(data, options);
   }
-  
+  // Bandaid: Change wick thickness , due to weird google chart limitation
+  changeWickWidth()
+  function changeWickWidth(){
+    let allRect = document.getElementsByTagName('rect');
+      Object.keys(allRect).forEach(function(key){
+        if (allRect[key].getAttribute("fill")==='#242424'){
+          allRect[key].setAttribute("width","1");
+          allRect[key].style.zIndex="-1";
+        }
+    })
+    setTimeout(function(){
+      changeWickWidth()
+    },100)
+  }
+
+
 </script>
 <%- include('../partials/footer') %>
 <script>
@@ -317,14 +331,6 @@ if (<%=user.premium%>){
           },1000)
         }
         countDown()
-  // Change wick thickness bandaid, due to weird google chart limitation
-  setTimeout(function(){
-      let allRect = document.getElementsByTagName('rect');
-        Object.keys(allRect).forEach(function(key){
-          if (allRect[key].getAttribute("fill")==='#242424'){
-            allRect[key].setAttribute("width","1")
-          }
-      })
-  },100)
+
 
 </script>
