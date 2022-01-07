@@ -14,6 +14,7 @@ function create(req, res) {
     }
     // Find stock to be transacted
     Stock.findById(req.params.id, function (err, stock) {
+      console.log('price here?', req.body);
       req.body.ticker = stock.ticker;
       req.body.stockId = req.params.id;
       // Swaps positive to negative if sell button was hit
