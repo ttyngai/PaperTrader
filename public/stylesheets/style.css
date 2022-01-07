@@ -61,46 +61,58 @@ nav {
   padding: 0 0.5rem;
   color: var(--whiteFont);
 }
+
 .navButtons:hover {
   color: var(--whiteFont);
   border-bottom: 0.1rem solid var(--stockYellow);
   text-decoration: none;
   transition: all 0.2s ease-in-out;
 }
+
 .activeNav {
   color: var(--stockYellow);
 }
+
 .basicUser {
   color: var(--greyFont);
 }
+
 .basicUser:hover {
   color: var(--stockYellow);
 }
+
 #countDownNum {
   color: var(--greyFont);
 }
+
 #countDownNum:hover {
   color: var(--stockYellow);
 }
+
 a {
   text-decoration: none;
 }
+
 #watchListContent {
   width: 95vw;
   max-width: 800px;
 }
+
 tr {
   text-align: right;
 }
+
 .tickerLeft {
   text-align: left;
   font-weight: bold;
 }
+
 .ticker {
   padding: 0 0 0 0.5rem;
   color: var(--whiteFont);
   font-weight: bold;
 }
+
 .tickerTitle {
   border-right: none;
   font-weight: bold;
@@ -114,10 +126,12 @@ tr {
 table {
   border-collapse: collapse;
 }
+
 #stockListTitle {
   border-bottom: 0.1rem solid var(--greyFont);
   color: var(--greyFont);
 }
+
 #stockName {
   text-align: left;
   color: var(--stockYellow);
@@ -139,9 +153,11 @@ table {
   border-bottom: 0.1rem solid var(--greyFont);
   white-space: nowrap;
 }
+
 .stockRed {
   color: var(--stockRed);
 }
+
 .stockGreen {
   color: var(--stockGreen);
 }
@@ -160,6 +176,7 @@ table {
   padding-top: 0.2rem;
   padding-bottom: 0.2rem;
 }
+
 .tickerButton:hover {
   background-color: var(--stockYellow);
   color: black;
@@ -169,10 +186,12 @@ table {
   padding: 0.5rem 2rem;
   text-align: left;
 }
+
 #portfolioForm {
   padding: 2rem 0 1rem 0;
   text-align: center;
 }
+
 .search {
   border: 1px solid var(--stockYellow);
   max-width: 18rem;
@@ -192,12 +211,14 @@ table {
   font-weight: bold;
   outline: none;
 }
+
 .formButton:hover {
   background-color: var(--stockYellow);
   color: black;
   font-weight: bold;
   outline: none;
 }
+
 .backButton {
   padding-bottom: 0.25rem;
 }
@@ -211,6 +232,7 @@ table {
   outline: none;
   border: none;
 }
+
 .removeItem:hover {
   background-color: var(--stockRed);
   color: var(--whiteFont);
@@ -220,6 +242,7 @@ table {
 #removeHeader {
   color: black;
 }
+
 .removeButtonSlot {
   text-align: center;
 }
@@ -231,11 +254,13 @@ table {
   font-size: 2rem;
   transform: translateX(7.5rem);
 }
+
 .stockInfoContent {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 .stockInfoTable {
   width: 95vw;
   max-width: 800px;
@@ -247,6 +272,7 @@ table {
   text-align: center;
   align-items: center;
 }
+
 .portfolioSelection {
   background: black;
   color: var(--whiteFont);
@@ -260,6 +286,7 @@ table {
   white-space: nowrap;
   overflow: hidden;
 }
+
 .portfolioSelection:hover {
   background-color: var(--transparentYellow);
   transform: scale(1.05);
@@ -271,26 +298,31 @@ table {
   text-align: center;
   font-size: 3.5rem;
 }
+
 #listPortfolio {
   font-size: 3rem;
   padding: 0.25rem;
   text-align: center;
 }
+
 .portfolioContent {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 #portfolioControl {
   display: flex;
   flex-direction: row;
   align-items: center;
   padding-top: 1rem;
 }
+
 .holdingsList {
   width: 95vw;
   max-width: 800px;
 }
+
 .portfolioList {
   text-align: right;
 }
@@ -324,6 +356,7 @@ table {
   font-size: 1rem;
   z-index: -1;
 }
+
 .portfolioEdit:hover {
   background-color: var(--stockYellow);
   color: black;
@@ -355,6 +388,7 @@ table {
   border: 0.1rem solid var(--stockYellow);
   background-color: black;
 }
+
 .portfolioDelete {
   border: none;
   background-color: transparent;
@@ -403,10 +437,10 @@ table {
   color: var(--whiteFont);
   opacity: 100%;
 }
+
 .blink_me:hover {
   animation: blinker 0.5s linear infinite;
 }
-
 @keyframes blinker {
   50% {
     opacity: 100%;
@@ -444,6 +478,7 @@ table {
   align-content: left;
   padding: 0.5rem;
 }
+
 .PLPrices {
   padding: 0 0 0 2rem;
 }
@@ -451,6 +486,7 @@ table {
 .buySell {
   text-align: right;
 }
+
 .positionTitle {
   padding: 0 0.5rem 0 0;
 }
@@ -472,19 +508,23 @@ table {
   max-width: 12rem;
   outline: none;
 }
+
 #buyButton {
   color: var(--brightGreen);
-  border: 2px solid var(--brightGreen);
+  border: 0.2rem solid var(--brightGreen);
 }
+
 #buyButton:hover {
   background-color: var(--brightGreen);
   color: black;
   outline: none;
 }
+
 #sellButton {
   color: var(--brightRed);
-  border: 2px solid var(--brightRed);
+  border: 0.2rem solid var(--brightRed);
 }
+
 #sellButton:hover {
   background-color: var(--brightRed);
   color: var(--whiteFont);
@@ -500,10 +540,12 @@ table {
   font-size: 1.5rem;
   margin: 0 0.2rem;
 }
+
 .buySellNumBox:focus {
   border: 0.2rem solid var(--stockYellow);
   background-color: black;
 }
+
 #buySellSharesBox {
   width: 22vw;
   max-width: 16rem;
@@ -518,6 +560,7 @@ input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
 input[type='number'] {
   -moz-appearance: textfield;
 }
@@ -564,34 +607,42 @@ input[type='number'] {
   max-width: 9rem;
   text-align: center;
 }
+
 .timeframeSelected {
   background-color: var(--stockYellow);
   color: black;
 }
+
 .timeframeSelector:hover {
   background-color: var(--stockYellow);
   color: black;
   outline: none;
 }
+
 #timeframeSelectorContainer {
   width: 95vw;
   max-width: 800px;
   margin: auto;
   padding-top: 1rem;
 }
+
 #timeframeTitle {
   color: var(--stockYellow);
 }
+
 .heroContent {
   text-align: center;
   margin: 10rem 0 0 0;
 }
+
 .heroTitle {
   font-size: 3.5rem;
 }
+
 .motto {
   font-size: 1.5rem;
 }
+
 #heroStart {
   background-color: black;
   border: 3px solid var(--stockYellow);
@@ -627,12 +678,14 @@ input[type='number'] {
   body {
     font-size: 1.1rem;
   }
+
   .tickerButton {
     font-size: 1.2rem;
     max-width: 6rem;
     padding-top: 0.25rem;
     padding-bottom: 0.25rem;
   }
+
   #stockName {
     font-size: 1rem;
     max-width: 6rem;
@@ -642,12 +695,14 @@ input[type='number'] {
   body {
     font-size: 1.15rem;
   }
+
   .tickerButton {
     font-size: 1.3rem;
     max-width: 7rem;
     padding-top: 0.3rem;
     padding-bottom: 0.3rem;
   }
+
   #stockName {
     font-size: 1.15rem;
     max-width: 12rem;
@@ -657,12 +712,14 @@ input[type='number'] {
   body {
     font-size: 1.5rem;
   }
+
   .tickerButton {
     font-size: 1.5rem;
     max-width: 10rem;
     padding-top: 0.35rem;
     padding-bottom: 0.35rem;
   }
+
   #stockName {
     font-size: 1.2rem;
     max-width: 15rem;
@@ -672,12 +729,14 @@ input[type='number'] {
   body {
     font-size: 1.5rem;
   }
+
   .tickerButton {
     font-size: 1.8rem;
     max-width: 12rem;
     padding-top: 0.4rem;
     padding-bottom: 0.4rem;
   }
+
   #stockName {
     font-size: 1.5rem;
     max-width: 20rem;
