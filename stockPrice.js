@@ -88,8 +88,8 @@ async function getChartData(ticker, timeFrameMode) {
   // User specific preferred chart timeframe
   let interval, range;
   if (timeFrameMode == 1) {
-    interval = '1m';
-    range = '45m';
+    interval = '5m';
+    range = '120m';
     timeAxisMode = 'time';
   } else if (timeFrameMode == 2) {
     interval = '15m';
