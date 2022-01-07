@@ -46,7 +46,7 @@
             <!-- Portfolio selection -->
           <select name="portfolioId" class="buySellNumBox" id="buySellPortfolioBox">
             <% portfolios.forEach(function(p){ %>
-            <option value="<%= p._id%>"  <%- (p._id.toString()===preselectPortfolio.toString())? 'selected':''   %>  ><%=p.name%></option>
+            <option value="<%= p._id%>"  <%- (p._id.toString()===preselectPortfolio.toString())? 'selected':''%>><%=p.name%></option>
             <%}) %>
           </select>
         </div>
@@ -217,9 +217,9 @@ let timeStampInterval = Math.floor(<%- JSON.stringify(chartParsed)%>.length/time
   function changeWickWidth(){
     let allRect = document.getElementsByTagName('rect');
       Object.keys(allRect).forEach(function(key){
-        if (allRect[key].getAttribute("fill")==='#242424'){
+        if (allRect[key].getAttribute("fill")==='#242424'){      
+          allRect[key].setAttribute("fill",allRect[key].nextElementSibling.getAttribute("fill"));
           allRect[key].setAttribute("width","1");
-          allRect[key].style.zIndex="-1";
         }
     })
     setTimeout(function(){
