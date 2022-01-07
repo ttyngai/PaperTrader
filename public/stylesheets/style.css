@@ -524,17 +524,11 @@ input[type='number'] {
 .buySellPriceBox {
   background-color: rgb(34, 34, 34);
   color: var(--stockYellow);
-  padding: 0 0 0 1.3rem;
+
   width: 22vw;
   max-width: 16rem;
 }
 
-.buySellPriceBoxDollarSign {
-  color: var(--stockYellow);
-  padding: 0.4rem 0 0 0.8rem;
-  font-size: 1.2rem;
-  position: absolute;
-}
 .buySellToIndicator {
   color: var(--stockYellow);
   font-weight: bold;
@@ -543,7 +537,6 @@ input[type='number'] {
 }
 
 .premiumPriceBox {
-  padding: 0 0 0 1.3rem;
   width: 22vw;
   max-width: 16rem;
 }
@@ -610,6 +603,22 @@ input[type='number'] {
 #heroStart:hover {
   background-color: var(--stockYellow);
   color: black;
+}
+
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: var(--stockYellow);
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: var(--stockYellow);
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: var(--stockYellow);
 }
 
 @media (min-width: 374px) {

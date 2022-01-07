@@ -21,7 +21,6 @@
       method="POST"
       >
       <!-- Stock Price -->
-      <span class="buySellPriceBoxDollarSign">$</span>
           <input
             type="number" 
             step="0.000001"
@@ -32,7 +31,7 @@
             spellcheck="false"
             autocorrect="off"
             id="buySellPriceBoxId"
-            value="<%- quote[0].combinedPrice%>"
+            placeholder="$<%- quote[0].combinedPrice%>"
             class="<%= user.premium ? 'buySellNumBox premiumPriceBox':'buySellNumBox buySellPriceBox'  %>"
             <%- (!user.premium) ? 'readonly':'' %>
             />
