@@ -264,19 +264,19 @@
           if((p.combinedPrice-p.regularMarketPreviousClose)>0){%>
           <td class="stockGreen">
             <%=
-            ((p.combinedPrice-p.regularMarketPreviousClose)*p.shares).toFixed(1)
+            ((p.combinedPrice-p.regularMarketPreviousClose)*p.shares).toFixed(2)
             %>k
           </td>
           <% } else if((p.combinedPrice-p.regularMarketPreviousClose)<0){%>
           <td class="stockRed">
             (<%=
-            (Math.abs(p.combinedPrice-p.regularMarketPreviousClose)*p.shares).toFixed(1)
+            (Math.abs(p.combinedPrice-p.regularMarketPreviousClose)*p.shares).toFixed(2)
             %>)
           </td>
           <%} else {%>
           <td>
             <%=
-            ((p.combinedPrice-p.regularMarketPreviousClose)*p.shares).toFixed(1)
+            ((p.combinedPrice-p.regularMarketPreviousClose)*p.shares).toFixed(2)
             %>k
           </td>
           <%}%> <% }%> <% }else if
@@ -317,11 +317,11 @@
           </td>
           <%}%> <% }else {%> <% if((p.combinedPrice - p.avgPrice)>0){%>
           <td class="stockGreen">
-            <%= ((p.combinedPrice - p.avgPrice)*p.shares).toFixed(1) %>k
+            <%= ((p.combinedPrice - p.avgPrice)*p.shares).toFixed(2) %>
           </td>
           <% } else if((p.combinedPrice - p.avgPrice)<0){%>
           <td class="stockRed">
-            (<%= (Math.abs(p.combinedPrice - p.avgPrice)*p.shares).toFixed(1)
+            (<%= (Math.abs(p.combinedPrice - p.avgPrice)*p.shares).toFixed(2)
             %>)
           </td>
           <%} else {%>
