@@ -3,7 +3,7 @@
   <div class="stockShowControls">
     <div>
       <!-- Back button -->
-      <form action="/stocks">
+      <form class="backButton" action="/stocks">
         <button  class="formButton">Back</button>
       </form>
     <% if (quote[0]){ %>
@@ -244,15 +244,15 @@ if (<%=user.premium%>){
     countDownNum = 60;
     membershipLevel = 'Basic'
   }
-      function countDown(){
-        let countDownString = `${membershipLevel}(${countDownNum})`
-        document.getElementById('countDownNum').innerHTML = countDownString
-        countDownNum--;
-        setTimeout(function(){
-          countDown()
-        },1000)
-      }
+  function countDown(){
+    let countDownString = `${membershipLevel}(${countDownNum})`
+    document.getElementById('countDownNum').innerHTML = countDownString
+    countDownNum--;
+    setTimeout(function(){
       countDown()
+    },1000)
+  }
+  countDown()
   // Convert href with '?' to without
   let refWithoutQuestionMark = window.location.href;
   if (window.location.href[window.location.href.length-1]=='?'){

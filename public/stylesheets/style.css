@@ -200,6 +200,9 @@ table {
   color: black;
   font-weight: bold;
 }
+.backButton {
+  padding-bottom: 0.25rem;
+}
 
 .removeItem {
   background-color: transparent;
