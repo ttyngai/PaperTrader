@@ -223,13 +223,9 @@ let timeStampInterval = Math.floor(<%- JSON.stringify(chartParsed)%>.length/time
       changeWickWidth()
     },100)
   }
-
-
 </script>
 <%- include('../partials/footer') %>
 <script>
-
-
   //Bonus upgraded refresh rate for premium users
 let refreshRate=60000;
 if (<%=user.premium%>){
@@ -238,7 +234,25 @@ if (<%=user.premium%>){
   window.setTimeout(function () {
     window.location.reload();
   }, refreshRate);
-
+  // Membership refresh time count down
+  let countDownNum;
+  let membershipLevel;
+  if(<%=req.user.premium%>){
+    countDownNum = 10;
+    membershipLevel = 'Premium'
+  } else {
+    countDownNum = 60;
+    membershipLevel = 'Basic'
+  }
+      function countDown(){
+        let countDownString = `${membershipLevel}(${countDownNum})`
+        document.getElementById('countDownNum').innerHTML = countDownString
+        countDownNum--;
+        setTimeout(function(){
+          countDown()
+        },1000)
+      }
+      countDown()
   // Convert href with '?' to without
   let refWithoutQuestionMark = window.location.href;
   if (window.location.href[window.location.href.length-1]=='?'){
@@ -259,20 +273,21 @@ if (<%=user.premium%>){
   if (tempInput && localStorage.referrer === refWithoutQuestionMark) {
     document.getElementById('buySellSharesBox').value = tempInput;
   }
+
   // On input #1
   document
-  .getElementById('buySellSharesBox')
-  .addEventListener('input', function () {
-    localStorage.inputField =
-    document.getElementById('buySellSharesBox').value;
-    localStorage.activeFocus = 'buySellSharesBox'
-  });
+    .getElementById('buySellSharesBox')
+    .addEventListener('input', function () {
+      localStorage.inputField =
+      document.getElementById('buySellSharesBox').value;
+      localStorage.activeFocus = 'buySellSharesBox'
+    });
   // On click #1
   document
-  .getElementById('buySellSharesBox')
-  .addEventListener('click', function () {
-    localStorage.activeFocus = 'buySellSharesBox'
-  });
+    .getElementById('buySellSharesBox')
+    .addEventListener('click', function () {
+      localStorage.activeFocus = 'buySellSharesBox'
+    });
   // Input #2 for price box
   const tempInput2 = localStorage.inputField2;
   if (tempInput2 && localStorage.referrer === refWithoutQuestionMark) {
@@ -280,17 +295,17 @@ if (<%=user.premium%>){
   }
   // On input #2
   document
-  .getElementById('buySellPriceBoxId')
-  .addEventListener('input', function () {
-    localStorage.inputField2 =
-    document.getElementById('buySellPriceBoxId').value;
-  });
+    .getElementById('buySellPriceBoxId')
+    .addEventListener('input', function () {
+      localStorage.inputField2 =
+      document.getElementById('buySellPriceBoxId').value;
+    });
   // On click #2
   document
-  .getElementById('buySellPriceBoxId')
-  .addEventListener('click', function () {
-    localStorage.activeFocus = 'buySellPriceBoxId'
-  });
+    .getElementById('buySellPriceBoxId')
+    .addEventListener('click', function () {
+      localStorage.activeFocus = 'buySellPriceBoxId'
+    });
   // Input #3 for porrtfolio selection box
   const tempInput3 = localStorage.inputField3;
   if (tempInput3 && localStorage.referrer === refWithoutQuestionMark) {
@@ -298,39 +313,19 @@ if (<%=user.premium%>){
   }
   // On select #3
   document
-  .getElementById('buySellPortfolioBox')
-  .addEventListener('input', function () {
-    localStorage.inputField3 =
-    document.getElementById('buySellPortfolioBox').value;
-  });
+    .getElementById('buySellPortfolioBox')
+    .addEventListener('input', function () {
+      localStorage.inputField3 =
+      document.getElementById('buySellPortfolioBox').value;
+   });
   // deletes focus if this option is selected
   document
-  .getElementById('buySellPortfolioBox')
-  .addEventListener('click', function () {
-    delete localStorage.activeFocus
-  });
+    .getElementById('buySellPortfolioBox')
+    .addEventListener('click', function () {
+      delete localStorage.activeFocus
+    });
   if(localStorage.activeFocus){
     document.getElementById(localStorage.activeFocus).focus();
   }
-  // Membership refresh rate countdown time
-  let countDownNum;
-  let membershipLevel;
-    if(<%=req.user.premium%>){
-      countDownNum = 10;
-      membershipLevel = 'Premium'
-    } else {
-      countDownNum = 60;
-      membershipLevel = 'Basic'
-    }
-        function countDown(){
-          let countDownString = `${membershipLevel}(${countDownNum})`
-          document.getElementById('countDownNum').innerHTML = countDownString
-          countDownNum--;
-          setTimeout(function(){
-            countDown()
-          },1000)
-        }
-        countDown()
-
 
 </script>

@@ -142,51 +142,16 @@
 <%- include('../partials/footer') %>
 <!-- Refresh Script -->
 <script>
-    //Bonus upgraded refresh rate for premium users
-    let refreshRate=60000;
-    if (<%=user.premium%>){
-      refreshRate = 10000
-    }
-      window.setTimeout(function () {
-        window.location.reload();
-      }, refreshRate);
-    // Convert href with '?' to without
-    let refWithoutQuestionMark = window.location.href;
-    if (window.location.href[window.location.href.length-1]=='?'){
-      refWithoutQuestionMark = refWithoutQuestionMark.slice(0,-1)
-    }
-      // Refresh input retainer
-      if (localStorage.referrer !== refWithoutQuestionMark) {
-        delete localStorage.inputField;
-        delete localStorage.activeFocus
-      }
-      const tempInput = localStorage.inputField;
-      if (tempInput && localStorage.referrer === refWithoutQuestionMark) {
-        document.getElementById('stockSearchBox').value = tempInput;
-      }
-      // Save input prior to refresh
-      document
-        .getElementById('stockSearchBox')
-        .addEventListener('input', function () {
-          localStorage.inputField = document.getElementById('stockSearchBox').value;
-        });
-      // When search button is pressed, clear inputfield
-        document
-        .getElementById('searchTickerButton')
-        .addEventListener('click', function () {
-          delete localStorage.inputField
-        });
-      // When stock search box is clicked, remember to remain focus even after refresh
-        document
-        .getElementById('stockSearchBox')
-        .addEventListener('click', function () {
-          localStorage.activeFocus = 'stockSearchBox';
-        });
-      // Checks to see if box should be focus while page loads
-      if (localStorage.activeFocus) {
-        document.getElementById(localStorage.activeFocus).focus();
-      }
-      // Membership refresh time count down
+  //Bonus upgraded refresh rate for premium users
+  let refreshRate=60000;
+  if (<%=user.premium%>){
+    refreshRate = 10000
+  }
+    window.setTimeout(function () {
+      window.location.reload();
+    }, refreshRate);
+
+  // Membership refresh time count down
   let countDownNum;
   let membershipLevel;
   if(<%=req.user.premium%>){
@@ -196,13 +161,49 @@
     countDownNum = 60;
     membershipLevel = 'Basic'
   }
-      function countDown(){
-        let countDownString = `${membershipLevel}(${countDownNum})`
-        document.getElementById('countDownNum').innerHTML = countDownString
-        countDownNum--;
-        setTimeout(function(){
-          countDown()
-        },1000)
-      }
+  function countDown(){
+    let countDownString = `${membershipLevel}(${countDownNum})`
+    document.getElementById('countDownNum').innerHTML = countDownString
+    countDownNum--;
+    setTimeout(function(){
       countDown()
+    },1000)
+  }
+  countDown()
+  // Convert href with '?' to without
+  let refWithoutQuestionMark = window.location.href;
+  if (window.location.href[window.location.href.length-1]=='?'){
+    refWithoutQuestionMark = refWithoutQuestionMark.slice(0,-1)
+  }
+  // Refresh input retainer
+  if (localStorage.referrer !== refWithoutQuestionMark) {
+    delete localStorage.inputField;
+    delete localStorage.activeFocus
+  }
+  const tempInput = localStorage.inputField;
+  if (tempInput && localStorage.referrer === refWithoutQuestionMark) {
+    document.getElementById('stockSearchBox').value = tempInput;
+  }
+  // Save input prior to refresh
+  document
+    .getElementById('stockSearchBox')
+    .addEventListener('input', function () {
+      localStorage.inputField = document.getElementById('stockSearchBox').value;
+    });
+  // When search button is pressed, clear inputfield
+    document
+    .getElementById('searchTickerButton')
+    .addEventListener('click', function () {
+      delete localStorage.inputField
+    });
+  // When stock search box is clicked, remember to remain focus even after refresh
+    document
+    .getElementById('stockSearchBox')
+    .addEventListener('click', function () {
+      localStorage.activeFocus = 'stockSearchBox';
+    });
+  // Checks to see if box should be focus while page loads
+  if (localStorage.activeFocus) {
+    document.getElementById(localStorage.activeFocus).focus();
+  }
 </script>
