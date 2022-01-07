@@ -213,9 +213,10 @@ let timeStampInterval = Math.floor(<%- JSON.stringify(chartParsed)%>.length/time
     );
     await chart.draw(data, options);
   }
-  // Bandaid: Change wick color/thickness, due to weird google chart limitation
-  changeWickWidth()
-  function changeWickWidth(){
+  // Bandaid: Change wick color/thickness, due to weird google chart limitation, tries(loop) a few times to ensure function
+  changeWickWidth(5)
+  function changeWickWidth(count){
+    if(count>0){
     let allRect = document.getElementsByTagName('rect');
       Object.keys(allRect).forEach(function(key){
         if (allRect[key].getAttribute("fill")==='#242424'){      
@@ -224,8 +225,9 @@ let timeStampInterval = Math.floor(<%- JSON.stringify(chartParsed)%>.length/time
         }
     })
     setTimeout(function(){
-      changeWickWidth()
+      changeWickWidth(count-1)
     },100)
+  }
   }
 </script>
 <%- include('../partials/footer') %>
