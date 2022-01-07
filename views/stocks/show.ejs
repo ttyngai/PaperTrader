@@ -61,15 +61,18 @@
       <h4>Create your portfolio today.</h4>
       <form action="/portfolios" method="POST">
         <input
-          class="search"
-          autocomplete="off"
-          type="text"
-          name="name"
-          placeholder="e.g. Spouse, Pet"
-          maxlength="16"
+        class="search"
+        type="text"
+        name="name"
+        placeholder="e.g. Spouse, Child"
+        maxlength="30"
+        autocomplete="off"
+        spellcheck="false"
+        autocorrect="off"
         />
         <input type="submit" class="formButton" value="Create" />
       </form>
+      <br>
     <%} %>
   </div>
   <!-- Chart plugin -->
