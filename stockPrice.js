@@ -101,15 +101,15 @@ async function getChartData(ticker, timeFrameMode) {
     timeAxisMode = 'date';
   } else if (timeFrameMode == 4) {
     interval = '1d';
-    range = '60d';
+    range = '30d';
     timeAxisMode = 'date';
   } else if (timeFrameMode == 5) {
     interval = '1wk';
-    range = '1y';
+    range = '6mo';
     timeAxisMode = 'month';
   } else if (timeFrameMode == 6) {
     interval = '1wk';
-    range = '3y';
+    range = '2y';
     timeAxisMode = 'month';
   }
   // Fetch stock charting data from Yahoo finance
