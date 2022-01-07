@@ -22,7 +22,7 @@
       >
       <!-- Stock Price -->
           <input
-            type="number" 
+            type="text" 
             step="0.000001"
             name="price"
             min="0"
@@ -31,7 +31,7 @@
             spellcheck="false"
             autocorrect="off"
             id="buySellPriceBoxId"
-            placeholder="$<%- quote[0].combinedPrice%>"
+            value="$ <%- quote[0].combinedPrice%>"
             class="<%= user.premium ? 'buySellNumBox premiumPriceBox':'buySellNumBox buySellPriceBox'  %>"
             <%- (!user.premium) ? 'readonly':'' %>
             />
