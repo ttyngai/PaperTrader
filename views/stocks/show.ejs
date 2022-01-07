@@ -177,6 +177,7 @@
   src="https://www.gstatic.com/charts/loader.js"
 ></script>
 <script type="text/javascript">
+  
   //This is for timeStamps generation parameters.
   let timestampPerChart = 4
   // Timestamp interval automatically determined by candle sticks available
@@ -209,10 +210,13 @@ let timeStampInterval = Math.floor(<%- JSON.stringify(chartParsed)%>.length/time
     );
     chart.draw(data, options);
   }
+  
 </script>
 <%- include('../partials/footer') %>
 <script>
-    //Bonus upgraded refresh rate for premium users
+
+
+  //Bonus upgraded refresh rate for premium users
 let refreshRate=60000;
 if (<%=user.premium%>){
   refreshRate = 10000
@@ -294,7 +298,7 @@ if (<%=user.premium%>){
   if(localStorage.activeFocus){
     document.getElementById(localStorage.activeFocus).focus();
   }
-// Membership refresh rate countdown time
+  // Membership refresh rate countdown time
   let countDownNum;
   let membershipLevel;
     if(<%=req.user.premium%>){
@@ -313,4 +317,14 @@ if (<%=user.premium%>){
           },1000)
         }
         countDown()
+  // Change wick thickness bandaid, due to weird google chart limitation
+  setTimeout(function(){
+      let allRect = document.getElementsByTagName('rect');
+        Object.keys(allRect).forEach(function(key){
+          if (allRect[key].getAttribute("fill")==='#242424'){
+            allRect[key].setAttribute("width","1")
+          }
+      })
+  },100)
+
 </script>

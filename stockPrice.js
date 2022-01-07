@@ -19,7 +19,6 @@ async function getStock(stocksInput, simpleCheck) {
   } else {
     tickers = stocksInput;
   }
-
   // Fetch stock from yahoo finance
   let stocksOutput = [];
   if (tickers.length !== 0) {
@@ -83,11 +82,9 @@ async function getStock(stocksInput, simpleCheck) {
   }
   return simpleCheck ? exist : stocksOutput;
 }
-
 async function getChartData(ticker, timeFrameMode) {
   let array = [];
   let object;
-
   // User specific preferred chart timeframe
   let interval, range;
   if (timeFrameMode == 1) {
@@ -111,7 +108,6 @@ async function getChartData(ticker, timeFrameMode) {
     range = '2y';
     timeAxisMode = 'month';
   }
-
   // Fetch stock charting data from Yahoo finance
   await fetch(
     `https://query1.finance.yahoo.com/v7/finance/chart/${ticker}?range=${range}&interval=${interval}`
@@ -168,7 +164,6 @@ async function getChartData(ticker, timeFrameMode) {
             let year = time.getUTCFullYear();
             row.push(`${month}/${year}`);
           }
-
           // More timeframes with it's timeframes(Icebox)
           row.push(low[i]);
           row.push(open[i]);
