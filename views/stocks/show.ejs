@@ -79,7 +79,7 @@
   <div id="chart_div"></div>
   <div id="timeframeSelectorContainer">
     <span id="timeframeTitle">
-      Time Frame
+      &nbspTime Frame
     </span>
     <form
     action="/stocks/changeTimeframe/<%= stock._id%>"
@@ -224,10 +224,10 @@ let timeStampInterval = Math.floor(<%- JSON.stringify(chartParsed)%>.length/time
           allRect[key].setAttribute("width","1");
         }
     })
-    setTimeout(function(){
-      changeWickWidth(count-1)
-    },100)
-  }
+      setTimeout(function(){
+        changeWickWidth(count-1)
+      },100)
+    }
   }
 </script>
 <%- include('../partials/footer') %>
