@@ -231,7 +231,7 @@
           <% if (p.combinedPrice){ %>
           <!-- For showing 4 decimal places with USD/CAD -->
           <% if (p.symbol.includes('CAD=X')){ %>
-          <td><%= p.combinedPrice.toFixed(4)%></td>
+          <td><%= p.combinedPrice.toFixed(3)%></td>
           <% } else if (p.combinedPrice>99999){ %>
           <td><%= (p.combinedPrice/1000).toFixed(2)%>k</td>
           <%} else {%>
@@ -347,7 +347,7 @@
           <!-- Average Price -->
           <!-- For showing 4 decimal places with USD/CAD -->
           <% if (p.symbol.includes('CAD=X')){ %>
-          <td><%= p.regularMarketPreviousClose.toFixed(4)%></td>
+          <td><%= p.regularMarketPreviousClose.toFixed(3)%></td>
           <%} else if (p.avgPrice > 9999) {%>
           <td><%= (p.avgPrice/1000).toFixed(2) %>k</td>
           <%} else {%>

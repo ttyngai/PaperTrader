@@ -119,7 +119,7 @@
                 <%=((quote[0].combinedPrice-quote[0].regularMarketPreviousClose)>0)?'stockGreen':
                 ''%>
                 <%=((quote[0].combinedPrice-quote[0].regularMarketPreviousClose)<0)?'stockRed':
-                ''%>"><%= quote[0].combinedPrice.toFixed(4)%></td>
+                ''%>"><%= quote[0].combinedPrice.toFixed(3)%></td>
                 <% } else if (quote[0].combinedPrice){ %>
                 <td class="tickerLeft tickerTitle
                 <%=((quote[0].combinedPrice-quote[0].regularMarketPreviousClose)>0)?'stockGreen':
@@ -132,7 +132,7 @@
               <!-- Previous Close Price -->
               <!-- For showing 4 decimal places with USD/CAD -->
               <% if (quote[0].regularMarketPreviousClose && quote[0].symbol.includes('CAD=X')){ %>
-                <td><%= quote[0].regularMarketPreviousClose.toFixed(4)%></td>
+                <td><%= quote[0].regularMarketPreviousClose.toFixed(3)%></td>
                 <% } else if (quote[0].regularMarketPreviousClose){ %>
                 <td><%= (quote[0].regularMarketPreviousClose).toFixed(2)%></td>
                 <%} else {%>

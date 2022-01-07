@@ -72,7 +72,7 @@
           <% if (s.combinedPrice){ %>
           <!-- For showing 4 decimal places with USD/CAD -->
           <% if (s.symbol.includes('CAD=X')){ %>
-          <td><%= s.combinedPrice.toFixed(4)%></td>
+          <td><%= s.combinedPrice.toFixed(3)%></td>
           <% }else if (s.combinedPrice>99999){ %>
           <td><%= (s.combinedPrice/1000).toFixed(1)%>k</td>
           <%} else {%>
@@ -87,7 +87,7 @@
           <td
             class="<%=((s.combinedPrice-s.regularMarketPreviousClose)>0)?'stockGreen': ''%> <%=((s.combinedPrice-s.regularMarketPreviousClose)<0)?'stockRed': ''%>"
           >
-            <%= (s.combinedPrice-s.regularMarketPreviousClose).toFixed(4)%>
+            <%= (s.combinedPrice-s.regularMarketPreviousClose).toFixed(3)%>
           </td>
           <% } else if ((s.combinedPrice-s.regularMarketPreviousClose)>999) {%>
           <td
@@ -111,7 +111,7 @@
           <% if (s.regularMarketPreviousClose) {%>
           <!-- For showing 4 decimal places with USD/CAD -->
           <% if (s.symbol.includes('CAD=X')){ %>
-          <td><%= s.regularMarketPreviousClose.toFixed(4)%></td>
+          <td><%= s.regularMarketPreviousClose.toFixed(3)%></td>
           <% } else if (s.regularMarketPreviousClose>99999) {%>
           <td><%=(s.regularMarketPreviousClose/1000).toFixed(1) %>k</td>
           <% } else {%>
