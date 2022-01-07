@@ -564,7 +564,8 @@ input[type='number'] {
   border-radius: 0.25rem;
   width: 10vw;
   min-width: 6rem;
-  max-width: 10rem;
+  max-width: 8rem;
+  text-align: center;
 }
 .timeframeSelected {
   background-color: var(--stockYellow);
