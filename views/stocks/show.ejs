@@ -32,13 +32,14 @@
             autocorrect="off"
             id="buySellPriceBoxId"
             value="$ <%- quote[0].combinedPrice%>"
+            required
             class="<%= user.premium ? 'buySellNumBox premiumPriceBox':'buySellNumBox buySellPriceBox'  %>"
-            <%- (!user.premium) ? 'readonly':'' %>
+            <%- (!user.premium) ? 'readonly':'' %> 
             />
             <!-- Shares -->
             <input type="number" min="1" max="1000000000"class="buySellNumBox" id="buySellSharesBox" name="shares" placeholder="Shares" autocomplete="off"
             spellcheck="false"
-            autocorrect="off"    />
+            autocorrect="off" required   />
             <span class="buySellToIndicator">
               &nbspTo&nbsp
             </span>
