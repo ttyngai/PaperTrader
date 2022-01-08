@@ -101,7 +101,7 @@ async function getChartData(ticker, timeFrameMode) {
     timeAxisMode = 'date';
   } else if (timeFrameMode == 4) {
     interval = '1d';
-    range = '30d';
+    range = '45d';
     timeAxisMode = 'date';
   } else if (timeFrameMode == 5) {
     interval = '1wk';
@@ -185,5 +185,6 @@ async function getChartData(ticker, timeFrameMode) {
       });
     })
     .catch((err) => console.log(err));
+  console.log(array);
   return array;
 }

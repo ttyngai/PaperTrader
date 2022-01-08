@@ -81,7 +81,6 @@ async function index(req, res) {
 }
 // Change timeframe on stock charts
 function changeTimeframe(req, res) {
-  console.log('what time frame', req.body.button);
   req.user.preferredTimeframe = req.body.button;
   req.user.save(function () {
     res.redirect(`/stocks/${req.params.stockId}`);
