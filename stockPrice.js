@@ -89,7 +89,7 @@ async function getChartData(ticker, timeFrameMode) {
   let interval, range;
   if (timeFrameMode == 1) {
     interval = '5m';
-    range = '120m';
+    range = '180m';
     timeAxisMode = 'time';
   } else if (timeFrameMode == 2) {
     interval = '15m';
