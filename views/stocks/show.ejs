@@ -182,7 +182,7 @@
 ></script>
 <script type="text/javascript">
 //This is for timeStamps generation parameters.
-let timestampPerChart = 4
+let timestampPerChart = 5
 // Timestamp interval automatically determined by candle sticks available
 let timeStampInterval = Math.floor(<%- JSON.stringify(chartParsed)%>.length/timestampPerChart)-1
   google.charts.load('current', { packages: ['corechart'] });
@@ -196,13 +196,19 @@ let timeStampInterval = Math.floor(<%- JSON.stringify(chartParsed)%>.length/time
       //Chart area that takes up room(away from axis)
       chartArea: {'width': '80%', 'height': '85%'},
       seriesType: 'candlesticks',
-      series: {1: {type: 'bars', lineDashStyle: [16, 8], lineWidth: 1, targetAxisIndex: 1}, 2: {type: 'line', lineDashStyle: [16, 8], lineWidth: 1, targetAxisIndex: 0}},
+      series: {0:{targetAxisIndex: 1},1: {type: 'bars', lineWidth: 1, targetAxisIndex: 0}, 2: {type: 'line', lineDashStyle: [16, 8], lineWidth: 1, targetAxisIndex: 1}},
       //First value is wick color, second is horizontal line
       colors: ['#242424','#393939','yellow'],
-      vAxis: {gridlineColor: '#393939', minorGridlines: {color:'transparent'}, textStyle: {
+
+      
+      vAxes: {0:{gridlineColor: 'transparent', minorGridlines: {color:'transparent'}, textStyle: {
+        color: 'transparent', fontSize:10
+      }, gridlines:{count:5}}, 1:{gridlineColor: '#393939', minorGridlines: {color:'transparent'}, textStyle: {
         color: '#FFF', fontSize:10
-      }, gridlines:{count:10}},
-      hAxis: {gridlineColor: 'transparent', textStyle: {color: '#FFF', fontSize: 10}, showTextEvery: timeStampInterval },
+      }, gridlines:{count:5}}},
+
+
+      hAxis: {gridlineColor: 'transparent', textStyle: {color: '#FFF', fontSize: 9}, showTextEvery: timeStampInterval },
       backgroundColor: 'transparent',
       candlestick: {
         risingColor: {stroke: stockGreen, strokeWidth: 1, fill: stockGreen},

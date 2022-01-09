@@ -97,7 +97,7 @@ async function getChartData(ticker, timeFrameMode) {
     range = '5d';
     timeAxisMode = 'date';
   } else if (timeFrameMode == 3) {
-    interval = '1h';
+    interval = '60m';
     range = '1mo';
     timeAxisMode = 'date';
   } else if (timeFrameMode == 4) {
