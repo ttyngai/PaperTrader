@@ -142,6 +142,20 @@ async function show(req, res) {
         stock.ticker,
         req.user.preferredTimeframe
       );
+      // find min and max of chart data
+      let chartMin, chartMax;
+      chartParsed.forEach(function (candle, idx) {
+        if (idx === 0) {
+          chartMax = candle[4];
+          chartMin = candle[1];
+        }
+        if (candle[4] > chartMax) {
+          chartMax = candle[4];
+        }
+        if (candle[1] < chartMin) {
+          chartMin = candle[1];
+        }
+      });
       res.render('stocks/show', {
         title: 'Stocks',
         stock,
@@ -150,6 +164,8 @@ async function show(req, res) {
         req,
         chartParsed,
         preselectPortfolio,
+        chartMin,
+        chartMax,
       });
     });
   });

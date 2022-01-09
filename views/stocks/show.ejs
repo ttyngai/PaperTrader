@@ -201,9 +201,9 @@ let timeStampInterval = Math.floor(<%- JSON.stringify(chartParsed)%>.length/time
       colors: ['#242424','#262626','yellow'],
       vAxes: {1:{gridlineColor: 'transparent', minorGridlines: {color:'transparent'}, textStyle: {
         color: 'transparent', fontSize:10
-      }, gridlines:{count:6}}, 0:{gridlineColor: '#262626', minorGridlines: {color:'transparent'}, textStyle: {
+      }, gridlines:{count:8}}, 0:{gridlineColor: '#262626', minorGridlines: {color:'transparent'}, textStyle: {
         color: '#FFF', fontSize:10
-      }, gridlines:{count:6}, viewWindowMode:'maximized'}},
+      }, gridlines:{count:8}, viewWindow:{max:<%= chartMax+(chartMax-chartMin)*.2%> , min:<%= chartMin-(chartMax-chartMin)*.2%>}}},
       hAxis: {gridlineColor: 'transparent', textStyle: {color: '#FFF', fontSize: 9}, showTextEvery: timeStampInterval },
       backgroundColor: 'transparent',
       candlestick: {
