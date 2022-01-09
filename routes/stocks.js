@@ -8,6 +8,9 @@ router.post('/', stocksCtrl.create);
 // Change timeframe
 router.post('/changeTimeframe/:stockId', stocksCtrl.changeTimeframe);
 
+// Toggle technicals
+router.post('/toggleTechnicals/:stockId', stocksCtrl.toggleTechnicals);
+
 //GET "/stocks", index route
 router.get('/', stocksCtrl.index);
 

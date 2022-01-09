@@ -9,6 +9,7 @@ module.exports = {
   create,
   hideOrDelete,
   changeTimeframe,
+  toggleTechnicals,
 };
 
 // For first time users, populates the watch list with sample tickers.
@@ -86,6 +87,18 @@ async function index(req, res) {
 // Change timeframe on stock charts
 function changeTimeframe(req, res) {
   req.user.preferredTimeframe = req.body.button;
+  req.user.save(function () {
+    res.redirect(`/stocks/${req.params.stockId}`);
+  });
+}
+// toggle technical analysis on stock charts
+function toggleTechnicals(req, res) {
+  if (req.body.button == 1) {
+    req.user.sma1 = !req.user.sma1;
+  }
+  if (req.body.button == 2) {
+    req.user.sma2 = !req.user.sma2;
+  }
   req.user.save(function () {
     res.redirect(`/stocks/${req.params.stockId}`);
   });

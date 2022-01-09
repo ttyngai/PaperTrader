@@ -427,7 +427,8 @@ input[type='number'] {
   max-width: 10rem;
   text-align: center;
   font-weight: bold;
-  margin-right: -0.6rem;
+  margin-right: -0.1rem;
+  margin-left: -0.1rem;
 }
 
 .timeframeSelected {
@@ -459,6 +460,33 @@ input[type='number'] {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+}
+
+.sma1 {
+  border-color: purple;
+  color: purple;
+}
+.sma1Selected {
+  background-color: purple;
+  color: black;
+}
+
+.sma1:hover {
+  background-color: purple;
+  color: black;
+}
+
+.sma2 {
+  border-color: rgb(42, 42, 253);
+  color: rgb(42, 42, 253);
+}
+.sma2Selected {
+  background-color: rgb(42, 42, 253);
+  color: black;
+}
+.sma2:hover {
+  background-color: rgb(42, 42, 253);
+  color: black;
 }
 
 .stockInfoTable {

@@ -93,6 +93,20 @@
       </div>
     </form>
   </div>
+  <div class="timeframeSelectorContainer">
+    <span class="timeframeTitle">
+      &nbspTechnical Analysis
+    </span>
+    <form
+    action="/stocks/toggleTechnicals/<%= stock._id%>"
+    method="POST"
+    >
+      <div>
+        <button type="submit" class="timeframeSelector sma1 <%- (req.user.sma1 == true) ? 'sma1Selected':'' %>" name="button" value="1">SMA9</button>
+        <button type="submit" class="timeframeSelector sma2 <%- (req.user.sma2 == true) ? 'sma2Selected':'' %>" name="button" value="2">SMA21</button>
+      </div>
+    </form>
+  </div>
       <!-- Stock info -->
       <div class="stockInfoContent">
         <br>
@@ -208,9 +222,9 @@ let timeStampInterval = Math.floor(<%- JSON.stringify(chartParsed)%>.length/time
         // Yellow current price line
         2: {type: 'line', color:'yellow', lineDashStyle: [16, 4], lineWidth: 1, targetAxisIndex: 0},
         // SMA 9
-        3: {type: 'line', color:'purple', lineWidth: 1, targetAxisIndex: 0},
+        3: {type: 'line', color:'<%- (req.user.sma1 == true) ? `purple`:`transparent` %>', lineWidth: 1, targetAxisIndex: 0},
         // SMA 21
-        4: {type: 'line', color:'blue', lineWidth: 1, targetAxisIndex: 0},
+        4: {type: 'line', color:'<%- (req.user.sma2 == true) ? `blue`:`transparent` %>', lineWidth: 1, targetAxisIndex: 0},
       },
       // vAxes
       vAxes: {
