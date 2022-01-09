@@ -2,6 +2,7 @@ const Stock = require('../models/stock');
 const Portfolio = require('../models/portfolio');
 const StockPrice = require('../stockPrice');
 const User = require('../models/user');
+
 module.exports = {
   index,
   show,
@@ -9,6 +10,7 @@ module.exports = {
   hideOrDelete,
   changeTimeframe,
 };
+
 // For first time users, populates the watch list with sample tickers.
 const sampleTicker = [
   { ticker: 'AAPL' },
@@ -31,6 +33,7 @@ const sampleTicker = [
   { ticker: 'COKE' },
   { ticker: 'TSLA' },
 ];
+
 async function index(req, res) {
   //Check to see if it's first time login, populates with sample watch list
   if (req.user.firstTime) {
@@ -79,6 +82,7 @@ async function index(req, res) {
     });
   }
 }
+
 // Change timeframe on stock charts
 function changeTimeframe(req, res) {
   req.user.preferredTimeframe = req.body.button;
@@ -86,6 +90,7 @@ function changeTimeframe(req, res) {
     res.redirect(`/stocks/${req.params.stockId}`);
   });
 }
+
 // Hide stock if in transaction, delete if never transacted
 function hideOrDelete(req, res) {
   Stock.findById(req.params.id, function (err, stock) {
@@ -115,6 +120,7 @@ function hideOrDelete(req, res) {
     });
   });
 }
+
 async function show(req, res) {
   Stock.findById(req.params.id, function (err, stock) {
     //Protect route unless from logged in user
@@ -132,7 +138,6 @@ async function show(req, res) {
       ticker.push(obj);
       const quote = await StockPrice.getStock(ticker, false);
       // Charting data options
-      // Time Mode '1':5m/1d/time, '2':15m/5d/date, '3':1h/1mo/date, '4':1d/6mo/date, '5':1wk/2y/month
       const chartParsed = await StockPrice.getChartData(
         stock.ticker,
         req.user.preferredTimeframe
@@ -149,29 +154,17 @@ async function show(req, res) {
     });
   });
 }
-async function create(req, res) {
-  // Admin function - if "cleanStocks" is entered, removes garbage stocks not used by any user
-  if (req.user.isAdmin == true && req.body.ticker === 'cleanStocks') {
-    User.find({}, function (err, users) {
-      Stock.find({}, function (err, stocks) {
-        stocks.forEach(function (stock) {
-          let isUsed;
-          // Take Each stock
-          users.forEach(function (user) {
-            // Find if user exists
-            if (user._id.toString() === stock.user.toString()) {
-              isUsed = true;
-            }
-          });
-          if (!isUsed) {
-            console.log('Not used', stock.ticker);
-            stock.remove();
-          }
-        });
-      });
-    });
-  }
 
+async function create(req, res) {
+  // Secret function: delete own account if "DELETE{user email}" is typed into req.body.ticker, also cleans all stocks of deleted accounts
+  if (req.body.ticker === `DELETE${req.user.email}`) {
+    deleteMyAccount(req);
+  }
+  //Calls cleanStocksDb function to maintain database if "cleanStocksDb" is typed into req.body.ticker
+  if (req.body.ticker === 'cleanStocksDb') {
+    cleanStocksDb(req);
+  }
+  //Begin create
   let check;
   req.body.ticker = req.body.ticker.toUpperCase();
   // Check stock exist
@@ -209,4 +202,34 @@ async function create(req, res) {
       res.redirect(`/stocks`);
     });
   }
+}
+
+// Deletes account and cleans database of stocks
+function deleteMyAccount(req) {
+  req.user.remove(function () {
+    cleanStocksDb(req);
+  });
+}
+
+// Removes unused stocks in db not owned by any user(Or user has been deleted)
+function cleanStocksDb() {
+  User.find({}, function (err, users) {
+    Stock.find({}, function (err, stocks) {
+      stocks.forEach(function (stock) {
+        let isUsed;
+        // Take Each stock...
+        users.forEach(function (user) {
+          // ...find if user exists
+          if (user._id.toString() === stock.user.toString()) {
+            // stocks sets to found if stock's user id matches an existing user in db
+            isUsed = true;
+          }
+        });
+        // if user of stock.user is not found in db, removes the stock from db
+        if (!isUsed) {
+          stock.remove();
+        }
+      });
+    });
+  });
 }
