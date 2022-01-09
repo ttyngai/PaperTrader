@@ -94,7 +94,7 @@ a {
 }
 
 #watchListContent {
-  width: 100vw;
+  width: 96vw;
   max-width: 800px;
 }
 
@@ -263,7 +263,7 @@ table {
 }
 
 .stockInfoTable {
-  width: 95vw;
+  width: 96vw;
   max-width: 800px;
 }
 
@@ -320,7 +320,7 @@ table {
 }
 
 .holdingsList {
-  width: 95vw;
+  width: 96vw;
   max-width: 800px;
 }
 
@@ -345,7 +345,7 @@ table {
 .portfolioSections {
   display: flex;
   flex-direction: column;
-  width: 95vw;
+  width: 96vw;
   max-width: 800px;
 }
 
@@ -493,7 +493,7 @@ table {
 }
 
 #chart_div {
-  width: 95vw;
+  width: 96vw;
   max-width: 1440px;
   height: 50vh;
   max-height: 576px;
@@ -604,11 +604,12 @@ input[type='number'] {
   background-color: black;
   border: 0.1rem solid var(--stockYellow);
   color: var(--stockYellow);
-  border-radius: 0.25rem;
-  width: 15vw;
-  min-width: 5rem;
-  max-width: 9rem;
+  width: 16vw;
+  min-width: 4rem;
+  max-width: 8rem;
   text-align: center;
+  font-weight: bold;
+  margin-right: -0.6rem;
 }
 
 .timeframeSelected {
@@ -623,7 +624,7 @@ input[type='number'] {
 }
 
 #timeframeSelectorContainer {
-  width: 95vw;
+  width: 96vw;
   max-width: 800px;
   margin: auto;
   padding-top: 0.5rem;
@@ -632,6 +633,7 @@ input[type='number'] {
 
 #timeframeTitle {
   color: var(--stockYellow);
+  font-weight: bold;
 }
 
 .heroContent {
