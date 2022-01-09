@@ -634,7 +634,6 @@ input[type='number'] {
   display: flex;
   flex-direction: column;
   text-align: center;
-  align-items: center;
   justify-content: center;
   height: 60vh;
   min-height: 20rem;
@@ -681,8 +680,8 @@ input[type='number'] {
 
 .footer {
   position: fixed;
-  padding: 1rem;
-  top: 96%;
+  padding-left: 2rem;
+  top: 96vh;
   z-index: -1;
   color: var(--greyFont);
 }
