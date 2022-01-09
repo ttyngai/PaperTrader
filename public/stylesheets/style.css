@@ -682,7 +682,7 @@ input[type='number'] {
   position: fixed;
   padding-left: 2rem;
   padding-bottom: 0rem;
-  top: 96vh;
+  top: 96%;
   z-index: -1;
   color: var(--greyFont);
 }
