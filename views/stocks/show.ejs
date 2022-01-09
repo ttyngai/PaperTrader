@@ -198,10 +198,10 @@ let timeStampInterval = Math.floor(<%- JSON.stringify(chartParsed)%>.length/time
       seriesType: 'candlesticks',
       series: {0:{targetAxisIndex: 0},1: {type: 'bars', lineWidth: 1, targetAxisIndex: 1}, 2: {type: 'line', lineDashStyle: [16, 8], lineWidth: 1, targetAxisIndex: 0}},
       //First value is wick color, second is horizontal line
-      colors: ['#242424','#131314','yellow'],
+      colors: ['#242424','#262626','yellow'],
       vAxes: {1:{gridlineColor: 'transparent', minorGridlines: {color:'transparent'}, textStyle: {
         color: 'transparent', fontSize:10
-      }, gridlines:{count:5}}, 0:{gridlineColor: '#131314', minorGridlines: {color:'transparent'}, textStyle: {
+      }, gridlines:{count:5}}, 0:{gridlineColor: '#262626', minorGridlines: {color:'transparent'}, textStyle: {
         color: '#FFF', fontSize:10
       }, gridlines:{count:5}}},
       hAxis: {gridlineColor: 'transparent', textStyle: {color: '#FFF', fontSize: 9}, showTextEvery: timeStampInterval },
