@@ -89,9 +89,9 @@
         <button type="submit" class="timeframeSelector <%- (req.user.preferredTimeframe == 1) ? 'timeframeSelected':'' %>" name="button" value="1">5m:3h</button>
         <button type="submit" class="timeframeSelector <%- (req.user.preferredTimeframe == 2) ? 'timeframeSelected':'' %>" name="button" value="2">15m:1d</button>
         <button type="submit" class="timeframeSelector <%- (req.user.preferredTimeframe == 3) ? 'timeframeSelected':'' %>" name="button" value="3">1h:5d</button>
-        <button type="submit" class="timeframeSelector <%- (req.user.preferredTimeframe == 4) ? 'timeframeSelected':'' %>" name="button" value="4">1d:2mo</button>
-        <button type="submit" class="timeframeSelector <%- (req.user.preferredTimeframe == 5) ? 'timeframeSelected':'' %>" name="button" value="5">1d:3mo</button>
-        <button type="submit" class="timeframeSelector <%- (req.user.preferredTimeframe == 6) ? 'timeframeSelected':'' %>" name="button" value="6">1w:2y</button>
+        <button type="submit" class="timeframeSelector <%- (req.user.preferredTimeframe == 4) ? 'timeframeSelected':'' %>" name="button" value="4">1d:3mo</button>
+        <button type="submit" class="timeframeSelector <%- (req.user.preferredTimeframe == 5) ? 'timeframeSelected':'' %>" name="button" value="5">1w:1y</button>
+        <button type="submit" class="timeframeSelector <%- (req.user.preferredTimeframe == 6) ? 'timeframeSelected':'' %>" name="button" value="6">1mo:5y</button>
       </div>
     </form>
   </div>
@@ -189,6 +189,7 @@ let timeStampInterval = Math.floor(<%- JSON.stringify(chartParsed)%>.length/time
   google.charts.setOnLoadCallback(drawChart);
   async function drawChart() {
     let stockGreen = '#00ff00'
+    let stockRed = '#ff0000'
     var data = google.visualization.arrayToDataTable(<%- JSON.stringify(chartParsed)%>, true);
     var options = {
       legend: 'none',
@@ -205,7 +206,7 @@ let timeStampInterval = Math.floor(<%- JSON.stringify(chartParsed)%>.length/time
       backgroundColor: 'transparent',
       candlestick: {
         risingColor: {stroke: stockGreen, strokeWidth: 1, fill: stockGreen},
-        fallingColor: {stroke: 'red', strokeWidth: 1, fill: 'red'},
+        fallingColor: {stroke: stockRed, strokeWidth: 1, fill: stockRed},
       },
     };
     var chart = new google.visualization.CandlestickChart(
@@ -222,6 +223,14 @@ let timeStampInterval = Math.floor(<%- JSON.stringify(chartParsed)%>.length/time
         if (allRect[key].getAttribute("fill")==='#242424'){      
           allRect[key].setAttribute("fill",allRect[key].nextElementSibling.getAttribute("fill"));
           allRect[key].setAttribute("width","1");
+          // Centering each wick. Google charts use INT to position candles, therefore any width that has a even number of pixels will be centered to the left pixel. Need to use parseFloat to calculate true center with decimals
+          let candleWidth = parseInt(allRect[key].nextElementSibling.getAttribute("width"))
+          let candleStartX = parseFloat(allRect[key].nextElementSibling.getAttribute("x"))
+          let candleCenter = candleWidth/2+candleStartX
+          let wickWidth = parseInt(allRect[key].getAttribute("width"))
+          let wickStartX = candleCenter - wickWidth/2
+          console.log(candleWidth, candleStartX, candleCenter, wickWidth, wickStartX)
+          allRect[key].setAttribute("x",`${wickStartX}`)
         }
     })
       setTimeout(function(){
@@ -237,9 +246,9 @@ let refreshRate=60000;
 if (<%=user.premium%>){
   refreshRate = 10000
 }
-  window.setTimeout(function () {
-    window.location.reload();
-  }, refreshRate);
+  // window.setTimeout(function () {
+  //   window.location.reload();
+  // }, refreshRate);
   // Membership refresh time count down
   let countDownNum;
   let membershipLevel;
