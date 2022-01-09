@@ -143,17 +143,22 @@ async function show(req, res) {
         req.user.preferredTimeframe
       );
       // find min and max of chart data
-      let chartMin, chartMax;
+      let chartMin, chartMax, chartVolumeMax;
       chartParsed.forEach(function (candle, idx) {
         if (idx === 0) {
           chartMax = candle[4];
           chartMin = candle[1];
+          chartVolumeMax = candle[5];
         }
         if (candle[4] > chartMax) {
           chartMax = candle[4];
         }
         if (candle[1] < chartMin) {
           chartMin = candle[1];
+        }
+        if (candle[5] > chartVolumeMax) {
+          chartVolumeMax = candle[5];
+          console.log('max vol', chartVolumeMax);
         }
       });
       res.render('stocks/show', {
@@ -166,6 +171,7 @@ async function show(req, res) {
         preselectPortfolio,
         chartMin,
         chartMax,
+        chartVolumeMax,
       });
     });
   });
