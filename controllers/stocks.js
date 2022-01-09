@@ -158,7 +158,6 @@ async function show(req, res) {
         }
         if (candle[5] > chartVolumeMax) {
           chartVolumeMax = candle[5];
-          console.log('max vol', chartVolumeMax);
         }
       });
       res.render('stocks/show', {
