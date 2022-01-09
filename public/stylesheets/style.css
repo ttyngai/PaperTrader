@@ -492,9 +492,9 @@ table {
 }
 
 #chart_div {
-  width: 95vw;
+  width: 105vw;
   max-width: 1024px;
-  height: 85vw;
+  height: 90vw;
   max-height: 800px;
   margin: auto;
 }

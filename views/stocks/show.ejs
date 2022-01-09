@@ -196,13 +196,13 @@ let timeStampInterval = Math.floor(<%- JSON.stringify(chartParsed)%>.length/time
       //Chart area that takes up room(away from axis)
       chartArea: {'width': '80%', 'height': '85%'},
       seriesType: 'candlesticks',
-      series: {0:{targetAxisIndex: 1},1: {type: 'bars', lineWidth: 1, targetAxisIndex: 0}, 2: {type: 'line', lineDashStyle: [16, 8], lineWidth: 1, targetAxisIndex: 1}},
+      series: {0:{targetAxisIndex: 0},1: {type: 'bars', lineWidth: 1, targetAxisIndex: 1}, 2: {type: 'line', lineDashStyle: [16, 8], lineWidth: 1, targetAxisIndex: 0}},
       //First value is wick color, second is horizontal line
-      colors: ['#242424','#393939','yellow'],
-      vAxes: {0:{gridlineColor: 'transparent', minorGridlines: {color:'transparent'}, textStyle: {
-        color: 'transparent', fontSize:9
-      }, gridlines:{count:5}}, 1:{gridlineColor: '#393939', minorGridlines: {color:'transparent'}, textStyle: {
-        color: '#FFF', fontSize:9
+      colors: ['#242424','#131314','yellow'],
+      vAxes: {1:{gridlineColor: 'transparent', minorGridlines: {color:'transparent'}, textStyle: {
+        color: 'transparent', fontSize:10
+      }, gridlines:{count:5}}, 0:{gridlineColor: '#131314', minorGridlines: {color:'transparent'}, textStyle: {
+        color: '#FFF', fontSize:10
       }, gridlines:{count:5}}},
       hAxis: {gridlineColor: 'transparent', textStyle: {color: '#FFF', fontSize: 9}, showTextEvery: timeStampInterval },
       backgroundColor: 'transparent',
