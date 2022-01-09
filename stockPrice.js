@@ -106,7 +106,7 @@ async function getChartData(ticker, timeFrameMode) {
     timeAxisMode = 'date';
   } else if (timeFrameMode == 5) {
     interval = '1d';
-    range = '6mo';
+    range = '3mo';
     timeAxisMode = 'month';
   } else if (timeFrameMode == 6) {
     interval = '1wk';
