@@ -93,6 +93,9 @@ function changeTimeframe(req, res) {
 }
 // toggle technical analysis on stock charts
 function toggleTechnicals(req, res) {
+  if (req.body.button == 0) {
+    req.user.volume = !req.user.volume;
+  }
   if (req.body.button == 1) {
     req.user.sma1 = !req.user.sma1;
   }

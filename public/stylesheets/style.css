@@ -313,7 +313,7 @@ nav {
 #chart_div {
   width: 96vw;
   max-width: 1440px;
-  height: 55vh;
+  height: 53vh;
   max-height: 576px;
   margin: auto;
 }
@@ -466,6 +466,20 @@ input[type='number'] {
   color: var(--whiteFont);
 }
 
+.volume {
+  border-color: var(--greyFont);
+  color: var(--greyFont);
+}
+.volumeSelected {
+  background-color: var(--greyFont);
+  color: black;
+}
+
+.volume:hover {
+  background-color: var(--greyFont);
+  color: black;
+}
+
 .sma1 {
   border-color: purple;
   color: purple;
@@ -481,15 +495,15 @@ input[type='number'] {
 }
 
 .sma2 {
-  border-color: rgb(42, 42, 253);
-  color: rgb(42, 42, 253);
+  border-color: #0277bd;
+  color: #0277bd;
 }
 .sma2Selected {
-  background-color: rgb(42, 42, 253);
+  background-color: #0277bd;
   color: black;
 }
 .sma2:hover {
-  background-color: rgb(42, 42, 253);
+  background-color: #0277bd;
   color: black;
 }
 
@@ -719,7 +733,7 @@ input[type='number'] {
   left: 3.5%;
   bottom: 0.5%;
   z-index: -1;
-  color: var(--greyFont);
+  color: #3b3b3b;
 }
 
 @media (min-width: 374px) {

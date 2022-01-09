@@ -17,8 +17,9 @@ const userSchema = new Schema(
     // First time login, for populating watch list
     firstTime: { type: Boolean, default: true },
     preferredTimeframe: { type: String, default: '2' },
-    sma1: { type: Boolean, default: true },
-    sma2: { type: Boolean, default: false },
+    volume: { type: Boolean, default: true },
+    sma1: { type: Boolean, default: false },
+    sma2: { type: Boolean, default: true },
   },
   {
     timestamps: true,

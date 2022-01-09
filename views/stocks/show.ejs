@@ -102,6 +102,7 @@
     method="POST"
     >
       <div>
+        <button type="submit" class="timeframeSelector volume <%- (req.user.volume == true) ? 'volumeSelected':'' %>" name="button" value="0">Volume</button>
         <button type="submit" class="timeframeSelector sma1 <%- (req.user.sma1 == true) ? 'sma1Selected':'' %>" name="button" value="1">SMA9</button>
         <button type="submit" class="timeframeSelector sma2 <%- (req.user.sma2 == true) ? 'sma2Selected':'' %>" name="button" value="2">SMA21</button>
       </div>
@@ -218,13 +219,13 @@ let timeStampInterval = Math.floor(<%- JSON.stringify(chartParsed)%>.length/time
           }
         },
         // Volume Bar
-        1: {type: 'bars', color:'#262626', lineWidth: 1, targetAxisIndex: 1}, 
+        1: {type: 'bars', color:'<%- (req.user.volume == true) ? `#262626`:`transparent` %>', lineWidth: 1, targetAxisIndex: 1}, 
         // Yellow current price line
         2: {type: 'line', color:'yellow', lineDashStyle: [16, 4], lineWidth: 1, targetAxisIndex: 0},
         // SMA 9
         3: {type: 'line', color:'<%- (req.user.sma1 == true) ? `purple`:`transparent` %>', lineWidth: 1, targetAxisIndex: 0},
         // SMA 21
-        4: {type: 'line', color:'<%- (req.user.sma2 == true) ? `blue`:`transparent` %>', lineWidth: 1, targetAxisIndex: 0},
+        4: {type: 'line', color:'<%- (req.user.sma2 == true) ? `#0277bd`:`transparent` %>', lineWidth: 1, targetAxisIndex: 0},
       },
       // vAxes
       vAxes: {
