@@ -54,7 +54,7 @@ nav {
 }
 
 .stockShowControls {
-  padding: 1rem 0 0 1rem;
+  padding: 0.5rem 0 0 1rem;
 }
 
 .navButtons {
@@ -257,8 +257,9 @@ table {
 
 .stockInfoContent {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  justify-content: center;
 }
 
 .stockInfoTable {
@@ -625,7 +626,8 @@ input[type='number'] {
   width: 95vw;
   max-width: 800px;
   margin: auto;
-  padding-top: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 #timeframeTitle {
