@@ -1,7 +1,7 @@
 <%- include('../partials/header') %>
 <div class="pageContainer">
   <!-- Form for adding stocks -->
-  <form id="searchForm" action="/stocks" method="POST">
+  <form class="searchForm" action="/stocks" method="POST">
     <input
       class="search"
       id="stockSearchBox"
@@ -21,10 +21,10 @@
   </form>
   <!-- Stocks watchlist container -->
   <div class="stockContent">
-    <table id="watchListContent">
+    <table class="watchListContent">
       <%if (listNotEmpty==true){ %>
       <thead>
-        <tr id="stockListTitle">
+        <tr class="stockListTitle">
           <th class="tickerLeft tickerTitle">Ticker</th>
           <th></th>
           <th>%Chg</th>
@@ -34,9 +34,9 @@
           <th></th>
         </tr>
       </thead>
-      <tbody id="wholeForm">
+      <tbody>
         <% stocks.forEach(function(s) {if (!s.hide) { %>
-        <tr id="eachStock">
+        <tr class="eachStock">
           <!-- Stock Ticker -->
           <td class="tickerLeft">
             <form class="tickerForm" action="/stocks/<%= s._id %>">
@@ -49,9 +49,9 @@
           </td>
           <!-- Stock company name -->
           <% if (s.longName){ %>
-          <td id="stockName"><%= s.longName%></td>
+          <td class="stockName"><%= s.longName%></td>
           <%} else if (s.shortName){%>
-          <td id="stockName"><%= s.shortName%></td>
+          <td class="stockName"><%= s.shortName%></td>
           <%} else {%>
           <td>n/a</td>
           <%} %>
@@ -131,8 +131,8 @@
       <%} else{ %>
       <tbody>
         <!-- If list empty, "Empty" message is rendered -->
-        <tr id="noStock">
-          <td>Stock list empty.</td>
+        <tr class="noStock">
+          <td>Stock list empty</td>
         </tr>
       </tbody>
       <%}%>

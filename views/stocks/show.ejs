@@ -8,14 +8,14 @@
       </form>
     <% if (quote[0]){ %>
       <!-- Name of stock as Title-->
-      <h1 id="stockTitleAtShow"><%= quote[0].longName%> (<%= stock.ticker%>)</h1>
+      <h1 class="stockTitleAtShow"><%= quote[0].longName%> (<%= stock.ticker%>)</h1>
       <%} else {%>
       <h1>n/a</h1>
       <%} %> 
       <!-- Stock purchase controls -->
     <% if (portfolios.length !==0) {%>
       <form
-      id="transaction"
+      class="transactionForm"
       action="/stocks/<%= stock._id%>/transactions"
       method="POST"
       >
@@ -75,8 +75,8 @@
   </div>
   <!-- Chart plugin -->
   <div id="chart_div"></div>
-  <div id="timeframeSelectorContainer">
-    <span id="timeframeTitle">
+  <div class="timeframeSelectorContainer">
+    <span class="timeframeTitle">
       &nbspTimeframe - Interval & Range
     </span>
     <form

@@ -25,6 +25,25 @@ body {
   background-color: var(--background);
 }
 
+tr {
+  text-align: right;
+}
+
+a {
+  text-decoration: none;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+/* Adding space for navbar */
+.pageContainer {
+  padding-top: 3rem;
+}
+
+/* Navigation */
+
 nav {
   position: fixed;
   display: flex;
@@ -43,18 +62,6 @@ nav {
   color: var(--stockYellow);
   font-weight: bold;
   white-space: nowrap;
-}
-
-.pageContainer {
-  padding-top: 3.5rem;
-}
-
-#stockTitleAtShow {
-  color: var(--stockYellow);
-}
-
-.stockShowControls {
-  padding: 0.5rem 0 0 1rem;
 }
 
 .navButtons {
@@ -89,17 +96,53 @@ nav {
   color: var(--stockYellow);
 }
 
-a {
-  text-decoration: none;
+/* Homepage */
+
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  height: 60vh;
+  min-height: 20rem;
 }
 
-#watchListContent {
+.heroTitle {
+  font-size: 3.5rem;
+}
+
+.motto {
+  font-size: 1.5rem;
+}
+
+.heroStart {
+  background-color: black;
+  border: 3px solid var(--stockYellow);
+  color: var(--stockYellow);
+  border-radius: 0.75rem;
+  padding: 0 3rem;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.heroStart:hover {
+  background-color: var(--stockYellow);
+  color: black;
+}
+
+/* Stock index page */
+
+.watchListContent {
   width: 96vw;
   max-width: 800px;
 }
 
-tr {
-  text-align: right;
+.stockTitleAtShow {
+  color: var(--stockYellow);
+}
+
+.stockShowControls {
+  padding: 0.5rem 0 0 1rem;
 }
 
 .tickerLeft {
@@ -123,16 +166,12 @@ tr {
   text-decoration: none;
 }
 
-table {
-  border-collapse: collapse;
-}
-
-#stockListTitle {
+.stockListTitle {
   border-bottom: 0.1rem solid var(--greyFont);
   color: var(--greyFont);
 }
 
-#stockName {
+.stockName {
   text-align: left;
   color: var(--stockYellow);
   font-size: 0.8rem;
@@ -149,7 +188,7 @@ table {
   align-items: center;
 }
 
-#eachStock {
+.eachStock {
   border-bottom: 0.1rem solid var(--greyFont);
   white-space: nowrap;
 }
@@ -182,14 +221,9 @@ table {
   color: black;
 }
 
-#searchForm {
+.searchForm {
   padding: 0.5rem 2rem;
   text-align: left;
-}
-
-#portfolioForm {
-  padding: 2rem 0 1rem 0;
-  text-align: center;
 }
 
 .search {
@@ -219,10 +253,6 @@ table {
   outline: none;
 }
 
-.backButton {
-  padding-bottom: 0.25rem;
-}
-
 .removeItem {
   background-color: transparent;
   color: var(--greyFont);
@@ -239,242 +269,30 @@ table {
   outline: none;
 }
 
-#removeHeader {
-  color: black;
-}
-
 .removeButtonSlot {
   text-align: center;
 }
 
-#noStock {
-  position: absolute;
-  top: 40%;
-  right: 50%;
-  font-size: 2rem;
-  transform: translateX(7.5rem);
-}
-
-.stockInfoContent {
+.noStock {
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
+  text-align: center;
   justify-content: center;
-}
-
-.stockInfoTable {
-  width: 96vw;
-  max-width: 800px;
-}
-
-#portfolioTable {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  align-items: center;
-}
-
-.portfolioSelection {
-  background: black;
-  color: var(--whiteFont);
-  border: 0.2rem solid var(--stockYellow);
-  width: 70vw;
-  max-width: 30rem;
-  border-radius: 1rem;
-  padding: 0.1em 0.5em;
-  font-size: 1em;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.portfolioSelection:hover {
-  background-color: var(--transparentYellow);
-  transform: scale(1.05);
-}
-
-#portfolioTitle {
-  color: var(--whiteFont);
-  padding: 8rem 0 0 0;
-  text-align: center;
-  font-size: 3.5rem;
-}
-
-#listPortfolio {
-  font-size: 3rem;
-  padding: 0.25rem;
-  text-align: center;
-}
-
-.portfolioContent {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-#portfolioControl {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding-top: 1rem;
-}
-
-.holdingsList {
-  width: 96vw;
-  max-width: 800px;
-}
-
-.portfolioList {
-  text-align: right;
-}
-
-.transactionBorderBottom {
-  border: none;
-}
-
-#transaction {
-  display: flex;
-  flex-direction: row;
-  align-content: center;
-}
-
-.portfolioListTitle {
-  border-bottom: 0.1rem solid var(--greyFont);
-}
-
-.portfolioSections {
-  display: flex;
-  flex-direction: column;
-  width: 96vw;
-  max-width: 800px;
-}
-
-.portfolioEdit {
-  background-color: transparent;
-  border: none;
-  color: var(--greyFont);
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  z-index: -1;
-}
-
-.portfolioEdit:hover {
-  background-color: var(--stockYellow);
-  color: black;
-}
-
-.portfolioEditActive {
-  background-color: var(--stockYellow);
-  color: black;
-}
-
-#portfolioEditting {
-  background-color: black;
-  border: 0.1rem solid var(--stockYellow);
-  color: var(--stockYellow);
-  border-radius: 0.25rem;
-  padding-left: 0.5rem;
-  font-size: 1.5rem;
-  width: 16rem;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-#portfolioEditting:hover {
-  border: 0.1rem solid var(--stockYellow);
-}
-
-#portfolioEditting:focus {
-  border: 0.1rem solid var(--stockYellow);
-  background-color: black;
-}
-
-.portfolioDelete {
-  border: none;
-  background-color: transparent;
-  color: var(--greyFont);
-  border-radius: 0.5rem;
-  font-size: 1rem;
-}
-
-.portfolioDelete:hover {
-  background-color: var(--stockRed);
-  color: var(--whiteFont);
-}
-
-.portfolioDeleteHide {
-  background-color: black;
-  color: black;
-  border: none;
-  z-index: -1;
-}
-
-.portfolioDeleteButtonHide {
-  color: black;
-}
-
-.portfolioDeleteContainer {
-  padding-top: 0.25rem;
-}
-
-#portfolioDeleteFinal {
-  background-color: black;
-  border: 2px solid var(--stockRed);
-  color: var(--stockRed);
-  border-radius: 0.5rem;
-  margin: 1.25rem 0 0 0;
-  padding: 0 2rem;
+  height: 60vh;
+  min-height: 20rem;
   font-size: 2rem;
-  width: 75vw;
-  max-width: 30rem;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
 }
 
-#portfolioDeleteFinal:hover {
-  background-color: var(--stockRed);
-  color: var(--whiteFont);
-  opacity: 100%;
-}
-
-.blink_me:hover {
-  animation: blinker 0.5s linear infinite;
-}
-@keyframes blinker {
-  50% {
-    opacity: 100%;
-  }
-}
-
-#portfolioDeleteBack {
-  background-color: black;
-  border: 1px solid var(--stockYellow);
-  color: var(--stockYellow);
-  border-radius: 0.5rem;
-  margin: 1.25rem 0 0 0;
-  padding: 0 2rem;
-  font-size: 2rem;
-  width: 75vw;
-  max-width: 30rem;
-}
-
-#portfolioDeleteBack:hover {
-  background-color: var(--stockYellow);
-  color: black;
-}
-
-.portfolioDeletePadding {
-  text-align: center;
-  padding: 6rem 0;
+/* Stock show page */
+.backButton {
+  padding-bottom: 0.25rem;
 }
 
 .tickerTransactionUnbold {
   font-weight: normal;
 }
 
-#PLSection {
+.PLSection {
   display: flex;
   align-content: left;
   padding: 0.5rem;
@@ -604,9 +422,9 @@ input[type='number'] {
   background-color: black;
   border: 0.1rem solid var(--stockYellow);
   color: var(--stockYellow);
-  width: 16vw;
+  width: 16.6%;
   min-width: 4rem;
-  max-width: 8rem;
+  max-width: 10rem;
   text-align: center;
   font-weight: bold;
   margin-right: -0.6rem;
@@ -623,7 +441,7 @@ input[type='number'] {
   outline: none;
 }
 
-#timeframeSelectorContainer {
+.timeframeSelectorContainer {
   width: 96vw;
   max-width: 800px;
   margin: auto;
@@ -631,41 +449,221 @@ input[type='number'] {
   padding-bottom: 0.5rem;
 }
 
-#timeframeTitle {
+.timeframeTitle {
   color: var(--stockYellow);
   font-weight: bold;
 }
 
-.heroContent {
+.stockInfoContent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.stockInfoTable {
+  width: 96vw;
+  max-width: 800px;
+}
+
+/* Portfolio */
+.portfolioForm {
+  padding: 2rem 0 1rem 0;
+  text-align: center;
+}
+
+#portfolioTable {
   display: flex;
   flex-direction: column;
   text-align: center;
-  justify-content: center;
-  height: 60vh;
-  min-height: 20rem;
+  align-items: center;
 }
 
-.heroTitle {
+.portfolioSelection {
+  background: black;
+  color: var(--whiteFont);
+  border: 0.2rem solid var(--stockYellow);
+  width: 70vw;
+  max-width: 30rem;
+  border-radius: 1rem;
+  padding: 0.1em 0.5em;
+  font-size: 1em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.portfolioSelection:hover {
+  background-color: var(--transparentYellow);
+  transform: scale(1.05);
+}
+
+.portfolioTitle {
+  color: var(--whiteFont);
+  padding: 8rem 0 0 0;
+  text-align: center;
   font-size: 3.5rem;
 }
 
-.motto {
-  font-size: 1.5rem;
+.listPortfolio {
+  font-size: 3rem;
+  padding: 0.25rem;
+  text-align: center;
 }
 
-#heroStart {
-  background-color: black;
-  border: 3px solid var(--stockYellow);
-  color: var(--stockYellow);
-  border-radius: 0.75rem;
-  padding: 0 3rem;
-  font-size: 2.5rem;
-  font-weight: bold;
+.portfolioContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-#heroStart:hover {
+.portfolioControl {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 1rem;
+}
+
+.holdingsList {
+  width: 96vw;
+  max-width: 800px;
+}
+
+.portfolioList {
+  text-align: right;
+}
+
+.transactionBorderBottom {
+  border: none;
+}
+
+.transactionForm {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+}
+
+.portfolioListTitle {
+  border-bottom: 0.1rem solid var(--greyFont);
+}
+
+.portfolioSections {
+  display: flex;
+  flex-direction: column;
+  width: 96vw;
+  max-width: 800px;
+}
+
+.portfolioEdit {
+  background-color: transparent;
+  border: none;
+  color: var(--greyFont);
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  z-index: -1;
+}
+
+.portfolioEdit:hover {
   background-color: var(--stockYellow);
   color: black;
+}
+
+.portfolioEditActive {
+  background-color: var(--stockYellow);
+  color: black;
+}
+
+#portfolioEditting {
+  background-color: black;
+  border: 0.1rem solid var(--stockYellow);
+  color: var(--stockYellow);
+  border-radius: 0.25rem;
+  padding-left: 0.5rem;
+  font-size: 1.5rem;
+  width: 16rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+#portfolioEditting:hover {
+  border: 0.1rem solid var(--stockYellow);
+}
+
+#portfolioEditting:focus {
+  border: 0.1rem solid var(--stockYellow);
+  background-color: black;
+}
+
+.portfolioDelete {
+  border: none;
+  background-color: transparent;
+  color: var(--greyFont);
+  border-radius: 0.5rem;
+  font-size: 1rem;
+}
+
+.portfolioDelete:hover {
+  background-color: var(--stockRed);
+  color: var(--whiteFont);
+}
+
+.portfolioDeleteHide {
+  background-color: black;
+  color: black;
+  border: none;
+  z-index: -1;
+}
+
+.portfolioDeleteButtonHide {
+  color: black;
+}
+
+.portfolioDeleteContainer {
+  padding-top: 0.25rem;
+}
+
+#portfolioDeleteFinal {
+  background-color: black;
+  border: 2px solid var(--stockRed);
+  color: var(--stockRed);
+  border-radius: 0.5rem;
+  margin: 1.25rem 0 0 0;
+  padding: 0 2rem;
+  font-size: 2rem;
+  width: 75vw;
+  max-width: 30rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+#portfolioDeleteFinal:hover {
+  background-color: var(--stockRed);
+  color: var(--whiteFont);
+  opacity: 100%;
+}
+
+#portfolioDeleteBack {
+  background-color: black;
+  border: 1px solid var(--stockYellow);
+  color: var(--stockYellow);
+  border-radius: 0.5rem;
+  margin: 1.25rem 0 0 0;
+  padding: 0 2rem;
+  font-size: 2rem;
+  width: 75vw;
+  max-width: 30rem;
+}
+
+#portfolioDeleteBack:hover {
+  background-color: var(--stockYellow);
+  color: black;
+}
+
+.portfolioDeletePadding {
+  text-align: center;
+  padding: 6rem 0;
 }
 
 ::placeholder {
@@ -704,7 +702,7 @@ input[type='number'] {
     padding-bottom: 0.25rem;
   }
 
-  #stockName {
+  .stockName {
     font-size: 1rem;
     max-width: 6rem;
   }
@@ -721,7 +719,7 @@ input[type='number'] {
     padding-bottom: 0.3rem;
   }
 
-  #stockName {
+  .stockName {
     font-size: 1.15rem;
     max-width: 12rem;
   }
@@ -738,7 +736,7 @@ input[type='number'] {
     padding-bottom: 0.35rem;
   }
 
-  #stockName {
+  .stockName {
     font-size: 1.2rem;
     max-width: 15rem;
   }
@@ -755,7 +753,7 @@ input[type='number'] {
     padding-bottom: 0.4rem;
   }
 
-  #stockName {
+  .stockName {
     font-size: 1.5rem;
     max-width: 20rem;
   }

@@ -4,9 +4,9 @@
     <!-- Portfolio title/Or "start a portfolio" message if portfolio empty -->
     <tbody>
       <%if (portfolios.length!==0) {%>
-      <div id="portfolioTitle">Portfolio</div>
+      <div class="portfolioTitle">Portfolio</div>
       <%}else{ %>
-      <div id="portfolioTitle">
+      <div class="portfolioTitle">
         <%= req.user.name.split(' ')[0] %>,<br />
         start a portfolio.
       </div>
@@ -15,7 +15,7 @@
       <% portfolios.forEach(function(p){%>
       <tr>
         <td>
-          <form id="listPortfolio" action="/portfolios/<%= p._id %>">
+          <form class="listPortfolio" action="/portfolios/<%= p._id %>">
             <input
               type="submit"
               class="portfolioSelection"
@@ -28,7 +28,7 @@
     </tbody>
   </table>
   <!-- Form for adding new portfolio -->
-  <form id="portfolioForm" action="/portfolios" method="POST">
+  <form class="portfolioForm" action="/portfolios" method="POST">
     <input
       class="search"
       type="text"
