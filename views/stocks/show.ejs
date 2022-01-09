@@ -86,12 +86,12 @@
     method="POST"
     >
       <div>
-        <button type="submit" class="timeframeSelector <%- (req.user.preferredTimeframe == 1) ? 'timeframeSelected':'' %>" name="button" value="1">1m:1d</button>
-        <button type="submit" class="timeframeSelector <%- (req.user.preferredTimeframe == 2) ? 'timeframeSelected':'' %>" name="button" value="2">5m:5d</button>
-        <button type="submit" class="timeframeSelector <%- (req.user.preferredTimeframe == 3) ? 'timeframeSelected':'' %>" name="button" value="3">30m:4w</button>
-        <button type="submit" class="timeframeSelector <%- (req.user.preferredTimeframe == 4) ? 'timeframeSelected':'' %>" name="button" value="4">1h:3mo</button>
-        <button type="submit" class="timeframeSelector <%- (req.user.preferredTimeframe == 5) ? 'timeframeSelected':'' %>" name="button" value="5">1d:1y</button>
-        <button type="submit" class="timeframeSelector <%- (req.user.preferredTimeframe == 6) ? 'timeframeSelected':'' %>" name="button" value="6">1w:3y</button>
+        <button type="submit" class="timeframeSelector <%- (req.user.preferredTimeframe == 1) ? 'timeframeSelected':'' %>" name="button" value="1">5m:1d</button>
+        <button type="submit" class="timeframeSelector <%- (req.user.preferredTimeframe == 2) ? 'timeframeSelected':'' %>" name="button" value="2">15m:5d</button>
+        <button type="submit" class="timeframeSelector <%- (req.user.preferredTimeframe == 3) ? 'timeframeSelected':'' %>" name="button" value="3">1h:1mo</button>
+        <button type="submit" class="timeframeSelector <%- (req.user.preferredTimeframe == 4) ? 'timeframeSelected':'' %>" name="button" value="4">1d:6mo</button>
+        <button type="submit" class="timeframeSelector <%- (req.user.preferredTimeframe == 5) ? 'timeframeSelected':'' %>" name="button" value="5">1w:2y</button>
+        <button type="submit" class="timeframeSelector <%- (req.user.preferredTimeframe == 6) ? 'timeframeSelected':'' %>" name="button" value="6">1w:5y</button>
       </div>
     </form>
   </div>
@@ -196,9 +196,9 @@ let timeStampInterval = Math.floor(<%- JSON.stringify(chartParsed)%>.length/time
       //Chart area that takes up room(away from axis)
       chartArea: {'width': '80%', 'height': '85%'},
       seriesType: 'candlesticks',
-      series: {1: {type: 'line', lineDashStyle: [16, 8], lineWidth: 1}},
+      series: {1: {type: 'bars', lineDashStyle: [16, 8], lineWidth: 1, targetAxisIndex: 1}, 2: {type: 'line', lineDashStyle: [16, 8], lineWidth: 1, targetAxisIndex: 0}},
       //First value is wick color, second is horizontal line
-      colors: ['#242424', 'yellow' ],
+      colors: ['#242424','#393939','yellow'],
       vAxis: {gridlineColor: '#393939', minorGridlines: {color:'transparent'}, textStyle: {
         color: '#FFF', fontSize:10
       }, gridlines:{count:10}},
@@ -245,9 +245,9 @@ let refreshRate=60000;
 if (<%=user.premium%>){
   refreshRate = 10000
 }
-  window.setTimeout(function () {
-    window.location.reload();
-  }, refreshRate);
+  // window.setTimeout(function () {
+  //   window.location.reload();
+  // }, refreshRate);
   // Membership refresh time count down
   let countDownNum;
   let membershipLevel;

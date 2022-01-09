@@ -89,28 +89,28 @@ async function getChartData(ticker, timeFrameMode) {
   // User specific preferred chart timeframe
   let interval, range;
   if (timeFrameMode == 1) {
-    interval = '1m';
+    interval = '5m';
     range = '1d';
     timeAxisMode = 'time';
   } else if (timeFrameMode == 2) {
-    interval = '5m';
+    interval = '15m';
     range = '5d';
     timeAxisMode = 'date';
   } else if (timeFrameMode == 3) {
-    interval = '30m';
+    interval = '1h';
     range = '1mo';
     timeAxisMode = 'date';
   } else if (timeFrameMode == 4) {
-    interval = '1h';
-    range = '3mo';
+    interval = '1d';
+    range = '6mo';
     timeAxisMode = 'date';
   } else if (timeFrameMode == 5) {
-    interval = '1d';
-    range = '1y';
+    interval = '1wk';
+    range = '2y';
     timeAxisMode = 'month';
   } else if (timeFrameMode == 6) {
     interval = '1wk';
-    range = '3y';
+    range = '5y';
     timeAxisMode = 'month';
   }
   // Fetch stock charting data from Yahoo finance
@@ -126,10 +126,18 @@ async function getChartData(ticker, timeFrameMode) {
       let high = object.indicators.quote[0].high;
       let low = object.indicators.quote[0].low;
       let close = object.indicators.quote[0].close;
+      let volume = object.indicators.quote[0].volume;
       let arrayLength = 0;
       for (i = 0; i < timestamp.length; i++) {
         // Check if any data is null
-        if (timestamp[i] && low[i] && open[i] && close[i] && high[i]) {
+        if (
+          timestamp[i] &&
+          low[i] &&
+          open[i] &&
+          close[i] &&
+          high[i] &&
+          volume[i]
+        ) {
           let row = [];
           // Date Time section
           // (Icebox)Currently for 1 minuite/ 1 hour range, need to expand for different timeframes with button selection
@@ -174,6 +182,7 @@ async function getChartData(ticker, timeFrameMode) {
           row.push(open[i]);
           row.push(close[i]);
           row.push(high[i]);
+          row.push(volume[i]);
           array.push(row);
           arrayLength++;
         }
@@ -186,5 +195,6 @@ async function getChartData(ticker, timeFrameMode) {
       });
     })
     .catch((err) => console.log(err));
+  console.log(array);
   return array;
 }
