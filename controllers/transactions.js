@@ -34,6 +34,7 @@ function create(req, res) {
     });
   });
 }
+
 // Remove transactions
 function deleteTransaction(req, res) {
   Portfolio.find(req.user._id, function (err, portfolios) {

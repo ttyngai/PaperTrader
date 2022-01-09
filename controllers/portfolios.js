@@ -20,6 +20,7 @@ async function index(req, res) {
   });
   res.render('portfolios/index', { title: 'Portfolios', portfolios, req });
 }
+
 // Create new portfolio
 function create(req, res) {
   const portfolio = new Portfolio(req.body);
@@ -30,6 +31,7 @@ function create(req, res) {
     res.redirect(`/portfolios`);
   });
 }
+
 //Displays selected portfolio with all transactions and current holdings calculated
 function show(req, res) {
   Portfolio.findById(req.params.id, function (err, portfolio) {
@@ -96,7 +98,6 @@ function show(req, res) {
           usdCad = p.combinedPrice;
         }
       });
-
       res.render(`portfolios/show`, {
         title: 'Portfolios',
         portfolio,

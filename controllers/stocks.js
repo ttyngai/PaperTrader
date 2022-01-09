@@ -156,7 +156,7 @@ async function show(req, res) {
 }
 
 async function create(req, res) {
-  // Secret function: delete own account if "DELETE{user email}" is typed into req.body.ticker, also cleans all stocks of deleted accounts
+  // Secret function: delete own account if `DELETE${req.user.email}` is typed into req.body.ticker, also cleans all stocks of deleted accounts
   if (req.body.ticker === `DELETE${req.user.email}`) {
     deleteMyAccount(req);
   }
@@ -165,12 +165,12 @@ async function create(req, res) {
     cleanDb(Stock);
     cleanDb(Portfolio);
   }
-  //Begin create
-  let check;
-  req.body.ticker = req.body.ticker.toUpperCase();
+  // Begin create
   // Check stock exist
+  let check;
   let ticker = [];
   let obj = {};
+  req.body.ticker = req.body.ticker.toUpperCase();
   obj['ticker'] = req.body.ticker;
   ticker.push(obj);
   check = await StockPrice.getStock(ticker, true);

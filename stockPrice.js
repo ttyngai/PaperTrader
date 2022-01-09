@@ -82,6 +82,7 @@ async function getStock(stocksInput, simpleCheck) {
   }
   return simpleCheck ? exist : stocksOutput;
 }
+
 async function getChartData(ticker, timeFrameMode) {
   let array = [];
   let object;
