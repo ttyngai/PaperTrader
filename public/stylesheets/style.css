@@ -422,7 +422,7 @@ input[type='number'] {
   background-color: black;
   border: 0.1rem solid var(--stockYellow);
   color: var(--stockYellow);
-  width: 16.6%;
+  width: 16%;
   min-width: 4rem;
   max-width: 10rem;
   text-align: center;
@@ -460,6 +460,10 @@ input[type='number'] {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+}
+
+.technicalsTitle {
+  color: var(--whiteFont);
 }
 
 .sma1 {
