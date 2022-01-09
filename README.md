@@ -5,9 +5,9 @@ PaperTrader is a training tool for experiencing the stock market without any mon
 **Please click this link to start the app:**
 https://papertraderlive.herokuapp.com/
 
-![Watchlist](https://i.imgur.com/kxdlxxM.png 'ScreenShot of watchlist')
+![Chart](https://i.imgur.com/aKyEain.png 'ScreenShot of stock chart')
 
-![Chart](https://i.imgur.com/NLM4xne.png 'ScreenShot of stock chart')
+![Watchlist](https://i.imgur.com/kxdlxxM.png 'ScreenShot of watchlist')
 
 ![Portfolio](https://i.imgur.com/VCrVfQi.png 'ScreenShot of portfolio')
 
