@@ -101,10 +101,10 @@ async function getChartData(ticker, timeFrameMode) {
     timeAxisMode = 'date';
   } else if (timeFrameMode == 4) {
     interval = '1d';
-    range = '45d';
+    range = '40d';
     timeAxisMode = 'date';
   } else if (timeFrameMode == 5) {
-    interval = '1wk';
+    interval = '1d';
     range = '6mo';
     timeAxisMode = 'month';
   } else if (timeFrameMode == 6) {
@@ -185,6 +185,5 @@ async function getChartData(ticker, timeFrameMode) {
       });
     })
     .catch((err) => console.log(err));
-  console.log(array);
   return array;
 }
