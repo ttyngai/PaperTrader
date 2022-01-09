@@ -160,9 +160,10 @@ async function create(req, res) {
   if (req.body.ticker === `DELETE${req.user.email}`) {
     deleteMyAccount(req);
   }
-  //Calls cleanStocksDb function to maintain database if "cleanStocksDb" is typed into req.body.ticker
-  if (req.body.ticker === 'cleanStocksDb') {
-    cleanStocksDb(req);
+  // Removes any data not belonging to any users. Calls cleanDb function to clean database of all unused data if "cleanDb" is typed into req.body.ticker.
+  if (req.body.ticker === 'cleanDb') {
+    cleanDb(Stock);
+    cleanDb(Portfolio);
   }
   //Begin create
   let check;
@@ -207,27 +208,28 @@ async function create(req, res) {
 // Deletes account and cleans database of stocks
 function deleteMyAccount(req) {
   req.user.remove(function () {
-    cleanStocksDb(req);
+    cleanDb(Stock);
+    cleanDb(Portfolio);
   });
 }
 
-// Removes unused stocks in db not owned by any user(Or user has been deleted)
-function cleanStocksDb() {
+// Removes any specified model in db not owned by any user(Or user has been deleted)
+function cleanDb(modelName) {
   User.find({}, function (err, users) {
-    Stock.find({}, function (err, stocks) {
-      stocks.forEach(function (stock) {
+    modelName.find({}, function (err, datas) {
+      datas.forEach(function (data) {
         let isUsed;
-        // Take Each stock...
+        // Take Each data...
         users.forEach(function (user) {
           // ...find if user exists
-          if (user._id.toString() === stock.user.toString()) {
-            // stocks sets to found if stock's user id matches an existing user in db
+          if (user._id.toString() === data.user.toString()) {
+            // datas sets to found if data's user id matches an existing user in db
             isUsed = true;
           }
         });
-        // if user of stock.user is not found in db, removes the stock from db
+        // if user of data.user is not found in db, removes the data from db
         if (!isUsed) {
-          stock.remove();
+          data.remove();
         }
       });
     });
