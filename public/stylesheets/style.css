@@ -680,8 +680,8 @@ input[type='number'] {
 
 .footer {
   position: fixed;
-  padding-left: 2rem;
-  top: 98%;
+  left: 2%;
+  top: 96%;
   z-index: -1;
   color: var(--greyFont);
 }
