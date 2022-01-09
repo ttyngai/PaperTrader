@@ -1,7 +1,7 @@
 const Stock = require('../models/stock');
 const Portfolio = require('../models/portfolio');
 const StockPrice = require('../stockPrice');
-
+const User = require('../models/user');
 module.exports = {
   index,
   show,
@@ -150,6 +150,28 @@ async function show(req, res) {
   });
 }
 async function create(req, res) {
+  // Admin function - if "cleanStocks" is entered, removes garbage stocks not used by any user
+  if (req.user.isAdmin == true && req.body.ticker === 'cleanStocks') {
+    User.find({}, function (err, users) {
+      Stock.find({}, function (err, stocks) {
+        stocks.forEach(function (stock) {
+          let isUsed;
+          // Take Each stock
+          users.forEach(function (user) {
+            // Find if user exists
+            if (user._id.toString() === stock.user.toString()) {
+              isUsed = true;
+            }
+          });
+          if (!isUsed) {
+            console.log('Not used', stock.ticker);
+            stock.remove();
+          }
+        });
+      });
+    });
+  }
+
   let check;
   req.body.ticker = req.body.ticker.toUpperCase();
   // Check stock exist
