@@ -326,8 +326,7 @@
           </td>
           <%} else {%>
           <td><%= ((p.combinedPrice - p.avgPrice)*p.shares).toFixed(1) %>k</td>
-          <%}%> <% }%> <% }else if
-          (p.combinedPrice==p.regularMarketPreviousClose){%>
+          <%}%> <% }%> <% }else if (p.combinedPrice==p.avgPrice){%>
           <td>0.00</td>
           <% }else {%>
           <td>n/a</td>
