@@ -91,7 +91,7 @@
         <button type="submit" class="timeframeSelector <%- (req.user.preferredTimeframe == 3) ? 'timeframeSelected':'' %>" name="button" value="3">1h:1mo</button>
         <button type="submit" class="timeframeSelector <%- (req.user.preferredTimeframe == 4) ? 'timeframeSelected':'' %>" name="button" value="4">1d:6mo</button>
         <button type="submit" class="timeframeSelector <%- (req.user.preferredTimeframe == 5) ? 'timeframeSelected':'' %>" name="button" value="5">1w:2y</button>
-        <button type="submit" class="timeframeSelector <%- (req.user.preferredTimeframe == 6) ? 'timeframeSelected':'' %>" name="button" value="6">1w:5y</button>
+        <button type="submit" class="timeframeSelector <%- (req.user.preferredTimeframe == 6) ? 'timeframeSelected':'' %>" name="button" value="6">1w:4y</button>
       </div>
     </form>
   </div>
@@ -201,9 +201,9 @@ let timeStampInterval = Math.floor(<%- JSON.stringify(chartParsed)%>.length/time
       colors: ['#242424','#262626','yellow'],
       vAxes: {1:{gridlineColor: 'transparent', minorGridlines: {color:'transparent'}, textStyle: {
         color: 'transparent', fontSize:10
-      }, gridlines:{count:5}}, 0:{gridlineColor: '#262626', minorGridlines: {color:'transparent'}, textStyle: {
+      }, gridlines:{count:6}}, 0:{gridlineColor: '#262626', minorGridlines: {color:'transparent'}, textStyle: {
         color: '#FFF', fontSize:10
-      }, gridlines:{count:5}}},
+      }, gridlines:{count:6}, viewWindowMode:'maximized'}},
       hAxis: {gridlineColor: 'transparent', textStyle: {color: '#FFF', fontSize: 9}, showTextEvery: timeStampInterval },
       backgroundColor: 'transparent',
       candlestick: {

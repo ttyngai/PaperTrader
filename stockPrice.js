@@ -110,7 +110,7 @@ async function getChartData(ticker, timeFrameMode) {
     timeAxisMode = 'month';
   } else if (timeFrameMode == 6) {
     interval = '1wk';
-    range = '5y';
+    range = '4y';
     timeAxisMode = 'month';
   }
   // Fetch stock charting data from Yahoo finance
@@ -195,6 +195,5 @@ async function getChartData(ticker, timeFrameMode) {
       });
     })
     .catch((err) => console.log(err));
-  console.log(array);
   return array;
 }
