@@ -494,8 +494,8 @@ table {
 #chart_div {
   width: 95vw;
   max-width: 1440px;
-  height: 90vh;
-  max-height: 480px;
+  height: 60vh;
+  max-height: 576px;
   margin: auto;
 }
 
