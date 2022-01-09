@@ -179,7 +179,7 @@
   src="https://www.gstatic.com/charts/loader.js"
 ></script>
 <script type="text/javascript">
-//This is for timeStamps generation parameters.
+// How many time/date stamp at hAxis
 let timestampPerChart = 5
 // Timestamp interval automatically determined by candle sticks available
 let timeStampInterval = Math.floor(<%- JSON.stringify(chartParsed)%>.length/timestampPerChart)-1
@@ -191,22 +191,60 @@ let timeStampInterval = Math.floor(<%- JSON.stringify(chartParsed)%>.length/time
     var data = google.visualization.arrayToDataTable(<%- JSON.stringify(chartParsed)%>, true);
     var options = {
       legend: 'none',
-      //Chart area that takes up room(away from axis)
+      // Chart area that takes up room(away from axis)
       chartArea: {'width': '80%', 'height': '90%'},
-      seriesType: 'candlesticks',
-      series: {0:{targetAxisIndex: 0},1: {type: 'bars', lineWidth: 1, targetAxisIndex: 1}, 2: {type: 'line', lineDashStyle: [16, 8], lineWidth: 1, targetAxisIndex: 0}},
-      //First value is wick color, second is horizontal line
-      colors: ['#242424','#262626','yellow'],
-      vAxes: {1:{gridlineColor: 'transparent', minorGridlines: {color:'transparent'}, textStyle: {
-        color: 'transparent', fontSize:10
-      }, gridlines:{count:8}, viewWindow:{max:<%=chartVolumeMax*5%>}}, 0:{gridlineColor: '#262626', minorGridlines: {color:'transparent'}, textStyle: {
-        color: '#FFF', fontSize:10
-      }, gridlines:{count:8}, viewWindow:{max:<%= chartMax+(chartMax-chartMin)*.2%> , min:<%= chartMin-(chartMax-chartMin)*.2%>}}},
-      hAxis: {gridlineColor: 'transparent', textStyle: {color: '#FFF', fontSize: 9}, showTextEvery: timeStampInterval },
+      // Chart background
       backgroundColor: 'transparent',
-      candlestick: {
-        risingColor: {stroke: stockGreen, strokeWidth: 1, fill: stockGreen},
-        fallingColor: {stroke: stockRed, strokeWidth: 1, fill: stockRed},
+      series: {
+        // Candlebar
+        0: {type:'candlesticks', color:'#242424', targetAxisIndex: 0,
+          candlestick: {
+            risingColor: {stroke: stockGreen, strokeWidth: 1, fill: stockGreen},
+            fallingColor: {stroke: stockRed, strokeWidth: 1, fill: stockRed},
+          }
+        },
+        // Volume Bar
+        1: {type: 'bars', color:'#262626', lineWidth: 1, targetAxisIndex: 1}, 
+        // Yellow current price line
+        2: {type: 'line', color:'yellow', lineDashStyle: [16, 4], lineWidth: 1, targetAxisIndex: 0},
+        // SMA 9
+        3: {type: 'line', color:'purple', lineWidth: 1, targetAxisIndex: 0},
+        // SMA 21
+        4: {type: 'line', color:'blue', lineWidth: 1, targetAxisIndex: 0},
+      },
+      // vAxes
+      vAxes: {
+        // Left hand vAxis
+        0:{
+          gridlineColor: '#262626', 
+          minorGridlines: {color:'transparent'}, 
+          textStyle: {
+            color: '#FFF', 
+            fontSize:10
+          }, 
+          gridlines:{count:8}, 
+          viewWindow:{
+            max:<%= chartMax+(chartMax-chartMin)*.2%>, 
+            min:<%= chartMin-(chartMax-chartMin)*.2%>
+          }
+        },
+        // Right hand vAxis
+        1:{
+          gridlineColor: 'transparent', 
+          minorGridlines: {color:'transparent'}, 
+          textStyle: {
+            color: 'transparent', 
+            fontSize:10
+          }, 
+          gridlines:{count:8},
+          viewWindow:{max:<%=chartVolumeMax*5%>}
+        }
+      },
+      // hAxis
+      hAxis: {
+        gridlineColor: 'transparent', 
+        textStyle: {color: '#FFF', fontSize: 9}, 
+        showTextEvery: timeStampInterval 
       },
     };
     var chart = new google.visualization.CandlestickChart(

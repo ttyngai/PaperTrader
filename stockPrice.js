@@ -67,7 +67,7 @@ async function getStock(stocksInput, simpleCheck) {
             ) {
               s.combinedPrice = s.postMarketPrice;
             }
-            // Stock went n/a when market wasn't
+            // If none found use basic price
             else if (s.regularMarketPrice) {
               s.combinedPrice = s.regularMarketPrice;
             } else {
@@ -121,12 +121,12 @@ async function getChartData(ticker, timeFrameMode) {
     .then(function (data) {
       // Parse data into array for google charts
       object = data.chart.result[0];
-      let timestamp = object.timestamp;
-      let open = object.indicators.quote[0].open;
-      let high = object.indicators.quote[0].high;
-      let low = object.indicators.quote[0].low;
-      let close = object.indicators.quote[0].close;
-      let volume = object.indicators.quote[0].volume;
+      const timestamp = object.timestamp;
+      const open = object.indicators.quote[0].open;
+      const high = object.indicators.quote[0].high;
+      const low = object.indicators.quote[0].low;
+      const close = object.indicators.quote[0].close;
+      const volume = object.indicators.quote[0].volume;
       let arrayLength = 0;
       for (i = 0; i < timestamp.length; i++) {
         // Check if any data is null
@@ -191,9 +191,32 @@ async function getChartData(ticker, timeFrameMode) {
       array[array.length - 1][2] = array[array.length - 2][3];
       // This is to find the last price (without undefined rows) to generate a yellow line
       array.forEach(function (row) {
-        row.push(array[array.length - 1][1]);
+        row.push(array[array.length - 1][3]);
       });
+      // Simple Moving Average:
+      simpleMovingAvg(array, 9);
+      // Simple Moving Average:
+      simpleMovingAvg(array, 21);
     })
     .catch((err) => console.log(err));
   return array;
+}
+
+// Simple moving avg
+function simpleMovingAvg(array, num) {
+  let avg = array[0][3];
+  array.forEach(function (row, idx) {
+    if (idx > 0 && idx < num) {
+      avg = (avg * idx + array[idx][3]) / (idx + 1);
+    } else if (idx >= num) {
+      // Adding num previous array[i][3]s together
+      avg = array[idx - num][3];
+      for (i = idx - (num - 1); i < idx; i++) {
+        avg += array[i][3];
+      }
+      // Taking average
+      avg /= num;
+    }
+    row.push(avg);
+  });
 }
