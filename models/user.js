@@ -16,10 +16,12 @@ const userSchema = new Schema(
     premium: { type: Boolean, default: false },
     // First time login, for populating watch list
     firstTime: { type: Boolean, default: true },
-    preferredTimeframe: { type: String, default: '2' },
-    volume: { type: Boolean, default: true },
-    sma1: { type: Boolean, default: false },
-    sma2: { type: Boolean, default: true },
+    chartSettings: {
+      timeframe: { type: String, default: '2' },
+      volume: { type: Boolean, default: true },
+      sma1: { type: Boolean, default: false },
+      sma2: { type: Boolean, default: true },
+    },
   },
   {
     timestamps: true,

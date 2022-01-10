@@ -38,6 +38,10 @@ Highlights:
 
 - When stock chart is required, yahoo finance data is pulled, processed and sent to google charts with specified parameters. This is then rendered in the stock details page. The processing of data includes generating the candlesticks with wick, as well as a easy to see dotted yellow line overlay indicating the most recent price. Since there are three sections of market time, all three are combined before generating a single price. Horizontal axis adjusted for user timezone with daylight-savings.
 
+- Stock chart time frames can be selected from the buttons under "Timeframe"
+
+- Technical analysis can also be toggled(as many as the user want) to overlay on top of the chart
+
 - When buying stocks, the input values and input focus remains even during refresh by using localStorage during opening and setting variables on input change.
 
 - When stock is bought a transaction is made with stockID recorded into selected portfolio(hence it was neccessary to retain watch list items even during a deletion)
@@ -51,7 +55,3 @@ Highlights:
 **Future improvements:**
 
 - Add functions to load money into account. This isn't all too exciting as the only interaction with the account capital is to block user from over buying stocks exceeding account value. This is not fun.
-
-- Add buttons for setting different chart timeframes. (e.g. 7 day/ 1mo, 6mo etc)
-
-- Add buttons for applying stock technical analysis (e.g. Volume, simple moving averages)

@@ -36,12 +36,14 @@ const sampleTicker = [
 ];
 
 async function index(req, res) {
-  //Check to see if it's first time login, populates with sample watch list
+  // Icebox: if user not logged in, show page with sampleWatchList in DB
+
+  // Check to see if it's first time login, populates with sample watch list
   if (req.user.firstTime) {
     for (i = 0; i < sampleTicker.length; i++) {
       const stock = new Stock(sampleTicker[i]);
       stock.user = req.user._id;
-      await stock.save();
+      stock.save();
     }
     req.user.firstTime = false;
     req.user.save(function (err) {
@@ -58,8 +60,8 @@ async function index(req, res) {
         if (a.ticker < b.ticker) return -1;
       });
       // Seperate futures
-      let futures = [];
-      let nonFutures = [];
+      const futures = [];
+      const nonFutures = [];
       stocksFound.forEach(function (stock) {
         stock.ticker.includes('=')
           ? futures.push(stock)
@@ -86,7 +88,7 @@ async function index(req, res) {
 
 // Change timeframe on stock charts
 function changeTimeframe(req, res) {
-  req.user.preferredTimeframe = req.body.button;
+  req.user.chartSettings.timeframe = req.body.button;
   req.user.save(function () {
     res.redirect(`/stocks/${req.params.stockId}`);
   });
@@ -94,13 +96,13 @@ function changeTimeframe(req, res) {
 // toggle technical analysis on stock charts
 function toggleTechnicals(req, res) {
   if (req.body.button == 0) {
-    req.user.volume = !req.user.volume;
+    req.user.chartSettings.volume = !req.user.chartSettings.volume;
   }
   if (req.body.button == 1) {
-    req.user.sma1 = !req.user.sma1;
+    req.user.chartSettings.sma1 = !req.user.chartSettings.sma1;
   }
   if (req.body.button == 2) {
-    req.user.sma2 = !req.user.sma2;
+    req.user.chartSettings.sma2 = !req.user.chartSettings.sma2;
   }
   req.user.save(function () {
     res.redirect(`/stocks/${req.params.stockId}`);
@@ -148,15 +150,15 @@ async function show(req, res) {
       preselectPortfolio = req.params.portfolioId;
     }
     Portfolio.find({ user: req.user._id }, async function (err, portfolios) {
-      let ticker = [];
-      let obj = {};
+      const ticker = [];
+      const obj = {};
       obj['ticker'] = stock.ticker;
       ticker.push(obj);
       const quote = await StockPrice.getStock(ticker, false);
       // Charting data options
       const chartParsed = await StockPrice.getChartData(
         stock.ticker,
-        req.user.preferredTimeframe
+        req.user.chartSettings.timeframe
       );
       // find min and max of chart data
       let chartMin, chartMax, chartVolumeMax;
@@ -205,8 +207,8 @@ async function create(req, res) {
   // Begin create
   // Check stock exist
   let check;
-  let ticker = [];
-  let obj = {};
+  const ticker = [];
+  const obj = {};
   req.body.ticker = req.body.ticker.toUpperCase();
   obj['ticker'] = req.body.ticker;
   ticker.push(obj);

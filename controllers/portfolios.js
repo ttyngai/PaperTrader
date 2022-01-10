@@ -47,9 +47,9 @@ function show(req, res) {
         if (a.ticker < b.ticker) return -1;
       });
       // Combining info into one single object to be popualted for the table
-      let tickers = [];
+      const tickers = [];
       holdings.forEach(function (s) {
-        let obj = {};
+        const obj = {};
         obj['ticker'] = s.ticker;
         tickers.push(obj);
       });
@@ -72,7 +72,7 @@ function show(req, res) {
         });
         // Calculating P/L holdings and all transactions for this particular portfolio
         prices.forEach(function (p) {
-          let priceCheckNonZero = p.combinedPrice
+          const priceCheckNonZero = p.combinedPrice
             ? p.combinedPrice
             : p.avgPrice;
           unrealizedPL += p.shares * (priceCheckNonZero - p.avgPrice);
@@ -153,7 +153,7 @@ function deletePortfolio(req, res) {
 
 // Calculate holdings based on portfolio's transaction. Summarizes the net shares(removes 0 share holdings), returns avg price of each holdings remaining
 function calculateHoldings(portfolio) {
-  let gatheredSum = [];
+  const gatheredSum = [];
   // New t.price is purchased price
   portfolio.transactions.forEach(function (t) {
     t.cost = t.shares * t.price;
@@ -172,7 +172,7 @@ function calculateHoldings(portfolio) {
     }
     // If doens't exist, makes a new one
     if (!exist) {
-      let objSum = {
+      const objSum = {
         ticker: t.ticker,
         shares: t.shares,
         costSum: t.cost,

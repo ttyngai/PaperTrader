@@ -8,7 +8,7 @@ module.exports = {
 async function getStock(stocksInput, simpleCheck) {
   // Converts into string
   let tickers;
-  let tickersString = [];
+  const tickersString = [];
   let exist = false;
   if (typeof stocksInput !== 'string') {
     // push to single string for one call
@@ -20,7 +20,7 @@ async function getStock(stocksInput, simpleCheck) {
     tickers = stocksInput;
   }
   // Fetch stock from yahoo finance
-  let stocksOutput = [];
+  const stocksOutput = [];
   if (tickers.length !== 0) {
     await fetch(
       `https://query1.finance.yahoo.com/v7/finance/quote?lang=en-US&region=US&corsDomain=finance.yahoo.com&symbols=${tickers}`
@@ -31,7 +31,7 @@ async function getStock(stocksInput, simpleCheck) {
         if (!simpleCheck && quote.quoteResponse.result[0]) {
           stockInfo = quote.quoteResponse.result.forEach(function (s, idx) {
             // Check for futures market type symbol
-            let isFutures = s.symbol.includes('=');
+            const isFutures = s.symbol.includes('=');
             //Check and match both stocks, then apply _id and if it is hidden
             s._id = stocksInput[idx]._id;
             s.hide = stocksInput[idx].hide;
@@ -84,7 +84,7 @@ async function getStock(stocksInput, simpleCheck) {
 }
 
 async function getChartData(ticker, timeFrameMode) {
-  let array = [];
+  const array = [];
   let object;
   // User specific preferred chart timeframe
   let interval, range;
@@ -138,11 +138,11 @@ async function getChartData(ticker, timeFrameMode) {
           high[i] &&
           volume[i]
         ) {
-          let row = [];
+          const row = [];
           // Date Time section
           // (Icebox)Currently for 1 minuite/ 1 hour range, need to expand for different timeframes with button selection
           // timeAxisMode == "time"
-          let time = new Date(timestamp[i] * 1000);
+          const time = new Date(timestamp[i] * 1000);
           if (timeAxisMode == 'time') {
             // Using "gmtoffset" item from API
             let hour = time.getUTCHours() + object.meta.gmtoffset / 60 / 60;
@@ -165,16 +165,20 @@ async function getChartData(ticker, timeFrameMode) {
           }
           // timeAxisMode == "date"
           else if (timeAxisMode == 'date') {
-            let time = new Date((timestamp[i] + object.meta.gmtoffset) * 1000);
-            let month = time.getUTCMonth() + 1;
-            let day = time.getUTCDate();
+            const time = new Date(
+              (timestamp[i] + object.meta.gmtoffset) * 1000
+            );
+            const month = time.getUTCMonth() + 1;
+            const day = time.getUTCDate();
             row.push(`${month}/${day}`);
           }
           // timeAxisMode == "month"
           else if (timeAxisMode == 'month') {
-            let time = new Date((timestamp[i] + object.meta.gmtoffset) * 1000);
-            let month = time.getUTCMonth() + 1;
-            let year = time.getUTCFullYear();
+            const time = new Date(
+              (timestamp[i] + object.meta.gmtoffset) * 1000
+            );
+            const month = time.getUTCMonth() + 1;
+            const year = time.getUTCFullYear();
             row.push(`${month}/${year}`);
           }
           // More timeframes with it's timeframes(Icebox)
