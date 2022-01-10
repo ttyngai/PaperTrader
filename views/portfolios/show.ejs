@@ -137,7 +137,8 @@
             2,}).format(((totalHoldings+unrealizedPL-currencyDeduction)*usdCad).toFixed(2))%>
           </td>
           <!-- Currency -->
-          <% if (usdCad){ %>
+          <!-- Will print CAD if currency not on par 1:1 -->
+          <% if (usdCad!==1){ %>
           <td class="">&nbspCAD</td>
           <%} else {%>
           <td class="">&nbspUSD</td>

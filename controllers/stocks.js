@@ -179,7 +179,6 @@ async function show(req, res) {
         }
       });
       let currency;
-      console.log('quote', quote);
       res.render('stocks/show', {
         title: 'Stocks',
         stock,

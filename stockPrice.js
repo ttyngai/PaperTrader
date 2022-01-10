@@ -130,14 +130,7 @@ async function getChartData(ticker, timeFrameMode) {
       let arrayLength = 0;
       for (i = 0; i < timestamp.length; i++) {
         // Check if any data is null
-        if (
-          timestamp[i] &&
-          low[i] &&
-          open[i] &&
-          close[i] &&
-          high[i] &&
-          volume[i]
-        ) {
+        if (timestamp[i] && low[i] && open[i] && close[i] && high[i]) {
           const row = [];
           // Date Time section
           // (Icebox)Currently for 1 minuite/ 1 hour range, need to expand for different timeframes with button selection
