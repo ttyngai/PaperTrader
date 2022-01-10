@@ -92,10 +92,17 @@ function show(req, res) {
         }
       });
       //Find "USDCAD=X"
-      let usdCad;
+      let usdCad = 1;
       prices.forEach(function (p) {
         if (p.symbol === 'USDCAD=X' || p.symbol === 'CAD=X') {
           usdCad = p.combinedPrice;
+        }
+      });
+
+      let currencyDeduction = 0;
+      prices.forEach(function (p) {
+        if (p.quoteType === 'CURRENCY') {
+          currencyDeduction = p.combinedPrice * p.shares;
         }
       });
       res.render(`portfolios/show`, {
@@ -108,6 +115,7 @@ function show(req, res) {
         totalHoldings,
         dayPL,
         usdCad,
+        currencyDeduction,
       });
     });
   });

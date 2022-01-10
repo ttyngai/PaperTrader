@@ -46,107 +46,9 @@
           <% if (dayPL > 0){ %>
           <td class="PLPrices stockGreen">
             $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
-            maximumFractionDigits: 2,}).format((dayPL).toFixed(2))%>
-          </td>
-          <%} else if (dayPL < 0){%>
-          <td class="PLPrices stockRed">
-            ($<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
-            maximumFractionDigits: 2,}).format(Math.abs(dayPL).toFixed(2))%>)
-          </td>
-          <%} else {%>
-          <td class="PLPrices">
-            $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
-            maximumFractionDigits: 2,}).format((dayPL).toFixed(2))%>
-          </td>
-          <%}%>
-        </tr>
-        <!-- Holdings P/L -->
-        <tr>
-          <td class="positionTitle">Holdings P/L:</td>
-          <% if (unrealizedPL > 0){ %>
-          <td class="PLPrices stockGreen">
-            $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
-            maximumFractionDigits: 2,}).format(unrealizedPL.toFixed(2))%>
-          </td>
-          <%} else if (unrealizedPL < 0){%>
-          <td class="PLPrices stockRed">
-            ($<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
-            maximumFractionDigits:
-            2,}).format(Math.abs(unrealizedPL).toFixed(2))%>)
-          </td>
-          <%} else {%>
-          <td class="PLPrices">
-            $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
-            maximumFractionDigits: 2,}).format(unrealizedPL.toFixed(2))%>
-          </td>
-          <%}%>
-        </tr>
-        <!-- Realized P/L -->
-        <tr>
-          <td class="positionTitle">Realized P/L:</td>
-          <% if (totalHoldings-realizedPL > 0){ %>
-          <td class="PLPrices stockGreen">
-            $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
-            maximumFractionDigits:
-            2,}).format(totalHoldings-realizedPL.toFixed(2))%>
-          </td>
-          <%} else if (totalHoldings-realizedPL < 0){%>
-          <td class="PLPrices stockRed">
-            ($<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
-            maximumFractionDigits:
-            2,}).format(Math.abs(totalHoldings-realizedPL).toFixed(2))%>)
-          </td>
-          <%} else {%>
-          <td class="PLPrices">
-            $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
-            maximumFractionDigits:
-            2,}).format(totalHoldings-realizedPL.toFixed(2))%>
-          </td>
-          <%}%>
-        </tr>
-        <!-- Total P/L -->
-        <tr>
-          <td class="positionTitle">Total P/L:</td>
-          <% if (totalHoldings-realizedPL+unrealizedPL > 0){ %>
-          <td class="PLPrices stockGreen">
-            $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
-            maximumFractionDigits:
-            2,}).format((totalHoldings-realizedPL+unrealizedPL).toFixed(2))%>
-          </td>
-          <%} else if (totalHoldings-realizedPL+unrealizedPL < 0){%>
-          <td class="PLPrices stockRed">
-            ($<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
-            maximumFractionDigits:
-            2,}).format(Math.abs(totalHoldings-realizedPL+unrealizedPL).toFixed(2))%>)
-          </td>
-          <%} else {%>
-          <td class="PLPrices">
-            $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
-            maximumFractionDigits:
-            2,}).format((totalHoldings-realizedPL+unrealizedPL).toFixed(2))%>
-          </td>
-          <%}%>
-        </tr>
-        <!-- Position Size -->
-        <tr>
-          <td class="positionTitle">Position Size:</td>
-          <td>
-            $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
-            maximumFractionDigits:
-            2,}).format((totalHoldings+unrealizedPL).toFixed(2))%>
-          </td>
-        </tr>
-        <!-- Special CAD P/L for personal use, only shows up if USDCAD=X symbol is added into holdings -->
-        <!-- Day P/L CAD -->
-        <%if((dayPL)&&usdCad){%>
-        <tr>
-          <td class="positionTitle">CAD Day P/L:</td>
-          <% if (dayPL> 0){ %>
-          <td class="PLPrices stockGreen">
-            $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
             maximumFractionDigits: 2,}).format((dayPL*usdCad).toFixed(2))%>
           </td>
-          <%} else if (dayPL< 0){%>
+          <%} else if (dayPL < 0){%>
           <td class="PLPrices stockRed">
             ($<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
             maximumFractionDigits:
@@ -159,22 +61,64 @@
           </td>
           <%}%>
         </tr>
-        <%}%>
-        <!-- Day P/L CAD -->
-        <%if(((totalHoldings-realizedPL+unrealizedPL))&&usdCad){%>
+        <!-- Holdings P/L -->
         <tr>
-          <td class="positionTitle">CAD P/L:</td>
-          <% if ((totalHoldings-realizedPL+unrealizedPL)> 0){ %>
+          <td class="positionTitle">Holdings P/L:</td>
+          <% if (unrealizedPL > 0){ %>
+          <td class="PLPrices stockGreen">
+            $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
+            maximumFractionDigits: 2,}).format(unrealizedPL*usdCad.toFixed(2))%>
+          </td>
+          <%} else if (unrealizedPL < 0){%>
+          <td class="PLPrices stockRed">
+            ($<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
+            maximumFractionDigits:
+            2,}).format(Math.abs(unrealizedPL*usdCad).toFixed(2))%>)
+          </td>
+          <%} else {%>
+          <td class="PLPrices">
+            $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
+            maximumFractionDigits: 2,}).format(unrealizedPL*usdCad.toFixed(2))%>
+          </td>
+          <%}%>
+        </tr>
+        <!-- Realized P/L -->
+        <tr>
+          <td class="positionTitle">Realized P/L:</td>
+          <% if (totalHoldings-realizedPL > 0){ %>
+          <td class="PLPrices stockGreen">
+            $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
+            maximumFractionDigits:
+            2,}).format((totalHoldings-realizedPL)*usdCad.toFixed(2))%>
+          </td>
+          <%} else if (totalHoldings-realizedPL < 0){%>
+          <td class="PLPrices stockRed">
+            ($<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
+            maximumFractionDigits:
+            2,}).format(Math.abs((totalHoldings-realizedPL)*usdCad).toFixed(2))%>)
+          </td>
+          <%} else {%>
+          <td class="PLPrices">
+            $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
+            maximumFractionDigits:
+            2,}).format((totalHoldings-realizedPL)*usdCad.toFixed(2))%>
+          </td>
+          <%}%>
+        </tr>
+        <!-- Total P/L -->
+        <tr>
+          <td class="positionTitle">Total P/L:</td>
+          <% if (totalHoldings-realizedPL+unrealizedPL > 0){ %>
           <td class="PLPrices stockGreen">
             $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
             maximumFractionDigits:
             2,}).format(((totalHoldings-realizedPL+unrealizedPL)*usdCad).toFixed(2))%>
           </td>
-          <%} else if ((totalHoldings-realizedPL+unrealizedPL)< 0){%>
+          <%} else if (totalHoldings-realizedPL+unrealizedPL < 0){%>
           <td class="PLPrices stockRed">
             ($<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
             maximumFractionDigits:
-            2,}).format(Math.abs(((totalHoldings-realizedPL+unrealizedPL)*usdCad)).toFixed(2))%>)
+            2,}).format(Math.abs((totalHoldings-realizedPL+unrealizedPL)*usdCad).toFixed(2))%>)
           </td>
           <%} else {%>
           <td class="PLPrices">
@@ -184,10 +128,29 @@
           </td>
           <%}%>
         </tr>
-        <%}%>
+        <!-- Position Size -->
+        <tr>
+          <td class="positionTitle">Position Size:</td>
+          <td>
+            $<%= Intl.NumberFormat('en-US',{ minimumFractionDigits: 2,
+            maximumFractionDigits:
+            2,}).format(((totalHoldings+unrealizedPL-currencyDeduction)*usdCad).toFixed(2))%>
+          </td>
+          <!-- Currency -->
+          <% if (usdCad){ %>
+          <td class="">&nbspCAD</td>
+          <%} else {%>
+          <td class="">&nbspUSD</td>
+          <%}%>
+        </tr>
+
+        <tr>
+          <td class="positionTitle"></td>
+        </tr>
       </table>
       <br />
     </div>
+
     <% if (prices.length){%>
     <h3 class="portfolioSections">Holdings</h3>
     <table class="holdingsList">
