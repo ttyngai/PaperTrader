@@ -203,7 +203,6 @@ async function getChartData(ticker, timeFrameMode) {
       simpleMovingAvg(array, 21);
     })
     .catch((err) => console.log(err));
-  console.log(array);
   return array;
 }
 

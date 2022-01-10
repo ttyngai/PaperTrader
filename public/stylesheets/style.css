@@ -8,7 +8,7 @@
   --transparentYellow: rgba(221, 188, 0, 0.37);
   --stockGreen: rgb(115, 255, 0);
   --brightGreen: greenyellow;
-  --stockRed: red;
+  --stockRed: rgb(255, 62, 62);
   --brightRed: red;
 }
 
@@ -37,13 +37,26 @@ table {
   border-collapse: collapse;
 }
 
+body::-webkit-scrollbar {
+  width: 0.5rem; /* width of the entire scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+  background: 'transparent'; /* color of the tracking area */
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: black; /* color of the scroll thumb */
+  border-radius: 20px; /* roundness of the scroll thumb */
+  border: 2px solid var(--greyFont); /* creates padding around scroll thumb */
+}
+
 /* Adding space for navbar */
 .pageContainer {
   padding-top: 3rem;
 }
 
 /* Navigation */
-
 nav {
   position: fixed;
   display: flex;
