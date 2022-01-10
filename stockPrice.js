@@ -98,7 +98,7 @@ async function getChartData(ticker, timeFrameMode) {
     timeAxisMode = 'date';
   } else if (timeFrameMode == 3) {
     interval = '1h';
-    range = '1mo';
+    range = '10d';
     timeAxisMode = 'date';
   } else if (timeFrameMode == 4) {
     interval = '1d';
@@ -203,6 +203,7 @@ async function getChartData(ticker, timeFrameMode) {
       simpleMovingAvg(array, 21);
     })
     .catch((err) => console.log(err));
+  console.log(array);
   return array;
 }
 

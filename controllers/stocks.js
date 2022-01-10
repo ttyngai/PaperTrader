@@ -196,7 +196,7 @@ async function show(req, res) {
 
 async function create(req, res) {
   // Secret function: delete own account if `DELETE${req.user.email}` is typed into req.body.ticker, also cleans all stocks of deleted accounts
-  if (req.body.ticker === `DELETE${req.user.email}`) {
+  if (req.body.ticker === `delete:${req.user.email}`) {
     deleteMyAccount(req);
   }
   // Removes any data not belonging to any users. Calls cleanDb function to clean database of all unused data if "cleanDb" is typed into req.body.ticker.

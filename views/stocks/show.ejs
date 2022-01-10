@@ -86,7 +86,7 @@
       <div>
         <button type="submit" class="timeframeSelector <%- (req.user.chartSettings.timeframe == 1) ? 'timeframeSelected':'' %>" name="button" value="1">5m:1d</button>
         <button type="submit" class="timeframeSelector <%- (req.user.chartSettings.timeframe == 2) ? 'timeframeSelected':'' %>" name="button" value="2">30m:5d</button>
-        <button type="submit" class="timeframeSelector <%- (req.user.chartSettings.timeframe == 3) ? 'timeframeSelected':'' %>" name="button" value="3">1h:1mo</button>
+        <button type="submit" class="timeframeSelector <%- (req.user.chartSettings.timeframe == 3) ? 'timeframeSelected':'' %>" name="button" value="3">1h:10d</button>
         <button type="submit" class="timeframeSelector <%- (req.user.chartSettings.timeframe == 4) ? 'timeframeSelected':'' %>" name="button" value="4">1d:6mo</button>
         <button type="submit" class="timeframeSelector <%- (req.user.chartSettings.timeframe == 5) ? 'timeframeSelected':'' %>" name="button" value="5">1wk:2y</button>
         <button type="submit" class="timeframeSelector <%- (req.user.chartSettings.timeframe == 6) ? 'timeframeSelected':'' %>" name="button" value="6">1mo:8y</button>
@@ -195,7 +195,7 @@
 ></script>
 <script type="text/javascript">
 // How many time/date stamp at hAxis
-let timestampPerChart = 5
+let timestampPerChart = 4
 // Timestamp interval automatically determined by candle sticks available
 let timeStampInterval = Math.floor(<%- JSON.stringify(chartParsed)%>.length/timestampPerChart)-1
   google.charts.load('current', { packages: ['corechart'] });
@@ -267,8 +267,10 @@ let timeStampInterval = Math.floor(<%- JSON.stringify(chartParsed)%>.length/time
     );
     await chart.draw(data, options);
   }
-  // Bandaid: Change wick color/thickness, due to weird google chart limitation, tries(loop) a few times to ensure function
-  changeWickWidth(5)
+  // Candlestick Styling Bandaid: Change wick color/thickness, due to weird google chart limitation, tries(loop) a few times to ensure function
+  setTimeout(function(){
+    changeWickWidth(3)
+  },50)
   function changeWickWidth(count){
     if(count>0){
     let allRect = document.getElementsByTagName('rect');
@@ -287,7 +289,7 @@ let timeStampInterval = Math.floor(<%- JSON.stringify(chartParsed)%>.length/time
     })
       setTimeout(function(){
         changeWickWidth(count-1)
-      },100)
+      },500)
     }
   }
 </script>
