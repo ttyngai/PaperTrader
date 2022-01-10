@@ -221,7 +221,7 @@ let timeStampInterval = Math.floor(<%- JSON.stringify(chartParsed)%>.length/time
         // Volume Bar
         1: {type: 'bars', color:'<%- (req.user.chartSettings.volume == true) ? `#262626`:`transparent` %>', lineWidth: 1, targetAxisIndex: 1}, 
         // Yellow current price line
-        2: {type: 'line', color:'yellow', lineDashStyle: [16, 4], lineWidth: 1, targetAxisIndex: 0},
+        2: {type: 'line', color:`<%- (chartParsed[chartParsed.length - 1][2] < chartParsed[chartParsed.length - 1][3]) ? '#00ff00' : '#ff0000' %>`, lineDashStyle: [16, 4], lineWidth: 1, targetAxisIndex: 0},
         // SMA 9
         3: {type: 'line', color:'<%- (req.user.chartSettings.sma1 == true) ? `purple`:`transparent` %>', lineWidth: 1, targetAxisIndex: 0},
         // SMA 21
@@ -281,9 +281,9 @@ let timeStampInterval = Math.floor(<%- JSON.stringify(chartParsed)%>.length/time
           // Centering each wick. Google charts use INT to position candles, therefore any width that has a even number of pixels will be centered to the left pixel. Need to use parseFloat to calculate true center with decimals
           const candleWidth = parseInt(allRect[key].nextElementSibling.getAttribute("width"))
           const candleStartX = parseFloat(allRect[key].nextElementSibling.getAttribute("x"))
-          let candleCenter = candleWidth/2+candleStartX
+          const candleCenter = candleWidth/2+candleStartX
           const wickWidth = parseInt(allRect[key].getAttribute("width"))
-          let wickStartX = candleCenter - wickWidth/2
+          const wickStartX = candleCenter - wickWidth/2
           allRect[key].setAttribute("x",`${wickStartX}`)
         }
     })

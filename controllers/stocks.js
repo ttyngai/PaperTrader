@@ -178,7 +178,6 @@ async function show(req, res) {
           chartVolumeMax = candle[5];
         }
       });
-      let currency;
       res.render('stocks/show', {
         title: 'Stocks',
         stock,
