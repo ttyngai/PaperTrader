@@ -39,10 +39,12 @@ table {
 
 body::-webkit-scrollbar {
   width: 0.5rem; /* width of the entire scrollbar */
+  position: fixed;
 }
 
 body::-webkit-scrollbar-track {
   background: 'transparent'; /* color of the tracking area */
+  position: fixed;
 }
 
 body::-webkit-scrollbar-thumb {
@@ -146,7 +148,7 @@ nav {
 /* Stock index page */
 
 .watchListContent {
-  width: 96vw;
+  width: 99vw;
   max-width: 800px;
 }
 
