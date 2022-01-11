@@ -85,8 +85,8 @@
     >
       <div>
         <button type="submit" class="timeframeSelector <%- (req.user.chartSettings.timeframe == 1) ? 'timeframeSelected':'' %>" name="button" value="1">5m:1d</button>
-        <button type="submit" class="timeframeSelector <%- (req.user.chartSettings.timeframe == 2) ? 'timeframeSelected':'' %>" name="button" value="2">30m:5d</button>
-        <button type="submit" class="timeframeSelector <%- (req.user.chartSettings.timeframe == 3) ? 'timeframeSelected':'' %>" name="button" value="3">1h:10d</button>
+        <button type="submit" class="timeframeSelector <%- (req.user.chartSettings.timeframe == 2) ? 'timeframeSelected':'' %>" name="button" value="2">30m:10d</button>
+        <button type="submit" class="timeframeSelector <%- (req.user.chartSettings.timeframe == 3) ? 'timeframeSelected':'' %>" name="button" value="3">1h:1mo</button>
         <button type="submit" class="timeframeSelector <%- (req.user.chartSettings.timeframe == 4) ? 'timeframeSelected':'' %>" name="button" value="4">1d:6mo</button>
         <button type="submit" class="timeframeSelector <%- (req.user.chartSettings.timeframe == 5) ? 'timeframeSelected':'' %>" name="button" value="5">1wk:2y</button>
         <button type="submit" class="timeframeSelector <%- (req.user.chartSettings.timeframe == 6) ? 'timeframeSelected':'' %>" name="button" value="6">1mo:8y</button>
@@ -105,6 +105,8 @@
         <button type="submit" class="timeframeSelector volume <%- (req.user.chartSettings.volume == true) ? 'volumeSelected':'' %>" name="button" value="0">Volume</button>
         <button type="submit" class="timeframeSelector sma1 <%- (req.user.chartSettings.sma1 == true) ? 'sma1Selected':'' %>" name="button" value="1">SMA9</button>
         <button type="submit" class="timeframeSelector sma2 <%- (req.user.chartSettings.sma2 == true) ? 'sma2Selected':'' %>" name="button" value="2">SMA21</button>
+        <button type="submit" class="timeframeSelector sma3 <%- (req.user.chartSettings.sma3 == true) ? 'sma3Selected':'' %>" name="button" value="3">SMA50</button>
+        <button type="submit" class="timeframeSelector sma4 <%- (req.user.chartSettings.sma4 == true) ? 'sma4Selected':'' %>" name="button" value="4">SMA200</button>
       </div>
     </form>
   </div>
@@ -221,11 +223,15 @@ let timeStampInterval = Math.floor(<%- JSON.stringify(chartParsed)%>.length/time
         // Volume Bar
         1: {type: 'bars', color:'<%- (req.user.chartSettings.volume == true) ? `#262626`:`transparent` %>', lineWidth: 1, targetAxisIndex: 1}, 
         // Yellow current price line
-        2: {type: 'line', color:`<%- (chartParsed[chartParsed.length - 1][2] < chartParsed[chartParsed.length - 1][3]) ? '#00ff00' : '#ff0000' %>`, lineDashStyle: [16, 4], lineWidth: 1, targetAxisIndex: 0},
+        2: {type: 'line', color:`<%- (chartParsed[chartParsed.length - 1][2] < chartParsed[chartParsed.length - 1][3]) ? '#00ff01' : '#ff0001' %>`, lineDashStyle: [16, 4], lineWidth: 1, targetAxisIndex: 0},
         // SMA 9
         3: {type: 'line', color:'<%- (req.user.chartSettings.sma1 == true) ? `purple`:`transparent` %>', lineWidth: 1, targetAxisIndex: 0},
         // SMA 21
         4: {type: 'line', color:'<%- (req.user.chartSettings.sma2 == true) ? `#0277bd`:`transparent` %>', lineWidth: 1, targetAxisIndex: 0},
+        // SMA 9
+        5: {type: 'line', color:'<%- (req.user.chartSettings.sma3 == true) ? `orange`:`transparent` %>', lineWidth: 1, targetAxisIndex: 0},
+        // SMA 21
+        6: {type: 'line', color:'<%- (req.user.chartSettings.sma4 == true) ? `yellowgreen`:`transparent` %>', lineWidth: 1, targetAxisIndex: 0},
       },
       // vAxes
       vAxes: {

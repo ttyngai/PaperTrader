@@ -104,6 +104,12 @@ function toggleTechnicals(req, res) {
   if (req.body.button == 2) {
     req.user.chartSettings.sma2 = !req.user.chartSettings.sma2;
   }
+  if (req.body.button == 3) {
+    req.user.chartSettings.sma3 = !req.user.chartSettings.sma3;
+  }
+  if (req.body.button == 4) {
+    req.user.chartSettings.sma4 = !req.user.chartSettings.sma4;
+  }
   req.user.save(function () {
     res.redirect(`/stocks/${req.params.stockId}`);
   });

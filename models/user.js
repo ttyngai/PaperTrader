@@ -19,8 +19,10 @@ const userSchema = new Schema(
     chartSettings: {
       timeframe: { type: String, default: '2' },
       volume: { type: Boolean, default: true },
-      sma1: { type: Boolean, default: false },
+      sma1: { type: Boolean, default: true },
       sma2: { type: Boolean, default: true },
+      sma3: { type: Boolean, default: true },
+      sma4: { type: Boolean, default: true },
     },
   },
   {

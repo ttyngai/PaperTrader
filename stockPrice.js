@@ -85,32 +85,39 @@ async function getStock(stocksInput, simpleCheck) {
 
 async function getChartData(ticker, timeFrameMode) {
   const array = [];
+  let numOfDisplayedCandles;
   let object;
   // User specific preferred chart timeframe
   let interval, range;
   if (timeFrameMode == 1) {
     interval = '5m';
-    range = '1d';
+    range = '2000m';
+    numOfDisplayedCandles = 79;
     timeAxisMode = 'time';
   } else if (timeFrameMode == 2) {
     interval = '30m';
-    range = '5d';
+    range = '200h';
+    numOfDisplayedCandles = 158;
     timeAxisMode = 'date';
   } else if (timeFrameMode == 3) {
     interval = '1h';
-    range = '10d';
+    range = '400h';
+    numOfDisplayedCandles = 147;
     timeAxisMode = 'date';
   } else if (timeFrameMode == 4) {
     interval = '1d';
-    range = '6mo';
+    range = '400d';
+    numOfDisplayedCandles = 126;
     timeAxisMode = 'date';
   } else if (timeFrameMode == 5) {
     interval = '1wk';
-    range = '2y';
+    range = '400wk';
+    numOfDisplayedCandles = 100;
     timeAxisMode = 'month';
   } else if (timeFrameMode == 6) {
     interval = '1mo';
-    range = '8y';
+    range = '400mo';
+    numOfDisplayedCandles = 100;
     timeAxisMode = 'month';
   }
   // Fetch stock charting data from Yahoo finance
@@ -194,9 +201,15 @@ async function getChartData(ticker, timeFrameMode) {
       simpleMovingAvg(array, 9);
       // Simple Moving Average:
       simpleMovingAvg(array, 21);
+      // Simple Moving Average:
+      simpleMovingAvg(array, 50);
+      // Simple Moving Average:
+      simpleMovingAvg(array, 200);
+      console.log('array.length', arrayLength);
     })
     .catch((err) => console.log(err));
-  return array;
+  const slicedArray = array.slice(array.length - numOfDisplayedCandles);
+  return slicedArray;
 }
 
 // Simple moving avg
