@@ -197,13 +197,13 @@ async function getChartData(ticker, timeFrameMode) {
       array.forEach(function (row) {
         row.push(array[array.length - 1][3]);
       });
-      // Simple Moving Average:
+      // Simple Moving Average 9:
       simpleMovingAvg(array, 9);
-      // Simple Moving Average:
+      // Simple Moving Average 21:
       simpleMovingAvg(array, 21);
-      // Simple Moving Average:
+      // Simple Moving Average 50:
       simpleMovingAvg(array, 50);
-      // Simple Moving Average:
+      // Simple Moving Average 200:
       simpleMovingAvg(array, 200);
     })
     .catch((err) => console.log(err));

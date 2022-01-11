@@ -210,6 +210,7 @@ let timeStampInterval = Math.floor(<%- JSON.stringify(chartParsed)%>.length/time
       legend: 'none',
       // Chart area that takes up room(away from axis)
       chartArea: {'width': '80%', 'height': '90%'},
+      
       // Chart background
       backgroundColor: 'transparent',
       series: {
@@ -223,7 +224,7 @@ let timeStampInterval = Math.floor(<%- JSON.stringify(chartParsed)%>.length/time
         // Volume Bar
         1: {type: 'bars', color:'<%- (req.user.chartSettings.volume == true) ? `#262626`:`transparent` %>', lineWidth: 1, targetAxisIndex: 1}, 
         // Yellow current price line
-        2: {type: 'line', color:'black', lineDashStyle: [16, 4], lineWidth: 1, targetAxisIndex: 0},
+        2: {type: 'line', color:'black', lineDashStyle: [16, 4], lineWidth: 1, targetAxisIndex: 0 },
         // SMA 9
         3: {type: 'line', color:'<%- (req.user.chartSettings.sma1 == true) ? `purple`:`transparent` %>', lineWidth: 1, targetAxisIndex: 0},
         // SMA 21
@@ -297,6 +298,7 @@ let timeStampInterval = Math.floor(<%- JSON.stringify(chartParsed)%>.length/time
           lastColor = allRect[key].nextElementSibling.getAttribute("fill");
         }
         document.getElementsByTagName('path')[0].setAttribute("stroke",lastColor)
+        console.log()
     })
       setTimeout(function(){
         changeWickWidth(count-1)
