@@ -91,33 +91,33 @@ async function getChartData(ticker, timeFrameMode) {
   let interval, range;
   if (timeFrameMode == 1) {
     interval = '5m';
-    range = '2000m';
+    range = '1395m';
     numOfDisplayedCandles = 79;
     timeAxisMode = 'time';
   } else if (timeFrameMode == 2) {
     interval = '30m';
-    range = '200h';
+    range = '179h';
     numOfDisplayedCandles = 158;
     timeAxisMode = 'date';
   } else if (timeFrameMode == 3) {
     interval = '1h';
-    range = '400h';
+    range = '347h';
     numOfDisplayedCandles = 147;
     timeAxisMode = 'date';
   } else if (timeFrameMode == 4) {
     interval = '1d';
-    range = '400d';
+    range = '326d';
     numOfDisplayedCandles = 126;
     timeAxisMode = 'date';
   } else if (timeFrameMode == 5) {
     interval = '1wk';
-    range = '400wk';
-    numOfDisplayedCandles = 100;
+    range = '356wk';
+    numOfDisplayedCandles = 156;
     timeAxisMode = 'month';
   } else if (timeFrameMode == 6) {
     interval = '1mo';
-    range = '400mo';
-    numOfDisplayedCandles = 100;
+    range = '296mo';
+    numOfDisplayedCandles = 96;
     timeAxisMode = 'month';
   }
   // Fetch stock charting data from Yahoo finance
@@ -205,9 +205,9 @@ async function getChartData(ticker, timeFrameMode) {
       simpleMovingAvg(array, 50);
       // Simple Moving Average:
       simpleMovingAvg(array, 200);
-      console.log('array.length', arrayLength);
     })
     .catch((err) => console.log(err));
+  // Take the lastest 'numOfDisplayedCandles' for the most updated
   const slicedArray = array.slice(array.length - numOfDisplayedCandles);
   return slicedArray;
 }
