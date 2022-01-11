@@ -327,7 +327,7 @@ nav {
 
 #chart_div {
   width: 96vw;
-  /* max-width: 1440px; */
+  max-width: 1440px;
   height: 53vh;
   max-height: 576px;
   margin: auto;

@@ -96,23 +96,23 @@ async function getChartData(ticker, timeFrameMode) {
     timeAxisMode = 'time';
   } else if (timeFrameMode == 2) {
     interval = '30m';
-    range = '179h';
-    numOfDisplayedCandles = 158;
+    range = '140h';
+    numOfDisplayedCandles = 79;
     timeAxisMode = 'date';
   } else if (timeFrameMode == 3) {
     interval = '1h';
-    range = '347h';
-    numOfDisplayedCandles = 147;
+    range = '270h';
+    numOfDisplayedCandles = 70;
     timeAxisMode = 'date';
   } else if (timeFrameMode == 4) {
     interval = '1d';
-    range = '326d';
-    numOfDisplayedCandles = 126;
+    range = '284d';
+    numOfDisplayedCandles = 84;
     timeAxisMode = 'date';
   } else if (timeFrameMode == 5) {
     interval = '1wk';
-    range = '356wk';
-    numOfDisplayedCandles = 156;
+    range = '304wk';
+    numOfDisplayedCandles = 104;
     timeAxisMode = 'month';
   } else if (timeFrameMode == 6) {
     interval = '1mo';
