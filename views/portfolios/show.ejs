@@ -419,10 +419,10 @@
     let countDownNum;
     let membershipLevel;
     if(<%=req.user.premium%>){
-      countDownNum = 10;
+      countDownNum = 9;
       membershipLevel = 'Premium'
     } else {
-      countDownNum = 60;
+      countDownNum = 59;
       membershipLevel = 'Basic'
     }
     function countDown(){

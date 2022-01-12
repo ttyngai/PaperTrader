@@ -87,6 +87,7 @@ async function getChartData(ticker, timeFrameMode) {
   const array = [];
   let numOfDisplayedCandles;
   let object;
+  let dateMatchCount = 0;
   // User specific preferred chart timeframe
   let interval, range;
   if (timeFrameMode == 1) {
@@ -97,7 +98,7 @@ async function getChartData(ticker, timeFrameMode) {
   } else if (timeFrameMode == 2) {
     interval = '30m';
     range = '140h';
-    numOfDisplayedCandles = 79;
+    numOfDisplayedCandles = 78;
     timeAxisMode = 'date';
   } else if (timeFrameMode == 3) {
     interval = '1h';
@@ -134,51 +135,51 @@ async function getChartData(ticker, timeFrameMode) {
       const low = object.indicators.quote[0].low;
       const close = object.indicators.quote[0].close;
       const volume = object.indicators.quote[0].volume;
+      let lastDate = new Date(
+        timestamp[timestamp.length - 1] * 1000
+      ).getUTCDate();
       let arrayLength = 0;
       for (i = 0; i < timestamp.length; i++) {
         // Check if any data is null
         if (timestamp[i] && low[i] && open[i] && close[i] && high[i]) {
           const row = [];
           // Date Time section
-          // (Icebox)Currently for 1 minuite/ 1 hour range, need to expand for different timeframes with button selection
+          const time = new Date((timestamp[i] + object.meta.gmtoffset) * 1000);
+          // Using "gmtoffset" item from API
+          let hour = time.getUTCHours();
+          let minute = time.getMinutes();
+          // Fix transition during 12am
+          if (hour < 0) {
+            hour += 13;
+          }
+          // turn 24 hour to 12
+          if (hour > 12) {
+            hour = hour - 12;
+          }
+
+          if (minute < 10) {
+            minute = `0${minute}`;
+          }
+          if (hour < 10) {
+            hour = `0${hour}`;
+          }
+          const month = time.getUTCMonth() + 1;
+          const day = time.getUTCDate();
+          const year = time.getUTCFullYear();
+          // Used for 1 day mode only
+          if (day == lastDate) {
+            dateMatchCount++;
+          }
           // timeAxisMode == "time"
-          const time = new Date(timestamp[i] * 1000);
           if (timeAxisMode == 'time') {
-            // Using "gmtoffset" item from API
-            let hour = time.getUTCHours() + object.meta.gmtoffset / 60 / 60;
-            // Fix transition during 12am
-            if (hour < 0) {
-              hour += 13;
-            }
-            // turn 24 hour to 12
-            if (hour > 12) {
-              hour = hour - 12;
-            }
-            let minute = time.getMinutes();
-            if (minute < 10) {
-              minute = `0${minute}`;
-            }
-            if (hour < 10) {
-              hour = `0${hour}`;
-            }
             row.push(`${hour}:${minute}`);
           }
           // timeAxisMode == "date"
           else if (timeAxisMode == 'date') {
-            const time = new Date(
-              (timestamp[i] + object.meta.gmtoffset) * 1000
-            );
-            const month = time.getUTCMonth() + 1;
-            const day = time.getUTCDate();
             row.push(`${month}/${day}`);
           }
           // timeAxisMode == "month"
           else if (timeAxisMode == 'month') {
-            const time = new Date(
-              (timestamp[i] + object.meta.gmtoffset) * 1000
-            );
-            const month = time.getUTCMonth() + 1;
-            const year = time.getUTCFullYear();
             row.push(`${month}/${year}`);
           }
           // More timeframes with it's timeframes(Icebox)
@@ -205,11 +206,16 @@ async function getChartData(ticker, timeFrameMode) {
       simpleMovingAvg(array, 50);
       // Simple Moving Average 200:
       simpleMovingAvg(array, 200);
+      // Timestamp
     })
     .catch((err) => console.log(err));
   // Take the lastest 'numOfDisplayedCandles' for the most updated
-  const slicedArray = array.slice(array.length - numOfDisplayedCandles);
-  return slicedArray;
+  if (timeFrameMode == 1) {
+    // For 1 day modes, only send candles that match latest date
+    return array.slice(array.length - dateMatchCount);
+  } else {
+    return array.slice(array.length - numOfDisplayedCandles);
+  }
 }
 
 // Simple moving avg
