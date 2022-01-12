@@ -144,8 +144,8 @@ async function getChartData(ticker, timeFrameMode) {
         if (timestamp[i] && low[i] && open[i] && close[i] && high[i]) {
           const row = [];
           // Date Time section
-          const time = new Date((timestamp[i] + object.meta.gmtoffset) * 1000);
           // Using "gmtoffset" item from API
+          const time = new Date((timestamp[i] + object.meta.gmtoffset) * 1000);
           let hour = time.getUTCHours();
           let minute = time.getMinutes();
           // Fix transition during 12am
