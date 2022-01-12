@@ -309,9 +309,9 @@ let timeStampInterval = Math.floor(<%- JSON.stringify(chartParsed)%>.length/time
 <%- include('../partials/footer') %>
 <script>
   //Bonus upgraded refresh rate for premium users
-let refreshRate=60000;
+let refreshRate=59000;
 if (<%=user.premium%>){
-  refreshRate = 10000
+  refreshRate = 9000
 }
   window.setTimeout(function () {
     window.location.reload();
