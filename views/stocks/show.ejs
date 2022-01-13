@@ -1,17 +1,214 @@
 <%- include('../partials/header') %>
 <div class="pageContainer">
   <div class="stockShowControls">
-    <div>
+    <div class="timeframeSelectorContainer">
       <!-- Back button -->
       <form class="backButton" action="/stocks">
-        <button  class="formButton">Back</button>
+        <button class="formButton">Back</button>
       </form>
-    <% if (quote[0]){ %>
+      <% if (quote[0]){ %>
       <!-- Name of stock as Title-->
-      <h1 class="stockTitleAtShow"><%= quote[0].longName%> (<%= stock.ticker%>)</h1>
+      <h1 class="stockTitleAtShow">
+        <%= quote[0].longName%> (<%= stock.ticker%>)
+      </h1>
       <%} else {%>
       <h1>n/a</h1>
-      <%} %> 
+      <%} %>
+    </div>
+    <!-- Stock info -->
+    <div class='timeframeSelectorContainer'>
+
+      <table class="stockInfoTable">
+        <thead>
+          <tr class="portfolioListTitle detailInfo">
+            <th class="tickerTitle">Price</th>
+            <th>PrevClose</th>
+            <th>%Day</th>
+            <th>Volume(M)</th>
+            <th>MktCap(M)</th>
+            <th>ForwardPE</th>
+          </tr>
+        </thead>
+        <% if (quote[0]){%>
+        <tbody>
+          <tr class="detailInfo">
+            <!-- Stock Price -->
+            <!-- For showing 4 decimal places with USD/CAD -->
+            <% if (quote[0].combinedPrice && quote[0].symbol.includes('CAD=X')){
+            %>
+            <td
+              class="tickerLeft tickerTitle <%=((quote[0].combinedPrice-quote[0].regularMarketPreviousClose)>0)?'stockGreen': ''%> <%=((quote[0].combinedPrice-quote[0].regularMarketPreviousClose)<0)?'stockRed': ''%>"
+            >
+              <%= quote[0].combinedPrice.toFixed(3)%>
+            </td>
+            <% } else if (quote[0].combinedPrice){ %>
+            <td
+              class="tickerLeft tickerTitle <%=((quote[0].combinedPrice-quote[0].regularMarketPreviousClose)>0)?'stockGreen': ''%> <%=((quote[0].combinedPrice-quote[0].regularMarketPreviousClose)<0)?'stockRed': ''%>"
+            >
+              <%= (quote[0].combinedPrice.toFixed(2))%>
+            </td>
+            <%} else {%>
+            <td>n/a</td>
+            <%} %>
+            <!-- Previous Close Price -->
+            <!-- For showing 4 decimal places with USD/CAD -->
+            <% if (quote[0].regularMarketPreviousClose &&
+            quote[0].symbol.includes('CAD=X')){ %>
+            <td><%= quote[0].regularMarketPreviousClose.toFixed(3)%></td>
+            <% } else if (quote[0].regularMarketPreviousClose){ %>
+            <td><%= (quote[0].regularMarketPreviousClose).toFixed(2)%></td>
+            <%} else {%>
+            <td>n/a</td>
+            <%} %>
+            <!-- % Change today -->
+            <% if (quote[0].combinedPrice-quote[0].regularMarketPreviousClose){
+            %>
+            <td
+              class="<%=((quote[0].combinedPrice-quote[0].regularMarketPreviousClose)>0)?'stockGreen': ''%> <%=((quote[0].combinedPrice-quote[0].regularMarketPreviousClose)<0)?'stockRed': ''%>"
+            >
+              <%=
+              (100*(quote[0].combinedPrice-quote[0].regularMarketPreviousClose)/quote[0].regularMarketPreviousClose).toFixed(2)%>%
+            </td>
+            <% }else if
+            (quote[0].combinedPrice==quote[0].regularMarketPreviousClose) {%>
+            <td>0.00%</td>
+            <%} else {%>
+            <td>n/a</td>
+            <%} %>
+            <!-- Volume Traded -->
+            <% if (quote[0].regularMarketVolume){ %>
+            <td><%= (quote[0].regularMarketVolume/1000000).toFixed(2)%></td>
+            <%} else {%>
+            <td>n/a</td>
+            <%} %>
+            <!-- Market Cap -->
+            <% if (quote[0].forwardPE){ %>
+            <td>
+              $<%=
+              Intl.NumberFormat('en-US').format((quote[0].marketCap/1000000).toFixed(0))%>
+            </td>
+            <%} else {%>
+            <td>n/a</td>
+            <%} %>
+            <!-- Forward P/E -->
+            <% if (quote[0].forwardPE){ %>
+            <td><%= quote[0].forwardPE.toFixed(2)%></td>
+            <%} else {%>
+            <td>n/a</td>
+            <%} %>
+          </tr>
+        </tbody>
+        <%}%>
+      </table>
+
+    </div>
+    <div class="timeframeSelectorContainer">
+      <span class="timeframeTitle"> &nbspTimeframe - Interval & Range </span>
+      <form action="/stocks/changeTimeframe/<%= stock._id%>" method="POST">
+        <div>
+          <button
+            type="submit"
+            class="timeframeSelector <%- (req.user.chartSettings.timeframe == 1) ? 'timeframeSelected':'' %>"
+            name="button"
+            value="1"
+          >
+            5m:1d
+          </button>
+          <button
+            type="submit"
+            class="timeframeSelector <%- (req.user.chartSettings.timeframe == 2) ? 'timeframeSelected':'' %>"
+            name="button"
+            value="2"
+          >
+            30m:5d
+          </button>
+          <button
+            type="submit"
+            class="timeframeSelector <%- (req.user.chartSettings.timeframe == 3) ? 'timeframeSelected':'' %>"
+            name="button"
+            value="3"
+          >
+            1h:10d
+          </button>
+          <button
+            type="submit"
+            class="timeframeSelector <%- (req.user.chartSettings.timeframe == 4) ? 'timeframeSelected':'' %>"
+            name="button"
+            value="4"
+          >
+            1d:4mo
+          </button>
+          <button
+            type="submit"
+            class="timeframeSelector <%- (req.user.chartSettings.timeframe == 5) ? 'timeframeSelected':'' %>"
+            name="button"
+            value="5"
+          >
+            1wk:2y
+          </button>
+          <button
+            type="submit"
+            class="timeframeSelector <%- (req.user.chartSettings.timeframe == 6) ? 'timeframeSelected':'' %>"
+            name="button"
+            value="6"
+          >
+            1mo:8y
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="timeframeSelectorContainer">
+      <span class="timeframeTitle technicalsTitle">
+        &nbspTechnical Analysis
+      </span>
+      <form action="/stocks/toggleTechnicals/<%= stock._id%>" method="POST">
+        <div>
+          <button
+            type="submit"
+            class="timeframeSelector volume <%- (req.user.chartSettings.volume == true) ? 'volumeSelected':'' %>"
+            name="button"
+            value="0"
+          >
+            Volume
+          </button>
+          <button
+            type="submit"
+            class="timeframeSelector sma1 <%- (req.user.chartSettings.sma1 == true) ? 'sma1Selected':'' %>"
+            name="button"
+            value="1"
+          >
+            SMA9
+          </button>
+          <button
+            type="submit"
+            class="timeframeSelector sma2 <%- (req.user.chartSettings.sma2 == true) ? 'sma2Selected':'' %>"
+            name="button"
+            value="2"
+          >
+            SMA21
+          </button>
+          <button
+            type="submit"
+            class="timeframeSelector sma3 <%- (req.user.chartSettings.sma3 == true) ? 'sma3Selected':'' %>"
+            name="button"
+            value="3"
+          >
+            SMA50
+          </button>
+          <button
+            type="submit"
+            class="timeframeSelector sma4 <%- (req.user.chartSettings.sma4 == true) ? 'sma4Selected':'' %>"
+            name="button"
+            value="4"
+          >
+            SMA200
+          </button>
+        </div>
+      </form>
+    </div>
+    <!-- Chart plugin -->
+    <div id="chart_div"></div>
+    <div class="timeframeSelectorContainer">
       <!-- Stock purchase controls -->
     <% if (portfolios.length !==0) {%>
       <form
@@ -39,7 +236,9 @@
             <input type="number" min="1" max="1000000000"class="buySellNumBox" id="buySellSharesBox" name="shares" placeholder="Shares" autocomplete="off"
             spellcheck="false"
             autocorrect="off" required   />
+            
             <span class="buySellToIndicator">
+              
               &nbspTo&nbsp
             </span>
             <!-- Portfolio selection -->
@@ -48,13 +247,12 @@
             <option value="<%= p._id%>"  <%- (p._id.toString()===preselectPortfolio.toString())? 'selected':''%>><%=p.name%></option>
             <%}) %>
           </select>
-        </div>
+
         <!-- Buy Sell buttons -->
-        <div>
           <button type="submit" class="buySellButtons" id="buyButton" name="button" value="buy">Buy</button>
           <button type="submit" class="buySellButtons" id="sellButton" name="button" value="sell">Sell</button>
-        </div>
       </form>
+      </div>
     <%} else {%>
       <!-- If portfolio empty, asks to create portfolio -->
       <h4>Create your portfolio today.</h4>
@@ -72,342 +270,229 @@
         <input type="submit" class="formButton" value="Create" />
       </form>
     <%} %>
-  </div>
-  <!-- Chart plugin -->
-  <div id="chart_div"></div>
-  <div class="timeframeSelectorContainer">
-    <span class="timeframeTitle">
-      &nbspTimeframe - Interval & Range
-    </span>
-    <form
-    action="/stocks/changeTimeframe/<%= stock._id%>"
-    method="POST"
-    >
-      <div>
-        <button type="submit" class="timeframeSelector <%- (req.user.chartSettings.timeframe == 1) ? 'timeframeSelected':'' %>" name="button" value="1">5m:1d</button>
-        <button type="submit" class="timeframeSelector <%- (req.user.chartSettings.timeframe == 2) ? 'timeframeSelected':'' %>" name="button" value="2">30m:5d</button>
-        <button type="submit" class="timeframeSelector <%- (req.user.chartSettings.timeframe == 3) ? 'timeframeSelected':'' %>" name="button" value="3">1h:10d</button>
-        <button type="submit" class="timeframeSelector <%- (req.user.chartSettings.timeframe == 4) ? 'timeframeSelected':'' %>" name="button" value="4">1d:4mo</button>
-        <button type="submit" class="timeframeSelector <%- (req.user.chartSettings.timeframe == 5) ? 'timeframeSelected':'' %>" name="button" value="5">1wk:2y</button>
-        <button type="submit" class="timeframeSelector <%- (req.user.chartSettings.timeframe == 6) ? 'timeframeSelected':'' %>" name="button" value="6">1mo:8y</button>
-      </div>
-    </form>
-  </div>
-  <div class="timeframeSelectorContainer">
-    <span class="timeframeTitle technicalsTitle">
-      &nbspTechnical Analysis
-    </span>
-    <form
-    action="/stocks/toggleTechnicals/<%= stock._id%>"
-    method="POST"
-    >
-      <div>
-        <button type="submit" class="timeframeSelector volume <%- (req.user.chartSettings.volume == true) ? 'volumeSelected':'' %>" name="button" value="0">Volume</button>
-        <button type="submit" class="timeframeSelector sma1 <%- (req.user.chartSettings.sma1 == true) ? 'sma1Selected':'' %>" name="button" value="1">SMA9</button>
-        <button type="submit" class="timeframeSelector sma2 <%- (req.user.chartSettings.sma2 == true) ? 'sma2Selected':'' %>" name="button" value="2">SMA21</button>
-        <button type="submit" class="timeframeSelector sma3 <%- (req.user.chartSettings.sma3 == true) ? 'sma3Selected':'' %>" name="button" value="3">SMA50</button>
-        <button type="submit" class="timeframeSelector sma4 <%- (req.user.chartSettings.sma4 == true) ? 'sma4Selected':'' %>" name="button" value="4">SMA200</button>
-      </div>
-    </form>
-  </div>
-      <!-- Stock info -->
-      <div class="stockInfoContent">
-        <br>
-        <table class="stockInfoTable">
-          <thead>
-            <tr class="portfolioListTitle detailInfo">
-              <th class="tickerLeft tickerTitle">Mark</th>
-              <th>PrevClose</th>
-              <th>%Day</th>
-              <th>Volume(M)</th>
-              <th>MktCap(M)</th>
-              <th>ForwardPE</th>
-            </tr>
-          </thead>
-      <% if (quote[0]){%>
-          <tbody>
-            <tr class="detailInfo">
-              <!-- Stock Price -->
-              <!-- For showing 4 decimal places with USD/CAD -->
-              <% if (quote[0].combinedPrice && quote[0].symbol.includes('CAD=X')){ %>
-                <td class="tickerLeft tickerTitle
-                <%=((quote[0].combinedPrice-quote[0].regularMarketPreviousClose)>0)?'stockGreen':
-                ''%>
-                <%=((quote[0].combinedPrice-quote[0].regularMarketPreviousClose)<0)?'stockRed':
-                ''%>"><%= quote[0].combinedPrice.toFixed(3)%></td>
-                <% } else if (quote[0].combinedPrice){ %>
-                <td class="tickerLeft tickerTitle
-                <%=((quote[0].combinedPrice-quote[0].regularMarketPreviousClose)>0)?'stockGreen':
-                ''%>
-                <%=((quote[0].combinedPrice-quote[0].regularMarketPreviousClose)<0)?'stockRed':
-                ''%>"><%= (quote[0].combinedPrice.toFixed(2))%></td>
-                <%} else {%>
-                <td>n/a</td>
-              <%} %>
-              <!-- Previous Close Price -->
-              <!-- For showing 4 decimal places with USD/CAD -->
-              <% if (quote[0].regularMarketPreviousClose && quote[0].symbol.includes('CAD=X')){ %>
-                <td><%= quote[0].regularMarketPreviousClose.toFixed(3)%></td>
-                <% } else if (quote[0].regularMarketPreviousClose){ %>
-                <td><%= (quote[0].regularMarketPreviousClose).toFixed(2)%></td>
-                <%} else {%>
-                <td>n/a</td>
-              <%} %>
-              <!-- % Change today -->
-              <% if (quote[0].combinedPrice-quote[0].regularMarketPreviousClose){ %>
-                <td class="
-                <%=((quote[0].combinedPrice-quote[0].regularMarketPreviousClose)>0)?'stockGreen':
-                ''%>
-                <%=((quote[0].combinedPrice-quote[0].regularMarketPreviousClose)<0)?'stockRed':
-                ''%>
-                "><%= (100*(quote[0].combinedPrice-quote[0].regularMarketPreviousClose)/quote[0].regularMarketPreviousClose).toFixed(2)%>%</td>
-                <% }else if (quote[0].combinedPrice==quote[0].regularMarketPreviousClose) {%>
-                <td>0.00%</td>
-                <%} else {%>
-                <td>n/a</td>
-              <%} %>
-              <!-- Volume Traded -->
-              <% if (quote[0].regularMarketVolume){ %>
-                <td ><%= (quote[0].regularMarketVolume/1000000).toFixed(2)%></td>
-                <%} else {%>
-                <td>n/a</td>
-                <%} %>
-                <!-- Market Cap -->
-                <% if (quote[0].forwardPE){  %>
-                <td>$<%= Intl.NumberFormat('en-US').format((quote[0].marketCap/1000000).toFixed(0))%></td>
-                <%} else {%>
-                <td>n/a</td>
-              <%} %>
-              <!-- Forward P/E -->
-              <% if (quote[0].forwardPE){  %>
-                <td><%= quote[0].forwardPE.toFixed(2)%></td>
-                <%} else {%>
-                <td>n/a</td>
-              <%} %>
-            </tr>
-          </tbody>
-        <%}%>
-      </table>
     </div>
   </div>
-<!-- Google Chart Plugin -->
-<script
-  type="text/javascript"
-  src="https://www.gstatic.com/charts/loader.js"
-></script>
-<script type="text/javascript">
-// How many time/date stamp at hAxis
-let timestampPerChart = 4
-// Timestamp interval automatically determined by candle sticks available
-let timeStampInterval = Math.floor(<%- JSON.stringify(chartParsed)%>.length/timestampPerChart)-1
-  google.charts.load('current', { packages: ['corechart'] });
-  google.charts.setOnLoadCallback(drawChart);
-  async function drawChart() {
-    let stockGreen = '#00ff00'
-    let stockRed = '#ff0000'
-    var data = google.visualization.arrayToDataTable(<%- JSON.stringify(chartParsed)%>, true);
-    var options = {
-      legend: 'none',
-      // Chart area that takes up room(away from axis)
-      chartArea: {'width': '80%', 'height': '90%'},
-      
-      // Chart background
-      backgroundColor: 'transparent',
-      series: {
-        // Candlebar
-        0: {type:'candlesticks', color:'#242424', targetAxisIndex: 0,
-          candlestick: {
-            risingColor: {stroke: stockGreen, strokeWidth: 1, fill: stockGreen},
-            fallingColor: {stroke: stockRed, strokeWidth: 1, fill: stockRed},
-          }
-        },
-        // Volume Bar
-        1: {type: 'bars', color:'<%- (req.user.chartSettings.volume == true) ? `#262626`:`transparent` %>', lineWidth: 1, targetAxisIndex: 1}, 
-        // Yellow current price line
-        2: {type: 'line', color:'black', lineDashStyle: [2, 6], lineWidth: 2, targetAxisIndex: 0 },
-        // SMA 9
-        3: {type: 'line', color:'<%- (req.user.chartSettings.sma1 == true) ? `purple`:`transparent` %>', lineWidth: 1, targetAxisIndex: 0},
-        // SMA 21
-        4: {type: 'line', color:'<%- (req.user.chartSettings.sma2 == true) ? `#0277bd`:`transparent` %>', lineWidth: 1, targetAxisIndex: 0},
-        // SMA 9
-        5: {type: 'line', color:'<%- (req.user.chartSettings.sma3 == true) ? `orange`:`transparent` %>', lineWidth: 1, targetAxisIndex: 0},
-        // SMA 21
-        6: {type: 'line', color:'<%- (req.user.chartSettings.sma4 == true) ? `yellowgreen`:`transparent` %>', lineWidth: 1, targetAxisIndex: 0},
-      },
-      // vAxes
-      vAxes: {
-        // Left hand vAxis
-        0:{
-          gridlineColor: '#262626', 
-          minorGridlines: {color:'transparent'}, 
-          textStyle: {
-            color: '#FFF', 
-            fontSize:10
-          }, 
-          gridlines:{count:16}, 
-          viewWindow:{
-            max:<%= chartMax+(chartMax-chartMin)/20%>, 
-            min:<%= chartMin-(chartMax-chartMin)/20%>
-          }
-        },
-        // Right hand vAxis
-        1:{
-          gridlineColor: 'transparent', 
-          minorGridlines: {color:'transparent'}, 
-          textStyle: {
-            color: 'transparent', 
-            fontSize:10
-          }, 
-          gridlines:{count:8},
-          viewWindow:{max:<%=chartVolumeMax*5%>}
-        }
-      },
-      // hAxis
-      hAxis: {
-        gridlineColor: 'transparent', 
-        textStyle: {color: '#FFF', fontSize: 9}, 
-        showTextEvery: timeStampInterval 
-      },
-    };
-    var chart = new google.visualization.CandlestickChart(
-      document.getElementById('chart_div')
-    );
-    await chart.draw(data, options);
-  }
-  // Candlestick Styling Bandaid: Change wick color/thickness, due to weird google chart limitation, tries(loop) a few times to ensure function
-  setTimeout(function(){
-    changeWickWidth(3)
-  },50)
-  let lastColor;
-  function changeWickWidth(count){
-    if(count>0){
-    let allRect = document.getElementsByTagName('rect');
-    
-      Object.keys(allRect).forEach(function(key){
-        if (allRect[key].getAttribute("fill")==='#242424'){      
-          allRect[key].setAttribute("fill",allRect[key].nextElementSibling.getAttribute("fill"));
-          allRect[key].setAttribute("width","1");
-          // Centering each wick. Google charts use INT to position candles, therefore any width that has a even number of pixels will be centered to the left pixel. Need to use parseFloat to calculate true center with decimals
-          const candleWidth = parseInt(allRect[key].nextElementSibling.getAttribute("width"))
-          const candleStartX = parseFloat(allRect[key].nextElementSibling.getAttribute("x"))
-          const candleCenter = candleWidth/2+candleStartX
-          const wickWidth = parseInt(allRect[key].getAttribute("width"))
-          const wickStartX = candleCenter - wickWidth/2
-          allRect[key].setAttribute("x",`${wickStartX}`)
-          // Save last color for horizontal price line
-          lastColor = allRect[key].nextElementSibling.getAttribute("fill");
-        }
-        document.getElementsByTagName('path')[0].setAttribute("stroke",lastColor)
-        console.log()
-    })
+  <!-- Google Chart Plugin -->
+  <script
+    type="text/javascript"
+    src="https://www.gstatic.com/charts/loader.js"
+  ></script>
+  <script type="text/javascript">
+    // How many time/date stamp at hAxis
+    let timestampPerChart = 4
+    // Timestamp interval automatically determined by candle sticks available
+    let timeStampInterval = Math.floor(<%- JSON.stringify(chartParsed)%>.length/timestampPerChart)-1
+      google.charts.load('current', { packages: ['corechart'] });
+      google.charts.setOnLoadCallback(drawChart);
+      async function drawChart() {
+        let stockGreen = '#00ff00'
+        let stockRed = '#ff0000'
+        var data = google.visualization.arrayToDataTable(<%- JSON.stringify(chartParsed)%>, true);
+        var options = {
+          legend: 'none',
+          // Chart area that takes up room(away from axis)
+          chartArea: {'width': '82.5%', 'height': '90%'},
+
+          // Chart background
+          backgroundColor: 'transparent',
+          series: {
+            // Candlebar
+            0: {type:'candlesticks', color:'#242424', targetAxisIndex: 0,
+              candlestick: {
+                risingColor: {stroke: stockGreen, strokeWidth: 1, fill: stockGreen},
+                fallingColor: {stroke: stockRed, strokeWidth: 1, fill: stockRed},
+              }
+            },
+            // Volume Bar
+            1: {type: 'bars', color:'<%- (req.user.chartSettings.volume == true) ? `#262626`:`transparent` %>', lineWidth: 1, targetAxisIndex: 1},
+            // Yellow current price line
+            2: {type: 'line', color:'black', lineDashStyle: [2, 6], lineWidth: 2, targetAxisIndex: 0 },
+            // SMA 9
+            3: {type: 'line', color:'<%- (req.user.chartSettings.sma1 == true) ? `purple`:`transparent` %>', lineWidth: 1, targetAxisIndex: 0},
+            // SMA 21
+            4: {type: 'line', color:'<%- (req.user.chartSettings.sma2 == true) ? `#0277bd`:`transparent` %>', lineWidth: 1, targetAxisIndex: 0},
+            // SMA 9
+            5: {type: 'line', color:'<%- (req.user.chartSettings.sma3 == true) ? `orange`:`transparent` %>', lineWidth: 1, targetAxisIndex: 0},
+            // SMA 21
+            6: {type: 'line', color:'<%- (req.user.chartSettings.sma4 == true) ? `yellowgreen`:`transparent` %>', lineWidth: 1, targetAxisIndex: 0},
+          },
+          // vAxes
+          vAxes: {
+            
+            // Left hand vAxis
+            0:{
+              format: '####.##',
+              gridlineColor: '#262626',
+              minorGridlines: {color:'transparent'},
+              textStyle: {
+                color: '#FFF',
+                fontSize:10
+              },
+              gridlines:{count:16},
+              viewWindow:{
+                max:<%= chartMax+(chartMax-chartMin)/20%>,
+                min:<%= chartMin-(chartMax-chartMin)/20%>
+              },
+            },
+            // Right hand vAxis
+            1:{
+
+              gridlineColor: 'transparent',
+              minorGridlines: {color:'transparent'},
+              textStyle: {
+                color: 'transparent',
+                fontSize:10
+              },
+              gridlines:{count:8},
+              viewWindow:{max:<%=chartVolumeMax*5%>}
+            }
+          },
+          // hAxis
+          hAxis: {
+            gridlineColor: 'transparent',
+            textStyle: {color: '#FFF', fontSize: 9},
+            showTextEvery: timeStampInterval
+          },
+        };
+        var chart = new google.visualization.CandlestickChart(
+          document.getElementById('chart_div')
+        );
+        await chart.draw(data, options);
+      }
+      // Candlestick Styling Bandaid: Change wick color/thickness, due to weird google chart limitation, tries(loop) a few times to ensure function
       setTimeout(function(){
-        changeWickWidth(count-1)
-      },500)
+        changeWickWidth(3)
+      },50)
+      let lastColor;
+      function changeWickWidth(count){
+        if(count>0){
+        let allRect = document.getElementsByTagName('rect');
+
+          Object.keys(allRect).forEach(function(key){
+            if (allRect[key].getAttribute("fill")==='#242424'){
+              allRect[key].setAttribute("fill",allRect[key].nextElementSibling.getAttribute("fill"));
+              allRect[key].setAttribute("width","1");
+              // Centering each wick. Google charts use INT to position candles, therefore any width that has a even number of pixels will be centered to the left pixel. Need to use parseFloat to calculate true center with decimals
+              const candleWidth = parseInt(allRect[key].nextElementSibling.getAttribute("width"))
+              const candleStartX = parseFloat(allRect[key].nextElementSibling.getAttribute("x"))
+              const candleCenter = candleWidth/2+candleStartX
+              const wickWidth = parseInt(allRect[key].getAttribute("width"))
+              const wickStartX = candleCenter - wickWidth/2
+              allRect[key].setAttribute("x",`${wickStartX}`)
+              // Save last color for horizontal price line
+              lastColor = allRect[key].nextElementSibling.getAttribute("fill");
+            }
+            document.getElementsByTagName('path')[0].setAttribute("stroke",lastColor)
+            console.log()
+        })
+          setTimeout(function(){
+            changeWickWidth(count-1)
+          },500)
+        }
+      }
+  </script>
+  <%- include('../partials/footer') %>
+  <script>
+      //Bonus upgraded refresh rate for premium users
+    let refreshRate=59000;
+    if (<%=user.premium%>){
+      refreshRate = 9000
     }
-  }
-</script>
-<%- include('../partials/footer') %>
-<script>
-  //Bonus upgraded refresh rate for premium users
-let refreshRate=59000;
-if (<%=user.premium%>){
-  refreshRate = 9000
-}
-  window.setTimeout(function () {
-    window.location.reload();
-  }, refreshRate);
-  // Membership refresh time count down
-  let countDownNum;
-  let membershipLevel;
-  if(<%=req.user.premium%>){
-    countDownNum = 9;
-    membershipLevel = 'Premium'
-  } else {
-    countDownNum = 59;
-    membershipLevel = 'Basic'
-  }
-  function countDown(){
-    let countDownString = `${membershipLevel}(${countDownNum})`
-    document.getElementById('countDownNum').innerHTML = countDownString
-    countDownNum--;
-    setTimeout(function(){
+      window.setTimeout(function () {
+        window.location.reload();
+      }, refreshRate);
+      // Membership refresh time count down
+      let countDownNum;
+      let membershipLevel;
+      if(<%=req.user.premium%>){
+        countDownNum = 9;
+        membershipLevel = 'Premium'
+      } else {
+        countDownNum = 59;
+        membershipLevel = 'Basic'
+      }
+      function countDown(){
+        let countDownString = `${membershipLevel}(${countDownNum})`
+        document.getElementById('countDownNum').innerHTML = countDownString
+        countDownNum--;
+        setTimeout(function(){
+          countDown()
+        },1000)
+      }
       countDown()
-    },1000)
-  }
-  countDown()
-  // Convert href with '?' to without
-  let refWithoutQuestionMark = window.location.href;
-  if (window.location.href[window.location.href.length-1]=='?'){
-    refWithoutQuestionMark = refWithoutQuestionMark.slice(0,-1)
-  }
-  // Refresh input retainer*3
-    if(localStorage.referrer !== refWithoutQuestionMark){
-      delete localStorage.inputField
-      delete localStorage.inputField2
-      delete localStorage.inputField3
-      delete localStorage.activeFocus
-    }
-  // check if anything in inputField stored
-  const tempInput = localStorage.inputField;
-  // If we stored value in tempInput, and we just reloaded, box is in use
-  // We will take value out and populate the box
-  // Input #1 for shares box
-  if (tempInput && localStorage.referrer === refWithoutQuestionMark) {
-    document.getElementById('buySellSharesBox').value = tempInput;
-  }
+      // Convert href with '?' to without
+      let refWithoutQuestionMark = window.location.href;
+      if (window.location.href[window.location.href.length-1]=='?'){
+        refWithoutQuestionMark = refWithoutQuestionMark.slice(0,-1)
+      }
+      // Refresh input retainer*3
+        if(localStorage.referrer !== refWithoutQuestionMark){
+          delete localStorage.inputField
+          delete localStorage.inputField2
+          delete localStorage.inputField3
+          delete localStorage.activeFocus
+        }
+      // check if anything in inputField stored
+      const tempInput = localStorage.inputField;
+      // If we stored value in tempInput, and we just reloaded, box is in use
+      // We will take value out and populate the box
+      // Input #1 for shares box
+      if (tempInput && localStorage.referrer === refWithoutQuestionMark) {
+        document.getElementById('buySellSharesBox').value = tempInput;
+      }
 
-  // On input #1
-  document
-    .getElementById('buySellSharesBox')
-    .addEventListener('input', function () {
-      localStorage.inputField =
-      document.getElementById('buySellSharesBox').value;
-      localStorage.activeFocus = 'buySellSharesBox'
-    });
-  // On click #1
-  document
-    .getElementById('buySellSharesBox')
-    .addEventListener('click', function () {
-      localStorage.activeFocus = 'buySellSharesBox'
-    });
-  // Input #2 for price box
-  const tempInput2 = localStorage.inputField2;
-  if (tempInput2 && localStorage.referrer === refWithoutQuestionMark) {
-    document.getElementById('buySellPriceBoxId').value = tempInput2;
-  }
-  // On input #2
-  document
-    .getElementById('buySellPriceBoxId')
-    .addEventListener('input', function () {
-      localStorage.inputField2 =
-      document.getElementById('buySellPriceBoxId').value;
-    });
-  // On click #2
-  document
-    .getElementById('buySellPriceBoxId')
-    .addEventListener('click', function () {
-      localStorage.activeFocus = 'buySellPriceBoxId'
-    });
-  // Input #3 for porrtfolio selection box
-  const tempInput3 = localStorage.inputField3;
-  if (tempInput3 && localStorage.referrer === refWithoutQuestionMark) {
-    document.getElementById('buySellPortfolioBox').value = tempInput3;
-  }
-  // On select #3
-  document
-    .getElementById('buySellPortfolioBox')
-    .addEventListener('input', function () {
-      localStorage.inputField3 =
-      document.getElementById('buySellPortfolioBox').value;
-   });
-  // deletes focus if this option is selected
-  document
-    .getElementById('buySellPortfolioBox')
-    .addEventListener('click', function () {
-      delete localStorage.activeFocus
-    });
-  if(localStorage.activeFocus){
-    document.getElementById(localStorage.activeFocus).focus();
-  }
-
-</script>
+      // On input #1
+      document
+        .getElementById('buySellSharesBox')
+        .addEventListener('input', function () {
+          localStorage.inputField =
+          document.getElementById('buySellSharesBox').value;
+          localStorage.activeFocus = 'buySellSharesBox'
+        });
+      // On click #1
+      document
+        .getElementById('buySellSharesBox')
+        .addEventListener('click', function () {
+          localStorage.activeFocus = 'buySellSharesBox'
+        });
+      // Input #2 for price box
+      const tempInput2 = localStorage.inputField2;
+      if (tempInput2 && localStorage.referrer === refWithoutQuestionMark) {
+        document.getElementById('buySellPriceBoxId').value = tempInput2;
+      }
+      // On input #2
+      document
+        .getElementById('buySellPriceBoxId')
+        .addEventListener('input', function () {
+          localStorage.inputField2 =
+          document.getElementById('buySellPriceBoxId').value;
+        });
+      // On click #2
+      document
+        .getElementById('buySellPriceBoxId')
+        .addEventListener('click', function () {
+          localStorage.activeFocus = 'buySellPriceBoxId'
+        });
+      // Input #3 for porrtfolio selection box
+      const tempInput3 = localStorage.inputField3;
+      if (tempInput3 && localStorage.referrer === refWithoutQuestionMark) {
+        document.getElementById('buySellPortfolioBox').value = tempInput3;
+      }
+      // On select #3
+      document
+        .getElementById('buySellPortfolioBox')
+        .addEventListener('input', function () {
+          localStorage.inputField3 =
+          document.getElementById('buySellPortfolioBox').value;
+       });
+      // deletes focus if this option is selected
+      document
+        .getElementById('buySellPortfolioBox')
+        .addEventListener('click', function () {
+          delete localStorage.activeFocus
+        });
+      if(localStorage.activeFocus){
+        document.getElementById(localStorage.activeFocus).focus();
+      }
+  </script>
+</div>

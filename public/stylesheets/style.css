@@ -342,8 +342,8 @@ nav {
 }
 
 #chart_div {
-  width: 96vw;
-  max-width: 1440px;
+  width: 97vw;
+  max-width: 1280px;
   height: 53vh;
   max-height: 576px;
   margin: auto;
@@ -355,7 +355,7 @@ nav {
   font-size: 1.5rem;
   padding: 0 0.5rem;
   border-radius: 0.25rem;
-  margin: 0.2rem -0.1rem 0.2rem 0.2rem;
+  margin: 0 0 0 0.1rem;
   width: 22vw;
   max-width: 12rem;
   outline: none;
@@ -460,6 +460,8 @@ input[type='number'] {
   font-weight: bold;
   margin-right: -0.1rem;
   margin-left: -0.1rem;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .timeframeSelected {
@@ -475,22 +477,14 @@ input[type='number'] {
 
 .timeframeSelectorContainer {
   width: 96vw;
-  max-width: 800px;
+  max-width: 1024px;
   margin: auto;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  padding-top: 0.25rem;
 }
 
 .timeframeTitle {
   color: var(--stockYellow);
   font-weight: bold;
-}
-
-.stockInfoContent {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
 }
 
 .technicalsTitle {

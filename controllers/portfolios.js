@@ -94,7 +94,7 @@ function show(req, res) {
       //Find "USDCAD=X"
       let usdCad = 1;
       prices.forEach(function (p) {
-        if (p.symbol === 'USDCAD=X' || p.symbol === 'CAD=X') {
+        if (p.symbol === 'CAD=X') {
           usdCad = p.combinedPrice;
         }
       });
