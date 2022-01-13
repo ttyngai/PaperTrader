@@ -214,6 +214,10 @@ async function getChartData(ticker, timeFrameMode) {
     // For 1 day modes, only send candles that match latest date
     return array.slice(array.length - dateMatchCount);
   } else {
+    // If data doesn't go back that far, will display all available candles
+    if (array.length < numOfDisplayedCandles) {
+      numOfDisplayedCandles = array.length;
+    }
     return array.slice(array.length - numOfDisplayedCandles);
   }
 }
