@@ -390,7 +390,7 @@ nav {
   border-radius: 0.25rem;
   padding: 0 0.5rem 0 0.5rem;
   font-size: 1.5rem;
-  margin: 0 0.2rem;
+  margin: 0 0 0 0.1rem;
 }
 
 .buySellNumBox:focus {
@@ -399,7 +399,7 @@ nav {
 }
 
 #buySellSharesBox {
-  width: 22vw;
+  width: 20vw;
   max-width: 16rem;
 }
 
@@ -420,9 +420,8 @@ input[type='number'] {
 .buySellPriceBox {
   background-color: rgb(34, 34, 34);
   color: var(--stockYellow);
-
-  width: 22vw;
-  max-width: 16rem;
+  width: 20vw;
+  max-width: 12rem;
 }
 
 .buySellToIndicator {
@@ -433,8 +432,8 @@ input[type='number'] {
 }
 
 .premiumPriceBox {
-  width: 22vw;
-  max-width: 16rem;
+  width: 20vw;
+  max-width: 12rem;
 }
 
 #buySellPortfolioBox {
