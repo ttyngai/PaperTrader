@@ -224,8 +224,15 @@ async function create(req, res) {
   const duplicate = await Stock.findOne({
     $and: [{ ticker: req.body.ticker }, { user: req.user._id }],
   });
+  // Disallow USDCAD=X type currency duplications from yahoo finance
+  let incorrectCurrency =
+    req.body.ticker.includes('USD') &&
+    req.body.ticker.includes('=X') &&
+    req.body.ticker.length === 8
+      ? true
+      : false;
   // If not a real stock, return to same page
-  if (!check) {
+  if (!check || incorrectCurrency) {
     res.redirect('/stocks');
   }
   //If duplicated, sets hide to false
@@ -242,7 +249,7 @@ async function create(req, res) {
     );
   }
   // Is a stock, not a duplicate, create new entry
-  if (check && !duplicate) {
+  if (check && !duplicate && !incorrectCurrency) {
     const stock = new Stock(req.body);
     stock.user = req.user._id;
     stock.save(function (err) {
