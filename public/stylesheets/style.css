@@ -159,6 +159,11 @@ nav {
   max-width: 800px;
 }
 
+.stockSearchContainer {
+  width: 96vw;
+  max-width: 800px;
+  margin: auto;
+}
 .stockTitleAtShow {
   color: var(--stockYellow);
 }
@@ -249,7 +254,7 @@ nav {
 }
 
 .searchForm {
-  padding: 0.5rem 2rem;
+  padding: 1rem 0.5rem;
   text-align: left;
 }
 
@@ -312,7 +317,7 @@ nav {
 
 /* Stock show page */
 .backButton {
-  padding: 0.25rem 0;
+  padding: 0.5rem 0;
 }
 
 .tickerTransactionUnbold {

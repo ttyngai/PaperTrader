@@ -1,24 +1,26 @@
 <%- include('../partials/header') %>
 <div class="pageContainer">
-  <!-- Form for adding stocks -->
-  <form class="searchForm" action="/stocks" method="POST">
-    <input
-      class="search"
-      id="stockSearchBox"
-      type="text"
-      autocomplete="off"
-      name="ticker"
-      placeholder="(e.g. AAPL)"
-      spellcheck="false"
-      autocorrect="off"
-    />
-    <input
-      type="submit"
-      class="formButton"
-      id="searchTickerButton"
-      value="Add"
-    />
-  </form>
+  <div class="stockSearchContainer">
+    <!-- Form for adding stocks -->
+    <form class="searchForm" action="/stocks" method="POST">
+      <input
+        class="search"
+        id="stockSearchBox"
+        type="text"
+        autocomplete="off"
+        name="ticker"
+        placeholder="(e.g. AAPL)"
+        spellcheck="false"
+        autocorrect="off"
+      />
+      <input
+        type="submit"
+        class="formButton"
+        id="searchTickerButton"
+        value="Add"
+      />
+    </form>
+  </div>
   <!-- Stocks watchlist container -->
   <div class="stockContent">
     <table class="watchListContent">
