@@ -103,7 +103,7 @@ async function getChartData(ticker, timeFrameMode) {
   } else if (timeFrameMode == 3) {
     interval = '1h';
     range = '270h';
-    numOfDisplayedCandles = 140;
+    numOfDisplayedCandles = 150;
     timeAxisMode = 'date';
   } else if (timeFrameMode == 4) {
     interval = '1d';

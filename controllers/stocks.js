@@ -2,6 +2,7 @@ const Stock = require('../models/stock');
 const Portfolio = require('../models/portfolio');
 const StockPrice = require('../stockPrice');
 const User = require('../models/user');
+const isLoggedIn = require('../config/auth');
 
 module.exports = {
   index,
@@ -13,7 +14,7 @@ module.exports = {
 };
 
 // For first time users, populates the watch list with sample tickers.
-const sampleTicker = [
+const sampleTickers = [
   { ticker: 'AAPL' },
   { ticker: 'AMZN' },
   { ticker: 'AMD' },
@@ -37,11 +38,27 @@ const sampleTicker = [
 
 async function index(req, res) {
   // Icebox: if user not logged in, show page with sampleWatchList in DB
+  // if (isLoggedIn) {
+  //   const stocks = await StockPrice.getStock(sampleTickers, false);
+  //   // Check if all are hidden(empty), allow watchlist to show "No symbols added"
+  //   let listNotEmpty = false;
+  //   stocks.forEach(function (s) {
+  //     if (!s.hide) {
+  //       listNotEmpty = true;
+  //     }
+  //   });
+  //   res.render('stocks/index', {
+  //     title: 'Stocks',
+  //     stocks,
+  //     listNotEmpty,
+  //     req,
+  //   });
+  // }else
 
   // Check to see if it's first time login, populates with sample watch list
   if (req.user.firstTime) {
-    for (i = 0; i < sampleTicker.length; i++) {
-      const stock = new Stock(sampleTicker[i]);
+    for (i = 0; i < sampleTickers.length; i++) {
+      const stock = new Stock(sampleTickers[i]);
       stock.user = req.user._id;
       stock.save();
     }
@@ -68,6 +85,7 @@ async function index(req, res) {
           : nonFutures.push(stock);
       });
       const stocksSorted = futures.concat(nonFutures);
+      console.log('stocks sorted', stocksSorted);
       const stocks = await StockPrice.getStock(stocksSorted, false);
       // Check if all are hidden(empty), allow watchlist to show "No symbols added"
       let listNotEmpty = false;
