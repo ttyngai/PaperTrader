@@ -67,7 +67,7 @@
           <!-- For showing 4 decimal places with USD/CAD -->
           <% if (s.symbol.includes('CAD=X')){ %>
           <td><%= s.combinedPrice.toFixed(3)%></td>
-          <% }else if (s.combinedPrice>99999){ %>
+          <% }else if (s.combinedPrice>9999){ %>
           <td><%= (s.combinedPrice/1000).toFixed(1)%>k</td>
           <%} else {%>
           <td><%= s.combinedPrice.toFixed(2)%></td>
