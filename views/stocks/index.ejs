@@ -36,16 +36,11 @@
       </thead>
       <tbody>
         <% stocks.forEach(function(s) {if (!s.hide) { %>
-        <tr class="eachStock">
+        <tr class="eachStock" data-href="/stocks/<%= s._id %>"">
           <!-- Stock Ticker -->
           <td class="tickerLeft">
-            <form class="tickerForm" action="/stocks/<%= s._id %>">
-              <input
-                type="submit"
-                class="tickerButton"
-                value="<%= s.symbol %>"
-              />
-            </form>
+
+              <%= s.symbol %>
           </td>
           <!-- Stock company name -->
           <% if (s.longName){ %>
@@ -176,6 +171,20 @@
   if (window.location.href[window.location.href.length-1]=='?'){
     refWithoutQuestionMark = refWithoutQuestionMark.slice(0,-1)
   }
+  // Make whole ticker row clockable
+
+  document.addEventListener('DOMContentLoaded', function(){
+    const rows = document.querySelectorAll('tr[data-href]')
+    rows.forEach(function(r){
+      r.addEventListener('click', function(){
+         window.location.href = r.dataset.href
+        })
+    })
+  })
+
+
+
+
   // Refresh input retainer
   if (localStorage.referrer !== refWithoutQuestionMark) {
     delete localStorage.inputField;

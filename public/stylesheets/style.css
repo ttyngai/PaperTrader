@@ -29,6 +29,13 @@ tr {
   text-align: right;
 }
 
+tr[data-href] {
+  cursor: pointer;
+}
+tr[data-href]:hover {
+  background-color: var(--transparentYellow);
+}
+
 a {
   text-decoration: none;
 }
@@ -162,7 +169,8 @@ nav {
 
 .tickerLeft {
   text-align: left;
-  font-weight: bold;
+  /* font-weight: bold; */
+  padding: 0.75rem 0 0.75rem 2rem;
 }
 
 .ticker {
@@ -218,7 +226,7 @@ nav {
 
 .tickerButton {
   border: none;
-  background-color: var(--tickerYellow);
+  background-color: black;
   width: 100%;
   max-width: 5rem;
   height: 100%;
@@ -231,10 +239,10 @@ nav {
   padding-bottom: 0.2rem;
 }
 
-.tickerButton:hover {
+/* .tickerButton:hover {
   background-color: var(--stockYellow);
   color: black;
-}
+} */
 
 .searchForm {
   padding: 0.5rem 2rem;
