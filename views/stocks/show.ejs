@@ -211,6 +211,9 @@
     <div class="timeframeSelectorContainer">
       <!-- Stock purchase controls -->
     <% if (portfolios.length !==0) {%>
+      <span class="timeframeTitle">
+        &nbspOrder
+      </span>
       <form
       class="transactionForm"
       action="/stocks/<%= stock._id%>/transactions"
@@ -291,7 +294,7 @@
         var options = {
           legend: 'none',
           // Chart area that takes up room(away from axis)
-          chartArea: {'width': '82.5%', 'height': '90%'},
+          chartArea: {'width': '91%', left:32, 'height': '91%', bottom:13},
 
           // Chart background
           backgroundColor: 'transparent',
