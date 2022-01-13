@@ -36,12 +36,9 @@
       </thead>
       <tbody>
         <% stocks.forEach(function(s) {if (!s.hide) { %>
-        <tr class="eachStock" data-href="/stocks/<%= s._id %>"">
+        <tr class="eachStock" data-href="/stocks/<%= s._id %>">
           <!-- Stock Ticker -->
-          <td class="tickerLeft">
-
-              <%= s.symbol %>
-          </td>
+          <td class="tickerLeft"><%= s.symbol %></td>
           <!-- Stock company name -->
           <% if (s.longName){ %>
           <td class="stockName"><%= s.longName%></td>
@@ -181,10 +178,6 @@
         })
     })
   })
-
-
-
-
   // Refresh input retainer
   if (localStorage.referrer !== refWithoutQuestionMark) {
     delete localStorage.inputField;

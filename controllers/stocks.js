@@ -76,6 +76,7 @@ async function index(req, res) {
           listNotEmpty = true;
         }
       });
+      console.log(stocks[0].symbol);
       res.render('stocks/index', {
         title: 'Stocks',
         stocks,
