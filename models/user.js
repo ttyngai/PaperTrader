@@ -13,7 +13,7 @@ const userSchema = new Schema(
     // Admin
     isAdmin: { type: Boolean, default: false },
     // Membership
-    premium: { type: Boolean, default: false },
+    premium: { type: Boolean, default: true },
     // First time login, for populating watch list
     firstTime: { type: Boolean, default: true },
     chartSettings: {
