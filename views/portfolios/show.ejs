@@ -157,7 +157,7 @@
     <table class="holdingsList">
       <thead>
         <tr class="portfolioList portfolioListTitle">
-          <th class="tickerLeft tickerTitle">Ticker</th>
+          <th class="tickerLeftPortfolio tickerTitle">Ticker</th>
           <th>Shares</th>
           <th>Price</th>
           <th>$Day</th>
@@ -173,7 +173,7 @@
         <!-- Holdings List-->
         <tr class="portfolioList">
           <!-- Tickers -->
-          <td class="tickerLeft">
+          <td class="tickerLeftPortfolio Portfolio">
             <form
               class="tickerForm"
               action="/stocks/<%= p._id %>/<%= portfolio._id%>"
@@ -348,7 +348,7 @@
     <table class="holdingsList">
       <thead>
         <tr class="portfolioList portfolioListTitle">
-          <th class="tickerLeft tickerTitle">Ticker</th>
+          <th class="tickerLeftPortfolio tickerTitle">Ticker</th>
           <th>Action</th>
           <th>Shares</th>
           <th>Transact Price</th>
@@ -362,7 +362,7 @@
         <% portfolio.transactions.forEach(function(t) { %>
         <tr class="portfolioList transactionBorderBottom">
           <!-- Ticker -->
-          <td class="tickerLeft tickerTitle tickerTransactionUnbold">
+          <td class="tickerLeftPortfolio tickerTitle tickerTransactionUnbold">
             <%= t.ticker %>
           </td>
           <!-- Action(Buy/Sell) -->

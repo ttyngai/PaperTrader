@@ -167,10 +167,16 @@ nav {
   padding: 0.5rem 0 0 1rem;
 }
 
+.tickerLeftPortfolio {
+  text-align: left;
+  font-weight: bold;
+}
+
 .tickerLeft {
   text-align: left;
-  /* font-weight: bold; */
-  padding: 0.75rem 0 0.75rem 2rem;
+  font-size: 1.1rem;
+  padding: 0.5rem 0.5rem 0.4rem 0.5rem;
+  width: 16vw;
 }
 
 .ticker {
@@ -180,6 +186,8 @@ nav {
 }
 
 .tickerTitle {
+  padding-left: 1rem;
+  text-align: left;
   border-right: none;
   font-weight: bold;
 }
@@ -197,12 +205,12 @@ nav {
 .stockName {
   text-align: left;
   color: var(--stockYellow);
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   max-width: 5rem;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  padding: 0 0 0 0.5rem;
+  padding: 0.5rem 0.5rem 0.4rem 0;
 }
 
 .stockContent {
@@ -226,7 +234,7 @@ nav {
 
 .tickerButton {
   border: none;
-  background-color: black;
+  background-color: var(--tickerYellow);
   width: 100%;
   max-width: 5rem;
   height: 100%;
@@ -239,10 +247,10 @@ nav {
   padding-bottom: 0.2rem;
 }
 
-/* .tickerButton:hover {
+.tickerButton:hover {
   background-color: var(--stockYellow);
   color: black;
-} */
+}
 
 .searchForm {
   padding: 0.5rem 2rem;
@@ -794,10 +802,16 @@ input[type='number'] {
     padding-top: 0.25rem;
     padding-bottom: 0.25rem;
   }
+  .tickerLeft {
+    font-size: 1.4rem;
+    padding: 0.37rem 0 0.25rem 0.8rem;
+    width: 16vw;
+  }
 
   .stockName {
     font-size: 1rem;
     max-width: 6rem;
+    padding: 0.37rem 0 0.25rem 0;
   }
 }
 @media (min-width: 427px) {
@@ -811,10 +825,16 @@ input[type='number'] {
     padding-top: 0.3rem;
     padding-bottom: 0.3rem;
   }
+  .tickerLeft {
+    font-size: 1.5rem;
+    padding: 0.45rem 0 0.25rem 0.5rem;
+    width: 16vw;
+  }
 
   .stockName {
     font-size: 1.15rem;
     max-width: 12rem;
+    padding: 0.45rem 0 0.25rem 0;
   }
 }
 @media (min-width: 600px) {
@@ -829,9 +849,16 @@ input[type='number'] {
     padding-bottom: 0.35rem;
   }
 
+  .tickerLeft {
+    font-size: 2rem;
+    padding: 0.4rem 0 0.25rem 1rem;
+    width: 16vw;
+  }
+
   .stockName {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     max-width: 15rem;
+    padding: 0.4rem 0 0.25rem 0rem;
   }
 }
 @media (min-width: 768px) {
@@ -846,6 +873,9 @@ input[type='number'] {
     padding-bottom: 0.4rem;
   }
 
+  .tickerLeft {
+    max-width: 12rem;
+  }
   .stockName {
     font-size: 1.5rem;
     max-width: 20rem;
