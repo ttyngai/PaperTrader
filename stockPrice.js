@@ -212,7 +212,12 @@ async function getChartData(ticker, timeFrameMode) {
   // Take the lastest 'numOfDisplayedCandles' for the most updated
   if (timeFrameMode == 1) {
     // For 1 day modes, only send candles that match latest date
-    return array.slice(array.length - dateMatchCount);
+    // Limit max frame for 140, especially for futures which continues to print afterhours
+    if (dateMatchCount > 140) {
+      return array.slice(array.length - 140);
+    } else {
+      return array.slice(array.length - dateMatchCount);
+    }
   } else {
     // If data doesn't go back that far, will display all available candles
     if (array.length < numOfDisplayedCandles) {
