@@ -110,12 +110,16 @@ nav {
   color: var(--stockYellow);
 }
 
-#countDownNum {
+.membershipNav {
   color: var(--greyFont);
 }
 
-#countDownNum:hover {
+.membershipNav:hover {
   color: var(--stockYellow);
+}
+
+.basicGuestCountdown {
+  color: var(--greyFont);
 }
 
 /* Homepage */

@@ -20,12 +20,12 @@
     <nav>
       <a class="navTitle navButtons" href="/">PaperTrader Live</a>
       <% if (user) { %>
-        <a id="membership" href="/memberships" <%-   req.user.premium ? 'class="activeNav navButtons"':'class="navButtons basicUser"'  %>><span id="countDownNum"></span></a>
+        <a id="membership" href="/memberships" <%-   req.user.premium ? 'class="activeNav navButtons"':'class="navButtons basicUser"'  %>><span id="countDownNum" class="membershipNav"></span></a>
       <a  href="/stocks" <%-   title === 'Stocks' ? 'class="activeNav navButtons"':'class="navButtons"'  %>  >Stocks</a>
       <a  href="/portfolios" <%- title === 'Portfolios' ? 'class="navButtons activeNav"':'class="navButtons"'%>> Portfolio</a>
       <a class="navButtons" href="/logout">Logout</a>
       <% } else { %>
-      <span id="countDownNum"></span>
+      <span id="countDownNum" class="basicGuestCountdown"></span>
       <a class="navButtons" href="/auth/google" class="login">Login</a>
       <% } %>
     </nav>

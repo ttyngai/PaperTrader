@@ -275,7 +275,6 @@
         </div>
       </form>
     </div>
-    
   </div>
   <!-- Google Chart Plugin -->
   <script
@@ -287,91 +286,84 @@
     let timestampPerChart = 4
     // Timestamp interval automatically determined by candle sticks available
     let timeStampInterval = Math.floor(<%- JSON.stringify(chartParsed)%>.length/timestampPerChart)-1
-      google.charts.load('current', { packages: ['corechart'] });
-      google.charts.setOnLoadCallback(drawChart);
-      async function drawChart() {
-        let stockGreen = '#00ff00'
-        let stockRed = '#ff0000'
-        var data = google.visualization.arrayToDataTable(<%- JSON.stringify(chartParsed)%>, true);
-        var options = {
-          legend: 'none',
-          // Chart area that takes up room(away from axis)
-          chartArea: {'width': '88%', left:40, 'height': '93%', bottom:14},
-          // Chart background
-          backgroundColor: 'transparent',
-          series: {
-            // Candlebar
-            0: {type:'candlesticks', color:'#242424', targetAxisIndex: 0,
-              candlestick: {
-                risingColor: {stroke: stockGreen, strokeWidth: 1, fill: stockGreen},
-                fallingColor: {stroke: stockRed, strokeWidth: 1, fill: stockRed},
-              }
-            },
-            // Volume Bar
-            1: {type: 'bars', color:'<%- (req.user.chartSettings.volume == true) ? `#262626`:`transparent` %>', lineWidth: 1, targetAxisIndex: 1},
-            // Yellow current price line
-            2: {type: 'line', color:'black', lineDashStyle: [2, 6], lineWidth: 2, targetAxisIndex: 0 },
-            // SMA 9
-            3: {type: 'line', color:'<%- (req.user.chartSettings.sma1 == true) ? `purple`:`transparent` %>', lineWidth: 1, targetAxisIndex: 0},
-            // SMA 21
-            4: {type: 'line', color:'<%- (req.user.chartSettings.sma2 == true) ? `#0277bd`:`transparent` %>', lineWidth: 1, targetAxisIndex: 0},
-            // SMA 9
-            5: {type: 'line', color:'<%- (req.user.chartSettings.sma3 == true) ? `orange`:`transparent` %>', lineWidth: 1, targetAxisIndex: 0},
-            // SMA 21
-            6: {type: 'line', color:'<%- (req.user.chartSettings.sma4 == true) ? `yellowgreen`:`transparent` %>', lineWidth: 1, targetAxisIndex: 0},
-          },
-          // vAxes
-          vAxes: {
-            
-            // Left hand vAxis
-            0:{
-              format: '#.####',
-              gridlineColor: '#262626',
-              minorGridlines: {color:'transparent'},
-              textStyle: {
-                color: '#FFF',
-                fontSize:10
-              },
-              gridlines:{count:16},
-              viewWindow:{
-                max:<%= chartMax+(chartMax-chartMin)/20%>,
-                min:<%= chartMin-(chartMax-chartMin)/20%>
-              },
-            },
-            // Right hand vAxis
-            1:{
-
-              gridlineColor: 'transparent',
-              minorGridlines: {color:'transparent'},
-              textStyle: {
-                color: 'transparent',
-                fontSize:10
-              },
-              gridlines:{count:8},
-              viewWindow:{max:<%=chartVolumeMax*5%>}
+    google.charts.load('current', { packages: ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+    async function drawChart() {
+      let stockGreen = '#00ff00'
+      let stockRed = '#ff0000'
+      var data = google.visualization.arrayToDataTable(<%- JSON.stringify(chartParsed)%>, true);
+      var options = {
+        legend: 'none',
+        // Chart area that takes up room(away from axis)
+        chartArea: {'width': '88%', left:40, 'height': '93%', bottom:14},
+        // Chart background
+        backgroundColor: 'transparent',
+        series: {
+          // Candlebar
+          0: {type:'candlesticks', color:'#242424', targetAxisIndex: 0,
+            candlestick: {
+              risingColor: {stroke: stockGreen, strokeWidth: 1, fill: stockGreen},
+              fallingColor: {stroke: stockRed, strokeWidth: 1, fill: stockRed},
             }
           },
-          // hAxis
-          hAxis: {
-            gridlineColor: 'transparent',
-            textStyle: {color: '#FFF', fontSize: 9},
-            showTextEvery: timeStampInterval
+          // Volume Bar
+          1: {type: 'bars', color:'<%- (req.user.chartSettings.volume == true) ? `#262626`:`transparent` %>', lineWidth: 1, targetAxisIndex: 1},
+          // Yellow current price line
+          2: {type: 'line', color:'black', lineDashStyle: [2, 6], lineWidth: 2, targetAxisIndex: 0 },
+          // SMA 9
+          3: {type: 'line', color:'<%- (req.user.chartSettings.sma1 == true) ? `purple`:`transparent` %>', lineWidth: 1, targetAxisIndex: 0},
+          // SMA 21
+          4: {type: 'line', color:'<%- (req.user.chartSettings.sma2 == true) ? `#0277bd`:`transparent` %>', lineWidth: 1, targetAxisIndex: 0},
+          // SMA 9
+          5: {type: 'line', color:'<%- (req.user.chartSettings.sma3 == true) ? `orange`:`transparent` %>', lineWidth: 1, targetAxisIndex: 0},
+          // SMA 21
+          6: {type: 'line', color:'<%- (req.user.chartSettings.sma4 == true) ? `yellowgreen`:`transparent` %>', lineWidth: 1, targetAxisIndex: 0},
+        },
+        // vAxes
+        vAxes: {
+          
+          // Left hand vAxis
+          0:{
+            format: '#.####',
+            gridlineColor: '#262626',
+            minorGridlines: {color:'transparent'},
+            textStyle: {
+              color: '#FFF',
+              fontSize:10
+            },
+            gridlines:{count:16},
+            viewWindow:{
+              max:<%= chartMax+(chartMax-chartMin)/20%>,
+              min:<%= chartMin-(chartMax-chartMin)/20%>
+            },
           },
-        };
-        var chart = new google.visualization.CandlestickChart(
-          document.getElementById('chart_div')
-        );
-        await chart.draw(data, options);
-      }
-      // Candlestick Styling Bandaid: Change wick color/thickness, due to weird google chart limitation, tries(loop) a few times to ensure function
-      setTimeout(function(){
-        changeWickWidth(5)
-      },50)
-      let lastColor;
-      function changeWickWidth(count){
-        if(count>0){
-        let allRect = document.getElementsByTagName('rect');
+          // Right hand vAxis
+          1:{
 
+            gridlineColor: 'transparent',
+            minorGridlines: {color:'transparent'},
+            textStyle: {
+              color: 'transparent',
+              fontSize:10
+            },
+            gridlines:{count:8},
+            viewWindow:{max:<%=chartVolumeMax*5%>}
+          }
+        },
+        // hAxis
+        hAxis: {
+          gridlineColor: 'transparent',
+          textStyle: {color: '#FFF', fontSize: 9},
+          showTextEvery: timeStampInterval
+        },
+      };
+      var chart = new google.visualization.CandlestickChart(
+        document.getElementById('chart_div')
+      );
+      await chart.draw(data, options);
+    // Candlestick Styling Bandaid: Change wick color/thickness, due to weird google chart limitation, tries(loop) a few times to ensure function
+      let lastColor;
+      let allRect = document.getElementsByTagName('rect');
           Object.keys(allRect).forEach(function(key){
             if (allRect[key].getAttribute("fill")==='#242424'){
               allRect[key].setAttribute("fill",allRect[key].nextElementSibling.getAttribute("fill"));
@@ -388,11 +380,7 @@
             }
             document.getElementsByTagName('path')[0].setAttribute("stroke",lastColor)
         })
-          setTimeout(function(){
-            changeWickWidth(count-1)
-          },500)
-        }
-      }
+     }
   </script>
   <%- include('../partials/footer') %>
   <script>
