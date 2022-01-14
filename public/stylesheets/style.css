@@ -2,6 +2,8 @@
   --nav: #131314;
   --background: #000000;
   --greyFont: #727272;
+  --darkGreyFont: #505050;
+
   --whiteFont: white;
   --stockYellow: rgb(221, 188, 0);
   --tickerYellow: rgba(255, 220, 24, 0.144);
@@ -203,7 +205,7 @@ nav {
 }
 
 .stockListTitle {
-  border-bottom: 0.1rem solid var(--greyFont);
+  border-bottom: 0.1rem solid var(--darkGreyFont);
   color: var(--greyFont);
 }
 
@@ -225,7 +227,7 @@ nav {
 }
 
 .eachStock {
-  border-bottom: 0.1rem solid var(--greyFont);
+  border-bottom: 0.1rem solid var(--darkGreyFont);
   white-space: nowrap;
 }
 
