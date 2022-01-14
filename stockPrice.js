@@ -136,7 +136,7 @@ async function getChartData(ticker, timeFrameMode) {
       const close = object.indicators.quote[0].close;
       const volume = object.indicators.quote[0].volume;
       let lastDate = new Date(
-        timestamp[timestamp.length - 1] * 1000
+        (timestamp[timestamp.length - 1] + object.meta.gmtoffset) * 1000
       ).getUTCDate();
       let arrayLength = 0;
       for (i = 0; i < timestamp.length; i++) {
@@ -212,8 +212,8 @@ async function getChartData(ticker, timeFrameMode) {
   // Take the lastest 'numOfDisplayedCandles' for the most updated
   if (timeFrameMode == 1) {
     // For 1 day modes, only send candles that match latest date
-    // Limit max frame for 140, especially for futures which continues to print afterhours
-    let maxCandles = 160;
+    // Limit max frame for 150, especially for futures which continues to print afterhours
+    let maxCandles = 150;
     if (dateMatchCount > maxCandles) {
       return array.slice(array.length - maxCandles);
     } else {

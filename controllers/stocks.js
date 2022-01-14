@@ -85,7 +85,6 @@ async function index(req, res) {
           : nonFutures.push(stock);
       });
       const stocksSorted = futures.concat(nonFutures);
-      console.log('stocks sorted', stocksSorted);
       const stocks = await StockPrice.getStock(stocksSorted, false);
       // Check if all are hidden(empty), allow watchlist to show "No symbols added"
       let listNotEmpty = false;
