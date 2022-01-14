@@ -408,7 +408,7 @@
 <!-- Refresh Script -->
 <script>
   //Bonus upgraded refresh rate for premium users
-    let refreshRate=59000;
+    let refreshRate=29000;
   if (<%=user.premium%>){
     refreshRate = 9000
   }
@@ -419,10 +419,10 @@
     let countDownNum;
     let membershipLevel;
     if(<%=req.user.premium%>){
-      countDownNum = 9;
+      countDownNum = 10;
       membershipLevel = 'Premium'
     } else {
-      countDownNum = 59;
+      countDownNum = 30;
       membershipLevel = 'Basic'
     }
     function countDown(){

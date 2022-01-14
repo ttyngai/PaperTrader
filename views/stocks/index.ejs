@@ -67,7 +67,7 @@
           <!-- For showing 4 decimal places with USD/CAD -->
           <% if (s.symbol.includes('CAD=X')){ %>
           <td><%= s.combinedPrice.toFixed(3)%></td>
-          <% }else if (s.combinedPrice>9999){ %>
+          <% }else if (s.combinedPrice>99999){ %>
           <td><%= (s.combinedPrice/1000).toFixed(1)%>k</td>
           <%} else {%>
           <td><%= s.combinedPrice.toFixed(2)%></td>
@@ -138,8 +138,8 @@
 <!-- Refresh Script -->
 <script>
   //Bonus upgraded refresh rate for premium users
-  let refreshRate=59000;
-  if (<%=user.premium%>){
+  let refreshRate=29000;
+  if (<%=!isGuest && user.premium%>){
     refreshRate = 9000
   }
     window.setTimeout(function () {
@@ -148,12 +148,12 @@
 
   // Membership refresh time count down
   let countDownNum;
-  let membershipLevel;
-  if(<%=req.user.premium%>){
-    countDownNum = 9;
+  let membershipLevel = 'Refresh';
+  if(<%=!isGuest && req.user.premium%>){
+    countDownNum = 10;
     membershipLevel = 'Premium'
   } else {
-    countDownNum = 59;
+    countDownNum = 30;
     membershipLevel = 'Basic'
   }
   function countDown(){
@@ -174,11 +174,13 @@
 
   document.addEventListener('DOMContentLoaded', function(){
     const rows = document.querySelectorAll('tr[data-href]')
-    rows.forEach(function(r){
-      r.addEventListener('click', function(){
-         window.location.href = r.dataset.href
-        })
-    })
+    if(<%=!isGuest%>){
+      rows.forEach(function(r){
+        r.addEventListener('click', function(){
+          window.location.href = r.dataset.href
+          })
+      })
+    }
   })
   // Refresh input retainer
   if (localStorage.referrer !== refWithoutQuestionMark) {

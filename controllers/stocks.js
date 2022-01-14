@@ -34,29 +34,37 @@ const sampleTickers = [
   { ticker: 'WMT' },
   { ticker: 'COKE' },
   { ticker: 'TSLA' },
+  { ticker: 'MCD' },
 ];
 
 async function index(req, res) {
   // Icebox: if user not logged in, show page with sampleWatchList in DB
-  // if (isLoggedIn) {
-  //   const stocks = await StockPrice.getStock(sampleTickers, false);
-  //   // Check if all are hidden(empty), allow watchlist to show "No symbols added"
-  //   let listNotEmpty = false;
-  //   stocks.forEach(function (s) {
-  //     if (!s.hide) {
-  //       listNotEmpty = true;
-  //     }
-  //   });
-  //   res.render('stocks/index', {
-  //     title: 'Stocks',
-  //     stocks,
-  //     listNotEmpty,
-  //     req,
-  //   });
-  // }else
+  let isGuest = false;
+  if (!req.user) {
+    isGuest = true;
+    sampleTickers.sort(function (a, b) {
+      if (a.ticker > b.ticker) return 1;
+      if (a.ticker < b.ticker) return -1;
+    });
+    const stocks = await StockPrice.getStock(sampleTickers, false);
+    // Check if all are hidden(empty), allow watchlist to show "No symbols added"
+    let listNotEmpty = false;
+    stocks.forEach(function (s) {
+      if (!s.hide) {
+        listNotEmpty = true;
+      }
+    });
+    res.render('stocks/index', {
+      title: 'Stocks',
+      stocks,
+      listNotEmpty,
+      req,
+      isGuest,
+    });
+  }
 
   // Check to see if it's first time login, populates with sample watch list
-  if (req.user.firstTime) {
+  else if (req.user.firstTime) {
     for (i = 0; i < sampleTickers.length; i++) {
       const stock = new Stock(sampleTickers[i]);
       stock.user = req.user._id;
@@ -68,7 +76,7 @@ async function index(req, res) {
     });
   }
   // Not first time user, proceed to show list
-  else {
+  else if (req.user) {
     // Pass in array of tickers
     Stock.find({ user: req.user }, async function (err, stocksFound) {
       // Sort alphabetically
@@ -98,6 +106,7 @@ async function index(req, res) {
         stocks,
         listNotEmpty,
         req,
+        isGuest,
       });
     });
   }
@@ -140,7 +149,7 @@ function hideOrDelete(req, res) {
       portfolios.forEach(function (p) {
         //Protect route unless from logged in user
         if (!p.user.equals(req.user._id)) {
-          return res.redirect('/portfolios');
+          return res.redirect('/stocks');
         }
         p.transactions.forEach(function (t) {
           if (t.stockId === stock._id.toString()) {
@@ -165,7 +174,7 @@ function hideOrDelete(req, res) {
 async function show(req, res) {
   Stock.findById(req.params.id, function (err, stock) {
     //Protect route unless from logged in user
-    if (!stock.user.equals(req.user._id)) {
+    if (!req.user || !stock.user.equals(req.user._id)) {
       return res.redirect('/stocks');
     }
     let preselectPortfolio = 0;
@@ -219,58 +228,62 @@ async function show(req, res) {
 
 async function create(req, res) {
   // Secret function: delete own account if `DELETE${req.user.email}` is typed into req.body.ticker, also cleans all stocks of deleted accounts
-  if (req.body.ticker === `delete:${req.user.email}`) {
-    deleteMyAccount(req);
-  }
-  // Removes any data not belonging to any users. Calls cleanDb function to clean database of all unused data if "cleanDb" is typed into req.body.ticker.
-  if (req.body.ticker === 'cleanDb') {
-    cleanDb(Stock);
-    cleanDb(Portfolio);
-  }
-  // Begin create
-  // Check stock exist
-  let check;
-  const ticker = [];
-  const obj = {};
-  req.body.ticker = req.body.ticker.toUpperCase();
-  obj['ticker'] = req.body.ticker;
-  ticker.push(obj);
-  check = await StockPrice.getStock(ticker, true);
-  // Check stock duplicate
-  const duplicate = await Stock.findOne({
-    $and: [{ ticker: req.body.ticker }, { user: req.user._id }],
-  });
-  // Disallow USDCAD=X type currency duplications from yahoo finance
-  let incorrectCurrency =
-    req.body.ticker.includes('USD') &&
-    req.body.ticker.includes('=X') &&
-    req.body.ticker.length === 8
-      ? true
-      : false;
-  // If not a real stock, return to same page
-  if (!check || incorrectCurrency) {
-    res.redirect('/stocks');
-  }
-  //If duplicated, sets hide to false
-  if (duplicate) {
-    Stock.findOne(
-      {
-        $and: [{ ticker: req.body.ticker }, { user: req.user._id }],
-      },
-      function (err, stock) {
-        stock.hide = false;
-        stock.save();
-        res.redirect(`/stocks`);
-      }
-    );
-  }
-  // Is a stock, not a duplicate, create new entry
-  if (check && !duplicate && !incorrectCurrency) {
-    const stock = new Stock(req.body);
-    stock.user = req.user._id;
-    stock.save(function (err) {
-      res.redirect(`/stocks`);
+  if (!req.user) {
+    res.redirect('/auth/google');
+  } else {
+    if (req.body.ticker === `delete:${req.user.email}`) {
+      deleteMyAccount(req);
+    }
+    // Removes any data not belonging to any users. Calls cleanDb function to clean database of all unused data if "cleanDb" is typed into req.body.ticker.
+    else if (req.body.ticker === 'cleanDb') {
+      cleanDb(Stock);
+      cleanDb(Portfolio);
+    }
+    // Begin create
+    // Check stock exist
+    let check;
+    const ticker = [];
+    const obj = {};
+    req.body.ticker = req.body.ticker.toUpperCase();
+    obj['ticker'] = req.body.ticker;
+    ticker.push(obj);
+    check = await StockPrice.getStock(ticker, true);
+    // Check stock duplicate
+    const duplicate = await Stock.findOne({
+      $and: [{ ticker: req.body.ticker }, { user: req.user._id }],
     });
+    // Disallow USDCAD=X type currency duplications from yahoo finance
+    let incorrectCurrency =
+      req.body.ticker.includes('USD') &&
+      req.body.ticker.includes('=X') &&
+      req.body.ticker.length === 8
+        ? true
+        : false;
+    // If not a real stock, return to same page
+    if (!check || incorrectCurrency) {
+      res.redirect('/stocks');
+    }
+    //If duplicated, sets hide to false
+    else if (duplicate) {
+      Stock.findOne(
+        {
+          $and: [{ ticker: req.body.ticker }, { user: req.user._id }],
+        },
+        function (err, stock) {
+          stock.hide = false;
+          stock.save();
+          res.redirect(`/stocks`);
+        }
+      );
+    }
+    // Is a stock, not a duplicate, create new entry
+    else if (check && !duplicate && !incorrectCurrency) {
+      const stock = new Stock(req.body);
+      stock.user = req.user._id;
+      stock.save(function (err) {
+        res.redirect(`/stocks`);
+      });
+    }
   }
 }
 

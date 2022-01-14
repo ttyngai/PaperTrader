@@ -55,7 +55,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/portfolios', isLoggedIn, portfoliosRouter);
-app.use('/stocks', isLoggedIn, stocksRouter);
+app.use('/stocks', stocksRouter);
 app.use('/', isLoggedIn, transactionsRouter);
 app.use('/memberships', isLoggedIn, membershipsRouter);
 

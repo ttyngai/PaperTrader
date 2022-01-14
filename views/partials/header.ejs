@@ -25,6 +25,7 @@
       <a  href="/portfolios" <%- title === 'Portfolios' ? 'class="navButtons activeNav"':'class="navButtons"'%>> Portfolio</a>
       <a class="navButtons" href="/logout">Logout</a>
       <% } else { %>
+      <span id="countDownNum"></span>
       <a class="navButtons" href="/auth/google" class="login">Login</a>
       <% } %>
     </nav>
