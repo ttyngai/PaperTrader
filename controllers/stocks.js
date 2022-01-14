@@ -172,58 +172,67 @@ function hideOrDelete(req, res) {
 }
 
 async function show(req, res) {
-  Stock.findById(req.params.id, function (err, stock) {
-    //Protect route unless from logged in user
-    if (!req.user || !stock.user.equals(req.user._id)) {
-      return res.redirect('/stocks');
-    }
-    let preselectPortfolio = 0;
-    if (req.params.portfolioId) {
-      preselectPortfolio = req.params.portfolioId;
-    }
-    Portfolio.find({ user: req.user._id }, async function (err, portfolios) {
-      const ticker = [];
-      const obj = {};
-      obj['ticker'] = stock.ticker;
-      ticker.push(obj);
-      const quote = await StockPrice.getStock(ticker, false);
-      // Charting data options
-      const chartParsed = await StockPrice.getChartData(
-        stock.ticker,
-        req.user.chartSettings.timeframe
-      );
-      // find min and max of chart data
-      let chartMin, chartMax, chartVolumeMax;
-      chartParsed.forEach(function (candle, idx) {
-        if (idx === 0) {
-          chartMax = candle[4];
-          chartMin = candle[1];
-          chartVolumeMax = candle[5];
-        }
-        if (candle[4] > chartMax) {
-          chartMax = candle[4];
-        }
-        if (candle[1] < chartMin) {
-          chartMin = candle[1];
-        }
-        if (candle[5] > chartVolumeMax) {
-          chartVolumeMax = candle[5];
-        }
-      });
-      res.render('stocks/show', {
-        title: 'Stocks',
-        stock,
-        portfolios,
-        quote,
-        req,
-        chartParsed,
-        preselectPortfolio,
-        chartMin,
-        chartMax,
-        chartVolumeMax,
+  if (req.params.id.length < 24) {
+    // (Icebox)
+    const quote = await StockPrice.getStock(req.params.id, false);
+    const chartParsed = await StockPrice.getChartData(req.params.id, 1);
+    console.log('guest quote', quote);
+    console.log('guess chart', chartParsed);
+    res.redirect('/auth/google');
+  } else {
+    Stock.findById(req.params.id, function (err, stock) {
+      //Protect route unless from logged in user
+      if (!req.user || !stock.user.equals(req.user._id)) {
+        return res.redirect('/stocks');
+      }
+      let preselectPortfolio = 0;
+      if (req.params.portfolioId) {
+        preselectPortfolio = req.params.portfolioId;
+      }
+      Portfolio.find({ user: req.user._id }, async function (err, portfolios) {
+        const ticker = [];
+        const obj = {};
+        obj['ticker'] = stock.ticker;
+        ticker.push(obj);
+        const quote = await StockPrice.getStock(ticker, false);
+        // Charting data options
+        const chartParsed = await StockPrice.getChartData(
+          stock.ticker,
+          req.user.chartSettings.timeframe
+        );
+        // find min and max of chart data
+        let chartMin, chartMax, chartVolumeMax;
+        chartParsed.forEach(function (candle, idx) {
+          if (idx === 0) {
+            chartMax = candle[4];
+            chartMin = candle[1];
+            chartVolumeMax = candle[5];
+          }
+          if (candle[4] > chartMax) {
+            chartMax = candle[4];
+          }
+          if (candle[1] < chartMin) {
+            chartMin = candle[1];
+          }
+          if (candle[5] > chartVolumeMax) {
+            chartVolumeMax = candle[5];
+          }
+        });
+        res.render('stocks/show', {
+          title: 'Stocks',
+          stock,
+          portfolios,
+          quote,
+          req,
+          chartParsed,
+          preselectPortfolio,
+          chartMin,
+          chartMax,
+          chartVolumeMax,
+        });
       });
     });
-  });
+  }
 }
 
 async function create(req, res) {

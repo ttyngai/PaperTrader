@@ -38,7 +38,7 @@
       </thead>
       <tbody>
         <% stocks.forEach(function(s) {if (!s.hide) { %>
-        <tr class="eachStock" data-href="/stocks/<%= s._id %>">
+        <tr class="eachStock" data-href="/stocks/<%= s._id %>/<%= s.symbol %>">
           <!-- Stock Ticker -->
           <td class="tickerLeft"><%= s.symbol %></td>
           <!-- Stock company name -->
@@ -171,13 +171,18 @@
     refWithoutQuestionMark = refWithoutQuestionMark.slice(0,-1)
   }
   // Make whole ticker row clockable
-
   document.addEventListener('DOMContentLoaded', function(){
     const rows = document.querySelectorAll('tr[data-href]')
     if(<%=!isGuest%>){
       rows.forEach(function(r){
         r.addEventListener('click', function(){
           window.location.href = r.dataset.href
+          })
+      })
+    } else {
+      rows.forEach(function(r){
+        r.addEventListener('click', function(){
+          window.location.href = `/stocks/${r.dataset.href.split('/')[3]}`
           })
       })
     }
